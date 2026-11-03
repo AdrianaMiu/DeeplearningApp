@@ -55,6 +55,7 @@ describe('Deep Learning Companion interface', () => {
     renderAt('/practice');
     await user.type(await screen.findByLabelText(/your answer/i), '5, 3');
     await user.click(screen.getByRole('button', { name: /save and continue/i }));
+    expect(await screen.findByText(/optional diagnostic · 2\/8/i)).toBeInTheDocument();
     await waitFor(async () => expect(await repository.getAttempts()).toHaveLength(1));
     expect((await repository.getAttempts())[0]).toMatchObject({ questionId: 'd01', score: 1 });
   });

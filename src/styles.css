@@ -144,6 +144,14 @@ main { min-height: 100vh; margin-left: 260px; }
 .setting-row { display: flex; justify-content: space-between; gap: 1rem; }
 .setting-row p { margin: .2rem 0; color: var(--muted); }
 .danger-zone { border-color: #d6aaa6; }
+.tutor-panel { margin: 2rem 0; padding: clamp(1.4rem, 4vw, 2.4rem); border: 1px solid #83aaa6; background: #e5f0ed; }
+.tutor-panel > h2 { margin: .35rem 0; }
+.tutor-panel label { margin: 1rem 0; }
+.privacy-disclosure { max-width: 68ch; padding: 1rem 1.2rem; border-left: 4px solid var(--gold); background: #fffaf0; }
+.checkbox-label { display: flex !important; grid-template-columns: auto 1fr; align-items: center; }
+.checkbox-label input { width: auto; }
+.tutor-reply { margin-top: 1rem; padding: 1rem 1.2rem; border-left: 4px solid var(--teal); background: var(--paper); }
+.tutor-reply small { display: block; color: var(--muted); }
 
 @media (max-width: 900px) {
   .mobile-header { position: sticky; z-index: 30; top: 0; display: flex; min-height: 64px; align-items: center; gap: .7rem; padding: .65rem 1rem; color: white; background: var(--sidebar); }

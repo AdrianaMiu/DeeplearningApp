@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import { useAppData } from '../app/context';
 import { lessons } from '../content/lessons';
+import { TutorPanel } from '../tutor/TutorPanel';
 
 export default function Lesson() {
   const { lessonId } = useParams();
@@ -43,6 +44,7 @@ export default function Lesson() {
         {Object.entries(lesson.views).map(([key, value], index) => <section className="paper-card" key={key}><p className="kicker">{String(index + 2).padStart(2, '0')} · {key.replace('workConnection', 'work connection')}</p><p>{value}</p></section>)}
       </div>
       <section className="independent-panel"><p className="kicker">Independent attempt</p><h2>Now make it yours</h2><p>{lesson.independentTask}</p><Link className="button button--primary" to="/practice">Open practice</Link></section>
+      <TutorPanel lessonId={lesson.id} conceptIds={lesson.conceptIds} learnerAttempt={prediction} />
       <section><h2>Misconception check</h2><ul className="correction-list">{lesson.misconceptions.map((item) => <li key={item}>{item}</li>)}</ul><p><strong>Teach it back:</strong> {lesson.teachBackPrompt}</p></section>
     </article>
   );

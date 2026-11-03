@@ -1,0 +1,21 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "deep-learning-companion-tutor",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-03",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "vars": {
+    "ALLOWED_ORIGIN": "https://adrianamiu.github.io"
+  },
+  "kv_namespaces": [
+    { "binding": "DAILY_LIMITS" }
+  ],
+  "ratelimits": [
+    {
+      "name": "RATE_LIMITER",
+      "namespace_id": "38104",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ]
+}

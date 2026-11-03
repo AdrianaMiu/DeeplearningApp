@@ -13,7 +13,9 @@ test('published deployment exposes the configured tutor verification', async ({ 
   await page.getByRole('button', { name: /continue to tutor/i }).click();
 
   await expect(page.getByText(/tutor is not configured/i)).toHaveCount(0);
-  await expect(page.locator('[aria-label="Human verification"] iframe')).toBeVisible({ timeout: 15_000 });
+  const verification = page.getByLabel(/human verification/i);
+  await expect(verification.locator('input[name="cf-turnstile-response"]')).toBeAttached({ timeout: 15_000 });
+  await expect.poll(async () => (await verification.boundingBox())?.height ?? 0).toBeGreaterThan(0);
 });
 
 test.describe('Deep Learning Companion release', () => {

@@ -1,0 +1,8 @@
+import { Link } from 'react-router-dom';
+import { useAppData } from '../app/context';
+
+export default function Review() {
+  const { snapshot } = useAppData();
+  const due = snapshot?.reviews.filter((item) => item.dueAt <= new Date().toISOString()) ?? [];
+  return <div className="page"><header className="page-heading"><p className="eyebrow">Spaced review · 1 / 3 / 7 / 14 / 30 days</p><h1>Revisit at the edge of forgetting</h1><p>Errors and low confidence move a variant earlier; earlier evidence is never erased.</p></header><section className="paper-card"><h2>{due.length ? `${due.length} reviews due` : 'Nothing due right now'}</h2><p>{due.length ? 'Start with the earliest due concept.' : 'Practice a fresh application problem or continue the guided path.'}</p><Link to="/practice">Open practice</Link></section></div>;
+}

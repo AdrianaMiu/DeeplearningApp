@@ -1,0 +1,19 @@
+import { useState, type ChangeEvent } from 'react';
+
+import { useAppData } from '../app/context';
+import { curriculumInventory } from '../content/inventory';
+import { exportProgress, importProgress, previewImport, resetProgress, type ImportPreview } from '../data/transfer';
+
+export default function Settings() {
+  const { repository, snapshot, refresh } = useAppData();
+  const [rawImport, setRawImport] = useState('');
+  const [preview, setPreview] = useState<ImportPreview>();
+  const [message, setMessage] = useState('');
+  async function toggleLanguage() { const current = await repository.getSettings(); await repository.saveSettings({ ...current, language: current.language === 'en' ? 'ro-help' : 'en', updatedAt: new Date().toISOString() }); refresh(); }
+  async function download() { const data = await exportProgress(repository.db, curriculumInventory.contentVersion); const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const anchor = document.createElement('a'); anchor.href = url; anchor.download = `deep-learning-progress-${data.exportedAt.slice(0, 10)}.json`; anchor.click(); URL.revokeObjectURL(url); }
+  async function selectFile(event: ChangeEvent<HTMLInputElement>) { const file = event.target.files?.[0]; if (!file) return; const text = await file.text(); setRawImport(text); setPreview(previewImport(text)); }
+  async function apply(mode: 'merge' | 'replace') { await importProgress(repository.db, rawImport, mode); setMessage(mode === 'merge' ? 'Backup merged.' : 'Local data replaced.'); refresh(); }
+  async function reset() { await resetProgress(repository.db); setMessage('Local learning data reset.'); refresh(); }
+  const valid = preview?.valid === true;
+  return <div className="page"><header className="page-heading"><p className="eyebrow">Control room</p><h1>Settings and local data</h1><p>Back up before replacing or resetting. Imports are validated before they can change local data.</p></header>{message && <p className="notice" role="status">{message}</p>}<div className="settings-grid"><section className="paper-card"><h2>Learning preferences</h2><div className="setting-row"><div><strong>Romanian tutor explanations</strong><p>Technical terms remain in English.</p></div><button className="button button--quiet" onClick={toggleLanguage}>{snapshot?.settings.language === 'ro-help' ? 'On' : 'Off'}</button></div><p>Normal session: {snapshot?.settings.normalSessionMinutes ?? 25} min · Minimum session: {snapshot?.settings.minimumSessionMinutes ?? 8} min</p></section><section className="paper-card"><h2>Export a backup</h2><p>Includes attempts, reviews, sessions, notes, and settings—not book text.</p><button className="button button--primary" onClick={download}>Download progress JSON</button></section><section className="paper-card"><h2>Import progress</h2><label>Choose progress file<input type="file" accept="application/json,.json" onChange={selectFile} /></label>{preview && (preview.valid ? <p className="result-good">Valid backup · {preview.counts.attempts} attempts · {preview.counts.notes} notes</p> : <p className="result-bad">{preview.error}</p>)}<div className="button-row"><button className="button button--quiet" disabled={!valid} onClick={() => apply('merge')}>Merge backup</button><button className="button button--danger" disabled={!valid} onClick={() => apply('replace')}>Replace local data</button></div></section><section className="paper-card danger-zone"><h2>Reset</h2><p>Export first if you may want this evidence later.</p><button className="button button--danger" onClick={reset}>Reset local progress</button></section></div></div>;
+}

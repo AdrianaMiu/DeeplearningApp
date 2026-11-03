@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VITE_TUTOR_URL: ${{ secrets.VITE_TUTOR_URL }}
+      VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6

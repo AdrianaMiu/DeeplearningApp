@@ -1,6 +1,21 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
+const environment = (globalThis as typeof globalThis & {
+  process?: { env?: Record<string, string | undefined> };
+}).process?.env ?? {};
+
+test('published deployment exposes the configured tutor verification', async ({ page }) => {
+  test.skip(!environment.PW_PRODUCTION_SMOKE, 'Run explicitly against the published GitHub Pages site.');
+
+  await page.goto('https://adrianamiu.github.io/DeeplearningApp/#/lesson/tensor-shapes');
+  await page.getByLabel(/i understand/i).check();
+  await page.getByRole('button', { name: /continue to tutor/i }).click();
+
+  await expect(page.getByText(/tutor is not configured/i)).toHaveCount(0);
+  await expect(page.locator('[aria-label="Human verification"] iframe')).toBeVisible({ timeout: 15_000 });
+});
+
 test.describe('Deep Learning Companion release', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('./');
@@ -53,7 +68,12 @@ test.describe('Deep Learning Companion release', () => {
     await page.getByLabel(/i understand/i).check();
     await page.getByRole('button', { name: /continue to tutor/i }).click();
     await context.setOffline(true);
-    await expect(page.getByText(/tutor is not configured.*continue the lesson without ai/i)).toBeVisible();
+    if (environment.VITE_TUTOR_URL && environment.VITE_TURNSTILE_SITE_KEY) {
+      await expect(page.getByLabel(/human verification/i)).toBeAttached();
+      await expect(page.getByText(/tutor is not configured/i)).toHaveCount(0);
+    } else {
+      await expect(page.getByText(/tutor is not configured.*continue the lesson without ai/i)).toBeVisible();
+    }
     await expect(page.getByRole('heading', { name: /misconception check/i })).toBeVisible();
   });
 

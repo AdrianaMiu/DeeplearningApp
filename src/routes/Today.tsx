@@ -7,6 +7,7 @@ export default function Today() {
   const resume = snapshot?.sessions.filter((item) => !item.completedAt).at(-1);
   const evidence = snapshot?.attempts.length ?? 0;
   const weekday = new Intl.DateTimeFormat(undefined, { weekday: 'long' }).format(new Date());
+  const lowEnergy = snapshot?.settings.lowEnergyMode ?? false;
   return (
     <div className="page today-page">
       <header className="page-heading">
@@ -17,9 +18,9 @@ export default function Today() {
       <section className="focus-card" aria-labelledby="today-focus">
         <div className="focus-number" aria-hidden="true">01</div>
         <div>
-          <p className="kicker">Recommended · 35 min</p>
+          <p className="kicker">Recommended · {lowEnergy ? `${snapshot?.settings.minimumSessionMinutes ?? 8} min minimum session` : '35 min'}</p>
           <h2 id="today-focus">Read tensors by shape</h2>
-          <p>Learn to see every axis before running code. Start with a prediction, then validate it.</p>
+          <p>{lowEnergy ? 'Make one prediction and save your place. A small session still creates useful evidence.' : 'Learn to see every axis before running code. Start with a prediction, then validate it.'}</p>
           <div className="button-row">
             <Link className="button button--primary" to="/lesson/tensor-shapes">Begin lesson <span aria-hidden="true">→</span></Link>
             {!snapshot?.settings.diagnosticCompleted && !snapshot?.settings.diagnosticSkipped && (

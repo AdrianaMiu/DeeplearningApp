@@ -4,7 +4,9 @@ import { curriculumInventory } from '../content/inventory';
 import { lessons } from '../content/lessons';
 
 export default function Curriculum() {
-  const bookChapters = curriculumInventory.chapters.filter((item) => item.kind === 'chapter');
+  const bookChapters = curriculumInventory.chapters;
+  const reviewedSections = new Set(lessons.flatMap((lesson) => lesson.sourceRefs.map((ref) => ref.sectionId)));
+  const chapterPrefix = (id: string) => id.startsWith('chapter-') ? `${Number(id.replace('chapter-', ''))}.` : `${id.at(-1)?.toUpperCase()}.`;
   return (
     <div className="page">
       <header className="page-heading split-heading">
@@ -25,13 +27,16 @@ export default function Curriculum() {
       </section>
       <section className="curriculum-index" aria-labelledby="book-index">
         <div className="section-title"><h2 id="book-index">Book inventory</h2><span className="status">honest scope</span></div>
-        <ol>
+        <div className="chapter-map">
           {bookChapters.map((chapter) => {
-            const reviewed = chapter.id === 'ch02' || chapter.id === 'ch03';
-            return <li key={chapter.id}><span>{chapter.title}</span><span className={reviewed ? 'status status--reviewed' : 'status'}>{reviewed ? 'Partly reviewed' : 'Unconverted'}</span></li>;
+            const prefix = chapterPrefix(chapter.id);
+            const sections = curriculumInventory.sections.filter((section) => section.id.startsWith(prefix));
+            const exercises = curriculumInventory.exercises.filter((exercise) => exercise.sectionId.startsWith(prefix));
+            const reviewed = chapter.id === 'chapter-2' || chapter.id === 'chapter-3';
+            return <details className="curriculum-chapter" key={chapter.id}><summary><span>{chapter.title}</span><span>{sections.length} sections · {exercises.length} exercises</span><span className={reviewed ? 'status status--reviewed' : 'status'}>{reviewed ? 'Partly reviewed' : 'Unconverted'}</span></summary><ol>{sections.map((section) => <li key={section.id} className={section.level > 1 ? 'subsection' : ''}><span><strong>§{section.id}</strong> {section.title}</span><span className={reviewedSections.has(section.id) ? 'status status--reviewed' : 'status'}>{reviewedSections.has(section.id) ? 'Reviewed' : section.contentStatus}</span></li>)}</ol>{exercises.length > 0 && <details className="exercise-index"><summary>Individual exercise references</summary><ol>{exercises.map((exercise) => <li key={exercise.id}><span>{exercise.id}</span><span className="status">{exercise.contentStatus}</span></li>)}</ol></details>}</details>;
           })}
-        </ol>
-        <p>Appendix A (§A.1–A.11), Appendix B (§B.1–B.8), installation, notation, and Chapter 1 orientation are indexed as references.</p>
+        </div>
+        <details className="orientation-index"><summary>Orientation and reference records</summary><ul>{curriculumInventory.orientation.map((item) => <li key={item.id}><strong>{item.title}</strong><span className="status">{item.contentStatus}</span></li>)}</ul></details>
       </section>
     </div>
   );

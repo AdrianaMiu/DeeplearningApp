@@ -3,10 +3,11 @@ import { useCallback, useState } from 'react';
 import { anonymousClientId, requestTutor as defaultRequestTutor, type TutorMode, type TutorRequest, type TutorResponse } from './client';
 import { TurnstileWidget } from './TurnstileWidget';
 
-export function TutorPanel({ lessonId, conceptIds, learnerAttempt, requestTutor = defaultRequestTutor }: {
+export function TutorPanel({ lessonId, conceptIds, learnerAttempt, locale = 'en', requestTutor = defaultRequestTutor }: {
   lessonId: string;
   conceptIds: string[];
   learnerAttempt: string;
+  locale?: 'en' | 'ro-help';
   requestTutor?: (request: TutorRequest) => Promise<TutorResponse>;
 }) {
   const [consentChecked, setConsentChecked] = useState(false);
@@ -25,7 +26,7 @@ export function TutorPanel({ lessonId, conceptIds, learnerAttempt, requestTutor 
     setLoading(true); setError('');
     try {
       const result = await requestTutor({
-        lessonId, conceptIds, mode, learnerAttempt, question, locale: 'en', recentConversation: [],
+        lessonId, conceptIds, mode, learnerAttempt, question, locale, recentConversation: [],
         turnstileToken: token || (injected ? 'test-token' : ''), anonymousClientId: anonymousClientId(),
       });
       setReply(result);

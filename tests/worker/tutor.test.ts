@@ -80,7 +80,9 @@ describe('guarded tutor Worker', () => {
 
   it('enforces Turnstile, per-minute rate limiting, and daily quota', async () => {
     const failedTurnstile = vi.fn(async () => Response.json({ success: false }));
-    expect((await handleTutorRequest(request(), env(), failedTurnstile)).status).toBe(403);
+    const failedEnv = env();
+    expect((await handleTutorRequest(request(), failedEnv, failedTurnstile)).status).toBe(403);
+    expect(failedEnv.DAILY_LIMITS.put).not.toHaveBeenCalled();
 
     const limited = env({ RATE_LIMITER: { limit: vi.fn().mockResolvedValue({ success: false }) } });
     expect((await handleTutorRequest(request(), limited, successfulFetch())).status).toBe(429);

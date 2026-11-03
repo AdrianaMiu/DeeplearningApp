@@ -50,6 +50,15 @@ describe('Deep Learning Companion interface', () => {
     await waitFor(async () => expect((await repository.getSettings()).diagnosticSkipped).toBe(true));
   });
 
+  it('records diagnostic evidence before advancing', async () => {
+    const user = userEvent.setup();
+    renderAt('/practice');
+    await user.type(await screen.findByLabelText(/your answer/i), '5, 3');
+    await user.click(screen.getByRole('button', { name: /save and continue/i }));
+    await waitFor(async () => expect(await repository.getAttempts()).toHaveLength(1));
+    expect((await repository.getAttempts())[0]).toMatchObject({ questionId: 'd01', score: 1 });
+  });
+
   it('requires a prediction before revealing a worked example', async () => {
     const user = userEvent.setup();
     renderAt('/lesson/tensor-shapes');
@@ -80,6 +89,20 @@ describe('Deep Learning Companion interface', () => {
     await user.click(await screen.findByRole('button', { name: /pause and save place/i }));
     await waitFor(async () => expect(await repository.getSessions()).toHaveLength(1));
     expect((await repository.getSessions())[0].resumeStep).toBe('prediction');
+  });
+
+  it('schedules review evidence and advances through lesson questions', async () => {
+    const user = userEvent.setup();
+    await repository.saveSettings({
+      ...(await repository.getSettings()), diagnosticSkipped: true, updatedAt: new Date().toISOString(),
+    });
+    renderAt('/practice');
+    await screen.findByRole('button', { name: /show hint 1/i });
+    await user.type(screen.getByLabelText(/your answer/i), '3');
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await waitFor(async () => expect(await repository.getReviews()).toHaveLength(2));
+    await user.click(screen.getByRole('button', { name: /next question/i }));
+    expect(screen.getByRole('heading', { name: /arange\(6\)/i })).toBeInTheDocument();
   });
 
   it('creates a local note and previews a valid progress import before applying it', async () => {
@@ -116,6 +139,7 @@ describe('Deep Learning Companion interface', () => {
     expect(screen.getByRole('table', { name: /gradient numeric comparison/i })).toBeInTheDocument();
     expect(screen.getByRole('table', { name: /regression residuals/i })).toBeInTheDocument();
     expect(screen.getAllByRole('slider').length).toBeGreaterThanOrEqual(3);
+    expect(document.querySelectorAll('math').length).toBeGreaterThanOrEqual(2);
   });
 
   it('requires confirmation before destructive local reset', async () => {

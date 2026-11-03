@@ -139,11 +139,11 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
 
   const rate = await env.RATE_LIMITER.limit({ key: body.anonymousClientId });
   if (!rate.success) return safeError('RATE_LIMITED', 'Tutor limit reached. Continue the lesson and try again shortly.', 429, origin);
-  if (!await enforceDailyLimits(env, body.anonymousClientId)) return safeError('DAILY_LIMIT_REACHED', 'Today’s tutor allowance is complete. All non-AI learning tools remain available.', 429, origin);
 
   let humanVerified = false;
   try { humanVerified = await verifyTurnstile(body.turnstileToken, env.TURNSTILE_SECRET, fetcher); } catch { /* safe failure */ }
   if (!humanVerified) return safeError('TURNSTILE_FAILED', 'Human verification expired. Please retry.', 403, origin);
+  if (!await enforceDailyLimits(env, body.anonymousClientId)) return safeError('DAILY_LIMIT_REACHED', 'Today’s tutor allowance is complete. All non-AI learning tools remain available.', 429, origin);
 
   const prompt = [
     'You are a concise deep-learning coach. Use only the supplied companion context.',

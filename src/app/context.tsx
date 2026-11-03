@@ -13,10 +13,11 @@ interface AppContextValue {
 }
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
+const defaultRepository = new LearningRepository(learningDatabase);
 
 export function AppProvider({
   children,
-  repository = new LearningRepository(learningDatabase),
+  repository = defaultRepository,
 }: {
   children: ReactNode;
   repository?: LearningRepository;

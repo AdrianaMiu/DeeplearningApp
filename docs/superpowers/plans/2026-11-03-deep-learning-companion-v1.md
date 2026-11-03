@@ -113,4 +113,5 @@
 - [ ] Review UI against current Vercel web guidelines; fix Important findings with RED → GREEN tests.
 - [ ] Commit `chore: prepare verified GitHub Pages release`.
 - [ ] Push without force, enable Pages Actions, deploy Worker only when credentials exist, and verify live URLs.
+- [ ] Create a GitHub milestone, implementation/content/deployment issues, labels, and a GitHub Project board linked to the repository; close issues already completed and leave future content expansion visible.
 

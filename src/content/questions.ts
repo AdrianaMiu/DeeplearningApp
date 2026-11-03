@@ -1,0 +1,39 @@
+import type { Question } from '../domain/types';
+import { makeQuestion, type QuestionSeed } from './question-helpers';
+
+const seeds: QuestionSeed[] = [
+  { id: 'q01', lessonId: 'tensor-shapes', type: 'shape', prompt: 'X has shape (3,4). What is the shape of X[:,1]?', answer: ['3'], explanation: 'Selecting one column removes the second axis.' },
+  { id: 'q02', lessonId: 'tensor-shapes', type: 'code_trace', prompt: 'What values does arange(6).reshape(2,3)[1] contain?', answer: ['3', '4', '5'], explanation: 'The second row contains the final three sequential values.' },
+  { id: 'q03', lessonId: 'tensor-shapes', type: 'transfer', prompt: 'Explain the axes of a vehicle-image batch shaped (8,3,224,224).', answer: 'batch, channels, height, width', explanation: 'NCHW records eight RGB images and their spatial dimensions.', application: true },
+  { id: 'q04', lessonId: 'broadcasting', type: 'shape', prompt: 'What shape results from adding (4,1,6) and (3,6)?', answer: ['4', '3', '6'], explanation: '(3,6) aligns as (1,3,6); every axis matches or includes 1.' },
+  { id: 'q05', lessonId: 'broadcasting', type: 'multiple_choice', prompt: 'Can (4,2) and (4,) broadcast?', options: ['Yes, to (4,2)', 'No', 'Yes, to (4,4)'], answer: 'No', explanation: 'Trailing dimensions 2 and 4 conflict.' },
+  { id: 'q06', lessonId: 'broadcasting', type: 'transfer', prompt: 'Give the bias shape for channel-wise addition to NCHW activations.', answer: ['1', 'C', '1', '1'], explanation: 'Singleton batch and spatial axes expand while C aligns to channels.', application: true },
+  { id: 'q07', lessonId: 'data-preprocessing', type: 'multiple_choice', prompt: 'When should an imputation mean be fitted?', options: ['Before splitting', 'On training data only', 'On validation data only'], answer: 'On training data only', explanation: 'Fitting on all data leaks validation information.' },
+  { id: 'q08', lessonId: 'data-preprocessing', type: 'debugging', prompt: 'A pipeline one-hot encodes train and validation separately. Identify the defect.', answer: 'inconsistent category mapping', explanation: 'Fit one mapping on training data and apply it unchanged.', application: true },
+  { id: 'q09', lessonId: 'linear-algebra-objects', type: 'multiple_choice', prompt: 'What is the axis count of a tensor shaped (8,3,224,224)?', options: ['3', '4', '8'], answer: '4', explanation: 'There are four axes regardless of their sizes.' },
+  { id: 'q10', lessonId: 'linear-algebra-objects', type: 'numeric', prompt: 'How many elements are in shape (2,3,4)?', answer: 24, explanation: 'Multiply the axis sizes: 2×3×4.' },
+  { id: 'q11', lessonId: 'reductions', type: 'shape', prompt: 'What shape is sum(X, dim=1) for X shaped (2,3,4)?', answer: ['2', '4'], explanation: 'Axis 1 is removed.' },
+  { id: 'q12', lessonId: 'reductions', type: 'transfer', prompt: 'Which axes should be reduced for one NCHW mean per channel?', answer: ['N', 'H', 'W'], explanation: 'Reduce batch and spatial axes and preserve C.', application: true },
+  { id: 'q13', lessonId: 'products-and-norms', type: 'shape', prompt: 'What is the shape of (8,16) @ (16,4)?', answer: ['8', '4'], explanation: 'The inner 16 dimensions contract.' },
+  { id: 'q14', lessonId: 'products-and-norms', type: 'numeric', prompt: 'What is [1,2] dot [3,4]?', answer: 11, explanation: '1×3 + 2×4 = 11.' },
+  { id: 'q15', lessonId: 'products-and-norms', type: 'explanation', prompt: 'Contrast elementwise multiplication with a dot product.', answer: 'elementwise preserves positions; dot sums products', explanation: 'One returns a vector-shaped result; the other aggregates to a scalar.' },
+  { id: 'q16', lessonId: 'derivatives-gradients', type: 'numeric', prompt: 'What is d(x²)/dx at x=3?', answer: 6, explanation: 'The derivative is 2x, so its value is 6.' },
+  { id: 'q17', lessonId: 'derivatives-gradients', type: 'multiple_choice', prompt: 'Which way does a gradient point?', options: ['Fastest local increase', 'Fastest local decrease', 'Always toward zero'], answer: 'Fastest local increase', explanation: 'Gradient descent negates the gradient to move downhill.' },
+  { id: 'q18', lessonId: 'derivatives-gradients', type: 'transfer', prompt: 'Why compare autodiff with a finite difference?', answer: 'to check gradient implementation numerically', explanation: 'Independent approximation can expose graph or derivative errors.', application: true },
+  { id: 'q19', lessonId: 'chain-rule', type: 'numeric', prompt: 'For y=(3x+1)², what is dy/dx at x=2?', answer: 42, explanation: '2(3x+1)×3 = 42.' },
+  { id: 'q20', lessonId: 'chain-rule', type: 'explanation', prompt: 'What happens to derivatives along one composed path?', answer: 'they multiply', explanation: 'The chain rule multiplies local sensitivities along the path.' },
+  { id: 'q21', lessonId: 'autodiff', type: 'multiple_choice', prompt: 'What does detach do?', options: ['Copies to GPU', 'Disconnects gradient history', 'Clears all gradients'], answer: 'Disconnects gradient history', explanation: 'The value remains available but its earlier graph is not traversed.' },
+  { id: 'q22', lessonId: 'autodiff', type: 'debugging', prompt: 'Loss grows because gradients accumulate every iteration. What step is missing?', answer: 'clear or zero gradients', explanation: 'Most frameworks accumulate parameter gradients by default.', application: true },
+  { id: 'q23', lessonId: 'autodiff', type: 'code_trace', prompt: 'If x=3 and y=(x²).sum(), what gradient reaches x?', answer: 6, explanation: 'Backward applies derivative 2x.' },
+  { id: 'q24', lessonId: 'probability-expectation', type: 'numeric', prompt: 'What is the expected value of a fair six-sided die?', answer: 3.5, tolerance: 0.0001, explanation: 'Average 1 through 6: 21/6.' },
+  { id: 'q25', lessonId: 'probability-expectation', type: 'multiple_choice', prompt: 'Must an expectation be a possible single outcome?', options: ['Always', 'No', 'Only for continuous variables'], answer: 'No', explanation: 'A fair coin coded 0/1 has expectation 0.5.' },
+  { id: 'q26', lessonId: 'probability-expectation', type: 'explanation', prompt: 'State linearity of expectation.', answer: 'E[aX+bY]=aE[X]+bE[Y]', explanation: 'It holds whether or not X and Y are independent.' },
+  { id: 'q27', lessonId: 'linear-regression', type: 'numeric', prompt: 'What MSE results for points (0,1),(1,3),(2,5) with w=2,b=1?', answer: 0, explanation: 'Every prediction equals its target.' },
+  { id: 'q28', lessonId: 'linear-regression', type: 'code_trace', prompt: 'For x=[0,1,2], w=2,b=1, list predictions.', answer: ['1', '3', '5'], explanation: 'Apply wx+b to each x.' },
+  { id: 'q29', lessonId: 'linear-regression', type: 'transfer', prompt: 'Why begin a new dataset with a linear baseline?', answer: 'to expose data and evaluation issues with an interpretable reference', explanation: 'A simple baseline establishes whether complexity is earning its cost.', application: true },
+  { id: 'q30', lessonId: 'regression-training', type: 'code_trace', prompt: 'Order forward, loss, backward, update, and zero-grad for one step.', answer: ['zero-grad', 'forward', 'loss', 'backward', 'update'], explanation: 'Clear old gradients before calculating the next update.' },
+  { id: 'q31', lessonId: 'regression-training', type: 'debugging', prompt: 'Training runs but parameters never change; loss.backward is called. Name one likely missing operation.', answer: 'parameter update', explanation: 'Gradients do not modify parameters until the optimizer/update step.', application: true },
+  { id: 'q32', lessonId: 'regression-training', type: 'explanation', prompt: 'What does decreasing training loss prove and not prove?', answer: 'optimization is occurring; generalization is not proven', explanation: 'Validation or unseen data is needed for evidence of generalization.' },
+];
+
+export const questions: Question[] = seeds.map(makeQuestion);

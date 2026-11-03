@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
@@ -116,5 +116,21 @@ describe('Deep Learning Companion interface', () => {
     expect(screen.getByRole('table', { name: /gradient numeric comparison/i })).toBeInTheDocument();
     expect(screen.getByRole('table', { name: /regression residuals/i })).toBeInTheDocument();
     expect(screen.getAllByRole('slider').length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('requires confirmation before destructive local reset', async () => {
+    const user = userEvent.setup();
+    await repository.appendAttempt({
+      id: 'protected-attempt', questionId: 'q01', questionVersion: 1,
+      conceptIds: ['tensor-shape'], response: '3', timestamp: new Date().toISOString(),
+      score: 1, gradingMethod: 'deterministic', confidence: 4, hintsUsed: 0,
+      solutionRevealed: false, tutorSupportLevel: 'none', applicationEvidence: false,
+    });
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    renderAt('/settings');
+    await user.click(await screen.findByRole('button', { name: /reset local progress/i }));
+    expect(confirm).toHaveBeenCalledOnce();
+    await expect(repository.getAttempts()).resolves.toHaveLength(1);
+    confirm.mockRestore();
   });
 });

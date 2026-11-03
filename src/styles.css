@@ -24,11 +24,11 @@ html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--paper-deep); }
 body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .35; background-image: linear-gradient(rgba(16,46,55,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(16,46,55,.035) 1px, transparent 1px); background-size: 24px 24px; }
 button, input, textarea, select { font: inherit; }
-button, a { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 a { color: var(--teal-dark); text-underline-offset: .2em; }
 a:hover { color: var(--coral); }
 :focus-visible { outline: 3px solid #f0a330; outline-offset: 3px; border-radius: 3px; }
-h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; color: var(--ink); line-height: 1.08; letter-spacing: -.025em; }
+h1, h2, h3 { scroll-margin-top: 5rem; font-family: Georgia, "Times New Roman", serif; color: var(--ink); line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
 h1 { max-width: 16ch; margin: .15em 0 .35em; font-size: clamp(2.5rem, 6vw, 5.7rem); font-weight: 500; }
 h2 { font-size: clamp(1.45rem, 3vw, 2.25rem); font-weight: 500; }
 h3 { font-size: 1.25rem; }
@@ -37,7 +37,7 @@ label { display: grid; gap: .45rem; color: var(--ink); font-weight: 700; }
 input, textarea, select { width: 100%; border: 1px solid #aab8b5; border-radius: 3px; padding: .76rem .82rem; color: var(--ink); background: #fffef9; }
 textarea { resize: vertical; }
 input[type="range"] { accent-color: var(--teal); padding: .35rem 0; }
-table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+table { width: 100%; border-collapse: collapse; font-size: .93rem; font-variant-numeric: tabular-nums; }
 th, td { padding: .72rem; border-bottom: 1px solid var(--line); text-align: left; }
 th { color: var(--ink); }
 
@@ -51,7 +51,7 @@ th { color: var(--ink); }
 .brand-mark { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 1px solid #82aaa9; border-radius: 50%; color: #c8ebe6; font: 1.6rem Georgia, serif; }
 .sidebar nav { display: grid; gap: .22rem; }
 .nav-link { display: grid; grid-template-columns: 2.1rem 1fr; align-items: center; padding: .78rem .8rem; border-radius: 3px; color: #d9e6e2; text-decoration: none; }
-.nav-link > span { color: #7ba2a1; font-size: .68rem; letter-spacing: .08em; }
+.nav-link > span { color: #bdd2d0; font-size: .68rem; letter-spacing: .08em; }
 .nav-link:hover, .nav-link--active { color: #fff; background: rgba(255,255,255,.09); }
 .nav-link--active { box-shadow: inset 3px 0 #69c2b9; }
 .local-note { position: absolute; bottom: 1rem; color: #a9c6c5; font-size: .75rem; }
@@ -86,7 +86,7 @@ main { min-height: 100vh; margin-left: 260px; }
 
 .focus-card { display: grid; grid-template-columns: auto minmax(280px, 1fr) minmax(220px, 360px); gap: clamp(1rem, 3vw, 3rem); align-items: center; padding: clamp(1.5rem, 4vw, 3rem); border-top: 5px solid var(--teal); background: var(--paper); box-shadow: var(--shadow); }
 .focus-card h2 { max-width: 15ch; margin: .25rem 0; font-size: clamp(2rem, 5vw, 4rem); }
-.focus-number { align-self: start; color: #97aaa7; font: 1.1rem Georgia, serif; }
+.focus-number { align-self: start; color: #536b6c; font: 1.1rem Georgia, serif; }
 .shape-sketch { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; transform: perspective(700px) rotateX(58deg) rotateZ(-24deg); }
 .shape-sketch span { display: grid; aspect-ratio: 1; place-items: center; border: 1px solid #66928f; color: var(--teal-dark); background: #d9ece8; font-size: .7rem; }
 .principle-strip { display: flex; gap: 1rem; margin-top: 1.2rem; padding: 1rem 1.2rem; border-left: 4px solid var(--gold); background: #f3ead1; }
@@ -139,7 +139,7 @@ main { min-height: 100vh; margin-left: 260px; }
 .progress-list p { margin: .2rem 0 0; color: var(--muted); font-size: .8rem; }
 .notes-layout { align-items: start; }
 .notes-layout .paper-card { display: grid; gap: 1rem; }
-.note-card { padding: 1rem 1.2rem; border-left: 4px solid var(--gold); background: var(--paper); }
+.note-card { overflow-wrap: anywhere; padding: 1rem 1.2rem; border-left: 4px solid var(--gold); background: var(--paper); }
 .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .setting-row { display: flex; justify-content: space-between; gap: 1rem; }
 .setting-row p { margin: .2rem 0; color: var(--muted); }

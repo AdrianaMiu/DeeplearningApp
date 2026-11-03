@@ -36,7 +36,7 @@ export default function Lesson() {
       <section className="objectives"><h2>By the end</h2><ul>{lesson.objectives.map((item) => <li key={item}>{item}</li>)}</ul></section>
       <section className="prediction-panel">
         <p className="kicker">01 · Predict before reveal</p><h2>A small commitment</h2><p>{lesson.predictionPrompt}</p>
-        <label>Your prediction<textarea value={prediction} onChange={(event) => setPrediction(event.target.value)} rows={3} /></label>
+        <label>Your prediction<textarea name="lesson-prediction" autoComplete="off" value={prediction} onChange={(event) => setPrediction(event.target.value)} rows={3} /></label>
         <button className="button button--primary" disabled={!prediction.trim()} onClick={() => setRevealed(true)}>Reveal worked example</button>
         {revealed && <div className="reveal" role="region" aria-label="Worked example"><p className="kicker">Compare, then correct</p><p>{lesson.workedExample}</p></div>}
       </section>

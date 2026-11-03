@@ -50,16 +50,16 @@ export default function Practice() {
   if (!skipped) {
     const question = diagnosticQuestions[diagnosticIndex];
     return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Optional diagnostic · {diagnosticIndex + 1}/8</p><h1>Find the best starting point</h1><p>Skip it at any time. Recommendations remain visible and overridable.</p></header>
-      <section className="question-card"><h2>{question.prompt}</h2><label>Your answer<input value={answer} onChange={(event) => setAnswer(event.target.value)} /></label><div className="button-row"><button className="button button--primary" disabled={!answer.trim()} onClick={answerDiagnostic}>Save and continue</button><button className="button button--quiet" onClick={skipDiagnostic}>Skip diagnostic</button></div></section></div>;
+      <section className="question-card"><h2>{question.prompt}</h2><label>Your answer<input name="diagnostic-answer" autoComplete="off" value={answer} onChange={(event) => setAnswer(event.target.value)} /></label><div className="button-row"><button className="button button--primary" disabled={!answer.trim()} onClick={answerDiagnostic}>Save and continue</button><button className="button button--quiet" onClick={skipDiagnostic}>Skip diagnostic</button></div></section></div>;
   }
 
   const selected = lessons.find((lesson) => lesson.id === recommendation) ?? lessons[0];
   const question = questions[0];
-  return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Practice desk</p><h1>One answer, with honest support</h1><p>Recommendation: {selected.title}. You remain in control.</p><label>Choose a different starting lesson<select value={recommendation} onChange={(event) => setRecommendation(event.target.value)}>{lessons.map((lesson) => <option key={lesson.id} value={lesson.id}>{lesson.title}</option>)}</select></label></header>
+  return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Practice desk</p><h1>One answer, with honest support</h1><p>Recommendation: {selected.title}. You remain in control.</p><label>Choose a different starting lesson<select name="starting-lesson" autoComplete="off" value={recommendation} onChange={(event) => setRecommendation(event.target.value)}>{lessons.map((lesson) => <option key={lesson.id} value={lesson.id}>{lesson.title}</option>)}</select></label></header>
     <section className="question-card"><p className="kicker">Shape reasoning · reviewed</p><h2>{question.prompt}</h2>
       {hints > 0 && <p className="hint" role="status">Hint: {question.hints[0]}</p>}
       <button className="text-button" disabled={hints > 0} onClick={() => setHints(1)}>Show hint 1</button>
-      <label>Your answer<input value={answer} onChange={(event) => setAnswer(event.target.value)} /></label>
+      <label>Your answer<input name="practice-answer" autoComplete="off" value={answer} onChange={(event) => setAnswer(event.target.value)} /></label>
       <button className="button button--primary" disabled={!answer.trim() || Boolean(feedback)} onClick={submitPractice}>Check answer</button>
       {feedback && <p className="feedback" role="status">{feedback} {hints > 0 && 'Recorded as assisted evidence.'}</p>}
     </section></div>;

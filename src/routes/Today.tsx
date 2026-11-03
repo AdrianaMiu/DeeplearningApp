@@ -6,10 +6,11 @@ export default function Today() {
   const { snapshot, loading } = useAppData();
   const resume = snapshot?.sessions.filter((item) => !item.completedAt).at(-1);
   const evidence = snapshot?.attempts.length ?? 0;
+  const weekday = new Intl.DateTimeFormat(undefined, { weekday: 'long' }).format(new Date());
   return (
     <div className="page today-page">
       <header className="page-heading">
-        <p className="eyebrow">Tuesday · learning desk</p>
+        <p className="eyebrow">{weekday} · learning desk</p>
         <h1>Your next clear step</h1>
         <p>Build reliable intuition in one focused loop: predict, test, explain, revisit.</p>
       </header>

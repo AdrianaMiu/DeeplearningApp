@@ -127,7 +127,7 @@ def coverage_records(sections, docs, blocked):
 def make_manifest(docs):
     return {'schemaVersion': 1, 'sourceHash': SOURCE_HASH, 'sourcePageCount': PAGE_COUNT,
             'contentVersion': CONTENT_VERSION, 'chunkingConfig': CHUNKING, 'store': None,
-            'documents': [{k: v for k, v in doc.items() if k != 'text'} for doc in docs]}
+            'documents': [{**{k: v for k, v in doc.items() if k != 'text'}, 'status': 'pending'} for doc in docs]}
 
 
 def confirm_delete(store, confirmation):
@@ -135,20 +135,28 @@ def confirm_delete(store, confirmation):
         raise ValueError('Deletion requires --store and --confirm with the exact fileSearchStores resource name')
 
 
+METADATA_KEYS = ('sourceHash', 'contentVersion', 'chapterId', 'sectionId',
+                 'printedStart', 'printedEnd', 'pdfPageStart', 'pdfPageEnd', 'contentHash')
+
+
 def custom_metadata(doc):
-    return [{'key': key, 'numericValue' if isinstance(value, int) else 'stringValue': value}
-            for key, value in doc.items() if key in ('sourceHash', 'contentVersion', 'chapterId', 'sectionId',
-                'printedStart', 'printedEnd', 'pdfPageStart', 'pdfPageEnd', 'contentHash')]
+    return [{'key': key, 'numericValue' if isinstance(doc[key], int) else 'stringValue': doc[key]}
+            for key in METADATA_KEYS if key in doc]
 
 
 def metadata(document):
-    return {item['key']: item.get('stringValue', item.get('numericValue')) for item in document.get('customMetadata', [])}
+    fields = {}
+    for item in document.get('customMetadata', []):
+        key = item['key']
+        if key in fields:
+            raise ValueError('Duplicate remote metadata key; inspect the private store before continuing')
+        fields[key] = item.get('stringValue', item.get('numericValue'))
+    return fields
 
 
 def match_document(remote, doc):
-    matches = [item for item in remote if all(metadata(item).get(key) == value for key, value in {
-        'sourceHash': SOURCE_HASH, 'contentVersion': CONTENT_VERSION, 'sectionId': doc['sectionId'],
-        'contentHash': doc['contentHash']}.items())]
+    expected = {key: doc[key] for key in METADATA_KEYS}
+    matches = [item for item in remote if all(metadata(item).get(key) == value for key, value in expected.items())]
     if len(matches) > 1:
         raise ValueError('Duplicate remote section documents; inspect the private store before continuing')
     return matches[0] if matches else None
@@ -335,9 +343,15 @@ def main(argv=None):
         manifest['coverage'] = coverage
         if previous:
             old_entries = {item['sectionId']: item for item in previous['documents']}
+            current_entries = {item['sectionId']: item for item in manifest['documents']}
+            for sid, old in old_entries.items():
+                current = current_entries.get(sid, {})
+                if (old.get('operation') or old.get('status') == 'uploading') and any(
+                        old.get(key) != current.get(key) for key in METADATA_KEYS):
+                    raise ValueError(f'Section {sid} has an unresolved upload and changed extraction metadata; reconcile the pending operation before reindexing')
             for entry in manifest['documents']:
                 old = old_entries.get(entry['sectionId'], {})
-                if old.get('contentHash') == entry['contentHash']:
+                if all(old.get(key) == entry[key] for key in METADATA_KEYS):
                     entry.update({key: old[key] for key in ('status', 'document', 'operation') if key in old})
             manifest['store'] = previous.get('store')
         store = args.store or manifest['store']
@@ -350,8 +364,13 @@ def main(argv=None):
             if not store:
                 raise ValueError('Verification requires --store or a resume manifest')
             remote = checked_documents(api, store)
-            if any(not (match := match_document(remote, doc)) or match.get('state') != 'STATE_ACTIVE' for doc in selected):
-                raise ValueError('Remote store is missing active documents or matching source metadata')
+            for doc in selected:
+                siblings = [item for item in remote if metadata(item).get('sectionId') == doc['sectionId']]
+                if len(siblings) > 1:
+                    raise ValueError('Remote store contains stale or duplicate section documents; complete cleanup before verification')
+                match = match_document(siblings, doc)
+                if not match or match.get('state') != 'STATE_ACTIVE':
+                    raise ValueError('Remote store is missing active documents or matching source metadata')
             print(json.dumps({'store': store, 'status': 'verified', 'sections': len(selected)}))
             return
         if not store:

@@ -1,9 +1,13 @@
 """Offline synthetic fixtures only; never upload or include book text."""
+import contextlib
+import copy
+import io
 import importlib.util
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import Mock, patch
 
 SPEC = importlib.util.spec_from_file_location('index_book', Path(__file__).parents[2] / 'scripts/rag/index_book.py')
 rag = importlib.util.module_from_spec(SPEC)
@@ -64,7 +68,8 @@ class Ingestion(unittest.TestCase):
         rag.confirm_delete('fileSearchStores/example', 'fileSearchStores/example')
 
     def test_resume_reconciles_without_duplicate_upload_and_rejects_foreign_metadata(self):
-        doc = {'sectionId': '1.1', 'contentHash': 'abc', 'chapterId': 'chapter-1'}
+        docs, _ = rag.extract_sections(['1.1 Alpha\nFixture material only.'], [section('1.1', 'Alpha')])
+        doc = docs[0]
         remote = {'name': 'fileSearchStores/example/documents/doc', 'state': 'STATE_ACTIVE', 'customMetadata': rag.custom_metadata({**doc, 'sourceHash': rag.SOURCE_HASH, 'contentVersion': rag.CONTENT_VERSION})}
         self.assertEqual(rag.match_document([remote], doc)['name'], remote['name'])
         remote['customMetadata'][0]['stringValue'] = 'foreign'
@@ -127,5 +132,96 @@ class Lifecycle(unittest.TestCase):
             path = Path(directory)
             with self.assertRaisesRegex(ValueError, 'store'):
                 rag.synchronize(Api(), 'fileSearchStores/example', self.docs, rag.make_manifest(self.docs), path / 'manifest.json', path)
+
+class ReviewRegressions(unittest.TestCase):
+    setUp = Lifecycle.setUp
+    def remote(self, doc=None, name='current', state='STATE_ACTIVE'):
+        return {'name': f'fileSearchStores/example/documents/{name}', 'state': state,
+                'customMetadata': rag.custom_metadata(doc or self.doc)}
+
+    def run_cli(self, command, api, path):
+        pdf = path.parent / 'fixture.pdf'
+        pdf.write_bytes(b'synthetic source fixture')
+        def source_tool(arguments, **kwargs):
+            if arguments[0] == 'pdftotext': Path(arguments[-1]).write_text('fixture')
+            return Mock(stdout='Pages: 1185\n')
+        with patch.object(rag.hashlib, 'sha256', return_value=Mock(hexdigest=lambda: rag.SOURCE_HASH)), \
+                patch.object(rag.subprocess, 'run', side_effect=source_tool), \
+                patch.object(rag, 'extract_sections', return_value=(self.docs, [])), \
+                patch.object(rag, 'coverage_records', return_value=[]), \
+                patch.object(rag, 'GoogleApi', return_value=api), contextlib.redirect_stdout(io.StringIO()):
+            rag.main([command, '--pdf', str(pdf), '--manifest', str(path)])
+
+    def test_verify_rejects_stale_sibling_after_replacement_even_if_current_is_active(self):
+        current = self.remote()
+        for state in ['STATE_ACTIVE', 'STATE_PENDING', 'STATE_FAILED']:
+            with self.subTest(state=state), tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / 'manifest.json'
+                manifest = rag.make_manifest(self.docs)
+                manifest['store'] = 'fileSearchStores/example'
+                rag.save_manifest(path, manifest)
+                stale = self.remote({**self.doc, 'contentHash': 'old-digest'}, 'stale', state)
+                api = Mock()
+                api.documents.return_value = [current, stale]
+                api.request.side_effect = ValueError('cleanup failed')
+                with self.assertRaisesRegex(ValueError, 'cleanup failed'), contextlib.redirect_stdout(io.StringIO()):
+                    rag.synchronize(api, 'fileSearchStores/example', self.docs, manifest, path, path.parent)
+                api.request.reset_mock()
+                with self.assertRaisesRegex(ValueError, 'stale|duplicate'):
+                    self.run_cli('verify', api, path)
+                api.request.assert_not_called()
+                api.documents.return_value = [current]
+                self.run_cli('verify', api, path)
+
+    def test_changed_extraction_cannot_overwrite_pending_or_uncertain_upload_journal(self):
+        for journal in [
+            {'status': 'uploading', 'operation': 'fileSearchStores/example/operations/old'},
+            {'status': 'uploading'},
+        ]:
+            with self.subTest(journal=journal), tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / 'manifest.json'
+                manifest = rag.make_manifest([{**self.doc, 'contentHash': 'old-digest'}])
+                manifest['store'] = 'fileSearchStores/example'
+                manifest['documents'][0].update(journal)
+                rag.save_manifest(path, manifest)
+                before = path.read_bytes()
+                api = Mock()
+                api.documents.return_value = []
+                api.upload.side_effect = AssertionError('unresolved old upload must prevent a new upload')
+                with self.assertRaisesRegex(ValueError, 'unresolved|pending'):
+                    self.run_cli('create', api, path)
+                api.upload.assert_not_called()
+                self.assertEqual(path.read_bytes(), before)
+
+    def test_document_matching_requires_all_expected_chapter_and_page_metadata(self):
+        for key in ['chapterId', 'printedStart', 'printedEnd', 'pdfPageStart', 'pdfPageEnd']:
+            for missing in [False, True]:
+                with self.subTest(key=key, missing=missing):
+                    remote = self.remote()
+                    if missing:
+                        remote['customMetadata'] = [item for item in remote['customMetadata'] if item['key'] != key]
+                    else:
+                        field = next(item for item in remote['customMetadata'] if item['key'] == key)
+                        field['numericValue' if key.startswith('pdf') else 'stringValue'] = 9999 if key.startswith('pdf') else 'wrong'
+                    self.assertIsNone(rag.match_document([remote], self.doc))
+
+    def test_duplicate_metadata_keys_are_rejected_even_when_values_match(self):
+        remote = self.remote()
+        remote['customMetadata'].append(copy.deepcopy(remote['customMetadata'][0]))
+        with self.assertRaisesRegex(ValueError, 'Duplicate.*metadata'):
+            rag.match_document([remote], self.doc)
+
+    def test_initial_and_partial_manifest_entries_conform_to_required_status_schema(self):
+        schema = json.loads((Path(__file__).parents[2] / 'scripts/rag/manifest.schema.json').read_text())
+        item_schema = schema['properties']['documents']['items']
+        manifest = rag.make_manifest([self.doc, {**self.doc, 'sectionId': '1.2'}])
+        self.assertEqual([entry.get('status') for entry in manifest['documents']], ['pending', 'pending'])
+        manifest['documents'][0]['status'] = 'uploading'
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'manifest.json'
+            rag.save_manifest(path, manifest)
+            for entry in json.loads(path.read_text())['documents']:
+                self.assertTrue(set(item_schema['required']).issubset(entry))
+                self.assertIn(entry['status'], item_schema['properties']['status']['enum'])
 
 if __name__ == '__main__': unittest.main()

@@ -1,3 +1,4 @@
+import { studioQuestions } from './studio-questions';
 import type { Question } from '../domain/types';
 import { makeQuestion, type QuestionSeed } from './question-helpers';
 
@@ -36,4 +37,4 @@ const seeds: QuestionSeed[] = [
   { id: 'q32', lessonId: 'regression-training', type: 'explanation', prompt: 'What does decreasing training loss prove and not prove?', answer: 'optimization is occurring; generalization is not proven', explanation: 'Validation or unseen data is needed for evidence of generalization.' },
 ];
 
-export const questions: Question[] = seeds.map(makeQuestion);
+export const questions: Question[] = [...seeds.map(makeQuestion), ...studioQuestions];

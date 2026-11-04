@@ -72,7 +72,7 @@ export const appendixStudios: ChapterStudio[] = [
     independentTask: 'Choose one algebra card, one calculus card, and one probability or statistics card. Solve the small prompt in each and describe a modeling situation where that tool is useful.',
     misconceptions: ['An eigenvector must be nonzero.', 'A sample estimate and a population quantity are not identical.', 'A short coverage card introduces a section; it does not establish mastery of every result in it.'],
     teachBackPrompt: 'Explain one card from A.1–A.11 in your own words and connect it to a model you have studied.',
-    chapterCheckQuestionIds: [], contentStatus: 'reviewed', durationMinutes: 45,
+    chapterCheckQuestionIds: ['studio-a-q1', 'studio-a-q2', 'studio-a-q3', 'studio-a-q4'], contentStatus: 'reviewed', durationMinutes: 45,
   },
   {
     ...coverageFields('appendix-b', toolCards),
@@ -94,6 +94,6 @@ export const appendixStudios: ChapterStudio[] = [
     independentTask: 'Write a short run checklist covering setup, ordered execution, input version, output storage, and resource teardown. Select the relevant B.1–B.8 cards to justify each step.',
     misconceptions: ['Saved cell output does not prove that a notebook runs from a clean kernel.', 'Ending a compute session does not by itself describe where artifacts were saved.'],
     teachBackPrompt: 'Explain how you would hand an experiment to a teammate so they can reproduce it after a runtime reset.',
-    chapterCheckQuestionIds: [], contentStatus: 'reviewed', durationMinutes: 40,
+    chapterCheckQuestionIds: ['studio-b-q1', 'studio-b-q2', 'studio-b-q3', 'studio-b-q4'], contentStatus: 'reviewed', durationMinutes: 40,
   },
 ];

@@ -19,7 +19,7 @@ export function makeStudio(seed: StudioSeed): ChapterStudio {
     views: { intuition: seed.intuition, math: seed.math, code: seed.code, workConnection: seed.work },
     predictionPrompt: seed.prediction, workedExample: seed.example, independentTask: seed.task,
     misconceptions: [seed.misconception], teachBackPrompt: `Explain ${seed.title.toLowerCase()} to a colleague using your own example.`,
-    interaction: seed.interaction, chapterCheckQuestionIds: [], contentStatus: 'reviewed', durationMinutes: 35,
+    interaction: seed.interaction, chapterCheckQuestionIds: [1, 2, 3, 4].map((n) => `studio-${seed.chapter}-q${n}`), contentStatus: 'reviewed', durationMinutes: 35,
   };
 }
 

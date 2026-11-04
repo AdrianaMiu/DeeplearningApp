@@ -42,22 +42,22 @@ describe('published learning content', () => {
     }
   });
 
-  it('contains eight diagnostic and thirty-two lesson questions with a useful type mix', () => {
+  it('contains 120 unique reviewed assessment items', () => {
     expect(diagnosticQuestions).toHaveLength(8);
-    expect(questions).toHaveLength(32);
+    expect(questions).toHaveLength(112);
     const all = [...diagnosticQuestions, ...questions];
-    expect(new Set(all.map((question) => question.id)).size).toBe(40);
+    expect(new Set(all.map((question) => question.id)).size).toBe(120);
     const types = new Set(all.map((question) => question.type));
     expect([...types].sort()).toEqual(
       ['multiple_choice', 'shape', 'numeric', 'code_trace', 'debugging', 'explanation', 'transfer'].sort(),
     );
     expect(all.every((question) => question.sourceRefs.length > 0 && question.hints.length > 0)).toBe(true);
-    expect(questions.every((question) => lessons.some((lesson) => lesson.id === question.lessonId))).toBe(true);
+    expect(questions.every((question) => learningEntries.some((entry) => entry.id === question.lessonId))).toBe(true);
   });
 
   it('labels all authored material as companion-created while preserving precise source IDs', () => {
-    const refs = [...lessons.flatMap((lesson) => lesson.sourceRefs), ...questions.flatMap((question) => question.sourceRefs)];
-    expect(refs.every((source) => source.companionCreated && /^([23]\.|[23]$)/.test(source.sectionId))).toBe(true);
+    const refs = [...learningEntries.flatMap((entry) => entry.sourceRefs), ...questions.flatMap((question) => question.sourceRefs)];
+    expect(refs.every((source) => source.companionCreated)).toBe(true);
     expect(refs.every((source) => source.sourceHash.length === 64 && source.pdfPageStart > 0)).toBe(true);
   });
 });

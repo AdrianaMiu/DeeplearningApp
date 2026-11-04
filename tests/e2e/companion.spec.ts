@@ -84,6 +84,17 @@ test.describe('Deep Learning Companion release', () => {
     expect(results.violations.filter((item) => ['critical', 'serious'].includes(item.impact ?? ''))).toEqual([]);
   });
 
+  test('opens a non-foundation studio and its source map', async ({ page }) => {
+    await page.getByRole('link', { name: 'Curriculum' }).click();
+    await page.getByRole('link', { name: 'Start studio: Convolutional Neural Networks' }).click();
+    await expect(page).toHaveURL(/#\/lesson\/cnn-studio/);
+    await page.goBack();
+    await page.getByRole('link', { name: 'Inspect sections for Convolutional Neural Networks', exact: true }).click();
+    await expect(page).toHaveURL(/#\/curriculum\/chapter-7/);
+    await expect(page.getByRole('heading', { name: 'Source sections' })).toBeVisible();
+    await expect(page.getByText('Individual exercise references', { exact: false })).toBeVisible();
+  });
+
   test('uses the navigation drawer at a mobile viewport', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     const menu = page.getByRole('button', { name: 'Menu' });

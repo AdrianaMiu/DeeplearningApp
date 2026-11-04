@@ -212,3 +212,32 @@ main { min-height: 100vh; margin-left: 260px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* A connected route through the book, with chapter details on paper. */
+.cockpit-location { margin: 1.5rem 0; padding-left: 1rem; border-left: 3px solid #9a7222; }
+.cockpit-location h2 { margin: .25rem 0; }
+.cockpit-focus { margin-bottom: 1.5rem; }
+.milestone-rail { margin: 2rem 0; overflow-x: auto; }
+.milestone-rail ol { display: flex; min-width: 680px; margin: 0; padding: 0; list-style: none; }
+.milestone-rail li { flex: 1; border-top: 2px solid #a9bcb6; }
+.milestone-rail a { display: grid; gap: .5rem; padding: .75rem .75rem 0 0; color: #395b5c; font-size: .78rem; font-weight: 700; text-decoration: none; }
+.milestone-rail a span { display: grid; width: 1.6rem; height: 1.6rem; place-items: center; margin-top: -1.6rem; border: 2px solid #a9bcb6; border-radius: 50%; background: #fbfcf7; }
+.milestone-rail .is-current { border-color: #087078; }
+.milestone-rail .is-current span { color: white; border-color: #087078; background: #087078; }
+.evidence-strip { padding: 1.5rem; border-block: 1px solid var(--line); background: #fbfcf7; }
+.evidence-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.evidence-columns > div { padding-left: 1rem; border-left: 2px solid #9a7222; }
+.resume-line { padding: 1.5rem 0; }
+.atlas-controls { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; padding: 1rem; background: #eef2ed; }
+.atlas-controls label { display: grid; gap: .4rem; }
+.atlas-milestone { margin: 3rem 0; padding-left: 1.2rem; border-left: 2px solid #87aaa5; }
+.atlas-milestone > h2 { margin: .2rem 0; }
+.atlas-row { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.3rem 0; border-top: 1px solid var(--line); }
+.atlas-row h3 { margin: 0 0 .5rem; font: 700 1.25rem Georgia, serif; }
+.atlas-row p { margin: .4rem 0; }
+.atlas-counts { color: var(--muted); font-size: .8rem; }
+.atlas-actions { display: grid; align-content: center; gap: .75rem; }
+.chapter-detail { margin: 1.5rem 0; padding: clamp(1rem, 3vw, 2rem); border: 1px solid #9a7222; background: #fbfcf7; }
+.chapter-detail li { margin-bottom: .35rem; }
+.chapter-detail .exercise-index { margin: 1rem 0; }
+@media (max-width: 620px) { .evidence-columns, .atlas-controls, .atlas-row { grid-template-columns: 1fr; } .atlas-actions { display: flex; flex-wrap: wrap; } }

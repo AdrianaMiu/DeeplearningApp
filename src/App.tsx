@@ -22,7 +22,7 @@ export function AppShell({ repository }: { repository?: LearningRepository }) {
         <Suspense fallback={<div className="page"><p role="status">Opening notebook…</p></div>}>
           <Routes>
             <Route path="/" element={<Today />} />
-            <Route path="/curriculum" element={<Curriculum />} />
+            <Route path="/curriculum/:chapterId?" element={<Curriculum />} />
             <Route path="/lesson/:lessonId" element={<Lesson />} />
             <Route path="/practice" element={<Practice />} />
             <Route path="/review" element={<Review />} />

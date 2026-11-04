@@ -158,4 +158,34 @@ describe('guarded tutor Worker', () => {
       vi.useRealTimers();
     }
   });
+
+  it('falls back to Gemini 3.6 Flash when Gemini 3.8 Flash is unavailable', async () => {
+    const fetcher = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.includes('turnstile')) return Response.json({ success: true });
+      if (url.includes('gemini-3.8-flash')) return Response.json({ error: { status: 'UNAVAILABLE' } }, { status: 503 });
+      return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify({
+        reply: 'Indexing removes the selected axis.',
+        sourceRefs: [{ sectionId: '2.1.2', printedStart: '33', pdfPageStart: 73 }],
+        supportLevel: 'hint',
+        insufficientEvidence: false,
+        suggestedNextAttempt: 'Name the remaining axis.',
+      }) }] } }] });
+    });
+
+    const response = await handleTutorRequest(request(), env(), fetcher);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ model: 'gemini-3.6-flash' });
+    expect(fetcher.mock.calls.some(([input]) => String(input).includes('gemini-3.6-flash'))).toBe(true);
+  });
+
+  it('distinguishes Gemini credential or model-access failures from temporary outages', async () => {
+    const fetcher = vi.fn(async (input: RequestInfo | URL) => String(input).includes('turnstile')
+      ? Response.json({ success: true })
+      : Response.json({ error: { status: 'PERMISSION_DENIED' } }, { status: 403 }));
+
+    const response = await handleTutorRequest(request(), env(), fetcher);
+    expect(response.status).toBe(503);
+    expect(await response.json()).toMatchObject({ code: 'TUTOR_CONFIGURATION_ERROR' });
+  });
 });

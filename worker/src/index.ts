@@ -41,9 +41,9 @@ const modelResponseSchema = z.object({
 });
 
 type Fetcher = typeof fetch;
-const model = 'gemini-3.8-flash';
+const models = ['gemini-3.8-flash', 'gemini-3.6-flash'] as const;
 const turnstileTimeoutMs = 5_000;
-const geminiTimeoutMs = 20_000;
+const geminiAttemptTimeoutMs = 10_000;
 
 async function fetchWithTimeout(fetcher: Fetcher, input: RequestInfo | URL, init: RequestInit, timeoutMs: number) {
   const controller = new AbortController();
@@ -177,19 +177,47 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
     'If context is insufficient, set insufficientEvidence true. Never invent a page, equation, or citation.',
   ].join('\n');
 
+  let response: Response | undefined;
+  let selectedModel: (typeof models)[number] = models[0];
+  let lastError: unknown;
+  for (const candidateModel of models) {
+    selectedModel = candidateModel;
+    response = undefined;
+    try {
+      response = await fetchWithTimeout(fetcher, `https://generativelanguage.googleapis.com/v1beta/models/${candidateModel}:generateContent?key=${encodeURIComponent(env.GEMINI_API_KEY)}`, {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: prompt }] }],
+          generationConfig: {
+            thinkingConfig: { thinkingLevel: 'low' },
+            maxOutputTokens: 800,
+            responseMimeType: 'application/json',
+          },
+        }),
+      }, geminiAttemptTimeoutMs);
+      if (response.ok || response.status < 500) break;
+    } catch (reason) {
+      lastError = reason;
+    }
+  }
+
+  if (!response) {
+    if (isAbortError(lastError)) {
+      return safeError('TUTOR_TIMEOUT', 'Tutor took too long to respond. Please try again.', 504, origin);
+    }
+    return safeError('TUTOR_UNAVAILABLE', 'Tutor is temporarily unavailable. Continue without AI.', 503, origin);
+  }
+  if (!response.ok) {
+    if ([400, 401, 403].includes(response.status)) {
+      return safeError('TUTOR_CONFIGURATION_ERROR', 'Gemini access is not configured correctly. Check the Worker API key and model access.', 503, origin);
+    }
+    if (response.status === 429) {
+      return safeError('RATE_LIMITED', 'Gemini quota is temporarily exhausted. Continue without AI and try again later.', 429, origin);
+    }
+    return safeError('TUTOR_BUSY', 'Gemini is currently busy. Please try again shortly.', 503, origin);
+  }
+
   try {
-    const response = await fetchWithTimeout(fetcher, `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(env.GEMINI_API_KEY)}`, {
-      method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: {
-          thinkingConfig: { thinkingLevel: 'low' },
-          maxOutputTokens: 800,
-          responseMimeType: 'application/json',
-        },
-      }),
-    }, geminiTimeoutMs);
-    if (!response.ok) return safeError(response.status === 429 ? 'RATE_LIMITED' : 'TUTOR_UNAVAILABLE', 'Tutor is temporarily unavailable. Continue without AI.', response.status === 429 ? 429 : 503, origin);
     const payload = await response.json() as { candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }> };
     const text = payload.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!text) return safeError('MALFORMED_TUTOR_RESPONSE', 'Tutor returned an unusable response. Continue without AI.', 502, origin);
@@ -199,7 +227,7 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
     if (!result.success || !citationsAllowed(result.data.sourceRefs, context.sourceRefs)) {
       return safeError('MALFORMED_TUTOR_RESPONSE', 'Tutor response could not be grounded in the reviewed source.', 502, origin);
     }
-    return json({ ...result.data, model, contentVersion: CONTENT_VERSION }, 200, origin);
+    return json({ ...result.data, model: selectedModel, contentVersion: CONTENT_VERSION }, 200, origin);
   } catch (reason) {
     if (isAbortError(reason)) {
       return safeError('TUTOR_TIMEOUT', 'Tutor took too long to respond. Please try again.', 504, origin);

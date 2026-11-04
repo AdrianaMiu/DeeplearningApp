@@ -100,6 +100,13 @@ describe('guarded tutor Worker', () => {
     const outbound = JSON.stringify(geminiCall?.[1]);
     expect(outbound).toContain('Shape is a contract');
     expect(outbound).not.toContain('p. 9999');
+    const geminiBody = JSON.parse(String(geminiCall?.[1]?.body));
+    expect(geminiBody.generationConfig).toMatchObject({
+      thinkingConfig: { thinkingLevel: 'low' },
+      maxOutputTokens: 800,
+      responseMimeType: 'application/json',
+    });
+    expect(geminiBody.generationConfig).not.toHaveProperty('temperature');
 
     const badCitationFetch = successfulFetch();
     badCitationFetch.mockImplementation(async (input: RequestInfo | URL) => String(input).includes('turnstile')
@@ -126,5 +133,29 @@ describe('guarded tutor Worker', () => {
     const response = await handleTutorRequest(request(), env(), unavailable);
     expect(response.status).toBe(503);
     expect(await response.json()).toMatchObject({ code: 'TUTOR_UNAVAILABLE' });
+  });
+
+  it('stops a slow Gemini request after 20 seconds with a retryable timeout', async () => {
+    vi.useFakeTimers();
+    try {
+      const stalled = vi.fn((input: RequestInfo | URL, init?: RequestInit) => {
+        if (String(input).includes('turnstile')) return Promise.resolve(Response.json({ success: true }));
+        return new Promise<Response>((_resolve, reject) => {
+          init?.signal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true });
+        });
+      });
+
+      const pending = handleTutorRequest(request(), env(), stalled);
+      await vi.waitFor(() => expect(stalled).toHaveBeenCalledTimes(2));
+      const geminiCall = stalled.mock.calls[1];
+      expect(geminiCall[1]?.signal).toBeInstanceOf(AbortSignal);
+
+      await vi.advanceTimersByTimeAsync(20_000);
+      const response = await pending;
+      expect(response.status).toBe(504);
+      expect(await response.json()).toMatchObject({ code: 'TUTOR_TIMEOUT' });
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

@@ -42,6 +42,18 @@ const modelResponseSchema = z.object({
 
 type Fetcher = typeof fetch;
 const model = 'gemini-3.8-flash';
+const turnstileTimeoutMs = 5_000;
+const geminiTimeoutMs = 20_000;
+
+async function fetchWithTimeout(fetcher: Fetcher, input: RequestInfo | URL, init: RequestInit, timeoutMs: number) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetcher(input, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
 
 function corsOrigin(request: Request, env: TutorEnv): string | undefined {
   const origin = request.headers.get('origin') ?? '';
@@ -64,11 +76,20 @@ function safeError(code: string, message: string, status: number, origin?: strin
   return json({ code, message }, status, origin);
 }
 
+function isAbortError(reason: unknown): boolean {
+  return typeof reason === 'object' && reason !== null && 'name' in reason && reason.name === 'AbortError';
+}
+
 async function verifyTurnstile(token: string, secret: string, fetcher: Fetcher): Promise<boolean> {
   const form = new FormData();
   form.set('secret', secret);
   form.set('response', token);
-  const response = await fetcher('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form });
+  const response = await fetchWithTimeout(
+    fetcher,
+    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+    { method: 'POST', body: form },
+    turnstileTimeoutMs,
+  );
   if (!response.ok) return false;
   const result = await response.json() as { success?: boolean };
   return result.success === true;
@@ -157,13 +178,17 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
   ].join('\n');
 
   try {
-    const response = await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(env.GEMINI_API_KEY)}`, {
+    const response = await fetchWithTimeout(fetcher, `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(env.GEMINI_API_KEY)}`, {
       method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.15, maxOutputTokens: 800, responseMimeType: 'application/json' },
+        generationConfig: {
+          thinkingConfig: { thinkingLevel: 'low' },
+          maxOutputTokens: 800,
+          responseMimeType: 'application/json',
+        },
       }),
-    });
+    }, geminiTimeoutMs);
     if (!response.ok) return safeError(response.status === 429 ? 'RATE_LIMITED' : 'TUTOR_UNAVAILABLE', 'Tutor is temporarily unavailable. Continue without AI.', response.status === 429 ? 429 : 503, origin);
     const payload = await response.json() as { candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }> };
     const text = payload.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -175,7 +200,10 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
       return safeError('MALFORMED_TUTOR_RESPONSE', 'Tutor response could not be grounded in the reviewed source.', 502, origin);
     }
     return json({ ...result.data, model, contentVersion: CONTENT_VERSION }, 200, origin);
-  } catch {
+  } catch (reason) {
+    if (isAbortError(reason)) {
+      return safeError('TUTOR_TIMEOUT', 'Tutor took too long to respond. Please try again.', 504, origin);
+    }
     return safeError('TUTOR_UNAVAILABLE', 'Tutor is temporarily unavailable. Continue without AI.', 503, origin);
   }
 }

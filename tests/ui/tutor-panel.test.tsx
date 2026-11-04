@@ -1,10 +1,60 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { TutorPanel } from '../../src/tutor/TutorPanel';
 
+afterEach(() => {
+  vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
+  delete window.turnstile;
+  document.querySelectorAll('script[data-turnstile]').forEach((script) => script.remove());
+});
+
 describe('TutorPanel', () => {
+  it.each([true, false])('uses a fresh token for the next production request after success=%s', async (success) => {
+    vi.stubEnv('VITE_TURNSTILE_SITE_KEY', 'site-key');
+    vi.stubEnv('VITE_TUTOR_URL', 'https://tutor.example');
+    const callbacks: Record<string, unknown>[] = [];
+    const remove = vi.fn();
+    const script = document.createElement('script');
+    script.dataset.turnstile = 'true';
+    document.head.append(script);
+    window.turnstile = { render: vi.fn((_element, options) => { callbacks.push(options); return `widget-${callbacks.length}`; }), remove };
+    let settle!: (response: Response) => void;
+    const fetchTutor = vi.fn().mockImplementationOnce(() => new Promise<Response>((resolve) => { settle = resolve; }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ reply: 'Second reply', suggestedNextAttempt: 'Try again', sourceRefs: [] }), { status: 200 }));
+    vi.stubGlobal('fetch', fetchTutor);
+    const user = userEvent.setup();
+    render(<TutorPanel lessonId="tensor-shapes" conceptIds={['tensor-shape']} learnerAttempt="My shape is 3" />);
+    await user.click(screen.getByRole('checkbox', { name: /i understand/i }));
+    await user.click(screen.getByRole('button', { name: /continue to tutor/i }));
+    await user.type(screen.getByLabelText(/question for the tutor/i), 'What axis remains?');
+    const ask = screen.getByRole('button', { name: /ask for a hint/i });
+    expect(ask).toBeDisabled();
+    act(() => (callbacks[0].callback as (token: string) => void)('first-token'));
+    await user.click(ask);
+    expect(JSON.parse(fetchTutor.mock.calls[0][1].body)).toMatchObject({ turnstileToken: 'first-token', learnerAttempt: 'My shape is 3', question: 'What axis remains?' });
+    expect(ask).toBeDisabled();
+    await act(async () => settle(new Response(JSON.stringify(success
+      ? { reply: 'First reply', suggestedNextAttempt: 'Try again', sourceRefs: [] }
+      : { message: 'Human verification expired. Please retry.' }), { status: success ? 200 : 400 })));
+    expect(await screen.findByText(success ? 'First reply' : 'Human verification expired. Please retry.')).toBeInTheDocument();
+    // A consumed token must never enable a second request.
+    expect(ask).toBeDisabled();
+    act(() => (callbacks[0].callback as (token: string) => void)('late-token'));
+    expect(ask).toBeDisabled();
+    await user.click(ask);
+    expect(fetchTutor).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(callbacks).toHaveLength(2));
+    expect(remove).toHaveBeenCalledWith('widget-1');
+    expect(screen.getByLabelText(/question for the tutor/i)).toHaveValue('What axis remains?');
+    act(() => (callbacks[1].callback as (token: string) => void)('second-token'));
+    await user.click(ask);
+    expect(await screen.findByText('Second reply')).toBeInTheDocument();
+    expect(JSON.parse(fetchTutor.mock.calls[1][1].body)).toMatchObject({ turnstileToken: 'second-token', learnerAttempt: 'My shape is 3' });
+  });
+
   it('discloses Gemini privacy terms before first use and keeps failure non-blocking', async () => {
     const user = userEvent.setup();
     const requestTutor = vi.fn().mockRejectedValue(new Error('Tutor is temporarily unavailable.'));

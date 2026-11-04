@@ -1,0 +1,144 @@
+{
+  "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+  "sourcePageCount": 1185,
+  "studios": [
+    {
+      "studioId": "introduction-studio",
+      "references": [
+        {
+          "sectionId": "1.1",
+          "printedStart": "2",
+          "pdfPageStart": 42,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "1.2",
+          "printedStart": "4",
+          "pdfPageStart": 44,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "1.1",
+        "printedPage": "2",
+        "pdfPage": 42
+      }
+    },
+    {
+      "studioId": "classification-studio",
+      "references": [
+        {
+          "sectionId": "4.1",
+          "printedStart": "127",
+          "pdfPageStart": 167,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "4.2",
+          "printedStart": "136",
+          "pdfPageStart": 176,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "4.1",
+        "printedPage": "127",
+        "pdfPage": 167
+      }
+    },
+    {
+      "studioId": "mlp-studio",
+      "references": [
+        {
+          "sectionId": "5.1",
+          "printedStart": "170",
+          "pdfPageStart": 210,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "5.6",
+          "printedStart": "198",
+          "pdfPageStart": 238,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "5.1",
+        "printedPage": "170",
+        "pdfPage": 210
+      }
+    },
+    {
+      "studioId": "builders-guide-studio",
+      "references": [
+        {
+          "sectionId": "6.1",
+          "printedStart": "212",
+          "pdfPageStart": 252,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "6.2",
+          "printedStart": "219",
+          "pdfPageStart": 259,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "6.1",
+        "printedPage": "212",
+        "pdfPage": 252
+      }
+    },
+    {
+      "studioId": "cnn-studio",
+      "references": [
+        {
+          "sectionId": "7.2",
+          "printedStart": "246",
+          "pdfPageStart": 286,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "7.3",
+          "printedStart": "254",
+          "pdfPageStart": 294,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "7.2",
+        "printedPage": "246",
+        "pdfPage": 286
+      }
+    },
+    {
+      "studioId": "modern-cnn-studio",
+      "references": [
+        {
+          "sectionId": "8.1",
+          "printedStart": "276",
+          "pdfPageStart": 316,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "8.6",
+          "printedStart": "311",
+          "pdfPageStart": 351,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "8.1",
+        "printedPage": "276",
+        "pdfPage": 316
+      }
+    }
+  ]
+}

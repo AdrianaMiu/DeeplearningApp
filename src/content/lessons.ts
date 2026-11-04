@@ -1,6 +1,7 @@
 import type { DeepLesson, LearningEntry } from '../domain/types';
 import { chapterLearningMap } from './course-map';
 import { companionSource } from './source';
+import { chapterStudios } from './studios';
 
 interface LessonSeed {
   id: string; title: string; question: string; sections: [string, number, number?][];
@@ -44,5 +45,5 @@ export const lessons: DeepLesson[] = seeds.map((seed, index) => ({
   durationMinutes: 35,
 }));
 
-export const learningEntries: LearningEntry[] = lessons;
+export const learningEntries: LearningEntry[] = [...lessons, ...chapterStudios];
 export const learningEntryById = new Map(learningEntries.map((entry) => [entry.id, entry]));

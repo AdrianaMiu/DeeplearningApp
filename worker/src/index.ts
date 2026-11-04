@@ -29,12 +29,9 @@ const requestSchema = z.object({
   anonymousClientId: z.string().min(8).max(128),
 });
 
-const sourceRefSchema = z.object({
-  sectionId: z.string(), printedStart: z.string(), pdfPageStart: z.number().int().positive(),
-});
 const modelResponseSchema = z.object({
   reply: z.string().min(1).max(6_000),
-  sourceRefs: z.array(sourceRefSchema).max(5),
+  sourceSectionIds: z.array(z.string()).max(5),
   supportLevel: z.enum(['hint', 'explanation', 'feedback', 'revealed']),
   insufficientEvidence: z.boolean(),
   suggestedNextAttempt: z.string().min(1).max(1_000),
@@ -110,12 +107,11 @@ async function enforceDailyLimits(env: TutorEnv, clientId: string): Promise<bool
   return true;
 }
 
-function citationsAllowed(citations: AllowedSourceRef[], allowlist: AllowedSourceRef[]): boolean {
-  return citations.every((citation) => allowlist.some((allowed) =>
-    allowed.sectionId === citation.sectionId
-    && allowed.printedStart === citation.printedStart
-    && allowed.pdfPageStart === citation.pdfPageStart,
-  ));
+function resolveSourceRefs(sectionIds: string[], allowlist: AllowedSourceRef[]): AllowedSourceRef[] | undefined {
+  const refsBySection = new Map(allowlist.map((sourceRef) => [sourceRef.sectionId, sourceRef]));
+  const sourceRefs = sectionIds.map((sectionId) => refsBySection.get(sectionId));
+  if (sourceRefs.some((sourceRef) => !sourceRef)) return undefined;
+  return sourceRefs as AllowedSourceRef[];
 }
 
 export async function handleTutorRequest(request: Request, env: TutorEnv, fetcher: Fetcher = fetch): Promise<Response> {
@@ -170,12 +166,30 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
     'You are a concise deep-learning coach. Use only the supplied companion context.',
     `Mode: ${body.mode}. Locale: ${body.locale}. Preserve English technical terms when locale is ro-help.`,
     `Lesson context: ${context.summary}`,
-    `Allowed citations: ${JSON.stringify(context.sourceRefs)}`,
+    `Allowed source section IDs: ${context.sourceRefs.map((sourceRef) => sourceRef.sectionId).join(', ')}`,
     `Question: ${body.question}`,
     `Learner attempt: ${body.learnerAttempt}`,
     `Recent conversation: ${JSON.stringify(body.recentConversation.slice(-6))}`,
-    'If context is insufficient, set insufficientEvidence true. Never invent a page, equation, or citation.',
+    'Return only allowed source section IDs. If context is insufficient, set insufficientEvidence true. Never invent a page, equation, or citation.',
   ].join('\n');
+
+  const responseJsonSchema = {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      reply: { type: 'string', description: 'A concise response grounded only in the supplied lesson context.' },
+      sourceSectionIds: {
+        type: 'array',
+        maxItems: 5,
+        items: { type: 'string', enum: context.sourceRefs.map((sourceRef) => sourceRef.sectionId) },
+        description: 'Only section IDs that directly support the response.',
+      },
+      supportLevel: { type: 'string', enum: ['hint', 'explanation', 'feedback', 'revealed'] },
+      insufficientEvidence: { type: 'boolean' },
+      suggestedNextAttempt: { type: 'string' },
+    },
+    required: ['reply', 'sourceSectionIds', 'supportLevel', 'insufficientEvidence', 'suggestedNextAttempt'],
+  };
 
   let response: Response | undefined;
   let selectedModel: (typeof models)[number] = models[0];
@@ -192,6 +206,7 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
             thinkingConfig: { thinkingLevel: 'low' },
             maxOutputTokens: 800,
             responseMimeType: 'application/json',
+            responseJsonSchema,
           },
         }),
       }, geminiAttemptTimeoutMs);
@@ -224,10 +239,15 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
     let decoded: unknown;
     try { decoded = JSON.parse(text); } catch { return safeError('MALFORMED_TUTOR_RESPONSE', 'Tutor returned an unusable response. Continue without AI.', 502, origin); }
     const result = modelResponseSchema.safeParse(decoded);
-    if (!result.success || !citationsAllowed(result.data.sourceRefs, context.sourceRefs)) {
+    if (!result.success) {
       return safeError('MALFORMED_TUTOR_RESPONSE', 'Tutor response could not be grounded in the reviewed source.', 502, origin);
     }
-    return json({ ...result.data, model: selectedModel, contentVersion: CONTENT_VERSION }, 200, origin);
+    const sourceRefs = resolveSourceRefs(result.data.sourceSectionIds, context.sourceRefs);
+    if (!sourceRefs) {
+      return safeError('MALFORMED_TUTOR_RESPONSE', 'Tutor response could not be grounded in the reviewed source.', 502, origin);
+    }
+    const { sourceSectionIds: _sourceSectionIds, ...tutorResponse } = result.data;
+    return json({ ...tutorResponse, sourceRefs, model: selectedModel, contentVersion: CONTENT_VERSION }, 200, origin);
   } catch (reason) {
     if (isAbortError(reason)) {
       return safeError('TUTOR_TIMEOUT', 'Tutor took too long to respond. Please try again.', 504, origin);

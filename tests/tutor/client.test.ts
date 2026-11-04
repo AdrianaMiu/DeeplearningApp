@@ -21,7 +21,26 @@ describe('tutor client', () => {
     vi.unstubAllGlobals();
   });
 
-  it('stops a request after 25 seconds and reports that the tutor took too long', async () => {
+  it('bounds and cancels a stalled response body', async () => {
+    vi.useFakeTimers();
+    vi.stubEnv('VITE_TUTOR_URL', 'https://tutor.example');
+    const cancel = vi.fn();
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(new ReadableStream({ cancel }))));
+    const pending = expect(requestTutor(input)).rejects.toThrow(/taking longer than expected/i);
+    await vi.advanceTimersByTimeAsync(30_000);
+    await pending;
+    expect(cancel).toHaveBeenCalledOnce();
+  });
+
+  it('classifies malformed and failed bodies safely', async () => {
+    vi.stubEnv('VITE_TUTOR_URL', 'https://tutor.example');
+    vi.stubGlobal('fetch', vi.fn(async () => new Response('broken json')));
+    await expect(requestTutor(input)).rejects.toThrow(/unusable response/i);
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(new ReadableStream({ start(controller) { controller.error(new Error('private transport details')); } }))));
+    await expect(requestTutor(input)).rejects.toThrow(/temporarily unavailable/i);
+  });
+
+  it('stops a request after 30 seconds and reports that the tutor took too long', async () => {
     vi.useFakeTimers();
     vi.stubEnv('VITE_TUTOR_URL', 'https://tutor.example');
     const stalledFetch = vi.fn((_url: string | URL | Request, init?: RequestInit) =>
@@ -35,7 +54,7 @@ describe('tutor client', () => {
     expect(stalledFetch.mock.calls[0][1]?.signal).toBeInstanceOf(AbortSignal);
 
     const rejection = expect(pending).rejects.toThrow(/taking longer than expected/i);
-    await vi.advanceTimersByTimeAsync(25_000);
+    await vi.advanceTimersByTimeAsync(30_000);
     await rejection;
   });
 });

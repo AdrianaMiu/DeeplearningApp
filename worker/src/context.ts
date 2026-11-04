@@ -1,3 +1,5 @@
+import studioContexts from './studio-contexts.json';
+
 export interface AllowedSourceRef {
   sectionId: string;
   printedStart: string;
@@ -17,6 +19,8 @@ const ref = (sectionId: string, page: number): AllowedSourceRef => ({
   pdfPageStart: page + 40,
 });
 
+export const BOOK_SOURCE_HASH = '93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56';
+
 export const CONTENT_VERSION = 'd2l-companion-2026.11-v1';
 
 export const tutorContexts: Record<string, TutorContext> = {
@@ -33,3 +37,6 @@ export const tutorContexts: Record<string, TutorContext> = {
   'linear-regression': { lessonId: 'linear-regression', conceptIds: ['linear-regression', 'squared-loss'], summary: 'Linear regression predicts Xw+b; mean squared error summarizes squared residuals.', sourceRefs: [ref('3.1.1', 83), ref('3.1.2', 88), ref('3.1.3', 88), ref('3.1.4', 90)] },
   'regression-training': { lessonId: 'regression-training', conceptIds: ['training-loop', 'synthetic-data'], summary: 'A complete training step clears gradients, predicts, computes loss, backpropagates, and updates parameters.', sourceRefs: [ref('3.3', 99), ref('3.4', 103)] },
 };
+
+// Companion-authored snapshot; tests compare all twenty contexts with reviewed studios and source refs.
+Object.assign(tutorContexts, studioContexts);

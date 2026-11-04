@@ -21,3 +21,9 @@ worker/.wrangler/
 *.tsbuildinfo
 .DS_Store
 
+
+# Private retrieval data and administrative resume state
+.rag/
+rag-private/
+__pycache__/
+*.pyc

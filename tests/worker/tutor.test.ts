@@ -172,6 +172,106 @@ describe('guarded tutor Worker', () => {
     }
   });
 
+  it('cancels stalled Gemini bodies and retries within the attempt deadline', async () => {
+    vi.useFakeTimers();
+    try {
+      const cancel = vi.fn();
+      const fetcher = vi.fn(async (url: RequestInfo | URL) => String(url).includes('turnstile')
+        ? Response.json({ success: true })
+        : new Response(new ReadableStream({ cancel })));
+      const pending = handleTutorRequest(request(), env(), fetcher);
+      await vi.advanceTimersByTimeAsync(20_000);
+      expect((await pending).status).toBe(504);
+      expect(cancel).toHaveBeenCalledTimes(2);
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('bounds Turnstile bodies to five seconds', async () => {
+    vi.useFakeTimers();
+    try {
+      const cancel = vi.fn();
+      const pending = handleTutorRequest(request(), env(), vi.fn(async () => new Response(new ReadableStream({ cancel }))));
+      await vi.advanceTimersByTimeAsync(5_000);
+      expect((await pending).status).toBe(403);
+      expect(cancel).toHaveBeenCalledOnce();
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('fails closed when KV exhausts the total request budget', async () => {
+    vi.useFakeTimers();
+    try {
+      const fetcher = successfulFetch();
+      const pending = handleTutorRequest(request(), env({ DAILY_LIMITS: { get: () => new Promise(() => {}), put: vi.fn() } }), fetcher);
+      await vi.advanceTimersByTimeAsync(25_000);
+      expect((await pending).status).toBe(504);
+      expect(fetcher).toHaveBeenCalledTimes(1);
+    } finally { vi.useRealTimers(); }
+  });
+
+  it.each([
+    ['timeout', 'success', 200], ['network', 'timeout', 504], ['server', 'timeout', 504],
+    ['timeout', 'network', 503], ['timeout', 'server', 503], ['body', 'success', 200],
+  ] as const)('classifies %s then %s using the complete attempt outcome', async (first, second, status) => {
+    vi.useFakeTimers();
+    try {
+      const success = successfulFetch();
+      let attempt = 0;
+      const fetcher = vi.fn(async (url: RequestInfo | URL, init?: RequestInit) => {
+        if (String(url).includes('turnstile')) return Response.json({ success: true });
+        const outcome = attempt++ === 0 ? first : second;
+        if (outcome === 'timeout') return new Response(new ReadableStream());
+        if (outcome === 'network') throw new Error('transport details');
+        if (outcome === 'body') return new Response(new ReadableStream({ start(controller) { controller.error(new Error('body connection lost')); } }));
+        if (outcome === 'server') return new Response('busy', { status: 503 });
+        return success(url, init);
+      });
+      const pending = handleTutorRequest(request(), env(), fetcher);
+      await vi.advanceTimersByTimeAsync(20_000);
+      expect((await pending).status).toBe(status);
+      expect(attempt).toBe(2);
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('limits delayed verification, KV, and both model bodies to one total budget', async () => {
+    vi.useFakeTimers();
+    try {
+      const signals: AbortSignal[] = [];
+      const delay = <T,>(value: T, ms: number) => new Promise<T>((resolve) => setTimeout(() => resolve(value), ms));
+      const fetcher = vi.fn(async (url: RequestInfo | URL, init?: RequestInit) => {
+        if (String(url).includes('turnstile')) return delay(Response.json({ success: true }), 4_000);
+        signals.push(init!.signal!);
+        return new Response(new ReadableStream());
+      });
+      const configuration = env({ DAILY_LIMITS: { get: () => delay(null, 4_000), put: async () => {} } });
+      const pending = handleTutorRequest(request(), configuration, fetcher);
+      await vi.advanceTimersByTimeAsync(24_999);
+      let completed = false; void pending.then(() => { completed = true; });
+      await Promise.resolve(); expect(completed).toBe(false);
+      await vi.advanceTimersByTimeAsync(1);
+      expect((await pending).status).toBe(504);
+      expect(signals.every((signal) => signal.aborted)).toBe(true);
+    } finally { vi.useRealTimers(); }
+  });
+
+  it.each([400, 401, 403, 429])('does not retry nonretryable status %s and cancels its body', async (status) => {
+    const cancel = vi.fn();
+    const fetcher = vi.fn(async (url: RequestInfo | URL) => String(url).includes('turnstile')
+      ? Response.json({ success: true }) : new Response(new ReadableStream({ cancel }), { status }));
+    const response = await handleTutorRequest(request(), env(), fetcher);
+    expect(response.status).toBe(status === 429 ? 429 : 503);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(cancel).toHaveBeenCalledOnce();
+  });
+
+  it('keeps truncated output distinct from timeout', async () => {
+    const fetcher = vi.fn(async (url: RequestInfo | URL) => String(url).includes('turnstile')
+      ? Response.json({ success: true }) : Response.json({ candidates: [{ finishReason: 'MAX_TOKENS', content: { parts: [{ text: '{}' }] } }] }));
+    const response = await handleTutorRequest(request(), env(), fetcher);
+    expect(response.status).toBe(502);
+    expect(await response.json()).toMatchObject({ code: 'MALFORMED_TUTOR_RESPONSE' });
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  });
+
   it('falls back to Gemini 3.6 Flash when Gemini 3.8 Flash is unavailable', async () => {
     const fetcher = vi.fn(async (input: RequestInfo | URL) => {
       const url = String(input);

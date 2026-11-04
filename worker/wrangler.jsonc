@@ -7,6 +7,9 @@
 	"observability": {
 		"enabled": false
 	},
+	// Optional RAG vars are deliberately absent until the private manifest/store is verified.
+	// Provision GEMINI_FILE_SEARCH_STORE, RAG_CONTENT_VERSION, and RAG_SOURCE_HASH together.
+	// See ../scripts/rag/README.md. API keys remain Worker secrets.
 	"vars": {
 		"ALLOWED_ORIGIN": "https://adrianamiu.github.io"
 	},

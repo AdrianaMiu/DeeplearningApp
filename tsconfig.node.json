@@ -8,5 +8,5 @@
     "strict": true,
     "noEmit": true
   },
-  "include": ["vite.config.ts", "playwright.config.ts", "worker"]
+  "include": ["vite.config.ts", "playwright.config.ts", "worker", "src/tutor/deadline.ts"]
 }

@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/d2l/rag/manifest.schema.json",
+  "title": "Private D2L ingestion resume manifest (no source text)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceHash",
+    "sourcePageCount",
+    "contentVersion",
+    "chunkingConfig",
+    "store",
+    "documents"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "sourceHash": {
+      "const": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+    },
+    "sourcePageCount": {
+      "const": 1185
+    },
+    "contentVersion": {
+      "const": "d2l-companion-2026.11-v1"
+    },
+    "store": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^fileSearchStores/[a-z0-9-]+$"
+    },
+    "storeCreationPending": {
+      "type": "boolean"
+    },
+    "chunkingConfig": {
+      "const": {
+        "whiteSpaceConfig": {
+          "maxTokensPerChunk": 400,
+          "maxOverlapTokens": 60
+        }
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sectionId",
+          "chapterId",
+          "sourceHash",
+          "contentVersion",
+          "printedStart",
+          "printedEnd",
+          "pdfPageStart",
+          "pdfPageEnd",
+          "boundaryStatus",
+          "contentHash",
+          "status"
+        ],
+        "properties": {
+          "sectionId": {
+            "type": "string"
+          },
+          "chapterId": {
+            "type": "string"
+          },
+          "sourceHash": {
+            "const": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+          },
+          "contentVersion": {
+            "const": "d2l-companion-2026.11-v1"
+          },
+          "printedStart": {
+            "type": "string"
+          },
+          "printedEnd": {
+            "type": "string"
+          },
+          "pdfPageStart": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1185
+          },
+          "pdfPageEnd": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1185
+          },
+          "boundaryStatus": {
+            "const": "heading-aligned-unreviewed"
+          },
+          "contentHash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "status": {
+            "enum": [
+              "uploading",
+              "active"
+            ]
+          },
+          "document": {
+            "type": "string"
+          },
+          "operation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sectionId",
+          "disposition"
+        ],
+        "properties": {
+          "sectionId": {
+            "type": "string"
+          },
+          "disposition": {
+            "enum": [
+              "document",
+              "container",
+              "excluded",
+              "blocked"
+            ]
+          },
+          "reason": {
+            "enum": [
+              "empty-source-placeholder",
+              "summary-or-exercises"
+            ]
+          },
+          "pdfPageStart": {
+            "type": "integer"
+          },
+          "printedStart": {
+            "type": "string"
+          },
+          "childSectionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+  "reviewMethod": "Rendered PDF page visually checked on 2026-11-04; two consecutive empty headings precede Summary, with no child headings or prose.",
+  "sections": [
+    { "sectionId": "13.2.2", "pdfPageStart": 615, "printedStart": "575", "reason": "empty-source-placeholder" },
+    { "sectionId": "13.2.3", "pdfPageStart": 615, "printedStart": "575", "reason": "empty-source-placeholder" }
+  ]
+}

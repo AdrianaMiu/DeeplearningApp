@@ -100,6 +100,24 @@ describe('TutorPanel', () => {
     });
   });
 
+  it.each([
+    ['book', 'Book source'], ['companion', 'Companion explanation'], [undefined, 'Companion explanation'],
+  ] as const)('labels grounding=%s and supports older Worker responses', async (grounding, label) => {
+    const user = userEvent.setup();
+    const requestTutor = vi.fn().mockResolvedValue({
+      reply: 'Name the remaining axis.', suggestedNextAttempt: 'Explain its size.',
+      sourceRefs: [{ sectionId: '2.1.2', printedStart: '33', pdfPageStart: 73 }],
+      ...(grounding ? { grounding } : {}),
+    });
+    render(<TutorPanel lessonId="tensor-shapes" conceptIds={['tensor-shape']} learnerAttempt="My shape is 3" requestTutor={requestTutor} />);
+    expect(screen.getByText(/indexed book.*conversation fragments.*processed by Gemini/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('checkbox', { name: /i understand/i }));
+    await user.click(screen.getByRole('button', { name: /continue to tutor/i }));
+    await user.type(screen.getByLabelText(/question for the tutor/i), 'What axis remains?');
+    await user.click(screen.getByRole('button', { name: /ask for a hint/i }));
+    expect(await screen.findByText(new RegExp(`${label}.*2\\.1\\.2.*print p\\. 33.*PDF p\\. 73`))).toBeInTheDocument();
+  });
+
   it('discloses Gemini privacy terms before first use and keeps failure non-blocking', async () => {
     const user = userEvent.setup();
     const requestTutor = vi.fn().mockRejectedValue(new Error('Tutor is temporarily unavailable.'));

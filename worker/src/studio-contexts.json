@@ -1,0 +1,489 @@
+{
+  "introduction-studio": {
+    "lessonId": "introduction-studio",
+    "conceptIds": [
+      "learning-problem",
+      "model"
+    ],
+    "summary": "A learned system uses experience to improve a task where hand-written rules may be difficult to specify. A model f maps an input x to a prediction; an objective measures how well predictions meet the task. A wake-word detector takes short audio segments as input and predicts whether the phrase is present. A model is not the same thing as its training data.",
+    "sourceRefs": [
+      {
+        "sectionId": "1.1",
+        "printedStart": "2",
+        "pdfPageStart": 42
+      },
+      {
+        "sectionId": "1.2",
+        "printedStart": "4",
+        "pdfPageStart": 44
+      }
+    ]
+  },
+  "classification-studio": {
+    "lessonId": "classification-studio",
+    "conceptIds": [
+      "softmax",
+      "classification"
+    ],
+    "summary": "A classifier assigns a score to each class; softmax turns these scores into a distribution. p_i = exp(z_i) / sum_j exp(z_j); cross-entropy for class y is -log(p_y). Equal logits for two classes yield probabilities 0.5 and 0.5 and loss -log(0.5) for either label. The largest logit need not itself be a probability.",
+    "sourceRefs": [
+      {
+        "sectionId": "4.1",
+        "printedStart": "127",
+        "pdfPageStart": 167
+      },
+      {
+        "sectionId": "4.2",
+        "printedStart": "136",
+        "pdfPageStart": 176
+      }
+    ]
+  },
+  "mlp-studio": {
+    "lessonId": "mlp-studio",
+    "conceptIds": [
+      "mlp",
+      "dropout"
+    ],
+    "summary": "Hidden layers build intermediate features; nonlinear activations let their composition represent more than one linear map. An MLP can compute y = W₂ ReLU(W₁x+b₁)+b₂; dropout randomly masks activations during training. ReLU maps [-1, 2] to [0, 2], changing the negative input while preserving the positive input. Stacking linear layers alone does not create a nonlinear function.",
+    "sourceRefs": [
+      {
+        "sectionId": "5.1",
+        "printedStart": "170",
+        "pdfPageStart": 210
+      },
+      {
+        "sectionId": "5.6",
+        "printedStart": "198",
+        "pdfPageStart": 238
+      }
+    ]
+  },
+  "builders-guide-studio": {
+    "lessonId": "builders-guide-studio",
+    "conceptIds": [
+      "modules",
+      "parameters"
+    ],
+    "summary": "Modules package computations and parameters into reusable building blocks. A dense layer maps x to Wx+b; composing modules applies their functions in sequence. A linear layer from four inputs to three outputs has a 3×4 weight matrix and three biases. A module may contain other modules as well as parameters.",
+    "sourceRefs": [
+      {
+        "sectionId": "6.1",
+        "printedStart": "212",
+        "pdfPageStart": 252
+      },
+      {
+        "sectionId": "6.2",
+        "printedStart": "219",
+        "pdfPageStart": 259
+      }
+    ]
+  },
+  "cnn-studio": {
+    "lessonId": "cnn-studio",
+    "conceptIds": [
+      "convolution",
+      "stride"
+    ],
+    "summary": "A kernel slides over local image regions, sharing weights across positions. For input width n, kernel width k, padding p and stride s, output width is floor((n+2p-k)/s)+1. A 5×5 image with a 3×3 kernel, stride 1 and no padding produces a 3×3 output. Stride changes how far the kernel moves, not its size.",
+    "sourceRefs": [
+      {
+        "sectionId": "7.2",
+        "printedStart": "246",
+        "pdfPageStart": 286
+      },
+      {
+        "sectionId": "7.3",
+        "printedStart": "254",
+        "pdfPageStart": 294
+      }
+    ]
+  },
+  "modern-cnn-studio": {
+    "lessonId": "modern-cnn-studio",
+    "conceptIds": [
+      "alexnet",
+      "residual-network"
+    ],
+    "summary": "Modern CNNs organize convolutional layers into architectures that can learn richer visual features. A residual block adds its input to a learned transformation: y = F(x) + x, when shapes match. If x = [1, 2] and F(x) = [0, 0], their sum is [1, 2]. A residual connection adds paths; it does not concatenate them.",
+    "sourceRefs": [
+      {
+        "sectionId": "8.1",
+        "printedStart": "276",
+        "pdfPageStart": 316
+      },
+      {
+        "sectionId": "8.6",
+        "printedStart": "311",
+        "pdfPageStart": 351
+      }
+    ]
+  },
+  "rnn-studio": {
+    "lessonId": "rnn-studio",
+    "conceptIds": [
+      "recurrent-state",
+      "backpropagation-through-time"
+    ],
+    "summary": "A hidden state is a running summary. The same update rule combines the previous summary with each new input; changing input order can change the final summary. An RNN updates h_t = phi(W_x x_t + W_h h_(t-1) + b). In our scalar demonstration phi is the identity, W_x=1, W_h=0.5 and b=0, so h_t=x_t+0.5h_(t-1). For inputs [2,0,1], states are 2, 1 and 1.5. The output in this toy model equals the state. Reversing the first two inputs changes the second state from 1 to 2. Unrolling a recurrent network creates time steps, not independent parameter sets.",
+    "sourceRefs": [
+      {
+        "sectionId": "9.4",
+        "printedStart": "358",
+        "pdfPageStart": 398
+      },
+      {
+        "sectionId": "9.7",
+        "printedStart": "372",
+        "pdfPageStart": 412
+      }
+    ]
+  },
+  "modern-rnn-studio": {
+    "lessonId": "modern-rnn-studio",
+    "conceptIds": [
+      "lstm",
+      "gru",
+      "gated-memory"
+    ],
+    "summary": "An LSTM can preserve a memory while restricting what it exposes. A GRU also gates recurrent information but combines memory and hidden state instead of maintaining a separate cell state. For an LSTM, c_t=f_t⊙c_(t-1)+i_t⊙g_t and h_t=o_t⊙tanh(c_t). Gates act elementwise. The example uses specified gate values to isolate their effects. With c_previous=2, f=0.5, i=0.25 and g=0.8, the new cell is 1.2. If o=0, the hidden output is 0 although the cell still stores 1.2. A zero hidden output does not imply the LSTM cell memory is zero.",
+    "sourceRefs": [
+      {
+        "sectionId": "10.1",
+        "printedStart": "380",
+        "pdfPageStart": 420
+      },
+      {
+        "sectionId": "10.2",
+        "printedStart": "387",
+        "pdfPageStart": 427
+      }
+    ]
+  },
+  "attention-transformers-studio": {
+    "lessonId": "attention-transformers-studio",
+    "conceptIds": [
+      "attention",
+      "transformer",
+      "causal-mask"
+    ],
+    "summary": "Each query scores available keys and mixes their associated values. Transformer blocks combine this mixing with position information, feed-forward layers, and residual paths. Attention(Q,K,V)=softmax(QKᵀ/√d_k)V, with softmax over keys for each query. A causal mask removes future positions before normalization. Equal scores [0,0] give weights [0.5,0.5] and output 4 for values [2,6]. If the second key is masked, weights become [1,0] and the output is 2. Attention scores are not probabilities until they have been normalized over the allowed keys.",
+    "sourceRefs": [
+      {
+        "sectionId": "11.3",
+        "printedStart": "433",
+        "pdfPageStart": 473
+      },
+      {
+        "sectionId": "11.7",
+        "printedStart": "454",
+        "pdfPageStart": 494
+      }
+    ]
+  },
+  "optimization-studio": {
+    "lessonId": "optimization-studio",
+    "conceptIds": [
+      "gradient-descent",
+      "learning-rate",
+      "momentum"
+    ],
+    "summary": "The gradient supplies a local direction, while the learning rate sets how far to move. Momentum carries a weighted history of gradients and changes the update trajectory. For L(w)=w²/2, the gradient is w and plain descent gives w_next=(1−η)w. With 0<η<2 this scalar example contracts toward zero; η=2 oscillates without shrinking. At w=2 the gradient is 2 and loss is 2. With η=0.5, w_next=1 and loss becomes 0.5. With η=2, w_next=-2 and loss remains 2. The negative gradient is a local descent direction, not a guarantee that every finite step reduces loss.",
+    "sourceRefs": [
+      {
+        "sectionId": "12.3",
+        "printedStart": "499",
+        "pdfPageStart": 539
+      },
+      {
+        "sectionId": "12.6",
+        "printedStart": "528",
+        "pdfPageStart": 568
+      }
+    ]
+  },
+  "performance-studio": {
+    "lessonId": "performance-studio",
+    "conceptIds": [
+      "asynchronous-computation",
+      "data-parallelism"
+    ],
+    "summary": "Submitting work and completing it can happen at different times. Multiple devices can share a batch, but copying data and combining gradients also consume time. Measured speedup is T_single/T_parallel for the same workload. If a single-device run takes 12 ms and two devices take 8 ms including communication, speedup is 1.5, not 2. A batch of 120 examples completed in 12 ms gives 10,000 examples/s. Completing the same batch in 8 ms gives 15,000 examples/s, a 1.5× speedup. Adding a second device does not automatically halve end-to-end training time.",
+    "sourceRefs": [
+      {
+        "sectionId": "13.2",
+        "printedStart": "572",
+        "pdfPageStart": 612
+      },
+      {
+        "sectionId": "13.5",
+        "printedStart": "593",
+        "pdfPageStart": 633
+      }
+    ]
+  },
+  "computer-vision-studio": {
+    "lessonId": "computer-vision-studio",
+    "conceptIds": [
+      "bounding-box",
+      "intersection-over-union",
+      "anchors"
+    ],
+    "summary": "A detection names an object and locates it. Boxes can overlap partly even when they identify the same object, so localization needs a geometric comparison. IoU=intersection area/union area, where union=area(A)+area(B)−intersection. For continuous corner coordinates, area=(x_max−x_min)(y_max−y_min). A=(0,0,2,2) and B=(1,0,3,2) each have area 4. Intersection is 2 and union is 6, so IoU=1/3. Dividing intersection by one box area is not intersection over union.",
+    "sourceRefs": [
+      {
+        "sectionId": "14.3",
+        "printedStart": "629",
+        "pdfPageStart": 669
+      },
+      {
+        "sectionId": "14.4",
+        "printedStart": "632",
+        "pdfPageStart": 672
+      }
+    ]
+  },
+  "nlp-pretraining-studio": {
+    "lessonId": "nlp-pretraining-studio",
+    "conceptIds": [
+      "word-embedding",
+      "bert",
+      "contextual-representation"
+    ],
+    "summary": "A static lookup gives a token the same vector in every sentence. A contextual encoder can produce different vectors for the same token by attending to surrounding tokens. An embedding table E with shape (V,d) maps token IDs of shape (N,T) to (N,T,d). Cosine similarity is u·v/(||u||||v||) for nonzero vectors. IDs shaped (2,4) become embeddings shaped (2,4,3). Vectors [1,0] and [1,1] have cosine similarity 1/√2; the embedding width is not the vocabulary size. A pretrained language representation is not already a classifier for every downstream label set.",
+    "sourceRefs": [
+      {
+        "sectionId": "15.1",
+        "printedStart": "717",
+        "pdfPageStart": 757
+      },
+      {
+        "sectionId": "15.8",
+        "printedStart": "751",
+        "pdfPageStart": 791
+      }
+    ]
+  },
+  "nlp-applications-studio": {
+    "lessonId": "nlp-applications-studio",
+    "conceptIds": [
+      "natural-language-inference",
+      "fine-tuning",
+      "classification-head"
+    ],
+    "summary": "Natural language inference compares a premise and a hypothesis. Attention can align their token representations before comparison; a classification head then predicts one relation for the pair. A token-pair alignment score can be e_ij=f(a_i)ᵀf(b_j). For sequence classification, a pooled representation (N,H) maps to logits (N,C); token tagging instead preserves the token axis (N,T,C). Two encoded pairs with six tokens and width four have shape (2,6,4). Selecting the classification-token representation gives (2,4); a three-class head produces (2,3). One label per text pair does not require one classification target for each token.",
+    "sourceRefs": [
+      {
+        "sectionId": "16.5",
+        "printedStart": "792",
+        "pdfPageStart": 832
+      },
+      {
+        "sectionId": "16.6",
+        "printedStart": "799",
+        "pdfPageStart": 839
+      }
+    ]
+  },
+  "reinforcement-learning-studio": {
+    "lessonId": "reinforcement-learning-studio",
+    "conceptIds": [
+      "markov-decision-process",
+      "discounted-return",
+      "value-function"
+    ],
+    "summary": "An action changes both the immediate reward and the state reached next. A useful policy considers the consequences beyond the next reward. For a deterministic transition, action value is r+γV(next). In a stochastic MDP, average the next-state values using transition probabilities. Terminal states have no future reward in this example. Stopping yields return 1. Moving then collecting 4 yields 0+0.5×4=2. Thus moving is preferred even though its immediate reward is lower. A reward is an immediate signal; a value aggregates future rewards under a policy or action choice.",
+    "sourceRefs": [
+      {
+        "sectionId": "17.1",
+        "printedStart": "810",
+        "pdfPageStart": 850
+      },
+      {
+        "sectionId": "17.2",
+        "printedStart": "813",
+        "pdfPageStart": 853
+      }
+    ]
+  },
+  "gaussian-processes-studio": {
+    "lessonId": "gaussian-processes-studio",
+    "conceptIds": [
+      "gaussian-process",
+      "rbf-kernel",
+      "posterior-uncertainty"
+    ],
+    "summary": "A Gaussian process assigns joint Gaussian distributions to function values at chosen inputs. The kernel states which values should vary together; observations then condition that prior. With unit amplitude, k(x,x′)=exp(−(x−x′)²/(2ℓ²)). Observation noise gives y=f(x)+ε. At x=[0,1], the covariance diagonal is 1 and the off-diagonal is exp(−1/(2ℓ²)). At length scale 1, k(0,1)=exp(-0.5)≈0.607. At length scale 2 it is exp(-0.125)≈0.882. Both points retain unit marginal prior variance. The RBF length scale controls similarity across inputs; it is not the observation-noise variance.",
+    "sourceRefs": [
+      {
+        "sectionId": "18.2",
+        "printedStart": "839",
+        "pdfPageStart": 879
+      },
+      {
+        "sectionId": "18.3",
+        "printedStart": "846",
+        "pdfPageStart": 886
+      }
+    ]
+  },
+  "hyperparameter-optimization-studio": {
+    "lessonId": "hyperparameter-optimization-studio",
+    "conceptIds": [
+      "hyperparameter-search",
+      "validation",
+      "multi-fidelity"
+    ],
+    "summary": "Each hyperparameter trial is a training-and-validation experiment. Cheap early measurements can help allocate resources, but may rank slow-starting models poorly. The search minimizes validation loss over configurations. In this toy budget, cost is the sum of trial epochs: three trials at two epochs cost 6; extending one from two to six adds 4, for a total of 10. At epoch two, trials A, B and C have validation losses 0.40, 0.30 and 0.50. Extending B by four epochs uses the remaining budget of four. This choice uses observed ranking, not a guarantee about final ranking. A configuration with the best early validation loss is not guaranteed to be best after full training.",
+    "sourceRefs": [
+      {
+        "sectionId": "19.1",
+        "printedStart": "859",
+        "pdfPageStart": 899
+      },
+      {
+        "sectionId": "19.4",
+        "printedStart": "884",
+        "pdfPageStart": 924
+      }
+    ]
+  },
+  "gan-studio": {
+    "lessonId": "gan-studio",
+    "conceptIds": [
+      "generator",
+      "discriminator",
+      "adversarial-training"
+    ],
+    "summary": "The discriminator learns to distinguish real from generated samples. The generator changes its outputs to make that distinction harder; each update changes the other network’s learning problem. For one real and one fake example, the summed discriminator loss is −log D(real)−log(1−D(fake)). The original minimax generator minimizes log(1−D(G(z))); practical variants may use a different generator loss. The discriminator loss is −log(0.8)−log(0.8)≈0.446. If D(fake) rises to 0.5 with D(real) fixed, that loss rises to about 0.916, although the generator is fooling the discriminator more often. Both networks do not minimize the same classification loss with the same labels.",
+    "sourceRefs": [
+      {
+        "sectionId": "20.1",
+        "printedStart": "912",
+        "pdfPageStart": 952
+      },
+      {
+        "sectionId": "20.2",
+        "printedStart": "918",
+        "pdfPageStart": 958
+      }
+    ]
+  },
+  "math-appendix-studio": {
+    "lessonId": "math-appendix-studio",
+    "conceptIds": [
+      "mathematical-toolkit",
+      "eigendecomposition",
+      "statistical-reasoning"
+    ],
+    "summary": "Mathematical tools answer different questions: geometry compares directions, calculus measures change, and probability describes uncertain outcomes. Choose the question before choosing a formula. An eigenpair satisfies Av=λv for nonzero v. For A=diag(3,1), [1,0] is an eigenvector with eigenvalue 3. Calculus, expectations, and entropy provide complementary tools rather than interchangeable operations. diag(3,1)[1,0]=[3,0]=3[1,0], but diag(3,1)[1,1]=[3,1] is not a scalar multiple of [1,1]. Only the first vector is an eigenvector here. An eigenvector must be nonzero. A sample estimate and a population quantity are not identical. A short coverage card introduces a section; it does not establish mastery of every result in it.",
+    "sourceRefs": [
+      {
+        "sectionId": "A.1",
+        "printedStart": "927",
+        "pdfPageStart": 967
+      },
+      {
+        "sectionId": "A.2",
+        "printedStart": "944",
+        "pdfPageStart": 984
+      },
+      {
+        "sectionId": "A.3",
+        "printedStart": "954",
+        "pdfPageStart": 994
+      },
+      {
+        "sectionId": "A.4",
+        "printedStart": "966",
+        "pdfPageStart": 1006
+      },
+      {
+        "sectionId": "A.5",
+        "printedStart": "982",
+        "pdfPageStart": 1022
+      },
+      {
+        "sectionId": "A.6",
+        "printedStart": "992",
+        "pdfPageStart": 1032
+      },
+      {
+        "sectionId": "A.7",
+        "printedStart": "1011",
+        "pdfPageStart": 1051
+      },
+      {
+        "sectionId": "A.8",
+        "printedStart": "1017",
+        "pdfPageStart": 1057
+      },
+      {
+        "sectionId": "A.9",
+        "printedStart": "1032",
+        "pdfPageStart": 1072
+      },
+      {
+        "sectionId": "A.10",
+        "printedStart": "1039",
+        "pdfPageStart": 1079
+      },
+      {
+        "sectionId": "A.11",
+        "printedStart": "1051",
+        "pdfPageStart": 1091
+      }
+    ]
+  },
+  "tools-appendix-studio": {
+    "lessonId": "tools-appendix-studio",
+    "conceptIds": [
+      "notebook-workflow",
+      "compute-resources",
+      "reproducibility"
+    ],
+    "summary": "An experiment is more than a notebook file: its environment, data, execution order, and saved outputs all affect whether it can be reproduced. Local and hosted tools share these needs. Raw tensor memory equals element count times bytes per element. A float32 tensor of shape (2,3,4) occupies 2×3×4×4=96 bytes before framework overhead or training state. Cell 2 reads a variable created by an earlier interactive command that is no longer in the notebook. Existing output looks correct, but a restart removes that variable; adding an explicit setup cell makes the dependency visible. Saved cell output does not prove that a notebook runs from a clean kernel. Ending a compute session does not by itself describe where artifacts were saved.",
+    "sourceRefs": [
+      {
+        "sectionId": "B.1",
+        "printedStart": "1068",
+        "pdfPageStart": 1108
+      },
+      {
+        "sectionId": "B.2",
+        "printedStart": "1073",
+        "pdfPageStart": 1113
+      },
+      {
+        "sectionId": "B.3",
+        "printedStart": "1076",
+        "pdfPageStart": 1116
+      },
+      {
+        "sectionId": "B.4",
+        "printedStart": "1085",
+        "pdfPageStart": 1125
+      },
+      {
+        "sectionId": "B.5",
+        "printedStart": "1086",
+        "pdfPageStart": 1126
+      },
+      {
+        "sectionId": "B.6",
+        "printedStart": "1090",
+        "pdfPageStart": 1130
+      },
+      {
+        "sectionId": "B.7",
+        "printedStart": "1095",
+        "pdfPageStart": 1135
+      },
+      {
+        "sectionId": "B.8",
+        "printedStart": "1108",
+        "pdfPageStart": 1148
+      }
+    ]
+  }
+}

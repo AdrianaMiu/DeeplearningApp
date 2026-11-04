@@ -15,6 +15,14 @@ describe('guided lesson', () => {
   afterEach(async () => { db.close(); await db.delete(); });
   function open(path = '/lesson/cnn-studio') { return render(<MemoryRouter initialEntries={[path]}><AppShell repository={repository} /></MemoryRouter>); }
 
+  it('opens the optional tutor for a reviewed studio', async () => {
+    const user = userEvent.setup(); open();
+    const toggle = await screen.findByRole('button', { name: 'Open tutor' });
+    expect(screen.queryByRole('heading', { name: /grounded tutor/i })).not.toBeInTheDocument();
+    await user.click(toggle);
+    expect(await screen.findByRole('button', { name: 'Close tutor' })).toHaveAttribute('aria-expanded', 'true');
+    expect(await screen.findByRole('heading', { name: /grounded tutor/i })).toBeInTheDocument();
+  });
   it('moves through the six guided stages', async () => {
     const user = userEvent.setup(); open();
     expect(await screen.findByRole('heading', { name: /trace convolution shapes/i })).toBeInTheDocument();

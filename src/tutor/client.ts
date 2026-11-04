@@ -1,3 +1,5 @@
+import { DeadlineError, readText, withDeadline } from './deadline';
+
 export type TutorMode = 'hint' | 'explain' | 'feedback' | 'reveal';
 
 export interface TutorRequest {
@@ -13,6 +15,7 @@ export interface TutorRequest {
 }
 
 export interface TutorResponse {
+  grounding?: 'book' | 'companion';
   reply: string;
   sourceRefs: Array<{ sectionId: string; printedStart: string; pdfPageStart: number }>;
   supportLevel: 'none' | 'hint' | 'explanation' | 'feedback' | 'revealed';
@@ -34,22 +37,22 @@ export function anonymousClientId(): string {
 export async function requestTutor(input: TutorRequest): Promise<TutorResponse> {
   const endpoint = import.meta.env.VITE_TUTOR_URL;
   if (!endpoint) throw new Error('Tutor is not configured. Continue the lesson without AI.');
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 25_000);
   let response: Response;
+  let payload: TutorResponse & { message?: string };
   try {
-    response = await fetch(`${endpoint.replace(/\/$/, '')}/api/tutor`, {
-      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(input), signal: controller.signal,
-    });
-  } catch {
-    if (controller.signal.aborted) {
-      throw new Error('Tutor is taking longer than expected. Please try again.');
-    }
+    ({ response, payload } = await withDeadline(async (signal) => {
+      const response = await fetch(`${endpoint.replace(/\/$/, '')}/api/tutor`, {
+        method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(input), signal,
+      });
+      if (signal.aborted) { void response.body?.cancel().catch(() => {}); throw new DeadlineError(); }
+      const payload = JSON.parse(await readText(response, signal));
+      return { response, payload };
+    }, 30_000));
+  } catch (reason) {
+    if (reason instanceof DeadlineError) throw new Error('Tutor is taking longer than expected. Please try again.');
+    if (reason instanceof SyntaxError) throw new Error('Tutor returned an unusable response. Continue the lesson without AI.');
     throw new Error('Tutor is temporarily unavailable. Continue the lesson without AI.');
-  } finally {
-    clearTimeout(timeout);
   }
-  const payload = await response.json() as TutorResponse & { message?: string };
   if (!response.ok) throw new Error(payload.message ?? 'Tutor is temporarily unavailable. Continue the lesson without AI.');
   return payload;
 }

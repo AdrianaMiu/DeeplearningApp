@@ -1,4 +1,5 @@
-import type { Lesson } from '../domain/types';
+import type { DeepLesson, LearningEntry } from '../domain/types';
+import { chapterLearningMap } from './course-map';
 import { companionSource } from './source';
 
 interface LessonSeed {
@@ -22,7 +23,10 @@ const seeds: LessonSeed[] = [
   { id: 'regression-training', title: 'Build the smallest complete training loop', question: 'Which steps must happen, in which order, for parameters to learn?', sections: [['3.3', 99, 103], ['3.4', 103, 108]], concepts: ['training-loop', 'synthetic-data'], topic: 'A training loop samples a batch, predicts, computes a scalar loss, obtains gradients, updates parameters, and clears gradients. Synthetic data gives a known truth for checking the loop.', math: 'Gradient descent updates θ←θ-η∇L(θ). A useful synthetic dataset uses y=Xw*+b*+ε with controlled noise.', code: 'Seed data generation, keep the true parameters for comparison, iterate mini-batches, call backward, update under no_grad, and zero gradients.', work: 'A tiny known-data experiment distinguishes optimizer bugs from model-capacity or dataset problems.', prediction: 'Order these operations: zero gradients, forward pass, loss, backward, parameter update.', example: 'Starting near zero on y=2x+1, repeated small gradient steps should move weight toward 2 and bias toward 1.', task: 'Write pseudocode for one epoch and identify two assertions that prove the implementation is learning rather than merely running.', misconceptions: ['zero_grad belongs to every update cycle.', 'A decreasing training loss is evidence of optimization, not proof of generalization.'] },
 ];
 
-export const lessons: Lesson[] = seeds.map((seed, index) => ({
+export const lessons: DeepLesson[] = seeds.map((seed, index) => ({
+  kind: 'deep-lesson',
+  chapterId: `chapter-${seed.sections[0][0].split('.')[0]}`,
+  milestoneId: chapterLearningMap.get(`chapter-${seed.sections[0][0].split('.')[0]}`)!.milestoneId,
   id: seed.id,
   title: seed.title,
   question: seed.question,
@@ -39,3 +43,6 @@ export const lessons: Lesson[] = seeds.map((seed, index) => ({
   contentStatus: 'reviewed',
   durationMinutes: 35,
 }));
+
+export const learningEntries: LearningEntry[] = lessons;
+export const learningEntryById = new Map(learningEntries.map((entry) => [entry.id, entry]));

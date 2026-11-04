@@ -59,7 +59,75 @@ export interface LessonView {
   workConnection: string;
 }
 
-export interface Lesson {
+export type MilestoneId = 'foundations' | 'models' | 'vision' | 'sequences' | 'systems' | 'broader';
+
+export interface Milestone {
+  id: MilestoneId;
+  title: string;
+  purpose: string;
+  order: number;
+  chapterIds: string[];
+}
+
+export interface ChapterLearningPath {
+  chapterId: string;
+  milestoneId: MilestoneId;
+  coreEntryIds: string[];
+}
+
+export interface SectionCoverage {
+  sectionId: string;
+  objective: string;
+  depth: 'introduced' | 'practiced' | 'reference';
+}
+
+export interface NumericControl {
+  id: string;
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  initial: number;
+}
+
+interface InteractionBase {
+  title: string;
+  instruction: string;
+}
+
+export type InteractionSpec = InteractionBase & (
+  | {
+    kind: 'parameter-lab';
+    controls: NumericControl[];
+    model: 'softmax' | 'dropout' | 'optimizer' | 'rbf-kernel' | 'search-budget' | 'gan-balance';
+  }
+  | {
+    kind: 'shape-path';
+    steps: { label: string; inputShape: number[]; outputShape: number[]; explanation: string }[];
+  }
+  | {
+    kind: 'sequence-stepper';
+    steps: { label: string; input: string; state: string; output: string; explanation: string }[];
+  }
+  | {
+    kind: 'matrix-explorer';
+    matrix: number[][];
+    operation: 'attention' | 'matmul' | 'eigen';
+  }
+  | {
+    kind: 'decision-canvas';
+    prompt: string;
+    options: { id: string; label: string; feedback: string; recommended?: boolean }[];
+  }
+  | {
+    kind: 'distribution-explorer';
+    controls: NumericControl[];
+    observations: number[];
+    model: 'normal' | 'bernoulli' | 'gaussian-process';
+  }
+);
+
+export interface LessonBase {
   id: string;
   title: string;
   question: string;
@@ -76,6 +144,26 @@ export interface Lesson {
   contentStatus: Extract<ContentStatus, 'reviewed' | 'published'>;
   durationMinutes: number;
 }
+
+export interface DeepLesson extends LessonBase {
+  kind: 'deep-lesson';
+  chapterId: string;
+  milestoneId: MilestoneId;
+}
+
+export interface ChapterStudio extends LessonBase {
+  kind: 'chapter-studio';
+  chapterId: string;
+  milestoneId: MilestoneId;
+  purpose: string;
+  capability: string;
+  sectionCoverage: SectionCoverage[];
+  interaction: InteractionSpec;
+  chapterCheckQuestionIds: string[];
+}
+
+export type LearningEntry = DeepLesson | ChapterStudio;
+export type Lesson = LearningEntry;
 
 export interface Question {
   id: string;

@@ -1,9 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import { diagnosticQuestions } from '../../src/content/diagnostic';
-import { lessons } from '../../src/content/lessons';
+import { learningEntries, learningEntryById, lessons } from '../../src/content/lessons';
 import { questions } from '../../src/content/questions';
 
 describe('published learning content', () => {
+  it('preserves the twelve deep lesson IDs', () => {
+    expect(lessons.map((lesson) => lesson.id).sort()).toEqual([
+      'autodiff', 'broadcasting', 'chain-rule', 'data-preprocessing',
+      'derivatives-gradients', 'linear-algebra-objects', 'linear-regression',
+      'probability-expectation', 'products-and-norms', 'reductions',
+      'regression-training', 'tensor-shapes',
+    ]);
+    expect(learningEntries).toHaveLength(12);
+    expect(learningEntryById.size).toBe(12);
+    expect(learningEntryById.get('missing-entry')).toBeUndefined();
+    for (const lesson of lessons) {
+      expect(lesson.kind).toBe('deep-lesson');
+      expect(lesson.chapterId).toBe(lesson.id === 'linear-regression' || lesson.id === 'regression-training' ? 'chapter-3' : 'chapter-2');
+      expect(lesson.milestoneId).toBe(lesson.chapterId === 'chapter-2' ? 'foundations' : 'models');
+      expect(learningEntryById.get(lesson.id)).toBe(lesson);
+    }
+  });
+
   it('contains the twelve approved reviewed lessons with complete learning anatomy', () => {
     expect(lessons).toHaveLength(12);
     expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(12);

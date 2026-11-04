@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { TutorPanel } from '../../src/tutor/TutorPanel';
 
 afterEach(() => {
+  vi.restoreAllMocks();
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
   delete window.turnstile;
@@ -53,6 +54,50 @@ describe('TutorPanel', () => {
     await user.click(ask);
     expect(await screen.findByText('Second reply')).toBeInTheDocument();
     expect(JSON.parse(fetchTutor.mock.calls[1][1].body)).toMatchObject({ turnstileToken: 'second-token', learnerAttempt: 'My shape is 3' });
+  });
+
+  it('renews verification after synchronous client-id failure while preserving the question and reply', async () => {
+    vi.stubEnv('VITE_TURNSTILE_SITE_KEY', 'site-key');
+    vi.stubEnv('VITE_TUTOR_URL', 'https://tutor.example');
+    const callbacks: Record<string, unknown>[] = [];
+    const remove = vi.fn();
+    window.turnstile = { render: vi.fn((_element, options) => { callbacks.push(options); return `widget-${callbacks.length}`; }), remove };
+    const fetchTutor = vi.fn().mockImplementation(() => Promise.resolve(new Response(JSON.stringify({
+      reply: 'Retained tutor reply', suggestedNextAttempt: 'Try another axis', sourceRefs: [],
+      supportLevel: 'hint', insufficientEvidence: false, model: 'test-model', contentVersion: 'test-version',
+    }), { status: 200 })));
+    vi.stubGlobal('fetch', fetchTutor);
+    const user = userEvent.setup();
+    render(<TutorPanel lessonId="tensor-shapes" conceptIds={['tensor-shape']} learnerAttempt="My shape is 3" />);
+    await user.click(screen.getByRole('checkbox', { name: /i understand/i }));
+    await user.click(screen.getByRole('button', { name: /continue to tutor/i }));
+    await user.type(screen.getByLabelText(/question for the tutor/i), 'What axis remains?');
+    const ask = screen.getByRole('button', { name: /ask for a hint/i });
+    act(() => (callbacks[0].callback as (token: string) => void)('first-token'));
+    await user.click(ask);
+    expect(await screen.findByText('Retained tutor reply')).toBeInTheDocument();
+    await waitFor(() => expect(callbacks).toHaveLength(2));
+
+    act(() => (callbacks[1].callback as (token: string) => void)('pre-failure-token'));
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementationOnce(() => {
+      throw new DOMException('Storage access denied', 'SecurityError');
+    });
+    await user.click(ask);
+    expect(await screen.findByText('Tutor is temporarily unavailable.')).toBeInTheDocument();
+    expect(fetchTutor).toHaveBeenCalledTimes(1);
+    expect(ask).toBeDisabled();
+    expect(screen.getByLabelText(/question for the tutor/i)).toHaveValue('What axis remains?');
+    expect(screen.getByText('Retained tutor reply')).toBeInTheDocument();
+    await waitFor(() => expect(callbacks).toHaveLength(3));
+    expect(remove).toHaveBeenCalledWith('widget-2');
+    act(() => (callbacks[1].callback as (token: string) => void)('stale-token'));
+    expect(ask).toBeDisabled();
+    act(() => (callbacks[2].callback as (token: string) => void)('recovery-token'));
+    await user.click(ask);
+    await waitFor(() => expect(fetchTutor).toHaveBeenCalledTimes(2));
+    expect(JSON.parse(fetchTutor.mock.calls[1][1].body)).toMatchObject({
+      turnstileToken: 'recovery-token', question: 'What axis remains?', learnerAttempt: 'My shape is 3',
+    });
   });
 
   it('discloses Gemini privacy terms before first use and keeps failure non-blocking', async () => {

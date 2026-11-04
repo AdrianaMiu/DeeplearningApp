@@ -32,7 +32,7 @@ test.describe('Deep Learning Companion release', () => {
   });
 
   test('completes the broadcasting explorer with equivalent table output', async ({ page }) => {
-    await page.getByRole('link', { name: 'Lab' }).click();
+    await page.getByRole('link', { name: 'Lab Experiment with math', exact: true }).click();
     await page.getByLabel('Left shape').fill('4, 2');
     await page.getByLabel('Right shape').fill('4');
     await expect(page.getByText(/neither equal nor 1/i)).toBeVisible();
@@ -42,7 +42,7 @@ test.describe('Deep Learning Companion release', () => {
   });
 
   test('persists a local note through reload', async ({ page }) => {
-    await page.getByRole('link', { name: 'Notes' }).click();
+    await page.getByRole('link', { name: 'Notes Save your explanations', exact: true }).click();
     await page.getByLabel('Note title').fill('Reload evidence');
     await page.getByLabel('Note body').fill('IndexedDB preserves this correction.');
     await page.getByRole('button', { name: 'Save note' }).click();
@@ -85,7 +85,7 @@ test.describe('Deep Learning Companion release', () => {
   });
 
   test('opens a non-foundation studio and its source map', async ({ page }) => {
-    await page.getByRole('link', { name: 'Curriculum' }).click();
+    await page.getByRole('link', { name: 'Curriculum Explore the book', exact: true }).click();
     await page.getByRole('link', { name: 'Start studio: Convolutional Neural Networks' }).click();
     await expect(page).toHaveURL(/#\/lesson\/cnn-studio/);
     await page.goBack();
@@ -100,7 +100,7 @@ test.describe('Deep Learning Companion release', () => {
     const menu = page.getByRole('button', { name: 'Menu' });
     await expect(menu).toBeVisible();
     await menu.click();
-    await page.getByRole('link', { name: 'Curriculum' }).click();
+    await page.getByRole('link', { name: 'Curriculum Explore the book', exact: true }).click();
     await expect(page.getByRole('heading', { name: /the complete map/i })).toBeVisible();
   });
 });

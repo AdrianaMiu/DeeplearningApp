@@ -94,13 +94,12 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
         <nav id="primary-navigation" aria-label="Primary">
           {navigation.map(([to, guide]) => (
-            <Link key={to} to={to} aria-label={guide.label}
-              aria-describedby={`nav-description-${guide.icon}`}
+            <Link key={to} to={to}
               aria-current={route === to ? 'page' : undefined}
               onClick={() => setOpen(false)}
               className={route === to ? 'nav-link nav-link--active' : 'nav-link'}>
               <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{iconPaths[guide.icon]}</svg>
-              <span className="nav-copy"><strong>{guide.label}</strong><small id={`nav-description-${guide.icon}`}>{guide.navDescription}</small></span>
+              <span className="nav-copy"><strong>{guide.label}</strong>{' '}<small>{guide.navDescription}</small></span>
             </Link>
           ))}
         </nav>

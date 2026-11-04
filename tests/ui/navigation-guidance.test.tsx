@@ -82,6 +82,18 @@ describe('navigation guidance', () => {
     expect(screen.getByRole('link', { name: 'Curriculum' })).toHaveAttribute('aria-current', 'page');
   });
 
+  it.each([
+    ['/practice/', 'Practice'],
+    ['/Practice', 'Practice'],
+    ['/Lesson/tensor-shapes', 'Curriculum'],
+    ['/Curriculum/', 'Curriculum'],
+  ])('matches route guidance and current navigation for %s', async (path, section) => {
+    await renderAt(path);
+    expect(screen.getByRole('region', { name: `${section} guide` })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: section })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: 'Today' })).not.toHaveAttribute('aria-current');
+  });
+
   it('operates the mobile drawer accessibly', async () => {
     vi.stubGlobal('matchMedia', (query: string) => ({
       matches: true, media: query, addEventListener: () => {}, removeEventListener: () => {},

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, matchPath, useLocation } from 'react-router-dom';
 
 import { sectionGuideByRoute, type SectionGuide, type SectionRoute } from '../content/section-guides';
 import { PagePurpose } from './PagePurpose';
@@ -23,8 +23,8 @@ export function Layout({ children }: { children: ReactNode }) {
   const menuRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
   const { pathname, key: locationKey } = useLocation();
-  const route: SectionRoute = pathname.startsWith('/lesson/') ? '/curriculum'
-    : Object.hasOwn(sectionGuideByRoute, pathname) ? pathname as SectionRoute : '/';
+  const route: SectionRoute = matchPath('/lesson/:lessonId', pathname) ? '/curriculum'
+    : navigation.find(([to]) => matchPath(to, pathname))?.[0] ?? '/';
   const modalOpen = mobile && open;
 
   useEffect(() => {

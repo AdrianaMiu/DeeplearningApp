@@ -44,6 +44,53 @@ describe('learning cockpit', () => {
     expect(await screen.findByRole('heading', { name: /chapter 2: preliminaries/i })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /chapter 7: convolutional/i })).not.toBeInTheDocument();
   });
+  it('ignores superseded due reviews in both the cockpit and atlas', async () => {
+    await repository.appendReview({ id: 'old', conceptId: 'tensor-shape', attemptId: 'a', timestamp: '2025-01-01', intervalIndex: 0, dueAt: '2025-01-02' });
+    await repository.appendReview({ id: 'new', conceptId: 'tensor-shape', attemptId: 'b', timestamp: '2025-02-01', intervalIndex: 1, dueAt: '2999-01-01' });
+    const user = userEvent.setup();
+    const view = renderAt('/');
+    expect(await screen.findByText('0 reviews due')).toBeInTheDocument();
+    view.unmount();
+    renderAt('/curriculum');
+    await screen.findByRole('region', { name: /book atlas/i });
+    await user.selectOptions(screen.getByLabelText(/filter chapters/i), 'review');
+    expect(await screen.findByText(/no chapters match/i)).toBeInTheDocument();
+  });
+  it('shows the rescheduled review count on the Review page', async () => {
+    await repository.appendReview({ id: 'old', conceptId: 'tensor-shape', attemptId: 'a', timestamp: '2025-01-01', intervalIndex: 0, dueAt: '2025-01-02' });
+    await repository.appendReview({ id: 'new', conceptId: 'tensor-shape', attemptId: 'b', timestamp: '2025-02-01', intervalIndex: 1, dueAt: '2999-01-01' });
+    renderAt('/review');
+    expect(await screen.findByRole('heading', { name: 'Nothing due right now' })).toBeInTheDocument();
+  });
+  it('resumes the latest valid unfinished activity despite a newer stale session', async () => {
+    await repository.saveSession({ id: 'valid', lessonId: 'broadcasting', goal: 'Broadcast shapes', startedAt: '2026-01-01', updatedAt: '2026-01-01', resumeStep: 'prediction' });
+    await repository.saveSession({ id: 'stale', lessonId: 'missing', goal: 'Stale activity', startedAt: '2026-01-02', updatedAt: '2026-01-02', resumeStep: 'prediction' });
+    renderAt('/');
+    expect(await screen.findByText(/because you paused/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Resume Broadcast without guessing' })).toHaveAttribute('href', '/lesson/broadcasting');
+  });
+  it('uses independent success and failed attempts to choose a next activity', async () => {
+    const base = { questionVersion: 1, response: 'answer', timestamp: '2026-01-01', score: 1, gradingMethod: 'deterministic' as const, confidence: 4 as const, hintsUsed: 0, solutionRevealed: false, tutorSupportLevel: 'none' as const, applicationEvidence: false };
+    await repository.appendAttempt({ ...base, id: 'success', questionId: 'q01', conceptIds: ['tensor-shape'] });
+    const view = renderAt('/');
+    expect(await screen.findByText(/next activity without a recent independent success/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Broadcast without guessing' })).toBeInTheDocument();
+    view.unmount();
+    await repository.appendAttempt({ ...base, id: 'failed', questionId: 'q04', conceptIds: ['broadcasting'], score: 0, timestamp: '2026-01-02' });
+    renderAt('/');
+    expect(await screen.findByText(/because your latest attempt.*needs another look/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Broadcast without guessing' })).toBeInTheDocument();
+  });
+  it('searches chapter fallback descriptions and activity titles', async () => {
+    const user = userEvent.setup();
+    renderAt('/curriculum');
+    const input = await screen.findByLabelText(/search chapters/i);
+    await user.type(input, 'tensor shape let you predict');
+    expect(screen.getByRole('heading', { name: /chapter 2: preliminaries/i })).toBeInTheDocument();
+    await user.clear(input);
+    await user.type(input, 'training loop');
+    expect(screen.getByRole('heading', { name: /chapter 3: linear neural/i })).toBeInTheDocument();
+  });
   it('explains indexed-only content and filters the atlas', async () => {
     const user = userEvent.setup();
     renderAt('/curriculum/chapter-7');

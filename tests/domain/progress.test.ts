@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Attempt } from '../../src/domain/types';
 import { deriveConceptProgress, recommendNextTask } from '../../src/domain/progress';
-import { REVIEW_INTERVAL_DAYS, scheduleReview } from '../../src/domain/review';
+import { REVIEW_INTERVAL_DAYS, scheduleReview, getDueReviews } from '../../src/domain/review';
 
 const attempt = (overrides: Partial<Attempt>): Attempt => ({
   id: crypto.randomUUID(),
@@ -21,6 +21,16 @@ const attempt = (overrides: Partial<Attempt>): Attempt => ({
 });
 
 describe('review scheduling', () => {
+  it('uses the latest review per concept independent of order and resolves timestamp ties deterministically', () => {
+    const base = { conceptId: 'tensor-shape', attemptId: 'a', intervalIndex: 0 };
+    const old = { ...base, id: 'old', timestamp: '2026-01-01T00:00:00Z', dueAt: '2026-01-02T00:00:00Z' };
+    const later = { ...base, id: 'new', timestamp: '2026-01-03T00:00:00Z', dueAt: '2026-02-01T00:00:00Z' };
+    const tie = { ...later, id: 'tie', dueAt: '2026-02-03T00:00:00Z' };
+    expect(getDueReviews([later, old], '2026-01-10T00:00:00Z')).toEqual([]);
+    expect(getDueReviews([tie, later, old], '2026-02-02T00:00:00Z')).toEqual([]);
+    expect(getDueReviews([old, later, tie], '2026-02-03T00:00:00Z')).toEqual([tie]);
+  });
+
   it('uses the transparent 1, 3, 7, 14, and 30 day sequence', () => {
     expect(REVIEW_INTERVAL_DAYS).toEqual([1, 3, 7, 14, 30]);
     expect(scheduleReview('2026-01-01T10:00:00.000Z', 2, true, 5)).toMatchObject({

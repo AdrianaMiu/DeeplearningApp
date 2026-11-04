@@ -5,6 +5,7 @@ import { getAvailableLearningEntries, getChapterLearningSummary } from '../conte
 import { milestones } from '../content/course-map';
 import { curriculumInventory } from '../content/inventory';
 import { questions } from '../content/questions';
+import { getDueReviews } from '../domain/review';
 
 const entries = getAvailableLearningEntries();
 const byId = new Map(entries.map((entry) => [entry.id, entry]));
@@ -19,7 +20,7 @@ export function ChapterAtlas() {
   const { snapshot } = useAppData();
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
-  const dueConcepts = useMemo(() => new Set(snapshot?.reviews.filter((review) => review.dueAt <= new Date().toISOString()).map((review) => review.conceptId) ?? []), [snapshot?.reviews]);
+  const dueConcepts = useMemo(() => new Set(getDueReviews(snapshot?.reviews ?? [], new Date().toISOString()).map((review) => review.conceptId)), [snapshot?.reviews]);
   const selected = chapterId ? summaries.get(chapterId) : undefined;
   const selectedEntries = selected?.availableEntryIds.flatMap((id) => byId.get(id) ? [byId.get(id)!] : []) ?? [];
   const sections = selected ? curriculumInventory.sections.filter((section) => section.id.startsWith(prefix(selected.chapterId))) : [];
@@ -28,7 +29,9 @@ export function ChapterAtlas() {
     const chapterEntries = chapter.availableEntryIds.flatMap((id) => byId.get(id) ? [byId.get(id)!] : []);
     const hasDue = chapterEntries.some((entry) => entry.conceptIds.some((id) => dueConcepts.has(id)));
     const hasIndexed = curriculumInventory.sections.some((section) => section.id.startsWith(prefix(chapter.chapterId)) && !sectionStatus(section.id));
-    return `${chapter.title} ${chapter.purpose ?? ''} ${chapter.capability ?? ''}`.toLowerCase().includes(search.toLowerCase().trim()) && (filter === 'all' || (filter === 'available' && chapterEntries.length > 0) || (filter === 'review' && hasDue) || (filter === 'indexed' && hasIndexed));
+    const first = chapterEntries[0];
+    const searchable = [chapter.title, chapter.purpose ?? first?.question, chapter.capability ?? first?.objectives[0], ...chapterEntries.flatMap((entry) => [entry.title, entry.question, ...entry.objectives, ...entry.conceptIds])].join(' ');
+    return searchable.toLowerCase().includes(search.toLowerCase().trim()) && (filter === 'all' || (filter === 'available' && chapterEntries.length > 0) || (filter === 'review' && hasDue) || (filter === 'indexed' && hasIndexed));
   }) }));
   return <section aria-label="Book atlas" className="book-atlas">
     <div className="atlas-controls"><label>Search chapters<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Title or topic" /></label><label>Filter chapters<select value={filter} onChange={(event) => setFilter(event.target.value)}><option value="all">All chapters</option><option value="available">Available now</option><option value="review">Needs review</option><option value="indexed">Indexed only</option></select></label></div>

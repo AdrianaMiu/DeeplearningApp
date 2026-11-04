@@ -46,6 +46,7 @@ export function Layout({ children }: { children: ReactNode }) {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     drawerRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
+    const focusFrame = requestAnimationFrame(() => drawerRef.current?.querySelector<HTMLButtonElement>('button')?.focus());
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
@@ -66,6 +67,7 @@ export function Layout({ children }: { children: ReactNode }) {
     };
     document.addEventListener('keydown', onKeyDown);
     return () => {
+      cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener('keydown', onKeyDown);
       menuRef.current?.focus();

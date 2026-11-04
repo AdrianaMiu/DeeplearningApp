@@ -6,5 +6,5 @@ export function Equation({ latex, label }: { latex: string; label: string }) {
     throwOnError: false,
     strict: 'warn',
   });
-  return <div className="equation" role="group" aria-label={label} dangerouslySetInnerHTML={{ __html: markup }} />;
+  return <div className="equation" role="group" tabIndex={0} aria-label={label} dangerouslySetInnerHTML={{ __html: markup }} />;
 }

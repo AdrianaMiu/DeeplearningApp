@@ -1,4 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
+// Playwright runs this fixture setup in Node; the browser tsconfig excludes Node types.
+// @ts-expect-error Node types are intentionally absent from the app tsconfig.
+import { writeFile, unlink } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
 const environment = (globalThis as typeof globalThis & {
@@ -125,4 +128,75 @@ test.describe('Deep Learning Companion release', () => {
     await page.getByRole('link', { name: 'Curriculum Explore the book', exact: true }).click();
     await expect(page.getByRole('heading', { name: /the complete map/i })).toBeVisible();
   });
+});
+
+test.describe('Route accessibility and offline content', () => {
+  for (const route of ['', 'curriculum', 'practice', 'review', 'lab', 'progress', 'notes', 'settings', 'lesson/modern-cnn-studio']) {
+    test(`checks ${route || 'today'} at 320px`, async ({ page }) => {
+      await page.setViewportSize({ width: 320, height: 800 });
+      await page.goto(`./#/${route}`);
+      await expect(page.locator('main h1')).toBeVisible();
+      const results = await new AxeBuilder({ page }).analyze();
+      expect(results.violations.filter((item) => ['critical', 'serious'].includes(item.impact ?? ''))).toEqual([]);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    });
+  }
+
+  test('keyboard operates drawer, lesson tabs, previous stage and numeric control', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('./');
+    const menu = page.getByRole('button', { name: 'Menu' });
+    await menu.focus(); await page.keyboard.press('Enter');
+    await expect(page.getByRole('button', { name: 'Close navigation' })).toBeFocused();
+    await page.keyboard.press('Escape'); await expect(menu).toBeFocused();
+    await page.goto('./#/lesson/tensor-shapes');
+    await page.getByRole('button', { name: 'predict', exact: true }).click();
+    await page.getByLabel('Your prediction').fill('A vector remains.');
+    await page.getByRole('button', { name: 'Reveal worked example' }).click();
+    const intuition = page.getByRole('tab', { name: 'Intuition' });
+    await intuition.focus(); await page.keyboard.press('ArrowRight');
+    await expect(page.getByRole('tab', { name: 'Math' })).toBeFocused();
+    await expect(page.getByRole('tab', { name: 'Math' })).toHaveAttribute('aria-selected', 'true');
+    await page.getByRole('button', { name: 'Previous stage' }).focus(); await page.keyboard.press('Enter');
+    await expect(page.getByRole('heading', { name: 'Predict', exact: true })).toBeVisible();
+    await page.goto('./#/lab');
+    const range = page.locator('input[type="range"]').first();
+    const previous = await range.inputValue(); await range.focus(); await page.keyboard.press('ArrowRight');
+    expect(await range.inputValue()).not.toBe(previous);
+  });
+
+  test('serves a previously unvisited studio offline from the repository scope', async ({ page, context }) => {
+    await page.goto('./');
+    await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+    await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+    const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope);
+    expect(new URL(scope).pathname).toBe('/DeeplearningApp/');
+    await context.setOffline(true);
+    await page.goto('./#/lesson/modern-cnn-studio');
+    await expect(page.getByRole('heading', { name: /compare modern CNN designs/i })).toBeVisible();
+    await page.getByRole('button', { name: 'predict', exact: true }).click();
+    await page.getByLabel('Your prediction').fill('The paths must have matching shapes.');
+    await page.getByRole('button', { name: 'Reveal worked example' }).click();
+    await page.getByRole('button', { name: 'try', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Both paths have the same shape' })).toBeVisible();
+  });
+});
+
+// Install a deliberately stale worker at the same scope before loading the app.
+test('replaces a stale service worker with the current build', async ({ page }) => {
+  const fixture = 'dist/stale-test-worker.js';
+  await writeFile(fixture, "self.addEventListener('install', () => self.skipWaiting()); self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));");
+  try {
+    await page.goto('./icons/companion-icon.svg');
+    await page.evaluate(async () => {
+      await navigator.serviceWorker.register('/DeeplearningApp/stale-test-worker.js', { scope: '/DeeplearningApp/' });
+      await navigator.serviceWorker.ready;
+    });
+    await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.scriptURL ?? '')).toContain('stale-test-worker.js');
+    await page.goto('./');
+    await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.scriptURL ?? ''), { timeout: 15_000 }).toContain('/DeeplearningApp/sw.js');
+    await expect(page.getByRole('heading', { name: /your next clear step/i })).toBeVisible();
+  } finally {
+    await unlink(fixture);
+  }
 });

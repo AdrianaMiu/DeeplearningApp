@@ -183,7 +183,7 @@ main { min-height: 100vh; margin-left: 260px; }
   .mobile-header { position: sticky; z-index: 30; top: 0; display: flex; min-height: 64px; align-items: center; gap: .7rem; padding: .65rem 1rem; color: white; background: var(--sidebar); }
   .mobile-header .brand-mark { width: 2rem; height: 2rem; }
   .menu-button { min-width: 44px; min-height: 44px; cursor: pointer; margin-left: auto; border: 1px solid #82aaa9; border-radius: 3px; padding: .5rem .75rem; color: white; background: transparent; }
-  .sidebar { z-index: 40; visibility: hidden; width: min(82vw, 310px); transform: translateX(-105%); transition: transform .2s ease, visibility .2s; }
+  .sidebar { z-index: 40; visibility: hidden; width: min(82vw, 310px); transform: translateX(-105%); transition: transform .2s ease; }
   .sidebar--open { visibility: visible; transform: translateX(0); }
   main { margin-left: 0; }
   .focus-card { grid-template-columns: auto 1fr; }
@@ -251,3 +251,15 @@ main { min-height: 100vh; margin-left: 260px; }
 .lesson-stage-actions { margin-top: 1.5rem; }
 .lesson-views [role="tablist"] { display: flex; overflow-x: auto; border-bottom: 1px solid var(--line, #c7c7c7); }
 .lesson-views [role="tabpanel"] { padding: .5rem 0; }
+
+/* The ledger and review queue connect each state to the next action. */
+.ledger-intro, .lab-instruction { max-width: 70ch; padding: .85rem 1rem; border-left: 3px solid var(--teal); background: var(--teal-soft); }
+.review-due-list { display: grid; gap: .5rem; padding: 0 0 0 1rem; border-left: 2px solid #75a9a4; list-style: none; }
+.review-due-list li { padding: .5rem .75rem; background: var(--paper-deep); text-transform: capitalize; }
+.review-due-list small { display: block; color: var(--muted); text-transform: none; }
+.progress-list article { border-left: 3px solid #aeb8b5; }
+.progress-list article:has(.status--retained), .progress-list article:has(.status--demonstrated) { border-left-color: var(--teal); }
+.progress-list .status { flex-shrink: 0; gap: .3rem; }
+@media (max-width: 620px) { .progress-list article { align-items: flex-start; flex-wrap: wrap; } }
+.ledger-intro p { margin: 0 0 .4rem; }
+.ledger-toggle { margin: 1rem 0; }

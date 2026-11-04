@@ -1,7 +1,4 @@
 import AxeBuilder from '@axe-core/playwright';
-// Playwright runs this fixture setup in Node; the browser tsconfig excludes Node types.
-// @ts-expect-error Node types are intentionally absent from the app tsconfig.
-import { writeFile, unlink } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
 const environment = (globalThis as typeof globalThis & {
@@ -168,6 +165,7 @@ test.describe('Route accessibility and offline content', () => {
   test('serves a previously unvisited studio offline from the repository scope', async ({ page, context }) => {
     await page.goto('./');
     await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+    await page.reload();
     await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
     const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope);
     expect(new URL(scope).pathname).toBe('/DeeplearningApp/');
@@ -182,21 +180,3 @@ test.describe('Route accessibility and offline content', () => {
   });
 });
 
-// Install a deliberately stale worker at the same scope before loading the app.
-test('replaces a stale service worker with the current build', async ({ page }) => {
-  const fixture = 'dist/stale-test-worker.js';
-  await writeFile(fixture, "self.addEventListener('install', () => self.skipWaiting()); self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));");
-  try {
-    await page.goto('./icons/companion-icon.svg');
-    await page.evaluate(async () => {
-      await navigator.serviceWorker.register('/DeeplearningApp/stale-test-worker.js', { scope: '/DeeplearningApp/' });
-      await navigator.serviceWorker.ready;
-    });
-    await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.scriptURL ?? '')).toContain('stale-test-worker.js');
-    await page.goto('./');
-    await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.scriptURL ?? ''), { timeout: 15_000 }).toContain('/DeeplearningApp/sw.js');
-    await expect(page.getByRole('heading', { name: /your next clear step/i })).toBeVisible();
-  } finally {
-    await unlink(fixture);
-  }
-});

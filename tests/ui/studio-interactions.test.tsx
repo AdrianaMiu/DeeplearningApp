@@ -28,3 +28,33 @@ it('exposes keyboard and table paths for every interaction', async () => {
     cleanup();
   }
 });
+
+it('edits a chapter numeric control with the keyboard and reports the new calculation', async () => {
+  const { getAvailableLearningEntries } = await import('../../src/content/catalog');
+  const entry = getAvailableLearningEntries().find(item => item.id === 'optimization-studio');
+  if (!entry || entry.kind !== 'chapter-studio') throw new Error('Optimization studio unavailable');
+  const user = userEvent.setup();
+  render(<InteractionRenderer spec={entry.interaction} />);
+  const rate = await screen.findByRole('spinbutton', { name: 'Learning rate' });
+  await user.click(rate);
+  await user.keyboard('{Control>}a{/Control}1');
+  expect(rate).toHaveValue(1);
+  expect(screen.getByRole('table', { name: /vary a descent step results/i })).toHaveTextContent('Next weight0');
+  expect(screen.getByRole('status')).toHaveTextContent('Next loss: 0');
+});
+
+it('returns to the previous sequence result by keyboard', async () => {
+  const { getAvailableLearningEntries } = await import('../../src/content/catalog');
+  const entry = getAvailableLearningEntries().find(item => item.id === 'rnn-studio');
+  if (!entry || entry.kind !== 'chapter-studio') throw new Error('RNN studio unavailable');
+  const user = userEvent.setup();
+  render(<InteractionRenderer spec={entry.interaction} />);
+  const table = await screen.findByRole('table', { name: /trace a scalar memory results/i });
+  const initial = table.textContent;
+  await user.click(screen.getByRole('button', { name: 'Next step' }));
+  expect(table.textContent).not.toBe(initial);
+  screen.getByRole('button', { name: 'Previous step' }).focus();
+  await user.keyboard('{Enter}');
+  expect(table.textContent).toBe(initial);
+  expect(screen.getByText('Step 1 of 3')).toBeInTheDocument();
+});

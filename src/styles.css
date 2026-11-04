@@ -263,3 +263,4 @@ main { min-height: 100vh; margin-left: 260px; }
 @media (max-width: 620px) { .progress-list article { align-items: flex-start; flex-wrap: wrap; } }
 .ledger-intro p { margin: 0 0 .4rem; }
 .ledger-toggle { margin: 1rem 0; }
+.update-notice { position: relative; z-index: 25; padding: .8rem 1rem; color: #102e37; background: #f6e8b8; border-bottom: 1px solid #a77d27; text-align: center; }

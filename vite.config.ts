@@ -7,7 +7,8 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
+      injectRegister: false,
       scope: '/DeeplearningApp/',
       base: '/DeeplearningApp/',
       includeAssets: ['icons/companion-icon.svg', 'labs/linear-regression-pytorch.ipynb'],

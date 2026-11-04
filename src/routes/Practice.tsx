@@ -12,6 +12,12 @@ import { scheduleReview } from '../domain/review';
 import type { Question } from '../domain/types';
 
 export default function Practice() {
+  const [params] = useSearchParams();
+  const sessionKey = JSON.stringify([params.get('mode'), params.get('entry')]);
+  return <PracticeSession key={sessionKey} />;
+}
+
+function PracticeSession() {
   const { repository, snapshot, refresh } = useAppData();
   const [params, setParams] = useSearchParams();
   const requestedMode = params.get('mode');

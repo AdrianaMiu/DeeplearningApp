@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useNavigate } from 'react-router-dom';
 import { QuestionResponse } from '../../src/components/QuestionResponse';
 import { questions } from '../../src/content/questions';
 import { AppShell } from '../../src/App';
@@ -9,6 +9,11 @@ import { createLearningDatabase } from '../../src/data/db';
 import { LearningRepository } from '../../src/data/repository';
 
 afterEach(cleanup);
+
+function NavigationControls() {
+  const navigate = useNavigate();
+  return <><button onClick={() => navigate('/practice?mode=quick&entry=broadcasting')}>Open broadcasting</button><button onClick={() => navigate('/practice?mode=diagnostic')}>Open diagnostic</button><button onClick={() => navigate(-1)}>Go back</button><button onClick={() => navigate(1)}>Go forward</button></>;
+}
 
 describe('practice modes', () => {
   it('renders a response control for each question type', () => {
@@ -37,6 +42,39 @@ describe('practice modes', () => {
     view.unmount();
     view = show('/practice?mode=chapter&entry=missing');
     expect(await screen.findByRole('heading', { name: /best starting point/i })).toBeInTheDocument();
+    view.unmount(); db.close(); await db.delete();
+  });
+
+  it('starts a fresh session when navigating between query entries and re-entering the diagnostic', async () => {
+    const db = createLearningDatabase(`query-navigation-${crypto.randomUUID()}`);
+    const repository = new LearningRepository(db);
+    const user = userEvent.setup();
+    const view = render(<MemoryRouter initialEntries={['/practice?mode=quick&entry=tensor-shapes']}><NavigationControls /><AppShell repository={repository} /></MemoryRouter>);
+    await user.click(await screen.findByRole('button', { name: /show hint 1/i }));
+    await user.type(screen.getByLabelText(/your answer/i), '3');
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await screen.findByRole('button', { name: /next question/i });
+    await user.click(screen.getByRole('button', { name: /next question/i }));
+    expect(screen.getByText(/Question 2\/3/)).toBeInTheDocument();
+    await user.type(screen.getByLabelText(/your answer/i), 'old answer');
+    await user.click(screen.getByRole('button', { name: /open broadcasting/i }));
+    expect(screen.getByText(/Question 1\/3/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/your answer/i)).toHaveValue('');
+    expect(screen.getByRole('button', { name: /show hint 1/i })).toBeEnabled();
+    await user.type(screen.getByLabelText(/your answer/i), '4,3,6');
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await screen.findByRole('button', { name: /next question/i });
+    await user.click(screen.getByRole('button', { name: /go back/i }));
+    expect(screen.getByText(/Question 1\/3/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/your answer/i)).toHaveValue('');
+    expect(screen.getByRole('button', { name: /check answer/i })).toBeDisabled();
+    await user.click(screen.getByRole('button', { name: /open diagnostic/i }));
+    await user.click(screen.getByRole('button', { name: /skip diagnostic/i }));
+    await user.click(screen.getByRole('button', { name: /go back/i }));
+    await user.click(screen.getByRole('button', { name: /go forward/i }));
+    expect(screen.getByText(/optional diagnostic · 1\/8/i)).toBeInTheDocument();
+    expect((await repository.getSettings()).diagnosticSkipped).toBe(true);
+    expect(await repository.getAttempts()).toHaveLength(2);
     view.unmount(); db.close(); await db.delete();
   });
 

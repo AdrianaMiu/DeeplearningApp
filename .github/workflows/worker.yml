@@ -6,6 +6,11 @@ on:
     branches: [main]
     paths:
       - 'worker/**'
+      - 'scripts/verify_release.py'
+      - 'tests/worker/**'
+      - 'tests/tutor/**'
+      - 'src/content/**'
+      - 'scripts/rag/**'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/worker.yml'
@@ -26,11 +31,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run typecheck
+      - name: Test Worker and tutor boundaries
+        run: npm test -- tests/worker tests/tutor tests/content
       - name: Verify Worker bundle
-        run: npx wrangler deploy --dry-run --config worker/wrangler.jsonc
+        env:
+          WRANGLER_LOG_PATH: /tmp/d2l-wrangler.log
+        run: npx wrangler deploy --dry-run --config worker/wrangler.jsonc --outdir /tmp/d2l-worker-dry-run
+      - name: Audit tracked files, Worker artifacts and optional retrieval configuration
+        run: python3 -B scripts/verify_release.py --worker-out /tmp/d2l-worker-dry-run
       - name: Deploy Worker
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
-        run: npx wrangler deploy --config worker/wrangler.jsonc
+        run: npx wrangler deploy --config worker/wrangler.jsonc --keep-vars
       - name: Explain skipped deployment
         if: ${{ env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == '' }}
         run: echo "Worker deployment skipped until Cloudflare repository secrets are configured."

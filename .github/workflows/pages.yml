@@ -27,9 +27,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Audit tracked publication inputs and optional Worker configuration
+        run: python3 -B scripts/verify_release.py
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Audit Pages artifacts and repository base path
+        run: python3 -B scripts/verify_release.py --dist dist
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - uses: actions/configure-pages@v5

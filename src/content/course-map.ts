@@ -33,7 +33,7 @@ export const milestones: Milestone[] = [
   },
 ];
 
-// Studio IDs reserve the chapter paths; their authored entries arrive in later content batches.
+// Core identities remain stable; catalog.ts derives availability from validated authored entries.
 const coreEntryIdsByChapter = new Map<string, string[]>([
   ['chapter-1', ['introduction-studio']],
   ['chapter-2', ['tensor-shapes', 'broadcasting', 'data-preprocessing', 'linear-algebra-objects', 'reductions', 'products-and-norms', 'derivatives-gradients', 'chain-rule', 'autodiff', 'probability-expectation']],

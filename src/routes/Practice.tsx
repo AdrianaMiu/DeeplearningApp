@@ -1,20 +1,27 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { QuestionResponse } from '../components/QuestionResponse';
+import { gradeQuestion } from '../domain/grading';
 
 import { useAppData } from '../app/context';
 import { diagnosticQuestions } from '../content/diagnostic';
-import { lessons } from '../content/lessons';
+import { learningEntries, lessons } from '../content/lessons';
 import { questions } from '../content/questions';
 import { scheduleReview } from '../domain/review';
 import type { Question } from '../domain/types';
 
-function normalized(value: string) { return value.toLowerCase().replace(/[^a-z0-9.]+/g, ' ').trim(); }
-function score(question: Question, response: string) {
-  const expected = Array.isArray(question.answer) ? question.answer.join(' ') : String(question.answer);
-  return normalized(response).includes(normalized(expected)) || normalized(expected).includes(normalized(response)) ? 1 : 0;
-}
-
 export default function Practice() {
   const { repository, snapshot, refresh } = useAppData();
+  const [params, setParams] = useSearchParams();
+  const requestedMode = params.get('mode');
+  const entryId = params.get('entry');
+  const entry = learningEntries.find((item) => item.id === entryId);
+  const mode = requestedMode === 'diagnostic' ? 'diagnostic'
+    : requestedMode === 'chapter' && entry?.kind === 'chapter-studio' ? 'chapter'
+    : requestedMode === 'quick' && entry && questions.some((item) => item.lessonId === entry.id) ? 'quick'
+    : undefined;
+  const [diagnosticDismissed, setDiagnosticDismissed] = useState(false);
   const [skipped, setSkipped] = useState(false);
   const [diagnosticIndex, setDiagnosticIndex] = useState(0);
   const [recommendation, setRecommendation] = useState('tensor-shapes');
@@ -29,12 +36,12 @@ export default function Practice() {
   async function skipDiagnostic() {
     const current = await repository.getSettings();
     await repository.saveSettings({ ...current, diagnosticSkipped: true, updatedAt: new Date().toISOString() });
-    setSkipped(true); refresh();
+    setSkipped(true); setDiagnosticDismissed(true); refresh();
   }
 
   async function recordEvidence(question: Question, response: string, usedHints = 0, revealed = false) {
     const timestamp = new Date().toISOString();
-    const result = score(question, response);
+    const result = gradeQuestion(question, response).score;
     const attemptId = crypto.randomUUID();
     await repository.appendAttempt({
       id: attemptId, questionId: question.id, questionVersion: question.version,
@@ -66,7 +73,7 @@ export default function Practice() {
     if (diagnosticIndex < diagnosticQuestions.length - 1) { setDiagnosticIndex((value) => value + 1); setAnswer(''); return; }
     const current = await repository.getSettings();
     await repository.saveSettings({ ...current, diagnosticCompleted: true, updatedAt: new Date().toISOString() });
-    setSkipped(true); refresh();
+    setSkipped(true); setDiagnosticDismissed(true); refresh();
   }
 
   async function submitPractice(question: Question) {
@@ -82,24 +89,26 @@ export default function Practice() {
     setQuestionIndex(nextIndex); setAnswer(''); setHints(0); setFeedback(undefined); setSolutionRevealed(false); setConfidence(3);
   }
 
-  if (!skipped) {
+  if ((mode === 'diagnostic' && !diagnosticDismissed) || (!mode && !skipped)) {
     const question = diagnosticQuestions[diagnosticIndex];
     return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Optional diagnostic · {diagnosticIndex + 1}/8</p><h1>Find the best starting point</h1><p>Skip it at any time. Recommendations remain visible and overridable.</p></header>
-      <section className="question-card"><h2>{question.prompt}</h2><label>Your answer<input name="diagnostic-answer" autoComplete="off" value={answer} onChange={(event) => setAnswer(event.target.value)} /></label><div className="button-row"><button className="button button--primary" disabled={!answer.trim()} onClick={answerDiagnostic}>Save and continue</button><button className="button button--quiet" onClick={skipDiagnostic}>Skip diagnostic</button></div></section></div>;
+      <section className="question-card"><h2>{question.prompt}</h2><QuestionResponse question={question} value={answer} onChange={setAnswer} /><div className="button-row"><button className="button button--primary" disabled={!answer.trim()} onClick={answerDiagnostic}>Save and continue</button><button className="button button--quiet" onClick={skipDiagnostic}>Skip diagnostic</button></div></section></div>;
   }
 
-  const selected = lessons.find((lesson) => lesson.id === recommendation) ?? lessons[0];
-  const selectedQuestions = questions.filter((question) => question.lessonId === recommendation);
+  const selected = (mode === 'chapter' || mode === 'quick' ? entry : lessons.find((lesson) => lesson.id === recommendation)) ?? lessons[0];
+  const selectedQuestions = mode === 'chapter' && selected.kind === 'chapter-studio'
+    ? selected.chapterCheckQuestionIds.flatMap((id) => questions.find((item) => item.id === id) ?? [])
+    : questions.filter((item) => item.lessonId === selected.id);
   const question = selectedQuestions[questionIndex] ?? selectedQuestions[0];
-  return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Practice desk</p><h1>One answer, with honest support</h1><p>Recommendation: {selected.title}. You remain in control.</p><label>Choose a different starting lesson<select name="starting-lesson" autoComplete="off" value={recommendation} onChange={(event) => { setRecommendation(event.target.value); resetQuestion(0); }}>{lessons.map((lesson) => <option key={lesson.id} value={lesson.id}>{lesson.title}</option>)}</select></label></header>
+  return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Practice desk</p><h1>{mode === 'chapter' ? 'Chapter check' : mode === 'quick' ? 'Quick practice' : 'One answer, with honest support'}</h1><p>Recommendation: {selected.title}. You remain in control.</p><label>Choose a different starting lesson<select name="starting-lesson" autoComplete="off" value={selected.id} onChange={(event) => { setRecommendation(event.target.value); if (mode) setParams({ mode: 'quick', entry: event.target.value }); resetQuestion(0); }}>{selected.kind === 'chapter-studio' && <option value={selected.id}>{selected.title}</option>}{lessons.map((lesson) => <option key={lesson.id} value={lesson.id}>{lesson.title}</option>)}</select></label></header>
     <section className="question-card"><p className="kicker">Question {questionIndex + 1}/{selectedQuestions.length} · reviewed</p><h2>{question.prompt}</h2>
       {hints > 0 && <p className="hint" role="status">Hint: {question.hints[0]}</p>}
       <button className="text-button" disabled={hints > 0} onClick={() => setHints(1)}>Show hint 1</button>
       {!solutionRevealed && <button className="text-button" onClick={() => setSolutionRevealed(true)}>Reveal solution</button>}
       {solutionRevealed && <p className="hint">Solution: {Array.isArray(question.answer) ? question.answer.join(', ') : question.answer}. {question.explanation}</p>}
-      <label>Your answer<input name="practice-answer" autoComplete="off" value={answer} onChange={(event) => setAnswer(event.target.value)} /></label>
+      <QuestionResponse question={question} value={answer} onChange={setAnswer} />
       <label>Confidence<select name="answer-confidence" value={confidence} onChange={(event) => setConfidence(Number(event.target.value) as 1 | 2 | 3 | 4 | 5)}><option value="1">1 · guessing</option><option value="2">2 · uncertain</option><option value="3">3 · fairly sure</option><option value="4">4 · confident</option><option value="5">5 · could teach it</option></select></label>
       <button className="button button--primary" disabled={!answer.trim() || Boolean(feedback)} onClick={() => submitPractice(question)}>Check answer</button>
-      {feedback && <><p className="feedback" role="status">{feedback} {(hints > 0 || solutionRevealed) && 'Recorded as assisted evidence.'}</p><button className="button button--quiet" onClick={() => resetQuestion((questionIndex + 1) % selectedQuestions.length)}>Next question</button></>}
+      {feedback && <><p className="feedback" role="status">{feedback} {(hints > 0 || solutionRevealed) && 'Recorded as assisted evidence.'}</p>{mode === 'chapter' && questionIndex === selectedQuestions.length - 1 ? <p>Chapter check complete.</p> : <button className="button button--quiet" onClick={() => resetQuestion((questionIndex + 1) % selectedQuestions.length)}>Next question</button>}</>}
     </section></div>;
 }

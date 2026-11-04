@@ -217,6 +217,8 @@ export interface SessionRecord {
   updatedAt: string;
   completedAt?: string;
   resumeStep: string;
+  prediction?: string;
+  workedRevealed?: boolean;
   reflection?: string;
 }
 

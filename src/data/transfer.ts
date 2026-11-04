@@ -40,6 +40,8 @@ const sessionSchema = z.object({
   updatedAt: isoDate,
   completedAt: isoDate.optional(),
   resumeStep: z.string(),
+  prediction: z.string().optional(),
+  workedRevealed: z.boolean().optional(),
   reflection: z.string().optional(),
 }).strict();
 

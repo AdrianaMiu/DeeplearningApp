@@ -241,3 +241,13 @@ main { min-height: 100vh; margin-left: 260px; }
 .chapter-detail li { margin-bottom: .35rem; }
 .chapter-detail .exercise-index { margin: 1rem 0; }
 @media (max-width: 620px) { .evidence-columns, .atlas-controls, .atlas-row { grid-template-columns: 1fr; } .atlas-actions { display: flex; flex-wrap: wrap; } }
+
+.lesson-journey { margin: 1.5rem 0; overflow-x: auto; }
+.lesson-journey ol { display: flex; gap: .35rem; list-style: none; padding: 0; margin: 0; }
+.lesson-journey button, .lesson-views [role="tab"] { background: transparent; border: 0; border-bottom: 3px solid transparent; padding: .65rem .8rem; text-transform: capitalize; cursor: pointer; white-space: nowrap; }
+.lesson-journey button[aria-current="step"], .lesson-views [aria-selected="true"] { border-bottom-color: currentColor; font-weight: 700; }
+.lesson-journey button:disabled { opacity: .45; cursor: not-allowed; }
+.lesson-stage { max-width: 75ch; padding: 1.5rem; border: 1px solid var(--line, #c7c7c7); }
+.lesson-stage-actions { margin-top: 1.5rem; }
+.lesson-views [role="tablist"] { display: flex; overflow-x: auto; border-bottom: 1px solid var(--line, #c7c7c7); }
+.lesson-views [role="tabpanel"] { padding: .5rem 0; }

@@ -73,6 +73,15 @@ describe('local learning data transfer', () => {
     await db.delete();
   });
 
+  it('round-trips guided lesson reasoning in a version 1 backup', async () => {
+    const session = { id: 'guided', lessonId: 'tensor-shapes', goal: 'Shapes', startedAt: '2026-11-03T08:00:00.000Z', updatedAt: '2026-11-03T08:00:00.000Z', resumeStep: 'reflect', prediction: 'My guess', reflection: 'My explanation', workedRevealed: true };
+    await repository.saveSession(session);
+    const backup = await exportProgress(db, contentVersion);
+    await resetProgress(db);
+    await importProgress(db, JSON.stringify(backup), 'merge');
+    expect(await repository.getSessions()).toEqual([session]);
+  });
+
   it('keeps attempts append-only and rejects a duplicate UUID', async () => {
     await repository.appendAttempt(attempt('attempt-1'));
 

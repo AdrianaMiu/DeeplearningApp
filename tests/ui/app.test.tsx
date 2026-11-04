@@ -64,7 +64,8 @@ describe('Deep Learning Companion interface', () => {
     const user = userEvent.setup();
     renderAt('/lesson/tensor-shapes');
 
-    const reveal = await screen.findByRole('button', { name: /reveal worked example/i });
+    await user.click(await screen.findByRole('button', { name: /^predict$/i }));
+    const reveal = screen.getByRole('button', { name: /reveal worked example/i });
     expect(reveal).toBeDisabled();
     await user.type(screen.getByLabelText(/your prediction/i), 'The remaining shape is (3).');
     await user.click(reveal);
@@ -89,7 +90,7 @@ describe('Deep Learning Companion interface', () => {
     renderAt('/lesson/tensor-shapes');
     await user.click(await screen.findByRole('button', { name: /pause and save place/i }));
     await waitFor(async () => expect(await repository.getSessions()).toHaveLength(1));
-    expect((await repository.getSessions())[0].resumeStep).toBe('prediction');
+    expect((await repository.getSessions())[0].resumeStep).toBe('orient');
   });
 
   it('schedules review evidence and advances through lesson questions', async () => {

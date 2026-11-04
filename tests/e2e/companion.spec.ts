@@ -9,6 +9,7 @@ test('published deployment exposes the configured tutor verification', async ({ 
   test.skip(!environment.PW_PRODUCTION_SMOKE, 'Run explicitly against the published GitHub Pages site.');
 
   await page.goto('https://adrianamiu.github.io/DeeplearningApp/#/lesson/tensor-shapes');
+  await page.getByRole('button', { name: 'Open tutor' }).click();
   await page.getByLabel(/i understand/i).check();
   await page.getByRole('button', { name: /continue to tutor/i }).click();
 
@@ -67,6 +68,7 @@ test.describe('Deep Learning Companion release', () => {
     expect(['0s', '0.00001s', '1e-05s']).toContain(duration);
 
     await page.getByRole('link', { name: /begin lesson/i }).click();
+    await page.getByRole('button', { name: 'Open tutor' }).click();
     await page.getByLabel(/i understand/i).check();
     await page.getByRole('button', { name: /continue to tutor/i }).click();
     await context.setOffline(true);
@@ -76,7 +78,7 @@ test.describe('Deep Learning Companion release', () => {
     } else {
       await expect(page.getByText(/tutor is not configured.*continue the lesson without ai/i)).toBeVisible();
     }
-    await expect(page.getByRole('heading', { name: /misconception check/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /orient/i })).toBeVisible();
   });
 
   test('has no automatically detectable serious accessibility violations', async ({ page }) => {
@@ -93,6 +95,26 @@ test.describe('Deep Learning Companion release', () => {
     await expect(page).toHaveURL(/#\/curriculum\/chapter-7/);
     await expect(page.getByRole('heading', { name: 'Source sections' })).toBeVisible();
     await expect(page.getByText('Individual exercise references', { exact: false })).toBeVisible();
+  });
+
+
+  test('guides a studio through prediction, interaction, check and resume', async ({ page }) => {
+    await page.goto('./#/lesson/modern-cnn-studio');
+    await page.getByRole('button', { name: 'predict', exact: true }).click();
+    await page.getByLabel('Your prediction').fill('The output becomes smaller.');
+    await page.getByRole('button', { name: 'Reveal worked example' }).click();
+    await expect(page.getByRole('region', { name: 'Worked example' })).toBeVisible();
+    await page.getByRole('button', { name: 'try', exact: true }).click();
+    await page.getByRole('button', { name: 'Both paths have the same shape' }).click();
+    await expect(page.getByText('Matching shapes permit elementwise addition.')).toBeVisible();
+    await page.getByRole('button', { name: 'check', exact: true }).click();
+    await expect(page.getByRole('link', { name: 'Open chapter check' })).toHaveAttribute('href', /mode=chapter&entry=modern-cnn-studio/);
+    await page.getByRole('button', { name: 'Pause and save place' }).click();
+    await expect(page.getByText(/saved locally/i)).toBeVisible();
+    await page.reload();
+    await expect(page.getByRole('heading', { name: 'Check', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'predict', exact: true }).click();
+    await expect(page.getByLabel('Your prediction')).toHaveValue('The output becomes smaller.');
   });
 
   test('uses the navigation drawer at a mobile viewport', async ({ page }) => {

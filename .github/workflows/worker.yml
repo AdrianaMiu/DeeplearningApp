@@ -10,6 +10,7 @@ on:
       - 'tests/worker/**'
       - 'tests/tutor/**'
       - 'src/content/**'
+      - 'src/tutor/**'
       - 'scripts/rag/**'
       - 'package.json'
       - 'package-lock.json'

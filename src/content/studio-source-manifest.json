@@ -139,6 +139,473 @@
         "printedPage": "276",
         "pdfPage": 316
       }
+    },
+    {
+      "studioId": "rnn-studio",
+      "references": [
+        {
+          "sectionId": "9.4",
+          "printedStart": "358",
+          "pdfPageStart": 398,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "9.7",
+          "printedStart": "372",
+          "pdfPageStart": 412,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "9.4",
+        "printedPage": "358",
+        "pdfPage": 398,
+        "equationIds": [
+          "9.4.2"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "modern-rnn-studio",
+      "references": [
+        {
+          "sectionId": "10.1",
+          "printedStart": "380",
+          "pdfPageStart": 420,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "10.2",
+          "printedStart": "387",
+          "pdfPageStart": 427,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "10.1",
+        "printedPage": "382",
+        "pdfPage": 422,
+        "equationIds": [
+          "10.1.3"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "attention-transformers-studio",
+      "references": [
+        {
+          "sectionId": "11.3",
+          "printedStart": "433",
+          "pdfPageStart": 473,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "11.7",
+          "printedStart": "454",
+          "pdfPageStart": 494,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "11.3",
+        "printedPage": "434",
+        "pdfPage": 474,
+        "equationIds": [
+          "11.3.2",
+          "11.3.3"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "optimization-studio",
+      "references": [
+        {
+          "sectionId": "12.3",
+          "printedStart": "499",
+          "pdfPageStart": 539,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "12.6",
+          "printedStart": "528",
+          "pdfPageStart": 568,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "12.3",
+        "printedPage": "500",
+        "pdfPage": 540,
+        "equationIds": [
+          "12.3.4"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "performance-studio",
+      "references": [
+        {
+          "sectionId": "13.2",
+          "printedStart": "572",
+          "pdfPageStart": 612,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "13.5",
+          "printedStart": "593",
+          "pdfPageStart": 633,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "13.2",
+        "printedPage": "572",
+        "pdfPage": 612,
+        "equationIds": [],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "computer-vision-studio",
+      "references": [
+        {
+          "sectionId": "14.3",
+          "printedStart": "629",
+          "pdfPageStart": 669,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "14.4",
+          "printedStart": "632",
+          "pdfPageStart": 672,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "14.4",
+        "printedPage": "635",
+        "pdfPage": 675,
+        "equationIds": [
+          "14.4.2"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "nlp-pretraining-studio",
+      "references": [
+        {
+          "sectionId": "15.1",
+          "printedStart": "717",
+          "pdfPageStart": 757,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "15.8",
+          "printedStart": "751",
+          "pdfPageStart": 791,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "15.1",
+        "printedPage": "717",
+        "pdfPage": 757,
+        "equationIds": [
+          "15.1.1"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "nlp-applications-studio",
+      "references": [
+        {
+          "sectionId": "16.5",
+          "printedStart": "792",
+          "pdfPageStart": 832,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "16.6",
+          "printedStart": "799",
+          "pdfPageStart": 839,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "16.5",
+        "printedPage": "793",
+        "pdfPage": 833,
+        "equationIds": [
+          "16.5.1"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "reinforcement-learning-studio",
+      "references": [
+        {
+          "sectionId": "17.1",
+          "printedStart": "810",
+          "pdfPageStart": 850,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "17.2",
+          "printedStart": "813",
+          "pdfPageStart": 853,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "17.2",
+        "printedPage": "814",
+        "pdfPage": 854,
+        "equationIds": [
+          "17.2.1",
+          "17.2.3"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "gaussian-processes-studio",
+      "references": [
+        {
+          "sectionId": "18.2",
+          "printedStart": "839",
+          "pdfPageStart": 879,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "18.3",
+          "printedStart": "846",
+          "pdfPageStart": 886,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "18.3",
+        "printedPage": "846",
+        "pdfPage": 886,
+        "equationIds": [
+          "18.3.1"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "hyperparameter-optimization-studio",
+      "references": [
+        {
+          "sectionId": "19.1",
+          "printedStart": "859",
+          "pdfPageStart": 899,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "19.4",
+          "printedStart": "884",
+          "pdfPageStart": 924,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "19.1",
+        "printedPage": "861",
+        "pdfPage": 901,
+        "equationIds": [
+          "unnumbered objective"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "gan-studio",
+      "references": [
+        {
+          "sectionId": "20.1",
+          "printedStart": "912",
+          "pdfPageStart": 952,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "20.2",
+          "printedStart": "918",
+          "pdfPageStart": 958,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "20.1",
+        "printedPage": "913",
+        "pdfPage": 953,
+        "equationIds": [
+          "20.1.1",
+          "20.1.2"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "math-appendix-studio",
+      "references": [
+        {
+          "sectionId": "A.1",
+          "printedStart": "927",
+          "pdfPageStart": 967,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.2",
+          "printedStart": "944",
+          "pdfPageStart": 984,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.3",
+          "printedStart": "954",
+          "pdfPageStart": 994,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.4",
+          "printedStart": "966",
+          "pdfPageStart": 1006,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.5",
+          "printedStart": "982",
+          "pdfPageStart": 1022,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.6",
+          "printedStart": "992",
+          "pdfPageStart": 1032,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.7",
+          "printedStart": "1011",
+          "pdfPageStart": 1051,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.8",
+          "printedStart": "1017",
+          "pdfPageStart": 1057,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.9",
+          "printedStart": "1032",
+          "pdfPageStart": 1072,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.10",
+          "printedStart": "1039",
+          "pdfPageStart": 1079,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "A.11",
+          "printedStart": "1051",
+          "pdfPageStart": 1091,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading and equation",
+        "sectionId": "A.2",
+        "printedPage": "944",
+        "pdfPage": 984,
+        "equationIds": [
+          "A.2"
+        ],
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "studioId": "tools-appendix-studio",
+      "references": [
+        {
+          "sectionId": "B.1",
+          "printedStart": "1068",
+          "pdfPageStart": 1108,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "B.2",
+          "printedStart": "1073",
+          "pdfPageStart": 1113,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "B.3",
+          "printedStart": "1076",
+          "pdfPageStart": 1116,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "B.4",
+          "printedStart": "1085",
+          "pdfPageStart": 1125,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "B.5",
+          "printedStart": "1086",
+          "pdfPageStart": 1126,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "B.6",
+          "printedStart": "1090",
+          "pdfPageStart": 1130,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "B.7",
+          "printedStart": "1095",
+          "pdfPageStart": 1135,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        },
+        {
+          "sectionId": "B.8",
+          "printedStart": "1108",
+          "pdfPageStart": 1148,
+          "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
+        }
+      ],
+      "manualCheck": {
+        "method": "rendered-page heading",
+        "sectionId": "B.1",
+        "printedPage": "1068",
+        "pdfPage": 1108,
+        "equationIds": [],
+        "checkedOn": "2026-11-04"
+      }
     }
   ]
 }

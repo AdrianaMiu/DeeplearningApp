@@ -11,8 +11,8 @@ describe('published learning content', () => {
       'probability-expectation', 'products-and-norms', 'reductions',
       'regression-training', 'tensor-shapes',
     ]);
-    expect(learningEntries).toHaveLength(18);
-    expect(learningEntryById.size).toBe(18);
+    expect(learningEntries).toHaveLength(32);
+    expect(learningEntryById.size).toBe(32);
     expect(learningEntryById.get('missing-entry')).toBeUndefined();
     for (const lesson of lessons) {
       expect(lesson.kind).toBe('deep-lesson');

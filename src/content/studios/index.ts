@@ -1,5 +1,12 @@
 import { foundationStudios } from './foundations';
 import { visionStudios } from './vision';
+import { sequenceStudios } from './sequences';
+import { systemsStudios } from './systems';
+import { advancedStudios } from './advanced';
+import { appendixStudios } from './appendices';
 
-export { foundationStudios, visionStudios };
-export const chapterStudios = [...foundationStudios, ...visionStudios];
+export { foundationStudios, visionStudios, sequenceStudios, systemsStudios, advancedStudios, appendixStudios };
+export const chapterStudios = [
+  ...foundationStudios, ...visionStudios, ...sequenceStudios,
+  ...systemsStudios, ...advancedStudios, ...appendixStudios,
+];

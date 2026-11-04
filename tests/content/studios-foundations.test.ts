@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { learningEntries } from '../../src/content/lessons';
 
-const studios = learningEntries.filter((entry) => entry.kind === 'chapter-studio');
+const foundationIds = [
+  'builders-guide-studio', 'classification-studio', 'cnn-studio',
+  'introduction-studio', 'mlp-studio', 'modern-cnn-studio',
+];
+const studios = learningEntries.filter((entry) => entry.kind === 'chapter-studio')
+  .filter((studio) => foundationIds.includes(studio.id));
 
 describe('chapter studio foundations', () => {
   it('authors the first six chapter studios', () => {

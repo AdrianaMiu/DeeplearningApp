@@ -14,15 +14,15 @@ describe('source section and exercise routes', () => {
   const open = (path: string) => render(<MemoryRouter initialEntries={[path]}><AppShell repository={repository} /></MemoryRouter>);
 
   it('shows an honest unavailable state for an unconverted section', async () => {
-    open('/section/1.1');
-    expect(await screen.findByRole('heading', { name: /a motivating example/i })).toBeInTheDocument();
+    open('/section/4.1');
+    expect(await screen.findByRole('heading', { name: /softmax regression/i })).toBeInTheDocument();
     expect(screen.getByText(/section activity is not authored yet/i)).toBeInTheDocument();
     expect(screen.getByText(/unconverted/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /back to chapter 1/i })).toHaveAttribute('href', '/curriculum/chapter-1');
+    expect(screen.getByRole('link', { name: /back to chapter 4/i })).toHaveAttribute('href', '/curriculum/chapter-4');
   });
 
   it('tracks deferred and discussed exercise workflow without granting mastery', async () => {
-    open('/exercise/1.9.exercise.1');
+    open('/exercise/4.1.5.exercise.1');
     expect(await screen.findByRole('heading', { name: /exercise 1/i })).toBeInTheDocument();
     expect(screen.getByText(/activity is not authored yet/i)).toBeInTheDocument();
     await userEvent.selectOptions(screen.getByLabelText(/exercise workflow state/i), 'discussed');
@@ -30,15 +30,15 @@ describe('source section and exercise routes', () => {
     await userEvent.click(screen.getByRole('button', { name: /save exercise state/i }));
     expect(await screen.findByText(/saved as discussed/i)).toBeInTheDocument();
     expect(await repository.getExerciseProgress()).toEqual([expect.objectContaining({
-      id: '1.9.exercise.1', state: 'discussed', linkedAttemptIds: [],
+      id: '4.1.5.exercise.1', state: 'discussed', linkedAttemptIds: [],
     })]);
     expect(await repository.getAttempts()).toEqual([]);
   });
 
   it('links every source record from the chapter atlas with accurate remaining counts', async () => {
     open('/curriculum/chapter-1');
-    expect(await screen.findByText(/0 of 17 detailed sections authored/i)).toBeInTheDocument();
-    expect(screen.getByText(/0 of 4 exercise activities authored/i)).toBeInTheDocument();
+    expect(await screen.findByText(/15 of 17 detailed sections authored/i)).toBeInTheDocument();
+    expect(screen.getByText(/4 of 4 exercise activities authored/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /section 1\.1 a motivating example/i })).toHaveAttribute('href', '/section/1.1');
     expect(screen.getByRole('link', { name: /exercise 1\.9\.exercise\.1/i })).toHaveAttribute('href', '/exercise/1.9.exercise.1');
     expect(screen.queryByText(/referenced in activity/i)).not.toBeInTheDocument();

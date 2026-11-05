@@ -5,6 +5,7 @@ import { curriculumInventory } from './inventory';
 import { learningEntries } from './lessons';
 import sourceManifest from './studio-source-manifest.json';
 import { createCoverageCatalog, type CoverageCatalog } from './coverage/registry';
+import { coverageCatalog as productionCoverageCatalog } from './coverage';
 
 export interface CatalogIssue {
   code: 'DUPLICATE_ENTRY_ID' | 'MISSING_CORE_ENTRY' | 'UNKNOWN_CHAPTER_ID' | 'UNKNOWN_MILESTONE_ID'
@@ -222,5 +223,5 @@ export function createLearningCatalog(input: CatalogInput) {
 }
 
 // Production maps and validation are constructed once at module scope, outside render paths.
-const catalog = createLearningCatalog({ entries: learningEntries });
+const catalog = createLearningCatalog({ entries: learningEntries, coverageCatalog: productionCoverageCatalog });
 export const { getAvailableLearningEntries, getChapterLearningSummary, validateLearningCatalog } = catalog;

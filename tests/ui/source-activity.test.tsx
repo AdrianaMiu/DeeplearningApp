@@ -65,7 +65,8 @@ describe('source section and exercise routes', () => {
     await repository.saveExerciseProgress({ id: '1.9.exercise.1', exerciseId: '1.9.exercise.1', state: 'deferred',
       linkedAttemptIds: [], updatedAt: '2026-11-05T10:00:00.000Z' });
     open('/progress');
-    expect(await screen.findByText(/609 indexed exercises/i)).toBeInTheDocument();
+    expect(await screen.findByText(/609 extracted exercise references/i)).toBeInTheDocument();
+    expect(screen.getByText(/not an independent count of the book/i)).toBeInTheDocument();
     expect(screen.getByText(/1 deferred/i)).toBeInTheDocument();
     expect(screen.getByText(/0 completed/i)).toBeInTheDocument();
   });

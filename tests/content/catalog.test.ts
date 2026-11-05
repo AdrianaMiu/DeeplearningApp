@@ -88,6 +88,7 @@ describe('learning catalog', () => {
     expect(partial.issues).toContainEqual(expect.objectContaining({ code: 'MISSING_CORE_ENTRY', entryId: 'tensor-shapes' }));
     expect(catalog.getChapterLearningSummary('chapter-1')).toMatchObject({ availability: 'available', studioCount: 1, deepLessonCount: 0,
       purpose: 'Identify the pieces of a machine learning system.', questionCount: 4,
+      authoredSectionCount: 0, authoredExerciseCount: 0, unclassifiedSectionCount: 17, remainingExerciseCount: 4,
     });
     expect(createLearningCatalog({ entries: [] }).getChapterLearningSummary('chapter-1')).toMatchObject({ availability: 'indexed', availableEntryIds: [] });
     expect(catalog.getChapterLearningSummary('unknown')).toMatchObject({ chapterId: 'unknown', availability: 'indexed', issues: [expect.objectContaining({ code: 'UNKNOWN_CHAPTER_ID' })] });

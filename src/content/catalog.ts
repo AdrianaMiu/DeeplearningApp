@@ -4,6 +4,7 @@ import { chapterLearningMap as defaultPaths, milestones as defaultMilestones } f
 import { curriculumInventory } from './inventory';
 import { learningEntries } from './lessons';
 import sourceManifest from './studio-source-manifest.json';
+import { createCoverageCatalog, type CoverageCatalog } from './coverage/registry';
 
 export interface CatalogIssue {
   code: 'DUPLICATE_ENTRY_ID' | 'MISSING_CORE_ENTRY' | 'UNKNOWN_CHAPTER_ID' | 'UNKNOWN_MILESTONE_ID'
@@ -27,6 +28,11 @@ export interface ChapterLearningSummary {
   questionCount: number;
   sourceSectionCount: number;
   exerciseCount: number;
+  authoredSectionCount: number;
+  authoredExerciseCount: number;
+  classifiedNonSubstantiveCount: number;
+  unclassifiedSectionCount: number;
+  remainingExerciseCount: number;
   availability: 'available' | 'partial' | 'indexed';
   issues: CatalogIssue[];
 }
@@ -43,6 +49,7 @@ interface CatalogInput {
   milestones?: readonly Milestone[];
   inventory?: CurriculumInventory;
   sourceManifest?: SourceManifest;
+  coverageCatalog?: CoverageCatalog;
 }
 
 const text = z.string().trim().min(1);
@@ -77,6 +84,9 @@ export function createLearningCatalog(input: CatalogInput) {
   const milestones = input.milestones ?? defaultMilestones;
   const inventory = input.inventory ?? curriculumInventory;
   const manifest = input.sourceManifest ?? sourceManifest;
+  const coverage = input.coverageCatalog ?? createCoverageCatalog({
+    inventory, sectionActivities: [], exerciseActivities: [], classifications: [],
+  });
   const chaptersById = new Map(inventory.chapters.map((chapter) => [chapter.id, chapter]));
   const sectionsById = new Map(inventory.sections.map((section) => [section.id, section]));
   const sectionChapterById = new Map<string, string>();
@@ -181,6 +191,7 @@ export function createLearningCatalog(input: CatalogInput) {
     const coreEntryIds = path?.coreEntryIds ?? [];
     const entries = coreEntryIds.flatMap((id) => availableById.get(id) ? [availableById.get(id)!] : []);
     const studios = entries.filter((entry) => entry.kind === 'chapter-studio');
+    const detailed = coverage.getChapterCoverageSummary(chapter.id);
     summariesById.set(chapter.id, {
       chapterId: chapter.id, milestoneId: path?.milestoneId, title: chapter.title,
       purpose: studios[0]?.purpose, capability: studios[0]?.capability,
@@ -188,6 +199,9 @@ export function createLearningCatalog(input: CatalogInput) {
       studioCount: studios.length, deepLessonCount: entries.length - studios.length,
       questionCount: studios.reduce((total, studio) => total + studio.chapterCheckQuestionIds.length, 0),
       sourceSectionCount: sectionCounts.get(chapter.id) ?? 0, exerciseCount: exerciseCounts.get(chapter.id) ?? 0,
+      authoredSectionCount: detailed.authoredSectionCount, authoredExerciseCount: detailed.authoredExerciseCount,
+      classifiedNonSubstantiveCount: detailed.classifiedNonSubstantiveCount,
+      unclassifiedSectionCount: detailed.unclassifiedSectionCount, remainingExerciseCount: detailed.remainingExerciseCount,
       availability: entries.length === 0 ? 'indexed' : entries.length === coreEntryIds.length ? 'available' : 'partial',
       issues: issues.filter((issue) => issue.chapterId === chapter.id || (issue.entryId !== undefined && coreEntryIds.includes(issue.entryId))),
     });
@@ -200,6 +214,8 @@ export function createLearningCatalog(input: CatalogInput) {
       return summary ? { ...summary, coreEntryIds: [...summary.coreEntryIds], availableEntryIds: [...summary.availableEntryIds], issues: summary.issues.map((issue) => ({ ...issue })) }
         : { chapterId, milestoneId: undefined, title: chapterId, coreEntryIds: [], availableEntryIds: [], studioCount: 0,
           deepLessonCount: 0, questionCount: 0, sourceSectionCount: 0, exerciseCount: 0, availability: 'indexed',
+          authoredSectionCount: 0, authoredExerciseCount: 0, classifiedNonSubstantiveCount: 0,
+          unclassifiedSectionCount: 0, remainingExerciseCount: 0,
           issues: [{ code: 'UNKNOWN_CHAPTER_ID', chapterId, message: `Unknown chapter ${chapterId}.` }] };
     },
   };

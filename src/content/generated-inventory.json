@@ -15908,9 +15908,54 @@
       }
     },
     {
+      "id": "2.3.13.exercise.10",
+      "title": "Exercise 10",
+      "order": 21,
+      "sectionId": "2.3.13",
+      "sourceExerciseNumber": 10,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.3.13",
+        "printedStart": "54",
+        "pdfPageStart": 94,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.3.13.exercise.11",
+      "title": "Exercise 11",
+      "order": 22,
+      "sectionId": "2.3.13",
+      "sourceExerciseNumber": 11,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.3.13",
+        "printedStart": "54",
+        "pdfPageStart": 94,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.3.13.exercise.12",
+      "title": "Exercise 12",
+      "order": 23,
+      "sectionId": "2.3.13",
+      "sourceExerciseNumber": 12,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.3.13",
+        "printedStart": "54",
+        "pdfPageStart": 94,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "2.4.6.exercise.1",
       "title": "Exercise 1",
-      "order": 21,
+      "order": 24,
       "sectionId": "2.4.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -15923,9 +15968,144 @@
       }
     },
     {
+      "id": "2.4.6.exercise.2",
+      "title": "Exercise 2",
+      "order": 25,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.3",
+      "title": "Exercise 3",
+      "order": 26,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.4",
+      "title": "Exercise 4",
+      "order": 27,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.5",
+      "title": "Exercise 5",
+      "order": 28,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.6",
+      "title": "Exercise 6",
+      "order": 29,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.7",
+      "title": "Exercise 7",
+      "order": 30,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.8",
+      "title": "Exercise 8",
+      "order": 31,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 8,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.9",
+      "title": "Exercise 9",
+      "order": 32,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 9,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "2.4.6.exercise.10",
+      "title": "Exercise 10",
+      "order": 33,
+      "sectionId": "2.4.6",
+      "sourceExerciseNumber": 10,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "2.4.6",
+        "printedStart": "60",
+        "pdfPageStart": 100,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "2.5.6.exercise.1",
       "title": "Exercise 1",
-      "order": 22,
+      "order": 34,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -15940,7 +16120,7 @@
     {
       "id": "2.5.6.exercise.2",
       "title": "Exercise 2",
-      "order": 23,
+      "order": 35,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -15955,7 +16135,7 @@
     {
       "id": "2.5.6.exercise.3",
       "title": "Exercise 3",
-      "order": 24,
+      "order": 36,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -15970,7 +16150,7 @@
     {
       "id": "2.5.6.exercise.4",
       "title": "Exercise 4",
-      "order": 25,
+      "order": 37,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -15985,7 +16165,7 @@
     {
       "id": "2.5.6.exercise.5",
       "title": "Exercise 5",
-      "order": 26,
+      "order": 38,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16000,7 +16180,7 @@
     {
       "id": "2.5.6.exercise.6",
       "title": "Exercise 6",
-      "order": 27,
+      "order": 39,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -16015,7 +16195,7 @@
     {
       "id": "2.5.6.exercise.7",
       "title": "Exercise 7",
-      "order": 28,
+      "order": 40,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -16030,7 +16210,7 @@
     {
       "id": "2.5.6.exercise.8",
       "title": "Exercise 8",
-      "order": 29,
+      "order": 41,
       "sectionId": "2.5.6",
       "sourceExerciseNumber": 8,
       "contentStatus": "unconverted",
@@ -16045,7 +16225,7 @@
     {
       "id": "2.6.8.exercise.1",
       "title": "Exercise 1",
-      "order": 30,
+      "order": 42,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16060,7 +16240,7 @@
     {
       "id": "2.6.8.exercise.2",
       "title": "Exercise 2",
-      "order": 31,
+      "order": 43,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16075,7 +16255,7 @@
     {
       "id": "2.6.8.exercise.3",
       "title": "Exercise 3",
-      "order": 32,
+      "order": 44,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16090,7 +16270,7 @@
     {
       "id": "2.6.8.exercise.4",
       "title": "Exercise 4",
-      "order": 33,
+      "order": 45,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16105,7 +16285,7 @@
     {
       "id": "2.6.8.exercise.5",
       "title": "Exercise 5",
-      "order": 34,
+      "order": 46,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16120,7 +16300,7 @@
     {
       "id": "2.6.8.exercise.6",
       "title": "Exercise 6",
-      "order": 35,
+      "order": 47,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -16135,7 +16315,7 @@
     {
       "id": "2.6.8.exercise.7",
       "title": "Exercise 7",
-      "order": 36,
+      "order": 48,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -16150,7 +16330,7 @@
     {
       "id": "2.6.8.exercise.8",
       "title": "Exercise 8",
-      "order": 37,
+      "order": 49,
       "sectionId": "2.6.8",
       "sourceExerciseNumber": 8,
       "contentStatus": "unconverted",
@@ -16165,7 +16345,7 @@
     {
       "id": "3.1.6.exercise.1",
       "title": "Exercise 1",
-      "order": 38,
+      "order": 50,
       "sectionId": "3.1.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16180,7 +16360,7 @@
     {
       "id": "3.1.6.exercise.2",
       "title": "Exercise 2",
-      "order": 39,
+      "order": 51,
       "sectionId": "3.1.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16195,7 +16375,7 @@
     {
       "id": "3.1.6.exercise.3",
       "title": "Exercise 3",
-      "order": 40,
+      "order": 52,
       "sectionId": "3.1.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16210,7 +16390,7 @@
     {
       "id": "3.1.6.exercise.4",
       "title": "Exercise 4",
-      "order": 41,
+      "order": 53,
       "sectionId": "3.1.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16225,7 +16405,7 @@
     {
       "id": "3.1.6.exercise.5",
       "title": "Exercise 5",
-      "order": 42,
+      "order": 54,
       "sectionId": "3.1.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16238,9 +16418,54 @@
       }
     },
     {
+      "id": "3.1.6.exercise.6",
+      "title": "Exercise 6",
+      "order": 55,
+      "sectionId": "3.1.6",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.1.6",
+        "printedStart": "93",
+        "pdfPageStart": 133,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "3.1.6.exercise.7",
+      "title": "Exercise 7",
+      "order": 56,
+      "sectionId": "3.1.6",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.1.6",
+        "printedStart": "93",
+        "pdfPageStart": 133,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "3.1.6.exercise.8",
+      "title": "Exercise 8",
+      "order": 57,
+      "sectionId": "3.1.6",
+      "sourceExerciseNumber": 8,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.1.6",
+        "printedStart": "93",
+        "pdfPageStart": 133,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "3.2.6.exercise.1",
       "title": "Exercise 1",
-      "order": 43,
+      "order": 58,
       "sectionId": "3.2.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16255,7 +16480,7 @@
     {
       "id": "3.2.6.exercise.2",
       "title": "Exercise 2",
-      "order": 44,
+      "order": 59,
       "sectionId": "3.2.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16268,9 +16493,69 @@
       }
     },
     {
+      "id": "3.3.5.exercise.1",
+      "title": "Exercise 1",
+      "order": 60,
+      "sectionId": "3.3.5",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.3.5",
+        "printedStart": "103",
+        "pdfPageStart": 143,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "3.3.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 61,
+      "sectionId": "3.3.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.3.5",
+        "printedStart": "103",
+        "pdfPageStart": 143,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "3.3.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 62,
+      "sectionId": "3.3.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.3.5",
+        "printedStart": "103",
+        "pdfPageStart": 143,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "3.3.5.exercise.4",
+      "title": "Exercise 4",
+      "order": 63,
+      "sectionId": "3.3.5",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.3.5",
+        "printedStart": "103",
+        "pdfPageStart": 143,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "3.4.6.exercise.1",
       "title": "Exercise 1",
-      "order": 45,
+      "order": 64,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16285,7 +16570,7 @@
     {
       "id": "3.4.6.exercise.2",
       "title": "Exercise 2",
-      "order": 46,
+      "order": 65,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16300,7 +16585,7 @@
     {
       "id": "3.4.6.exercise.3",
       "title": "Exercise 3",
-      "order": 47,
+      "order": 66,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16315,7 +16600,7 @@
     {
       "id": "3.4.6.exercise.4",
       "title": "Exercise 4",
-      "order": 48,
+      "order": 67,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16330,7 +16615,7 @@
     {
       "id": "3.4.6.exercise.5",
       "title": "Exercise 5",
-      "order": 49,
+      "order": 68,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16345,7 +16630,7 @@
     {
       "id": "3.4.6.exercise.6",
       "title": "Exercise 6",
-      "order": 50,
+      "order": 69,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -16360,7 +16645,7 @@
     {
       "id": "3.4.6.exercise.7",
       "title": "Exercise 7",
-      "order": 51,
+      "order": 70,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -16375,7 +16660,7 @@
     {
       "id": "3.4.6.exercise.8",
       "title": "Exercise 8",
-      "order": 52,
+      "order": 71,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 8,
       "contentStatus": "unconverted",
@@ -16390,7 +16675,7 @@
     {
       "id": "3.4.6.exercise.9",
       "title": "Exercise 9",
-      "order": 53,
+      "order": 72,
       "sectionId": "3.4.6",
       "sourceExerciseNumber": 9,
       "contentStatus": "unconverted",
@@ -16405,7 +16690,7 @@
     {
       "id": "3.5.6.exercise.1",
       "title": "Exercise 1",
-      "order": 54,
+      "order": 73,
       "sectionId": "3.5.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16420,7 +16705,7 @@
     {
       "id": "3.5.6.exercise.2",
       "title": "Exercise 2",
-      "order": 55,
+      "order": 74,
       "sectionId": "3.5.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16435,7 +16720,7 @@
     {
       "id": "3.5.6.exercise.3",
       "title": "Exercise 3",
-      "order": 56,
+      "order": 75,
       "sectionId": "3.5.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16450,7 +16735,7 @@
     {
       "id": "3.5.6.exercise.4",
       "title": "Exercise 4",
-      "order": 57,
+      "order": 76,
       "sectionId": "3.5.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16465,7 +16750,7 @@
     {
       "id": "3.5.6.exercise.5",
       "title": "Exercise 5",
-      "order": 58,
+      "order": 77,
       "sectionId": "3.5.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16480,7 +16765,7 @@
     {
       "id": "3.6.5.exercise.1",
       "title": "Exercise 1",
-      "order": 59,
+      "order": 78,
       "sectionId": "3.6.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16495,7 +16780,7 @@
     {
       "id": "3.6.5.exercise.2",
       "title": "Exercise 2",
-      "order": 60,
+      "order": 79,
       "sectionId": "3.6.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16510,7 +16795,7 @@
     {
       "id": "3.6.5.exercise.3",
       "title": "Exercise 3",
-      "order": 61,
+      "order": 80,
       "sectionId": "3.6.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16525,7 +16810,7 @@
     {
       "id": "3.6.5.exercise.4",
       "title": "Exercise 4",
-      "order": 62,
+      "order": 81,
       "sectionId": "3.6.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16540,7 +16825,7 @@
     {
       "id": "3.6.5.exercise.5",
       "title": "Exercise 5",
-      "order": 63,
+      "order": 82,
       "sectionId": "3.6.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16555,7 +16840,7 @@
     {
       "id": "3.6.5.exercise.6",
       "title": "Exercise 6",
-      "order": 64,
+      "order": 83,
       "sectionId": "3.6.5",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -16570,7 +16855,7 @@
     {
       "id": "3.6.5.exercise.7",
       "title": "Exercise 7",
-      "order": 65,
+      "order": 84,
       "sectionId": "3.6.5",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -16585,7 +16870,7 @@
     {
       "id": "3.7.6.exercise.1",
       "title": "Exercise 1",
-      "order": 66,
+      "order": 85,
       "sectionId": "3.7.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16600,7 +16885,7 @@
     {
       "id": "3.7.6.exercise.2",
       "title": "Exercise 2",
-      "order": 67,
+      "order": 86,
       "sectionId": "3.7.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16615,7 +16900,7 @@
     {
       "id": "3.7.6.exercise.3",
       "title": "Exercise 3",
-      "order": 68,
+      "order": 87,
       "sectionId": "3.7.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16630,7 +16915,7 @@
     {
       "id": "3.7.6.exercise.4",
       "title": "Exercise 4",
-      "order": 69,
+      "order": 88,
       "sectionId": "3.7.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16643,9 +16928,39 @@
       }
     },
     {
+      "id": "3.7.6.exercise.5",
+      "title": "Exercise 5",
+      "order": 89,
+      "sectionId": "3.7.6",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.7.6",
+        "printedStart": "126",
+        "pdfPageStart": 166,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "3.7.6.exercise.6",
+      "title": "Exercise 6",
+      "order": 90,
+      "sectionId": "3.7.6",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "3.7.6",
+        "printedStart": "126",
+        "pdfPageStart": 166,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "4.1.5.exercise.1",
       "title": "Exercise 1",
-      "order": 70,
+      "order": 91,
       "sectionId": "4.1.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16660,7 +16975,7 @@
     {
       "id": "4.1.5.exercise.2",
       "title": "Exercise 2",
-      "order": 71,
+      "order": 92,
       "sectionId": "4.1.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16673,9 +16988,84 @@
       }
     },
     {
+      "id": "4.1.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 93,
+      "sectionId": "4.1.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.1.5",
+        "printedStart": "135",
+        "pdfPageStart": 175,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "4.1.5.exercise.4",
+      "title": "Exercise 4",
+      "order": 94,
+      "sectionId": "4.1.5",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.1.5",
+        "printedStart": "135",
+        "pdfPageStart": 175,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "4.1.5.exercise.5",
+      "title": "Exercise 5",
+      "order": 95,
+      "sectionId": "4.1.5",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.1.5",
+        "printedStart": "135",
+        "pdfPageStart": 175,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "4.1.5.exercise.6",
+      "title": "Exercise 6",
+      "order": 96,
+      "sectionId": "4.1.5",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.1.5",
+        "printedStart": "135",
+        "pdfPageStart": 175,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "4.1.5.exercise.7",
+      "title": "Exercise 7",
+      "order": 97,
+      "sectionId": "4.1.5",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.1.5",
+        "printedStart": "135",
+        "pdfPageStart": 175,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "4.2.5.exercise.1",
       "title": "Exercise 1",
-      "order": 72,
+      "order": 98,
       "sectionId": "4.2.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16688,9 +17078,39 @@
       }
     },
     {
+      "id": "4.2.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 99,
+      "sectionId": "4.2.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.2.5",
+        "printedStart": "140",
+        "pdfPageStart": 180,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "4.2.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 100,
+      "sectionId": "4.2.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.2.5",
+        "printedStart": "140",
+        "pdfPageStart": 180,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "4.3.4.exercise.1",
       "title": "Exercise 1",
-      "order": 73,
+      "order": 101,
       "sectionId": "4.3.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16705,7 +17125,7 @@
     {
       "id": "4.3.4.exercise.2",
       "title": "Exercise 2",
-      "order": 74,
+      "order": 102,
       "sectionId": "4.3.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16718,9 +17138,24 @@
       }
     },
     {
+      "id": "4.3.4.exercise.3",
+      "title": "Exercise 3",
+      "order": 103,
+      "sectionId": "4.3.4",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.3.4",
+        "printedStart": "142",
+        "pdfPageStart": 182,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "4.4.7.exercise.1",
       "title": "Exercise 1",
-      "order": 75,
+      "order": 104,
       "sectionId": "4.4.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16735,7 +17170,7 @@
     {
       "id": "4.4.7.exercise.2",
       "title": "Exercise 2",
-      "order": 76,
+      "order": 105,
       "sectionId": "4.4.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16750,7 +17185,7 @@
     {
       "id": "4.4.7.exercise.3",
       "title": "Exercise 3",
-      "order": 77,
+      "order": 106,
       "sectionId": "4.4.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16765,7 +17200,7 @@
     {
       "id": "4.4.7.exercise.4",
       "title": "Exercise 4",
-      "order": 78,
+      "order": 107,
       "sectionId": "4.4.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16780,7 +17215,7 @@
     {
       "id": "4.4.7.exercise.5",
       "title": "Exercise 5",
-      "order": 79,
+      "order": 108,
       "sectionId": "4.4.7",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16795,7 +17230,7 @@
     {
       "id": "4.5.5.exercise.1",
       "title": "Exercise 1",
-      "order": 80,
+      "order": 109,
       "sectionId": "4.5.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16810,7 +17245,7 @@
     {
       "id": "4.5.5.exercise.2",
       "title": "Exercise 2",
-      "order": 81,
+      "order": 110,
       "sectionId": "4.5.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16823,9 +17258,39 @@
       }
     },
     {
+      "id": "4.5.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 111,
+      "sectionId": "4.5.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.5.5",
+        "printedStart": "150",
+        "pdfPageStart": 190,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "4.5.5.exercise.4",
+      "title": "Exercise 4",
+      "order": 112,
+      "sectionId": "4.5.5",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.5.5",
+        "printedStart": "150",
+        "pdfPageStart": 190,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "4.6.5.exercise.1",
       "title": "Exercise 1",
-      "order": 82,
+      "order": 113,
       "sectionId": "4.6.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16840,7 +17305,7 @@
     {
       "id": "4.6.5.exercise.2",
       "title": "Exercise 2",
-      "order": 83,
+      "order": 114,
       "sectionId": "4.6.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16855,7 +17320,7 @@
     {
       "id": "4.6.5.exercise.3",
       "title": "Exercise 3",
-      "order": 84,
+      "order": 115,
       "sectionId": "4.6.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16870,7 +17335,7 @@
     {
       "id": "4.6.5.exercise.4",
       "title": "Exercise 4",
-      "order": 85,
+      "order": 116,
       "sectionId": "4.6.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16885,7 +17350,7 @@
     {
       "id": "4.7.7.exercise.1",
       "title": "Exercise 1",
-      "order": 86,
+      "order": 117,
       "sectionId": "4.7.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16900,7 +17365,7 @@
     {
       "id": "4.7.7.exercise.2",
       "title": "Exercise 2",
-      "order": 87,
+      "order": 118,
       "sectionId": "4.7.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16913,9 +17378,39 @@
       }
     },
     {
+      "id": "4.7.7.exercise.3",
+      "title": "Exercise 3",
+      "order": 119,
+      "sectionId": "4.7.7",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.7.7",
+        "printedStart": "169",
+        "pdfPageStart": 209,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "4.7.7.exercise.4",
+      "title": "Exercise 4",
+      "order": 120,
+      "sectionId": "4.7.7",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "4.7.7",
+        "printedStart": "169",
+        "pdfPageStart": 209,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "5.1.4.exercise.1",
       "title": "Exercise 1",
-      "order": 88,
+      "order": 121,
       "sectionId": "5.1.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -16930,7 +17425,7 @@
     {
       "id": "5.1.4.exercise.2",
       "title": "Exercise 2",
-      "order": 89,
+      "order": 122,
       "sectionId": "5.1.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -16945,7 +17440,7 @@
     {
       "id": "5.1.4.exercise.3",
       "title": "Exercise 3",
-      "order": 90,
+      "order": 123,
       "sectionId": "5.1.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -16960,7 +17455,7 @@
     {
       "id": "5.1.4.exercise.4",
       "title": "Exercise 4",
-      "order": 91,
+      "order": 124,
       "sectionId": "5.1.4",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -16975,7 +17470,7 @@
     {
       "id": "5.1.4.exercise.5",
       "title": "Exercise 5",
-      "order": 92,
+      "order": 125,
       "sectionId": "5.1.4",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -16990,7 +17485,7 @@
     {
       "id": "5.1.4.exercise.6",
       "title": "Exercise 6",
-      "order": 93,
+      "order": 126,
       "sectionId": "5.1.4",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -17005,7 +17500,7 @@
     {
       "id": "5.1.4.exercise.7",
       "title": "Exercise 7",
-      "order": 94,
+      "order": 127,
       "sectionId": "5.1.4",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -17020,7 +17515,7 @@
     {
       "id": "5.2.4.exercise.1",
       "title": "Exercise 1",
-      "order": 95,
+      "order": 128,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17035,7 +17530,7 @@
     {
       "id": "5.2.4.exercise.2",
       "title": "Exercise 2",
-      "order": 96,
+      "order": 129,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17050,7 +17545,7 @@
     {
       "id": "5.2.4.exercise.3",
       "title": "Exercise 3",
-      "order": 97,
+      "order": 130,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17065,7 +17560,7 @@
     {
       "id": "5.2.4.exercise.4",
       "title": "Exercise 4",
-      "order": 98,
+      "order": 131,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17080,7 +17575,7 @@
     {
       "id": "5.2.4.exercise.5",
       "title": "Exercise 5",
-      "order": 99,
+      "order": 132,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -17095,7 +17590,7 @@
     {
       "id": "5.2.4.exercise.6",
       "title": "Exercise 6",
-      "order": 100,
+      "order": 133,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -17110,7 +17605,7 @@
     {
       "id": "5.2.4.exercise.7",
       "title": "Exercise 7",
-      "order": 101,
+      "order": 134,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -17125,7 +17620,7 @@
     {
       "id": "5.2.4.exercise.8",
       "title": "Exercise 8",
-      "order": 102,
+      "order": 135,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 8,
       "contentStatus": "unconverted",
@@ -17140,7 +17635,7 @@
     {
       "id": "5.2.4.exercise.9",
       "title": "Exercise 9",
-      "order": 103,
+      "order": 136,
       "sectionId": "5.2.4",
       "sourceExerciseNumber": 9,
       "contentStatus": "unconverted",
@@ -17155,7 +17650,7 @@
     {
       "id": "5.3.6.exercise.1",
       "title": "Exercise 1",
-      "order": 104,
+      "order": 137,
       "sectionId": "5.3.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17170,7 +17665,7 @@
     {
       "id": "5.3.6.exercise.2",
       "title": "Exercise 2",
-      "order": 105,
+      "order": 138,
       "sectionId": "5.3.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17185,7 +17680,7 @@
     {
       "id": "5.3.6.exercise.3",
       "title": "Exercise 3",
-      "order": 106,
+      "order": 139,
       "sectionId": "5.3.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17200,7 +17695,7 @@
     {
       "id": "5.3.6.exercise.4",
       "title": "Exercise 4",
-      "order": 107,
+      "order": 140,
       "sectionId": "5.3.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17215,7 +17710,7 @@
     {
       "id": "5.3.6.exercise.5",
       "title": "Exercise 5",
-      "order": 108,
+      "order": 141,
       "sectionId": "5.3.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -17230,7 +17725,7 @@
     {
       "id": "5.4.4.exercise.1",
       "title": "Exercise 1",
-      "order": 109,
+      "order": 142,
       "sectionId": "5.4.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17245,7 +17740,7 @@
     {
       "id": "5.4.4.exercise.2",
       "title": "Exercise 2",
-      "order": 110,
+      "order": 143,
       "sectionId": "5.4.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17260,7 +17755,7 @@
     {
       "id": "5.4.4.exercise.3",
       "title": "Exercise 3",
-      "order": 111,
+      "order": 144,
       "sectionId": "5.4.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17275,7 +17770,7 @@
     {
       "id": "5.4.4.exercise.4",
       "title": "Exercise 4",
-      "order": 112,
+      "order": 145,
       "sectionId": "5.4.4",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17290,7 +17785,7 @@
     {
       "id": "5.5.6.exercise.1",
       "title": "Exercise 1",
-      "order": 113,
+      "order": 146,
       "sectionId": "5.5.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17305,7 +17800,7 @@
     {
       "id": "5.5.6.exercise.2",
       "title": "Exercise 2",
-      "order": 114,
+      "order": 147,
       "sectionId": "5.5.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17320,7 +17815,7 @@
     {
       "id": "5.5.6.exercise.3",
       "title": "Exercise 3",
-      "order": 115,
+      "order": 148,
       "sectionId": "5.5.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17335,7 +17830,7 @@
     {
       "id": "5.5.6.exercise.4",
       "title": "Exercise 4",
-      "order": 116,
+      "order": 149,
       "sectionId": "5.5.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17350,7 +17845,7 @@
     {
       "id": "5.5.6.exercise.5",
       "title": "Exercise 5",
-      "order": 117,
+      "order": 150,
       "sectionId": "5.5.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -17365,7 +17860,7 @@
     {
       "id": "5.6.5.exercise.1",
       "title": "Exercise 1",
-      "order": 118,
+      "order": 151,
       "sectionId": "5.6.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17380,7 +17875,7 @@
     {
       "id": "5.6.5.exercise.2",
       "title": "Exercise 2",
-      "order": 119,
+      "order": 152,
       "sectionId": "5.6.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17395,7 +17890,7 @@
     {
       "id": "5.6.5.exercise.3",
       "title": "Exercise 3",
-      "order": 120,
+      "order": 153,
       "sectionId": "5.6.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17410,7 +17905,7 @@
     {
       "id": "5.6.5.exercise.4",
       "title": "Exercise 4",
-      "order": 121,
+      "order": 154,
       "sectionId": "5.6.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17425,7 +17920,7 @@
     {
       "id": "5.6.5.exercise.5",
       "title": "Exercise 5",
-      "order": 122,
+      "order": 155,
       "sectionId": "5.6.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -17440,7 +17935,7 @@
     {
       "id": "5.6.5.exercise.6",
       "title": "Exercise 6",
-      "order": 123,
+      "order": 156,
       "sectionId": "5.6.5",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -17455,7 +17950,7 @@
     {
       "id": "5.6.5.exercise.7",
       "title": "Exercise 7",
-      "order": 124,
+      "order": 157,
       "sectionId": "5.6.5",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -17470,7 +17965,7 @@
     {
       "id": "5.7.10.exercise.1",
       "title": "Exercise 1",
-      "order": 125,
+      "order": 158,
       "sectionId": "5.7.10",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17485,7 +17980,7 @@
     {
       "id": "5.7.10.exercise.2",
       "title": "Exercise 2",
-      "order": 126,
+      "order": 159,
       "sectionId": "5.7.10",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17500,7 +17995,7 @@
     {
       "id": "5.7.10.exercise.3",
       "title": "Exercise 3",
-      "order": 127,
+      "order": 160,
       "sectionId": "5.7.10",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17515,7 +18010,7 @@
     {
       "id": "5.7.10.exercise.4",
       "title": "Exercise 4",
-      "order": 128,
+      "order": 161,
       "sectionId": "5.7.10",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17530,7 +18025,7 @@
     {
       "id": "5.7.10.exercise.5",
       "title": "Exercise 5",
-      "order": 129,
+      "order": 162,
       "sectionId": "5.7.10",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -17545,7 +18040,7 @@
     {
       "id": "6.1.5.exercise.1",
       "title": "Exercise 1",
-      "order": 130,
+      "order": 163,
       "sectionId": "6.1.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17560,7 +18055,7 @@
     {
       "id": "6.1.5.exercise.2",
       "title": "Exercise 2",
-      "order": 131,
+      "order": 164,
       "sectionId": "6.1.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17575,7 +18070,7 @@
     {
       "id": "6.1.5.exercise.3",
       "title": "Exercise 3",
-      "order": 132,
+      "order": 165,
       "sectionId": "6.1.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17588,9 +18083,54 @@
       }
     },
     {
+      "id": "6.2.4.exercise.1",
+      "title": "Exercise 1",
+      "order": 166,
+      "sectionId": "6.2.4",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "6.2.4",
+        "printedStart": "222",
+        "pdfPageStart": 262,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "6.2.4.exercise.2",
+      "title": "Exercise 2",
+      "order": 167,
+      "sectionId": "6.2.4",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "6.2.4",
+        "printedStart": "222",
+        "pdfPageStart": 262,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "6.2.4.exercise.3",
+      "title": "Exercise 3",
+      "order": 168,
+      "sectionId": "6.2.4",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "6.2.4",
+        "printedStart": "222",
+        "pdfPageStart": 262,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "6.4.2.exercise.1",
       "title": "Exercise 1",
-      "order": 133,
+      "order": 169,
       "sectionId": "6.4.2",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17605,7 +18145,7 @@
     {
       "id": "6.4.2.exercise.2",
       "title": "Exercise 2",
-      "order": 134,
+      "order": 170,
       "sectionId": "6.4.2",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17620,7 +18160,7 @@
     {
       "id": "6.4.2.exercise.3",
       "title": "Exercise 3",
-      "order": 135,
+      "order": 171,
       "sectionId": "6.4.2",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17635,7 +18175,7 @@
     {
       "id": "6.5.4.exercise.1",
       "title": "Exercise 1",
-      "order": 136,
+      "order": 172,
       "sectionId": "6.5.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17650,7 +18190,7 @@
     {
       "id": "6.5.4.exercise.2",
       "title": "Exercise 2",
-      "order": 137,
+      "order": 173,
       "sectionId": "6.5.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17665,7 +18205,7 @@
     {
       "id": "6.6.4.exercise.1",
       "title": "Exercise 1",
-      "order": 138,
+      "order": 174,
       "sectionId": "6.6.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17680,7 +18220,7 @@
     {
       "id": "6.6.4.exercise.2",
       "title": "Exercise 2",
-      "order": 139,
+      "order": 175,
       "sectionId": "6.6.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17695,7 +18235,7 @@
     {
       "id": "6.6.4.exercise.3",
       "title": "Exercise 3",
-      "order": 140,
+      "order": 176,
       "sectionId": "6.6.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17708,9 +18248,69 @@
       }
     },
     {
+      "id": "6.7.5.exercise.1",
+      "title": "Exercise 1",
+      "order": 177,
+      "sectionId": "6.7.5",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "6.7.5",
+        "printedStart": "238",
+        "pdfPageStart": 278,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "6.7.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 178,
+      "sectionId": "6.7.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "6.7.5",
+        "printedStart": "238",
+        "pdfPageStart": 278,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "6.7.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 179,
+      "sectionId": "6.7.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "6.7.5",
+        "printedStart": "238",
+        "pdfPageStart": 278,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "6.7.5.exercise.4",
+      "title": "Exercise 4",
+      "order": 180,
+      "sectionId": "6.7.5",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "6.7.5",
+        "printedStart": "238",
+        "pdfPageStart": 278,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "7.1.6.exercise.1",
       "title": "Exercise 1",
-      "order": 141,
+      "order": 181,
       "sectionId": "7.1.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17725,7 +18325,7 @@
     {
       "id": "7.1.6.exercise.2",
       "title": "Exercise 2",
-      "order": 142,
+      "order": 182,
       "sectionId": "7.1.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17740,7 +18340,7 @@
     {
       "id": "7.1.6.exercise.3",
       "title": "Exercise 3",
-      "order": 143,
+      "order": 183,
       "sectionId": "7.1.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17755,7 +18355,7 @@
     {
       "id": "7.1.6.exercise.4",
       "title": "Exercise 4",
-      "order": 144,
+      "order": 184,
       "sectionId": "7.1.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17770,7 +18370,7 @@
     {
       "id": "7.1.6.exercise.5",
       "title": "Exercise 5",
-      "order": 145,
+      "order": 185,
       "sectionId": "7.1.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -17785,7 +18385,7 @@
     {
       "id": "7.1.6.exercise.6",
       "title": "Exercise 6",
-      "order": 146,
+      "order": 186,
       "sectionId": "7.1.6",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -17800,7 +18400,7 @@
     {
       "id": "7.2.8.exercise.1",
       "title": "Exercise 1",
-      "order": 147,
+      "order": 187,
       "sectionId": "7.2.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17815,7 +18415,7 @@
     {
       "id": "7.2.8.exercise.2",
       "title": "Exercise 2",
-      "order": 148,
+      "order": 188,
       "sectionId": "7.2.8",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17830,7 +18430,7 @@
     {
       "id": "7.2.8.exercise.3",
       "title": "Exercise 3",
-      "order": 149,
+      "order": 189,
       "sectionId": "7.2.8",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17845,7 +18445,7 @@
     {
       "id": "7.2.8.exercise.4",
       "title": "Exercise 4",
-      "order": 150,
+      "order": 190,
       "sectionId": "7.2.8",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17860,7 +18460,7 @@
     {
       "id": "7.3.4.exercise.1",
       "title": "Exercise 1",
-      "order": 151,
+      "order": 191,
       "sectionId": "7.3.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17875,7 +18475,7 @@
     {
       "id": "7.3.4.exercise.2",
       "title": "Exercise 2",
-      "order": 152,
+      "order": 192,
       "sectionId": "7.3.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17890,7 +18490,7 @@
     {
       "id": "7.3.4.exercise.3",
       "title": "Exercise 3",
-      "order": 153,
+      "order": 193,
       "sectionId": "7.3.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17905,7 +18505,7 @@
     {
       "id": "7.3.4.exercise.4",
       "title": "Exercise 4",
-      "order": 154,
+      "order": 194,
       "sectionId": "7.3.4",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -17920,7 +18520,7 @@
     {
       "id": "7.3.4.exercise.5",
       "title": "Exercise 5",
-      "order": 155,
+      "order": 195,
       "sectionId": "7.3.4",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -17935,7 +18535,7 @@
     {
       "id": "7.3.4.exercise.6",
       "title": "Exercise 6",
-      "order": 156,
+      "order": 196,
       "sectionId": "7.3.4",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -17950,7 +18550,7 @@
     {
       "id": "7.4.5.exercise.1",
       "title": "Exercise 1",
-      "order": 157,
+      "order": 197,
       "sectionId": "7.4.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -17965,7 +18565,7 @@
     {
       "id": "7.4.5.exercise.2",
       "title": "Exercise 2",
-      "order": 158,
+      "order": 198,
       "sectionId": "7.4.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -17980,7 +18580,7 @@
     {
       "id": "7.4.5.exercise.3",
       "title": "Exercise 3",
-      "order": 159,
+      "order": 199,
       "sectionId": "7.4.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -17995,7 +18595,7 @@
     {
       "id": "7.4.5.exercise.4",
       "title": "Exercise 4",
-      "order": 160,
+      "order": 200,
       "sectionId": "7.4.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18010,7 +18610,7 @@
     {
       "id": "7.4.5.exercise.5",
       "title": "Exercise 5",
-      "order": 161,
+      "order": 201,
       "sectionId": "7.4.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -18025,7 +18625,7 @@
     {
       "id": "7.4.5.exercise.6",
       "title": "Exercise 6",
-      "order": 162,
+      "order": 202,
       "sectionId": "7.4.5",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -18040,7 +18640,7 @@
     {
       "id": "7.4.5.exercise.7",
       "title": "Exercise 7",
-      "order": 163,
+      "order": 203,
       "sectionId": "7.4.5",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -18055,7 +18655,7 @@
     {
       "id": "7.5.5.exercise.1",
       "title": "Exercise 1",
-      "order": 164,
+      "order": 204,
       "sectionId": "7.5.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18070,7 +18670,7 @@
     {
       "id": "7.5.5.exercise.2",
       "title": "Exercise 2",
-      "order": 165,
+      "order": 205,
       "sectionId": "7.5.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18085,7 +18685,7 @@
     {
       "id": "7.5.5.exercise.3",
       "title": "Exercise 3",
-      "order": 166,
+      "order": 206,
       "sectionId": "7.5.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18100,7 +18700,7 @@
     {
       "id": "7.5.5.exercise.4",
       "title": "Exercise 4",
-      "order": 167,
+      "order": 207,
       "sectionId": "7.5.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18115,7 +18715,7 @@
     {
       "id": "7.5.5.exercise.5",
       "title": "Exercise 5",
-      "order": 168,
+      "order": 208,
       "sectionId": "7.5.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -18128,9 +18728,39 @@
       }
     },
     {
+      "id": "7.5.5.exercise.6",
+      "title": "Exercise 6",
+      "order": 209,
+      "sectionId": "7.5.5",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "7.5.5",
+        "printedStart": "269",
+        "pdfPageStart": 309,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "7.5.5.exercise.7",
+      "title": "Exercise 7",
+      "order": 210,
+      "sectionId": "7.5.5",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "7.5.5",
+        "printedStart": "269",
+        "pdfPageStart": 309,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "7.6.4.exercise.1",
       "title": "Exercise 1",
-      "order": 169,
+      "order": 211,
       "sectionId": "7.6.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18145,7 +18775,7 @@
     {
       "id": "7.6.4.exercise.2",
       "title": "Exercise 2",
-      "order": 170,
+      "order": 212,
       "sectionId": "7.6.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18160,14 +18790,14 @@
     {
       "id": "7.6.4.exercise.3",
       "title": "Exercise 3",
-      "order": 171,
+      "order": 213,
       "sectionId": "7.6.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
       "source": {
         "sectionId": "7.6.4",
-        "printedStart": "273",
-        "pdfPageStart": 313,
+        "printedStart": "274",
+        "pdfPageStart": 314,
         "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
         "companionCreated": false
       }
@@ -18175,14 +18805,29 @@
     {
       "id": "7.6.4.exercise.4",
       "title": "Exercise 4",
-      "order": 172,
+      "order": 214,
       "sectionId": "7.6.4",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
       "source": {
         "sectionId": "7.6.4",
-        "printedStart": "273",
-        "pdfPageStart": 313,
+        "printedStart": "274",
+        "pdfPageStart": 314,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "7.6.4.exercise.5",
+      "title": "Exercise 5",
+      "order": 215,
+      "sectionId": "7.6.4",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "7.6.4",
+        "printedStart": "274",
+        "pdfPageStart": 314,
         "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
         "companionCreated": false
       }
@@ -18190,7 +18835,7 @@
     {
       "id": "8.1.5.exercise.1",
       "title": "Exercise 1",
-      "order": 173,
+      "order": 216,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18205,7 +18850,7 @@
     {
       "id": "8.1.5.exercise.2",
       "title": "Exercise 2",
-      "order": 174,
+      "order": 217,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18220,7 +18865,7 @@
     {
       "id": "8.1.5.exercise.3",
       "title": "Exercise 3",
-      "order": 175,
+      "order": 218,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18235,7 +18880,7 @@
     {
       "id": "8.1.5.exercise.4",
       "title": "Exercise 4",
-      "order": 176,
+      "order": 219,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18250,7 +18895,7 @@
     {
       "id": "8.1.5.exercise.5",
       "title": "Exercise 5",
-      "order": 177,
+      "order": 220,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -18265,7 +18910,7 @@
     {
       "id": "8.1.5.exercise.6",
       "title": "Exercise 6",
-      "order": 178,
+      "order": 221,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -18280,7 +18925,7 @@
     {
       "id": "8.1.5.exercise.7",
       "title": "Exercise 7",
-      "order": 179,
+      "order": 222,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -18295,7 +18940,7 @@
     {
       "id": "8.1.5.exercise.8",
       "title": "Exercise 8",
-      "order": 180,
+      "order": 223,
       "sectionId": "8.1.5",
       "sourceExerciseNumber": 8,
       "contentStatus": "unconverted",
@@ -18310,7 +18955,7 @@
     {
       "id": "8.2.5.exercise.1",
       "title": "Exercise 1",
-      "order": 181,
+      "order": 224,
       "sectionId": "8.2.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18325,7 +18970,7 @@
     {
       "id": "8.2.5.exercise.2",
       "title": "Exercise 2",
-      "order": 182,
+      "order": 225,
       "sectionId": "8.2.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18340,7 +18985,7 @@
     {
       "id": "8.2.5.exercise.3",
       "title": "Exercise 3",
-      "order": 183,
+      "order": 226,
       "sectionId": "8.2.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18355,7 +19000,7 @@
     {
       "id": "8.2.5.exercise.4",
       "title": "Exercise 4",
-      "order": 184,
+      "order": 227,
       "sectionId": "8.2.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18370,7 +19015,7 @@
     {
       "id": "8.3.5.exercise.1",
       "title": "Exercise 1",
-      "order": 185,
+      "order": 228,
       "sectionId": "8.3.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18385,7 +19030,7 @@
     {
       "id": "8.3.5.exercise.2",
       "title": "Exercise 2",
-      "order": 186,
+      "order": 229,
       "sectionId": "8.3.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18400,7 +19045,7 @@
     {
       "id": "8.3.5.exercise.3",
       "title": "Exercise 3",
-      "order": 187,
+      "order": 230,
       "sectionId": "8.3.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18415,7 +19060,7 @@
     {
       "id": "8.3.5.exercise.4",
       "title": "Exercise 4",
-      "order": 188,
+      "order": 231,
       "sectionId": "8.3.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18430,7 +19075,7 @@
     {
       "id": "8.3.5.exercise.5",
       "title": "Exercise 5",
-      "order": 189,
+      "order": 232,
       "sectionId": "8.3.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -18445,7 +19090,7 @@
     {
       "id": "8.3.5.exercise.6",
       "title": "Exercise 6",
-      "order": 190,
+      "order": 233,
       "sectionId": "8.3.5",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -18460,7 +19105,7 @@
     {
       "id": "8.4.5.exercise.1",
       "title": "Exercise 1",
-      "order": 191,
+      "order": 234,
       "sectionId": "8.4.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18475,7 +19120,7 @@
     {
       "id": "8.4.5.exercise.2",
       "title": "Exercise 2",
-      "order": 192,
+      "order": 235,
       "sectionId": "8.4.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18490,7 +19135,7 @@
     {
       "id": "8.4.5.exercise.3",
       "title": "Exercise 3",
-      "order": 193,
+      "order": 236,
       "sectionId": "8.4.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18505,7 +19150,7 @@
     {
       "id": "8.4.5.exercise.4",
       "title": "Exercise 4",
-      "order": 194,
+      "order": 237,
       "sectionId": "8.4.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18520,7 +19165,7 @@
     {
       "id": "8.4.5.exercise.5",
       "title": "Exercise 5",
-      "order": 195,
+      "order": 238,
       "sectionId": "8.4.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -18535,7 +19180,7 @@
     {
       "id": "8.5.7.exercise.1",
       "title": "Exercise 1",
-      "order": 196,
+      "order": 239,
       "sectionId": "8.5.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18550,7 +19195,7 @@
     {
       "id": "8.5.7.exercise.2",
       "title": "Exercise 2",
-      "order": 197,
+      "order": 240,
       "sectionId": "8.5.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18565,7 +19210,7 @@
     {
       "id": "8.5.7.exercise.3",
       "title": "Exercise 3",
-      "order": 198,
+      "order": 241,
       "sectionId": "8.5.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18580,7 +19225,7 @@
     {
       "id": "8.5.7.exercise.4",
       "title": "Exercise 4",
-      "order": 199,
+      "order": 242,
       "sectionId": "8.5.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18595,7 +19240,7 @@
     {
       "id": "8.5.7.exercise.5",
       "title": "Exercise 5",
-      "order": 200,
+      "order": 243,
       "sectionId": "8.5.7",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -18610,7 +19255,7 @@
     {
       "id": "8.5.7.exercise.6",
       "title": "Exercise 6",
-      "order": 201,
+      "order": 244,
       "sectionId": "8.5.7",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -18625,7 +19270,7 @@
     {
       "id": "8.5.7.exercise.7",
       "title": "Exercise 7",
-      "order": 202,
+      "order": 245,
       "sectionId": "8.5.7",
       "sourceExerciseNumber": 7,
       "contentStatus": "unconverted",
@@ -18640,7 +19285,7 @@
     {
       "id": "8.6.7.exercise.1",
       "title": "Exercise 1",
-      "order": 203,
+      "order": 246,
       "sectionId": "8.6.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18655,7 +19300,7 @@
     {
       "id": "8.6.7.exercise.2",
       "title": "Exercise 2",
-      "order": 204,
+      "order": 247,
       "sectionId": "8.6.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18670,7 +19315,7 @@
     {
       "id": "8.6.7.exercise.3",
       "title": "Exercise 3",
-      "order": 205,
+      "order": 248,
       "sectionId": "8.6.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18685,7 +19330,7 @@
     {
       "id": "8.6.7.exercise.4",
       "title": "Exercise 4",
-      "order": 206,
+      "order": 249,
       "sectionId": "8.6.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18698,9 +19343,24 @@
       }
     },
     {
+      "id": "8.6.7.exercise.5",
+      "title": "Exercise 5",
+      "order": 250,
+      "sectionId": "8.6.7",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "8.6.7",
+        "printedStart": "321",
+        "pdfPageStart": 361,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "8.7.7.exercise.1",
       "title": "Exercise 1",
-      "order": 207,
+      "order": 251,
       "sectionId": "8.7.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18715,7 +19375,7 @@
     {
       "id": "8.7.7.exercise.2",
       "title": "Exercise 2",
-      "order": 208,
+      "order": 252,
       "sectionId": "8.7.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18730,7 +19390,7 @@
     {
       "id": "8.7.7.exercise.3",
       "title": "Exercise 3",
-      "order": 209,
+      "order": 253,
       "sectionId": "8.7.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18743,9 +19403,39 @@
       }
     },
     {
+      "id": "8.7.7.exercise.4",
+      "title": "Exercise 4",
+      "order": 254,
+      "sectionId": "8.7.7",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "8.7.7",
+        "printedStart": "326",
+        "pdfPageStart": 366,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "8.7.7.exercise.5",
+      "title": "Exercise 5",
+      "order": 255,
+      "sectionId": "8.7.7",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "8.7.7",
+        "printedStart": "326",
+        "pdfPageStart": 366,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "8.8.6.exercise.1",
       "title": "Exercise 1",
-      "order": 210,
+      "order": 256,
       "sectionId": "8.8.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18760,7 +19450,7 @@
     {
       "id": "8.8.6.exercise.2",
       "title": "Exercise 2",
-      "order": 211,
+      "order": 257,
       "sectionId": "8.8.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18775,7 +19465,7 @@
     {
       "id": "8.8.6.exercise.3",
       "title": "Exercise 3",
-      "order": 212,
+      "order": 258,
       "sectionId": "8.8.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18790,7 +19480,7 @@
     {
       "id": "8.8.6.exercise.4",
       "title": "Exercise 4",
-      "order": 213,
+      "order": 259,
       "sectionId": "8.8.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18805,7 +19495,7 @@
     {
       "id": "9.1.6.exercise.1",
       "title": "Exercise 1",
-      "order": 214,
+      "order": 260,
       "sectionId": "9.1.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18820,7 +19510,7 @@
     {
       "id": "9.1.6.exercise.2",
       "title": "Exercise 2",
-      "order": 215,
+      "order": 261,
       "sectionId": "9.1.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18835,7 +19525,7 @@
     {
       "id": "9.1.6.exercise.3",
       "title": "Exercise 3",
-      "order": 216,
+      "order": 262,
       "sectionId": "9.1.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18850,7 +19540,7 @@
     {
       "id": "9.1.6.exercise.4",
       "title": "Exercise 4",
-      "order": 217,
+      "order": 263,
       "sectionId": "9.1.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18865,7 +19555,7 @@
     {
       "id": "9.2.7.exercise.1",
       "title": "Exercise 1",
-      "order": 218,
+      "order": 264,
       "sectionId": "9.2.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18880,7 +19570,7 @@
     {
       "id": "9.2.7.exercise.2",
       "title": "Exercise 2",
-      "order": 219,
+      "order": 265,
       "sectionId": "9.2.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18893,9 +19583,24 @@
       }
     },
     {
+      "id": "9.2.7.exercise.3",
+      "title": "Exercise 3",
+      "order": 266,
+      "sectionId": "9.2.7",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "9.2.7",
+        "printedStart": "352",
+        "pdfPageStart": 392,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "9.3.5.exercise.1",
       "title": "Exercise 1",
-      "order": 220,
+      "order": 267,
       "sectionId": "9.3.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18910,7 +19615,7 @@
     {
       "id": "9.3.5.exercise.2",
       "title": "Exercise 2",
-      "order": 221,
+      "order": 268,
       "sectionId": "9.3.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18925,7 +19630,7 @@
     {
       "id": "9.3.5.exercise.3",
       "title": "Exercise 3",
-      "order": 222,
+      "order": 269,
       "sectionId": "9.3.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -18940,7 +19645,7 @@
     {
       "id": "9.3.5.exercise.4",
       "title": "Exercise 4",
-      "order": 223,
+      "order": 270,
       "sectionId": "9.3.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -18953,9 +19658,24 @@
       }
     },
     {
+      "id": "9.3.5.exercise.5",
+      "title": "Exercise 5",
+      "order": 271,
+      "sectionId": "9.3.5",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "9.3.5",
+        "printedStart": "358",
+        "pdfPageStart": 398,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "9.4.5.exercise.1",
       "title": "Exercise 1",
-      "order": 224,
+      "order": 272,
       "sectionId": "9.4.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -18970,7 +19690,7 @@
     {
       "id": "9.4.5.exercise.2",
       "title": "Exercise 2",
-      "order": 225,
+      "order": 273,
       "sectionId": "9.4.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -18985,7 +19705,7 @@
     {
       "id": "9.4.5.exercise.3",
       "title": "Exercise 3",
-      "order": 226,
+      "order": 274,
       "sectionId": "9.4.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19000,7 +19720,7 @@
     {
       "id": "9.4.5.exercise.4",
       "title": "Exercise 4",
-      "order": 227,
+      "order": 275,
       "sectionId": "9.4.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19015,7 +19735,7 @@
     {
       "id": "9.5.7.exercise.1",
       "title": "Exercise 1",
-      "order": 228,
+      "order": 276,
       "sectionId": "9.5.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19030,7 +19750,7 @@
     {
       "id": "9.5.7.exercise.2",
       "title": "Exercise 2",
-      "order": 229,
+      "order": 277,
       "sectionId": "9.5.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19045,7 +19765,7 @@
     {
       "id": "9.5.7.exercise.3",
       "title": "Exercise 3",
-      "order": 230,
+      "order": 278,
       "sectionId": "9.5.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19060,7 +19780,7 @@
     {
       "id": "9.5.7.exercise.4",
       "title": "Exercise 4",
-      "order": 231,
+      "order": 279,
       "sectionId": "9.5.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19075,7 +19795,7 @@
     {
       "id": "9.5.7.exercise.5",
       "title": "Exercise 5",
-      "order": 232,
+      "order": 280,
       "sectionId": "9.5.7",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -19090,7 +19810,7 @@
     {
       "id": "9.5.7.exercise.6",
       "title": "Exercise 6",
-      "order": 233,
+      "order": 281,
       "sectionId": "9.5.7",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -19103,9 +19823,69 @@
       }
     },
     {
+      "id": "9.5.7.exercise.7",
+      "title": "Exercise 7",
+      "order": 282,
+      "sectionId": "9.5.7",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "9.5.7",
+        "printedStart": "370",
+        "pdfPageStart": 410,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "9.5.7.exercise.8",
+      "title": "Exercise 8",
+      "order": 283,
+      "sectionId": "9.5.7",
+      "sourceExerciseNumber": 8,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "9.5.7",
+        "printedStart": "370",
+        "pdfPageStart": 410,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "9.5.7.exercise.9",
+      "title": "Exercise 9",
+      "order": 284,
+      "sectionId": "9.5.7",
+      "sourceExerciseNumber": 9,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "9.5.7",
+        "printedStart": "370",
+        "pdfPageStart": 410,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "9.5.7.exercise.10",
+      "title": "Exercise 10",
+      "order": 285,
+      "sectionId": "9.5.7",
+      "sourceExerciseNumber": 10,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "9.5.7",
+        "printedStart": "370",
+        "pdfPageStart": 410,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "9.6.4.exercise.1",
       "title": "Exercise 1",
-      "order": 234,
+      "order": 286,
       "sectionId": "9.6.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19120,7 +19900,7 @@
     {
       "id": "9.6.4.exercise.2",
       "title": "Exercise 2",
-      "order": 235,
+      "order": 287,
       "sectionId": "9.6.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19135,7 +19915,7 @@
     {
       "id": "9.7.4.exercise.1",
       "title": "Exercise 1",
-      "order": 236,
+      "order": 288,
       "sectionId": "9.7.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19150,7 +19930,7 @@
     {
       "id": "9.7.4.exercise.2",
       "title": "Exercise 2",
-      "order": 237,
+      "order": 289,
       "sectionId": "9.7.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19165,7 +19945,7 @@
     {
       "id": "9.7.4.exercise.3",
       "title": "Exercise 3",
-      "order": 238,
+      "order": 290,
       "sectionId": "9.7.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19180,7 +19960,7 @@
     {
       "id": "9.7.4.exercise.4",
       "title": "Exercise 4",
-      "order": 239,
+      "order": 291,
       "sectionId": "9.7.4",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19195,7 +19975,7 @@
     {
       "id": "9.7.4.exercise.5",
       "title": "Exercise 5",
-      "order": 240,
+      "order": 292,
       "sectionId": "9.7.4",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -19208,9 +19988,84 @@
       }
     },
     {
+      "id": "10.1.5.exercise.1",
+      "title": "Exercise 1",
+      "order": 293,
+      "sectionId": "10.1.5",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.1.5",
+        "printedStart": "387",
+        "pdfPageStart": 427,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.1.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 294,
+      "sectionId": "10.1.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.1.5",
+        "printedStart": "387",
+        "pdfPageStart": 427,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.1.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 295,
+      "sectionId": "10.1.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.1.5",
+        "printedStart": "387",
+        "pdfPageStart": 427,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.1.5.exercise.4",
+      "title": "Exercise 4",
+      "order": 296,
+      "sectionId": "10.1.5",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.1.5",
+        "printedStart": "387",
+        "pdfPageStart": 427,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.1.5.exercise.5",
+      "title": "Exercise 5",
+      "order": 297,
+      "sectionId": "10.1.5",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.1.5",
+        "printedStart": "387",
+        "pdfPageStart": 427,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "10.2.7.exercise.1",
       "title": "Exercise 1",
-      "order": 241,
+      "order": 298,
       "sectionId": "10.2.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19225,7 +20080,7 @@
     {
       "id": "10.2.7.exercise.2",
       "title": "Exercise 2",
-      "order": 242,
+      "order": 299,
       "sectionId": "10.2.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19240,7 +20095,7 @@
     {
       "id": "10.2.7.exercise.3",
       "title": "Exercise 3",
-      "order": 243,
+      "order": 300,
       "sectionId": "10.2.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19255,7 +20110,7 @@
     {
       "id": "10.2.7.exercise.4",
       "title": "Exercise 4",
-      "order": 244,
+      "order": 301,
       "sectionId": "10.2.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19270,7 +20125,7 @@
     {
       "id": "10.3.4.exercise.1",
       "title": "Exercise 1",
-      "order": 245,
+      "order": 302,
       "sectionId": "10.3.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19285,7 +20140,7 @@
     {
       "id": "10.3.4.exercise.2",
       "title": "Exercise 2",
-      "order": 246,
+      "order": 303,
       "sectionId": "10.3.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19300,7 +20155,7 @@
     {
       "id": "10.3.4.exercise.3",
       "title": "Exercise 3",
-      "order": 247,
+      "order": 304,
       "sectionId": "10.3.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19315,7 +20170,7 @@
     {
       "id": "10.4.4.exercise.1",
       "title": "Exercise 1",
-      "order": 248,
+      "order": 305,
       "sectionId": "10.4.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19330,7 +20185,7 @@
     {
       "id": "10.4.4.exercise.2",
       "title": "Exercise 2",
-      "order": 249,
+      "order": 306,
       "sectionId": "10.4.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19345,7 +20200,7 @@
     {
       "id": "10.4.4.exercise.3",
       "title": "Exercise 3",
-      "order": 250,
+      "order": 307,
       "sectionId": "10.4.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19360,7 +20215,7 @@
     {
       "id": "10.5.6.exercise.1",
       "title": "Exercise 1",
-      "order": 251,
+      "order": 308,
       "sectionId": "10.5.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19375,7 +20230,7 @@
     {
       "id": "10.5.6.exercise.2",
       "title": "Exercise 2",
-      "order": 252,
+      "order": 309,
       "sectionId": "10.5.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19388,9 +20243,129 @@
       }
     },
     {
+      "id": "10.6.5.exercise.1",
+      "title": "Exercise 1",
+      "order": 310,
+      "sectionId": "10.6.5",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.6.5",
+        "printedStart": "408",
+        "pdfPageStart": 448,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.6.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 311,
+      "sectionId": "10.6.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.6.5",
+        "printedStart": "408",
+        "pdfPageStart": 448,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.7.10.exercise.1",
+      "title": "Exercise 1",
+      "order": 312,
+      "sectionId": "10.7.10",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.7.10",
+        "printedStart": "417",
+        "pdfPageStart": 457,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.7.10.exercise.2",
+      "title": "Exercise 2",
+      "order": 313,
+      "sectionId": "10.7.10",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.7.10",
+        "printedStart": "417",
+        "pdfPageStart": 457,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.7.10.exercise.3",
+      "title": "Exercise 3",
+      "order": 314,
+      "sectionId": "10.7.10",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.7.10",
+        "printedStart": "417",
+        "pdfPageStart": 457,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.7.10.exercise.4",
+      "title": "Exercise 4",
+      "order": 315,
+      "sectionId": "10.7.10",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.7.10",
+        "printedStart": "417",
+        "pdfPageStart": 457,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.7.10.exercise.5",
+      "title": "Exercise 5",
+      "order": 316,
+      "sectionId": "10.7.10",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.7.10",
+        "printedStart": "417",
+        "pdfPageStart": 457,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "10.7.10.exercise.6",
+      "title": "Exercise 6",
+      "order": 317,
+      "sectionId": "10.7.10",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "10.7.10",
+        "printedStart": "417",
+        "pdfPageStart": 457,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "10.8.5.exercise.1",
       "title": "Exercise 1",
-      "order": 253,
+      "order": 318,
       "sectionId": "10.8.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19405,7 +20380,7 @@
     {
       "id": "10.8.5.exercise.2",
       "title": "Exercise 2",
-      "order": 254,
+      "order": 319,
       "sectionId": "10.8.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19420,7 +20395,7 @@
     {
       "id": "10.8.5.exercise.3",
       "title": "Exercise 3",
-      "order": 255,
+      "order": 320,
       "sectionId": "10.8.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19435,7 +20410,7 @@
     {
       "id": "11.1.3.exercise.1",
       "title": "Exercise 1",
-      "order": 256,
+      "order": 321,
       "sectionId": "11.1.3",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19450,7 +20425,7 @@
     {
       "id": "11.1.3.exercise.2",
       "title": "Exercise 2",
-      "order": 257,
+      "order": 322,
       "sectionId": "11.1.3",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19465,7 +20440,7 @@
     {
       "id": "11.1.3.exercise.3",
       "title": "Exercise 3",
-      "order": 258,
+      "order": 323,
       "sectionId": "11.1.3",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19480,7 +20455,7 @@
     {
       "id": "11.1.3.exercise.4",
       "title": "Exercise 4",
-      "order": 259,
+      "order": 324,
       "sectionId": "11.1.3",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19495,7 +20470,7 @@
     {
       "id": "11.2.5.exercise.1",
       "title": "Exercise 1",
-      "order": 260,
+      "order": 325,
       "sectionId": "11.2.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19510,7 +20485,7 @@
     {
       "id": "11.2.5.exercise.2",
       "title": "Exercise 2",
-      "order": 261,
+      "order": 326,
       "sectionId": "11.2.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19525,7 +20500,7 @@
     {
       "id": "11.2.5.exercise.3",
       "title": "Exercise 3",
-      "order": 262,
+      "order": 327,
       "sectionId": "11.2.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19540,7 +20515,7 @@
     {
       "id": "11.2.5.exercise.4",
       "title": "Exercise 4",
-      "order": 263,
+      "order": 328,
       "sectionId": "11.2.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19553,9 +20528,54 @@
       }
     },
     {
+      "id": "11.3.6.exercise.1",
+      "title": "Exercise 1",
+      "order": 329,
+      "sectionId": "11.3.6",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.3.6",
+        "printedStart": "440",
+        "pdfPageStart": 480,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "11.3.6.exercise.2",
+      "title": "Exercise 2",
+      "order": 330,
+      "sectionId": "11.3.6",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.3.6",
+        "printedStart": "440",
+        "pdfPageStart": 480,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "11.3.6.exercise.3",
+      "title": "Exercise 3",
+      "order": 331,
+      "sectionId": "11.3.6",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.3.6",
+        "printedStart": "440",
+        "pdfPageStart": 480,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "11.4.5.exercise.1",
       "title": "Exercise 1",
-      "order": 264,
+      "order": 332,
       "sectionId": "11.4.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19570,7 +20590,7 @@
     {
       "id": "11.4.5.exercise.2",
       "title": "Exercise 2",
-      "order": 265,
+      "order": 333,
       "sectionId": "11.4.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19583,9 +20603,39 @@
       }
     },
     {
+      "id": "11.5.4.exercise.1",
+      "title": "Exercise 1",
+      "order": 334,
+      "sectionId": "11.5.4",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.5.4",
+        "printedStart": "449",
+        "pdfPageStart": 489,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "11.5.4.exercise.2",
+      "title": "Exercise 2",
+      "order": 335,
+      "sectionId": "11.5.4",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.5.4",
+        "printedStart": "449",
+        "pdfPageStart": 489,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "11.6.5.exercise.1",
       "title": "Exercise 1",
-      "order": 266,
+      "order": 336,
       "sectionId": "11.6.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19600,7 +20650,7 @@
     {
       "id": "11.6.5.exercise.2",
       "title": "Exercise 2",
-      "order": 267,
+      "order": 337,
       "sectionId": "11.6.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19615,7 +20665,7 @@
     {
       "id": "11.6.5.exercise.3",
       "title": "Exercise 3",
-      "order": 268,
+      "order": 338,
       "sectionId": "11.6.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19630,7 +20680,7 @@
     {
       "id": "11.7.8.exercise.1",
       "title": "Exercise 1",
-      "order": 269,
+      "order": 339,
       "sectionId": "11.7.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19645,7 +20695,7 @@
     {
       "id": "11.7.8.exercise.2",
       "title": "Exercise 2",
-      "order": 270,
+      "order": 340,
       "sectionId": "11.7.8",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19660,7 +20710,7 @@
     {
       "id": "11.7.8.exercise.3",
       "title": "Exercise 3",
-      "order": 271,
+      "order": 341,
       "sectionId": "11.7.8",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19675,7 +20725,7 @@
     {
       "id": "11.7.8.exercise.4",
       "title": "Exercise 4",
-      "order": 272,
+      "order": 342,
       "sectionId": "11.7.8",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19690,7 +20740,7 @@
     {
       "id": "11.7.8.exercise.5",
       "title": "Exercise 5",
-      "order": 273,
+      "order": 343,
       "sectionId": "11.7.8",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -19705,7 +20755,7 @@
     {
       "id": "11.8.7.exercise.1",
       "title": "Exercise 1",
-      "order": 274,
+      "order": 344,
       "sectionId": "11.8.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19720,7 +20770,7 @@
     {
       "id": "11.8.7.exercise.2",
       "title": "Exercise 2",
-      "order": 275,
+      "order": 345,
       "sectionId": "11.8.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19735,7 +20785,7 @@
     {
       "id": "11.8.7.exercise.3",
       "title": "Exercise 3",
-      "order": 276,
+      "order": 346,
       "sectionId": "11.8.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19748,9 +20798,69 @@
       }
     },
     {
+      "id": "11.9.7.exercise.1",
+      "title": "Exercise 1",
+      "order": 347,
+      "sectionId": "11.9.7",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.9.7",
+        "printedStart": "483",
+        "pdfPageStart": 523,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "11.9.7.exercise.2",
+      "title": "Exercise 2",
+      "order": 348,
+      "sectionId": "11.9.7",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.9.7",
+        "printedStart": "483",
+        "pdfPageStart": 523,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "11.9.7.exercise.3",
+      "title": "Exercise 3",
+      "order": 349,
+      "sectionId": "11.9.7",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.9.7",
+        "printedStart": "483",
+        "pdfPageStart": 523,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "11.9.7.exercise.4",
+      "title": "Exercise 4",
+      "order": 350,
+      "sectionId": "11.9.7",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "11.9.7",
+        "printedStart": "483",
+        "pdfPageStart": 523,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "12.1.4.exercise.1",
       "title": "Exercise 1",
-      "order": 277,
+      "order": 351,
       "sectionId": "12.1.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19765,7 +20875,7 @@
     {
       "id": "12.1.4.exercise.2",
       "title": "Exercise 2",
-      "order": 278,
+      "order": 352,
       "sectionId": "12.1.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19778,9 +20888,39 @@
       }
     },
     {
+      "id": "12.1.4.exercise.3",
+      "title": "Exercise 3",
+      "order": 353,
+      "sectionId": "12.1.4",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.1.4",
+        "printedStart": "490",
+        "pdfPageStart": 530,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.1.4.exercise.4",
+      "title": "Exercise 4",
+      "order": 354,
+      "sectionId": "12.1.4",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.1.4",
+        "printedStart": "490",
+        "pdfPageStart": 530,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "12.2.5.exercise.1",
       "title": "Exercise 1",
-      "order": 279,
+      "order": 355,
       "sectionId": "12.2.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19795,7 +20935,7 @@
     {
       "id": "12.2.5.exercise.2",
       "title": "Exercise 2",
-      "order": 280,
+      "order": 356,
       "sectionId": "12.2.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19810,7 +20950,7 @@
     {
       "id": "12.2.5.exercise.3",
       "title": "Exercise 3",
-      "order": 281,
+      "order": 357,
       "sectionId": "12.2.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19825,7 +20965,7 @@
     {
       "id": "12.2.5.exercise.4",
       "title": "Exercise 4",
-      "order": 282,
+      "order": 358,
       "sectionId": "12.2.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19838,9 +20978,69 @@
       }
     },
     {
+      "id": "12.2.5.exercise.5",
+      "title": "Exercise 5",
+      "order": 359,
+      "sectionId": "12.2.5",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.2.5",
+        "printedStart": "499",
+        "pdfPageStart": 539,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.2.5.exercise.6",
+      "title": "Exercise 6",
+      "order": 360,
+      "sectionId": "12.2.5",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.2.5",
+        "printedStart": "499",
+        "pdfPageStart": 539,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.2.5.exercise.7",
+      "title": "Exercise 7",
+      "order": 361,
+      "sectionId": "12.2.5",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.2.5",
+        "printedStart": "499",
+        "pdfPageStart": 539,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.2.5.exercise.8",
+      "title": "Exercise 8",
+      "order": 362,
+      "sectionId": "12.2.5",
+      "sourceExerciseNumber": 8,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.2.5",
+        "printedStart": "499",
+        "pdfPageStart": 539,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "12.3.5.exercise.1",
       "title": "Exercise 1",
-      "order": 283,
+      "order": 363,
       "sectionId": "12.3.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19855,7 +21055,7 @@
     {
       "id": "12.3.5.exercise.2",
       "title": "Exercise 2",
-      "order": 284,
+      "order": 364,
       "sectionId": "12.3.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19870,7 +21070,7 @@
     {
       "id": "12.3.5.exercise.3",
       "title": "Exercise 3",
-      "order": 285,
+      "order": 365,
       "sectionId": "12.3.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19885,7 +21085,7 @@
     {
       "id": "12.3.5.exercise.4",
       "title": "Exercise 4",
-      "order": 286,
+      "order": 366,
       "sectionId": "12.3.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19898,9 +21098,24 @@
       }
     },
     {
+      "id": "12.3.5.exercise.5",
+      "title": "Exercise 5",
+      "order": 367,
+      "sectionId": "12.3.5",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.3.5",
+        "printedStart": "510",
+        "pdfPageStart": 550,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "12.4.6.exercise.1",
       "title": "Exercise 1",
-      "order": 287,
+      "order": 368,
       "sectionId": "12.4.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19915,7 +21130,7 @@
     {
       "id": "12.4.6.exercise.2",
       "title": "Exercise 2",
-      "order": 288,
+      "order": 369,
       "sectionId": "12.4.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -19930,7 +21145,7 @@
     {
       "id": "12.4.6.exercise.3",
       "title": "Exercise 3",
-      "order": 289,
+      "order": 370,
       "sectionId": "12.4.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -19945,7 +21160,7 @@
     {
       "id": "12.4.6.exercise.4",
       "title": "Exercise 4",
-      "order": 290,
+      "order": 371,
       "sectionId": "12.4.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -19960,7 +21175,7 @@
     {
       "id": "12.4.6.exercise.5",
       "title": "Exercise 5",
-      "order": 291,
+      "order": 372,
       "sectionId": "12.4.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -19975,7 +21190,7 @@
     {
       "id": "12.5.7.exercise.1",
       "title": "Exercise 1",
-      "order": 292,
+      "order": 373,
       "sectionId": "12.5.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -19990,7 +21205,7 @@
     {
       "id": "12.5.7.exercise.2",
       "title": "Exercise 2",
-      "order": 293,
+      "order": 374,
       "sectionId": "12.5.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20005,7 +21220,7 @@
     {
       "id": "12.5.7.exercise.3",
       "title": "Exercise 3",
-      "order": 294,
+      "order": 375,
       "sectionId": "12.5.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20020,7 +21235,7 @@
     {
       "id": "12.5.7.exercise.4",
       "title": "Exercise 4",
-      "order": 295,
+      "order": 376,
       "sectionId": "12.5.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -20033,9 +21248,69 @@
       }
     },
     {
+      "id": "12.6.5.exercise.1",
+      "title": "Exercise 1",
+      "order": 377,
+      "sectionId": "12.6.5",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.6.5",
+        "printedStart": "538",
+        "pdfPageStart": 578,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.6.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 378,
+      "sectionId": "12.6.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.6.5",
+        "printedStart": "538",
+        "pdfPageStart": 578,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.6.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 379,
+      "sectionId": "12.6.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.6.5",
+        "printedStart": "538",
+        "pdfPageStart": 578,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.6.5.exercise.4",
+      "title": "Exercise 4",
+      "order": 380,
+      "sectionId": "12.6.5",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.6.5",
+        "printedStart": "538",
+        "pdfPageStart": 578,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "12.7.7.exercise.1",
       "title": "Exercise 1",
-      "order": 296,
+      "order": 381,
       "sectionId": "12.7.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20050,7 +21325,7 @@
     {
       "id": "12.7.7.exercise.2",
       "title": "Exercise 2",
-      "order": 297,
+      "order": 382,
       "sectionId": "12.7.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20065,7 +21340,7 @@
     {
       "id": "12.7.7.exercise.3",
       "title": "Exercise 3",
-      "order": 298,
+      "order": 383,
       "sectionId": "12.7.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20080,7 +21355,7 @@
     {
       "id": "12.7.7.exercise.4",
       "title": "Exercise 4",
-      "order": 299,
+      "order": 384,
       "sectionId": "12.7.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -20095,7 +21370,7 @@
     {
       "id": "12.7.7.exercise.5",
       "title": "Exercise 5",
-      "order": 300,
+      "order": 385,
       "sectionId": "12.7.7",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -20110,7 +21385,7 @@
     {
       "id": "12.7.7.exercise.6",
       "title": "Exercise 6",
-      "order": 301,
+      "order": 386,
       "sectionId": "12.7.7",
       "sourceExerciseNumber": 6,
       "contentStatus": "unconverted",
@@ -20125,7 +21400,7 @@
     {
       "id": "12.8.5.exercise.1",
       "title": "Exercise 1",
-      "order": 302,
+      "order": 387,
       "sectionId": "12.8.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20140,7 +21415,7 @@
     {
       "id": "12.8.5.exercise.2",
       "title": "Exercise 2",
-      "order": 303,
+      "order": 388,
       "sectionId": "12.8.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20155,7 +21430,7 @@
     {
       "id": "12.8.5.exercise.3",
       "title": "Exercise 3",
-      "order": 304,
+      "order": 389,
       "sectionId": "12.8.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20170,7 +21445,7 @@
     {
       "id": "12.8.5.exercise.4",
       "title": "Exercise 4",
-      "order": 305,
+      "order": 390,
       "sectionId": "12.8.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -20185,7 +21460,7 @@
     {
       "id": "12.9.4.exercise.1",
       "title": "Exercise 1",
-      "order": 306,
+      "order": 391,
       "sectionId": "12.9.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20198,9 +21473,54 @@
       }
     },
     {
+      "id": "12.9.4.exercise.2",
+      "title": "Exercise 2",
+      "order": 392,
+      "sectionId": "12.9.4",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.9.4",
+        "printedStart": "551",
+        "pdfPageStart": 591,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.9.4.exercise.3",
+      "title": "Exercise 3",
+      "order": 393,
+      "sectionId": "12.9.4",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.9.4",
+        "printedStart": "551",
+        "pdfPageStart": 591,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "12.9.4.exercise.4",
+      "title": "Exercise 4",
+      "order": 394,
+      "sectionId": "12.9.4",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "12.9.4",
+        "printedStart": "551",
+        "pdfPageStart": 591,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "12.10.5.exercise.1",
       "title": "Exercise 1",
-      "order": 307,
+      "order": 395,
       "sectionId": "12.10.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20215,7 +21535,7 @@
     {
       "id": "12.10.5.exercise.2",
       "title": "Exercise 2",
-      "order": 308,
+      "order": 396,
       "sectionId": "12.10.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20230,7 +21550,7 @@
     {
       "id": "12.10.5.exercise.3",
       "title": "Exercise 3",
-      "order": 309,
+      "order": 397,
       "sectionId": "12.10.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20245,7 +21565,7 @@
     {
       "id": "12.10.5.exercise.4",
       "title": "Exercise 4",
-      "order": 310,
+      "order": 398,
       "sectionId": "12.10.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -20260,7 +21580,7 @@
     {
       "id": "12.11.5.exercise.1",
       "title": "Exercise 1",
-      "order": 311,
+      "order": 399,
       "sectionId": "12.11.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20275,7 +21595,7 @@
     {
       "id": "12.11.5.exercise.2",
       "title": "Exercise 2",
-      "order": 312,
+      "order": 400,
       "sectionId": "12.11.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20290,7 +21610,7 @@
     {
       "id": "12.11.5.exercise.3",
       "title": "Exercise 3",
-      "order": 313,
+      "order": 401,
       "sectionId": "12.11.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20305,7 +21625,7 @@
     {
       "id": "12.11.5.exercise.4",
       "title": "Exercise 4",
-      "order": 314,
+      "order": 402,
       "sectionId": "12.11.5",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -20320,7 +21640,7 @@
     {
       "id": "12.11.5.exercise.5",
       "title": "Exercise 5",
-      "order": 315,
+      "order": 403,
       "sectionId": "12.11.5",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -20335,7 +21655,7 @@
     {
       "id": "13.1.5.exercise.1",
       "title": "Exercise 1",
-      "order": 316,
+      "order": 404,
       "sectionId": "13.1.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20350,7 +21670,7 @@
     {
       "id": "13.2.5.exercise.1",
       "title": "Exercise 1",
-      "order": 317,
+      "order": 405,
       "sectionId": "13.2.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20363,9 +21683,84 @@
       }
     },
     {
+      "id": "13.3.4.exercise.1",
+      "title": "Exercise 1",
+      "order": 406,
+      "sectionId": "13.3.4",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.3.4",
+        "printedStart": "579",
+        "pdfPageStart": 619,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.3.4.exercise.2",
+      "title": "Exercise 2",
+      "order": 407,
+      "sectionId": "13.3.4",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.3.4",
+        "printedStart": "579",
+        "pdfPageStart": 619,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.3.4.exercise.3",
+      "title": "Exercise 3",
+      "order": 408,
+      "sectionId": "13.3.4",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.3.4",
+        "printedStart": "579",
+        "pdfPageStart": 619,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.3.4.exercise.4",
+      "title": "Exercise 4",
+      "order": 409,
+      "sectionId": "13.3.4",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.3.4",
+        "printedStart": "579",
+        "pdfPageStart": 619,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.3.4.exercise.5",
+      "title": "Exercise 5",
+      "order": 410,
+      "sectionId": "13.3.4",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.3.4",
+        "printedStart": "579",
+        "pdfPageStart": 619,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "13.4.9.exercise.1",
       "title": "Exercise 1",
-      "order": 318,
+      "order": 411,
       "sectionId": "13.4.9",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20380,7 +21775,7 @@
     {
       "id": "13.4.9.exercise.2",
       "title": "Exercise 2",
-      "order": 319,
+      "order": 412,
       "sectionId": "13.4.9",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20393,9 +21788,174 @@
       }
     },
     {
+      "id": "13.4.9.exercise.3",
+      "title": "Exercise 3",
+      "order": 413,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.4",
+      "title": "Exercise 4",
+      "order": 414,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.5",
+      "title": "Exercise 5",
+      "order": 415,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.6",
+      "title": "Exercise 6",
+      "order": 416,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.7",
+      "title": "Exercise 7",
+      "order": 417,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.8",
+      "title": "Exercise 8",
+      "order": 418,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 8,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.9",
+      "title": "Exercise 9",
+      "order": 419,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 9,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.10",
+      "title": "Exercise 10",
+      "order": 420,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 10,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.11",
+      "title": "Exercise 11",
+      "order": 421,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 11,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.12",
+      "title": "Exercise 12",
+      "order": 422,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 12,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.4.9.exercise.13",
+      "title": "Exercise 13",
+      "order": 423,
+      "sectionId": "13.4.9",
+      "sourceExerciseNumber": 13,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.4.9",
+        "printedStart": "593",
+        "pdfPageStart": 633,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "13.5.8.exercise.1",
       "title": "Exercise 1",
-      "order": 320,
+      "order": 424,
       "sectionId": "13.5.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20410,7 +21970,7 @@
     {
       "id": "13.5.8.exercise.2",
       "title": "Exercise 2",
-      "order": 321,
+      "order": 425,
       "sectionId": "13.5.8",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20423,9 +21983,39 @@
       }
     },
     {
+      "id": "13.5.8.exercise.3",
+      "title": "Exercise 3",
+      "order": 426,
+      "sectionId": "13.5.8",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.5.8",
+        "printedStart": "602",
+        "pdfPageStart": 642,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "13.5.8.exercise.4",
+      "title": "Exercise 4",
+      "order": 427,
+      "sectionId": "13.5.8",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "13.5.8",
+        "printedStart": "602",
+        "pdfPageStart": 642,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "13.6.5.exercise.1",
       "title": "Exercise 1",
-      "order": 322,
+      "order": 428,
       "sectionId": "13.6.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20440,7 +22030,7 @@
     {
       "id": "13.6.5.exercise.2",
       "title": "Exercise 2",
-      "order": 323,
+      "order": 429,
       "sectionId": "13.6.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20455,7 +22045,7 @@
     {
       "id": "13.7.6.exercise.1",
       "title": "Exercise 1",
-      "order": 324,
+      "order": 430,
       "sectionId": "13.7.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20470,7 +22060,7 @@
     {
       "id": "13.7.6.exercise.2",
       "title": "Exercise 2",
-      "order": 325,
+      "order": 431,
       "sectionId": "13.7.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20485,7 +22075,7 @@
     {
       "id": "13.7.6.exercise.3",
       "title": "Exercise 3",
-      "order": 326,
+      "order": 432,
       "sectionId": "13.7.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20500,7 +22090,7 @@
     {
       "id": "14.1.4.exercise.1",
       "title": "Exercise 1",
-      "order": 327,
+      "order": 433,
       "sectionId": "14.1.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20515,7 +22105,7 @@
     {
       "id": "14.1.4.exercise.2",
       "title": "Exercise 2",
-      "order": 328,
+      "order": 434,
       "sectionId": "14.1.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20530,7 +22120,7 @@
     {
       "id": "14.1.4.exercise.3",
       "title": "Exercise 3",
-      "order": 329,
+      "order": 435,
       "sectionId": "14.1.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20545,7 +22135,7 @@
     {
       "id": "14.2.4.exercise.1",
       "title": "Exercise 1",
-      "order": 330,
+      "order": 436,
       "sectionId": "14.2.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20560,7 +22150,7 @@
     {
       "id": "14.2.4.exercise.2",
       "title": "Exercise 2",
-      "order": 331,
+      "order": 437,
       "sectionId": "14.2.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20575,7 +22165,7 @@
     {
       "id": "14.2.4.exercise.3",
       "title": "Exercise 3",
-      "order": 332,
+      "order": 438,
       "sectionId": "14.2.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20588,9 +22178,24 @@
       }
     },
     {
+      "id": "14.2.4.exercise.4",
+      "title": "Exercise 4",
+      "order": 439,
+      "sectionId": "14.2.4",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.2.4",
+        "printedStart": "629",
+        "pdfPageStart": 669,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "14.3.3.exercise.1",
       "title": "Exercise 1",
-      "order": 333,
+      "order": 440,
       "sectionId": "14.3.3",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20605,7 +22210,7 @@
     {
       "id": "14.3.3.exercise.2",
       "title": "Exercise 2",
-      "order": 334,
+      "order": 441,
       "sectionId": "14.3.3",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20620,7 +22225,7 @@
     {
       "id": "14.4.6.exercise.1",
       "title": "Exercise 1",
-      "order": 335,
+      "order": 442,
       "sectionId": "14.4.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20635,7 +22240,7 @@
     {
       "id": "14.4.6.exercise.2",
       "title": "Exercise 2",
-      "order": 336,
+      "order": 443,
       "sectionId": "14.4.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20650,7 +22255,7 @@
     {
       "id": "14.4.6.exercise.3",
       "title": "Exercise 3",
-      "order": 337,
+      "order": 444,
       "sectionId": "14.4.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20665,7 +22270,7 @@
     {
       "id": "14.4.6.exercise.4",
       "title": "Exercise 4",
-      "order": 338,
+      "order": 445,
       "sectionId": "14.4.6",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -20680,7 +22285,7 @@
     {
       "id": "14.4.6.exercise.5",
       "title": "Exercise 5",
-      "order": 339,
+      "order": 446,
       "sectionId": "14.4.6",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -20695,7 +22300,7 @@
     {
       "id": "14.5.4.exercise.1",
       "title": "Exercise 1",
-      "order": 340,
+      "order": 447,
       "sectionId": "14.5.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20710,7 +22315,7 @@
     {
       "id": "14.5.4.exercise.2",
       "title": "Exercise 2",
-      "order": 341,
+      "order": 448,
       "sectionId": "14.5.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20725,7 +22330,7 @@
     {
       "id": "14.5.4.exercise.3",
       "title": "Exercise 3",
-      "order": 342,
+      "order": 449,
       "sectionId": "14.5.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20740,7 +22345,7 @@
     {
       "id": "14.6.5.exercise.1",
       "title": "Exercise 1",
-      "order": 343,
+      "order": 450,
       "sectionId": "14.6.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20755,7 +22360,7 @@
     {
       "id": "14.6.5.exercise.2",
       "title": "Exercise 2",
-      "order": 344,
+      "order": 451,
       "sectionId": "14.6.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20770,7 +22375,7 @@
     {
       "id": "14.7.5.exercise.1",
       "title": "Exercise 1",
-      "order": 345,
+      "order": 452,
       "sectionId": "14.7.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20783,9 +22388,84 @@
       }
     },
     {
+      "id": "14.7.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 453,
+      "sectionId": "14.7.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.7.5",
+        "printedStart": "665",
+        "pdfPageStart": 705,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "14.7.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 454,
+      "sectionId": "14.7.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.7.5",
+        "printedStart": "666",
+        "pdfPageStart": 706,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "14.7.5.exercise.4",
+      "title": "Exercise 4",
+      "order": 455,
+      "sectionId": "14.7.5",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.7.5",
+        "printedStart": "666",
+        "pdfPageStart": 706,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "14.8.6.exercise.1",
+      "title": "Exercise 1",
+      "order": 456,
+      "sectionId": "14.8.6",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.8.6",
+        "printedStart": "672",
+        "pdfPageStart": 712,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "14.8.6.exercise.2",
+      "title": "Exercise 2",
+      "order": 457,
+      "sectionId": "14.8.6",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.8.6",
+        "printedStart": "672",
+        "pdfPageStart": 712,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "14.9.4.exercise.1",
       "title": "Exercise 1",
-      "order": 346,
+      "order": 458,
       "sectionId": "14.9.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20800,7 +22480,7 @@
     {
       "id": "14.9.4.exercise.2",
       "title": "Exercise 2",
-      "order": 347,
+      "order": 459,
       "sectionId": "14.9.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20815,7 +22495,7 @@
     {
       "id": "14.10.5.exercise.1",
       "title": "Exercise 1",
-      "order": 348,
+      "order": 460,
       "sectionId": "14.10.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20830,7 +22510,7 @@
     {
       "id": "14.10.5.exercise.2",
       "title": "Exercise 2",
-      "order": 349,
+      "order": 461,
       "sectionId": "14.10.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20845,7 +22525,7 @@
     {
       "id": "14.11.7.exercise.1",
       "title": "Exercise 1",
-      "order": 350,
+      "order": 462,
       "sectionId": "14.11.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20860,7 +22540,7 @@
     {
       "id": "14.11.7.exercise.2",
       "title": "Exercise 2",
-      "order": 351,
+      "order": 463,
       "sectionId": "14.11.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20875,7 +22555,7 @@
     {
       "id": "14.11.7.exercise.3",
       "title": "Exercise 3",
-      "order": 352,
+      "order": 464,
       "sectionId": "14.11.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -20890,7 +22570,7 @@
     {
       "id": "14.11.7.exercise.4",
       "title": "Exercise 4",
-      "order": 353,
+      "order": 465,
       "sectionId": "14.11.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -20903,9 +22583,69 @@
       }
     },
     {
+      "id": "14.12.9.exercise.1",
+      "title": "Exercise 1",
+      "order": 466,
+      "sectionId": "14.12.9",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.12.9",
+        "printedStart": "700",
+        "pdfPageStart": 740,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "14.12.9.exercise.2",
+      "title": "Exercise 2",
+      "order": 467,
+      "sectionId": "14.12.9",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.12.9",
+        "printedStart": "700",
+        "pdfPageStart": 740,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "14.12.9.exercise.3",
+      "title": "Exercise 3",
+      "order": 468,
+      "sectionId": "14.12.9",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.12.9",
+        "printedStart": "700",
+        "pdfPageStart": 740,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "14.12.9.exercise.4",
+      "title": "Exercise 4",
+      "order": 469,
+      "sectionId": "14.12.9",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "14.12.9",
+        "printedStart": "700",
+        "pdfPageStart": 740,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "14.13.9.exercise.1",
       "title": "Exercise 1",
-      "order": 354,
+      "order": 470,
       "sectionId": "14.13.9",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20920,7 +22660,7 @@
     {
       "id": "14.13.9.exercise.2",
       "title": "Exercise 2",
-      "order": 355,
+      "order": 471,
       "sectionId": "14.13.9",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20935,7 +22675,7 @@
     {
       "id": "14.14.9.exercise.1",
       "title": "Exercise 1",
-      "order": 356,
+      "order": 472,
       "sectionId": "14.14.9",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20950,7 +22690,7 @@
     {
       "id": "14.14.9.exercise.2",
       "title": "Exercise 2",
-      "order": 357,
+      "order": 473,
       "sectionId": "14.14.9",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20965,7 +22705,7 @@
     {
       "id": "15.1.6.exercise.1",
       "title": "Exercise 1",
-      "order": 358,
+      "order": 474,
       "sectionId": "15.1.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -20980,7 +22720,7 @@
     {
       "id": "15.1.6.exercise.2",
       "title": "Exercise 2",
-      "order": 359,
+      "order": 475,
       "sectionId": "15.1.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -20995,7 +22735,7 @@
     {
       "id": "15.1.6.exercise.3",
       "title": "Exercise 3",
-      "order": 360,
+      "order": 476,
       "sectionId": "15.1.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21010,7 +22750,7 @@
     {
       "id": "15.2.4.exercise.1",
       "title": "Exercise 1",
-      "order": 361,
+      "order": 477,
       "sectionId": "15.2.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21025,7 +22765,7 @@
     {
       "id": "15.2.4.exercise.2",
       "title": "Exercise 2",
-      "order": 362,
+      "order": 478,
       "sectionId": "15.2.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21040,7 +22780,7 @@
     {
       "id": "15.2.4.exercise.3",
       "title": "Exercise 3",
-      "order": 363,
+      "order": 479,
       "sectionId": "15.2.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21055,7 +22795,7 @@
     {
       "id": "15.3.8.exercise.1",
       "title": "Exercise 1",
-      "order": 364,
+      "order": 480,
       "sectionId": "15.3.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21070,7 +22810,7 @@
     {
       "id": "15.3.8.exercise.2",
       "title": "Exercise 2",
-      "order": 365,
+      "order": 481,
       "sectionId": "15.3.8",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21085,7 +22825,7 @@
     {
       "id": "15.3.8.exercise.3",
       "title": "Exercise 3",
-      "order": 366,
+      "order": 482,
       "sectionId": "15.3.8",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21100,7 +22840,7 @@
     {
       "id": "15.4.5.exercise.1",
       "title": "Exercise 1",
-      "order": 367,
+      "order": 483,
       "sectionId": "15.4.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21115,7 +22855,7 @@
     {
       "id": "15.4.5.exercise.2",
       "title": "Exercise 2",
-      "order": 368,
+      "order": 484,
       "sectionId": "15.4.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21130,7 +22870,7 @@
     {
       "id": "15.5.5.exercise.1",
       "title": "Exercise 1",
-      "order": 369,
+      "order": 485,
       "sectionId": "15.5.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21143,9 +22883,24 @@
       }
     },
     {
+      "id": "15.5.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 486,
+      "sectionId": "15.5.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "15.5.5",
+        "printedStart": "742",
+        "pdfPageStart": 782,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "15.6.4.exercise.1",
       "title": "Exercise 1",
-      "order": 370,
+      "order": 487,
       "sectionId": "15.6.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21160,7 +22915,7 @@
     {
       "id": "15.6.4.exercise.2",
       "title": "Exercise 2",
-      "order": 371,
+      "order": 488,
       "sectionId": "15.6.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21175,7 +22930,7 @@
     {
       "id": "15.6.4.exercise.3",
       "title": "Exercise 3",
-      "order": 372,
+      "order": 489,
       "sectionId": "15.6.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21188,9 +22943,24 @@
       }
     },
     {
+      "id": "15.6.4.exercise.4",
+      "title": "Exercise 4",
+      "order": 490,
+      "sectionId": "15.6.4",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "15.6.4",
+        "printedStart": "746",
+        "pdfPageStart": 786,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "15.7.4.exercise.1",
       "title": "Exercise 1",
-      "order": 373,
+      "order": 491,
       "sectionId": "15.7.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21205,7 +22975,7 @@
     {
       "id": "15.7.4.exercise.2",
       "title": "Exercise 2",
-      "order": 374,
+      "order": 492,
       "sectionId": "15.7.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21220,7 +22990,7 @@
     {
       "id": "15.8.8.exercise.1",
       "title": "Exercise 1",
-      "order": 375,
+      "order": 493,
       "sectionId": "15.8.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21235,7 +23005,7 @@
     {
       "id": "15.8.8.exercise.2",
       "title": "Exercise 2",
-      "order": 376,
+      "order": 494,
       "sectionId": "15.8.8",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21250,7 +23020,7 @@
     {
       "id": "15.9.4.exercise.1",
       "title": "Exercise 1",
-      "order": 377,
+      "order": 495,
       "sectionId": "15.9.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21265,7 +23035,7 @@
     {
       "id": "15.9.4.exercise.2",
       "title": "Exercise 2",
-      "order": 378,
+      "order": 496,
       "sectionId": "15.9.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21280,7 +23050,7 @@
     {
       "id": "15.10.4.exercise.1",
       "title": "Exercise 1",
-      "order": 379,
+      "order": 497,
       "sectionId": "15.10.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21295,7 +23065,7 @@
     {
       "id": "15.10.4.exercise.2",
       "title": "Exercise 2",
-      "order": 380,
+      "order": 498,
       "sectionId": "15.10.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21310,7 +23080,7 @@
     {
       "id": "16.1.6.exercise.1",
       "title": "Exercise 1",
-      "order": 381,
+      "order": 499,
       "sectionId": "16.1.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21325,7 +23095,7 @@
     {
       "id": "16.1.6.exercise.2",
       "title": "Exercise 2",
-      "order": 382,
+      "order": 500,
       "sectionId": "16.1.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21340,7 +23110,7 @@
     {
       "id": "16.2.5.exercise.1",
       "title": "Exercise 1",
-      "order": 383,
+      "order": 501,
       "sectionId": "16.2.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21355,7 +23125,7 @@
     {
       "id": "16.2.5.exercise.2",
       "title": "Exercise 2",
-      "order": 384,
+      "order": 502,
       "sectionId": "16.2.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21370,7 +23140,7 @@
     {
       "id": "16.2.5.exercise.3",
       "title": "Exercise 3",
-      "order": 385,
+      "order": 503,
       "sectionId": "16.2.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21385,7 +23155,7 @@
     {
       "id": "16.3.5.exercise.1",
       "title": "Exercise 1",
-      "order": 386,
+      "order": 504,
       "sectionId": "16.3.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21400,7 +23170,7 @@
     {
       "id": "16.3.5.exercise.2",
       "title": "Exercise 2",
-      "order": 387,
+      "order": 505,
       "sectionId": "16.3.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21415,7 +23185,7 @@
     {
       "id": "16.3.5.exercise.3",
       "title": "Exercise 3",
-      "order": 388,
+      "order": 506,
       "sectionId": "16.3.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21430,7 +23200,7 @@
     {
       "id": "16.4.4.exercise.1",
       "title": "Exercise 1",
-      "order": 389,
+      "order": 507,
       "sectionId": "16.4.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21445,7 +23215,7 @@
     {
       "id": "16.4.4.exercise.2",
       "title": "Exercise 2",
-      "order": 390,
+      "order": 508,
       "sectionId": "16.4.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21460,7 +23230,7 @@
     {
       "id": "16.5.4.exercise.1",
       "title": "Exercise 1",
-      "order": 391,
+      "order": 509,
       "sectionId": "16.5.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21475,7 +23245,7 @@
     {
       "id": "16.5.4.exercise.2",
       "title": "Exercise 2",
-      "order": 392,
+      "order": 510,
       "sectionId": "16.5.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21490,7 +23260,7 @@
     {
       "id": "16.5.4.exercise.3",
       "title": "Exercise 3",
-      "order": 393,
+      "order": 511,
       "sectionId": "16.5.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21505,7 +23275,7 @@
     {
       "id": "16.6.6.exercise.1",
       "title": "Exercise 1",
-      "order": 394,
+      "order": 512,
       "sectionId": "16.6.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21520,7 +23290,7 @@
     {
       "id": "16.6.6.exercise.2",
       "title": "Exercise 2",
-      "order": 395,
+      "order": 513,
       "sectionId": "16.6.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21535,7 +23305,7 @@
     {
       "id": "16.6.6.exercise.3",
       "title": "Exercise 3",
-      "order": 396,
+      "order": 514,
       "sectionId": "16.6.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21550,7 +23320,7 @@
     {
       "id": "16.7.5.exercise.1",
       "title": "Exercise 1",
-      "order": 397,
+      "order": 515,
       "sectionId": "16.7.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21565,7 +23335,7 @@
     {
       "id": "16.7.5.exercise.2",
       "title": "Exercise 2",
-      "order": 398,
+      "order": 516,
       "sectionId": "16.7.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21580,7 +23350,7 @@
     {
       "id": "17.1.5.exercise.1",
       "title": "Exercise 1",
-      "order": 399,
+      "order": 517,
       "sectionId": "17.1.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21595,7 +23365,7 @@
     {
       "id": "17.1.5.exercise.2",
       "title": "Exercise 2",
-      "order": 400,
+      "order": 518,
       "sectionId": "17.1.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21608,24 +23378,9 @@
       }
     },
     {
-      "id": "17.1.5.exercise.3",
-      "title": "Exercise 3",
-      "order": 401,
-      "sectionId": "17.1.5",
-      "sourceExerciseNumber": 3,
-      "contentStatus": "unconverted",
-      "source": {
-        "sectionId": "17.1.5",
-        "printedStart": "813",
-        "pdfPageStart": 853,
-        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
-        "companionCreated": false
-      }
-    },
-    {
       "id": "17.2.10.exercise.1",
       "title": "Exercise 1",
-      "order": 402,
+      "order": 519,
       "sectionId": "17.2.10",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21640,7 +23395,7 @@
     {
       "id": "17.2.10.exercise.2",
       "title": "Exercise 2",
-      "order": 403,
+      "order": 520,
       "sectionId": "17.2.10",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21655,7 +23410,7 @@
     {
       "id": "17.2.10.exercise.3",
       "title": "Exercise 3",
-      "order": 404,
+      "order": 521,
       "sectionId": "17.2.10",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21670,7 +23425,7 @@
     {
       "id": "17.2.10.exercise.4",
       "title": "Exercise 4",
-      "order": 405,
+      "order": 522,
       "sectionId": "17.2.10",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -21685,7 +23440,7 @@
     {
       "id": "17.3.7.exercise.1",
       "title": "Exercise 1",
-      "order": 406,
+      "order": 523,
       "sectionId": "17.3.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21700,7 +23455,7 @@
     {
       "id": "17.3.7.exercise.2",
       "title": "Exercise 2",
-      "order": 407,
+      "order": 524,
       "sectionId": "17.3.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21715,7 +23470,7 @@
     {
       "id": "17.3.7.exercise.3",
       "title": "Exercise 3",
-      "order": 408,
+      "order": 525,
       "sectionId": "17.3.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21730,7 +23485,7 @@
     {
       "id": "18.1.2.exercise.1",
       "title": "Exercise 1",
-      "order": 409,
+      "order": 526,
       "sectionId": "18.1.2",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21745,7 +23500,7 @@
     {
       "id": "18.1.2.exercise.2",
       "title": "Exercise 2",
-      "order": 410,
+      "order": 527,
       "sectionId": "18.1.2",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21758,9 +23513,84 @@
       }
     },
     {
+      "id": "18.1.2.exercise.3",
+      "title": "Exercise 3",
+      "order": 528,
+      "sectionId": "18.1.2",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "18.1.2",
+        "printedStart": "839",
+        "pdfPageStart": 879,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "18.1.2.exercise.4",
+      "title": "Exercise 4",
+      "order": 529,
+      "sectionId": "18.1.2",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "18.1.2",
+        "printedStart": "839",
+        "pdfPageStart": 879,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "18.1.2.exercise.5",
+      "title": "Exercise 5",
+      "order": 530,
+      "sectionId": "18.1.2",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "18.1.2",
+        "printedStart": "839",
+        "pdfPageStart": 879,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "18.1.2.exercise.6",
+      "title": "Exercise 6",
+      "order": 531,
+      "sectionId": "18.1.2",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "18.1.2",
+        "printedStart": "839",
+        "pdfPageStart": 879,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "18.1.2.exercise.7",
+      "title": "Exercise 7",
+      "order": 532,
+      "sectionId": "18.1.2",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "18.1.2",
+        "printedStart": "839",
+        "pdfPageStart": 879,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "18.2.7.exercise.1",
       "title": "Exercise 1",
-      "order": 411,
+      "order": 533,
       "sectionId": "18.2.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21775,7 +23605,7 @@
     {
       "id": "18.2.7.exercise.2",
       "title": "Exercise 2",
-      "order": 412,
+      "order": 534,
       "sectionId": "18.2.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21790,7 +23620,7 @@
     {
       "id": "18.2.7.exercise.3",
       "title": "Exercise 3",
-      "order": 413,
+      "order": 535,
       "sectionId": "18.2.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21805,7 +23635,7 @@
     {
       "id": "18.2.7.exercise.4",
       "title": "Exercise 4",
-      "order": 414,
+      "order": 536,
       "sectionId": "18.2.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -21820,7 +23650,7 @@
     {
       "id": "18.2.7.exercise.5",
       "title": "Exercise 5",
-      "order": 415,
+      "order": 537,
       "sectionId": "18.2.7",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -21835,7 +23665,7 @@
     {
       "id": "18.3.7.exercise.1",
       "title": "Exercise 1",
-      "order": 416,
+      "order": 538,
       "sectionId": "18.3.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21850,7 +23680,7 @@
     {
       "id": "18.3.7.exercise.2",
       "title": "Exercise 2",
-      "order": 417,
+      "order": 539,
       "sectionId": "18.3.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21865,7 +23695,7 @@
     {
       "id": "18.3.7.exercise.3",
       "title": "Exercise 3",
-      "order": 418,
+      "order": 540,
       "sectionId": "18.3.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21880,7 +23710,7 @@
     {
       "id": "18.3.7.exercise.4",
       "title": "Exercise 4",
-      "order": 419,
+      "order": 541,
       "sectionId": "18.3.7",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -21893,9 +23723,39 @@
       }
     },
     {
+      "id": "18.3.7.exercise.5",
+      "title": "Exercise 5",
+      "order": 542,
+      "sectionId": "18.3.7",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "18.3.7",
+        "printedStart": "858",
+        "pdfPageStart": 898,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "18.3.7.exercise.6",
+      "title": "Exercise 6",
+      "order": 543,
+      "sectionId": "18.3.7",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "18.3.7",
+        "printedStart": "858",
+        "pdfPageStart": 898,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "19.1.4.exercise.1",
       "title": "Exercise 1",
-      "order": 420,
+      "order": 544,
       "sectionId": "19.1.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21910,7 +23770,7 @@
     {
       "id": "19.1.4.exercise.2",
       "title": "Exercise 2",
-      "order": 421,
+      "order": 545,
       "sectionId": "19.1.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -21925,7 +23785,7 @@
     {
       "id": "19.1.4.exercise.3",
       "title": "Exercise 3",
-      "order": 422,
+      "order": 546,
       "sectionId": "19.1.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -21938,39 +23798,9 @@
       }
     },
     {
-      "id": "19.1.4.exercise.4",
-      "title": "Exercise 4",
-      "order": 423,
-      "sectionId": "19.1.4",
-      "sourceExerciseNumber": 4,
-      "contentStatus": "unconverted",
-      "source": {
-        "sectionId": "19.1.4",
-        "printedStart": "866",
-        "pdfPageStart": 906,
-        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
-        "companionCreated": false
-      }
-    },
-    {
-      "id": "19.1.4.exercise.5",
-      "title": "Exercise 5",
-      "order": 424,
-      "sectionId": "19.1.4",
-      "sourceExerciseNumber": 5,
-      "contentStatus": "unconverted",
-      "source": {
-        "sectionId": "19.1.4",
-        "printedStart": "866",
-        "pdfPageStart": 906,
-        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
-        "companionCreated": false
-      }
-    },
-    {
       "id": "19.2.8.exercise.1",
       "title": "Exercise 1",
-      "order": 425,
+      "order": 547,
       "sectionId": "19.2.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -21983,9 +23813,24 @@
       }
     },
     {
+      "id": "19.2.8.exercise.2",
+      "title": "Exercise 2",
+      "order": 548,
+      "sectionId": "19.2.8",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "19.2.8",
+        "printedStart": "874",
+        "pdfPageStart": 914,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "19.3.5.exercise.1",
       "title": "Exercise 1",
-      "order": 426,
+      "order": 549,
       "sectionId": "19.3.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22000,7 +23845,7 @@
     {
       "id": "19.3.5.exercise.2",
       "title": "Exercise 2",
-      "order": 427,
+      "order": 550,
       "sectionId": "19.3.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22013,16 +23858,16 @@
       }
     },
     {
-      "id": "19.3.5.exercise.3",
-      "title": "Exercise 3",
-      "order": 428,
-      "sectionId": "19.3.5",
-      "sourceExerciseNumber": 3,
+      "id": "20.1.6.exercise.1",
+      "title": "Exercise 1",
+      "order": 551,
+      "sectionId": "20.1.6",
+      "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
       "source": {
-        "sectionId": "19.3.5",
-        "printedStart": "884",
-        "pdfPageStart": 924,
+        "sectionId": "20.1.6",
+        "printedStart": "918",
+        "pdfPageStart": 958,
         "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
         "companionCreated": false
       }
@@ -22030,7 +23875,7 @@
     {
       "id": "20.2.6.exercise.1",
       "title": "Exercise 1",
-      "order": 429,
+      "order": 552,
       "sectionId": "20.2.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22043,9 +23888,24 @@
       }
     },
     {
+      "id": "20.2.6.exercise.2",
+      "title": "Exercise 2",
+      "order": 553,
+      "sectionId": "20.2.6",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "20.2.6",
+        "printedStart": "925",
+        "pdfPageStart": 965,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "A.1.11.exercise.1",
       "title": "Exercise 1",
-      "order": 430,
+      "order": 554,
       "sectionId": "A.1.11",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22060,7 +23920,7 @@
     {
       "id": "A.1.11.exercise.2",
       "title": "Exercise 2",
-      "order": 431,
+      "order": 555,
       "sectionId": "A.1.11",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22075,7 +23935,7 @@
     {
       "id": "A.1.11.exercise.3",
       "title": "Exercise 3",
-      "order": 432,
+      "order": 556,
       "sectionId": "A.1.11",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22090,7 +23950,7 @@
     {
       "id": "A.1.11.exercise.4",
       "title": "Exercise 4",
-      "order": 433,
+      "order": 557,
       "sectionId": "A.1.11",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -22103,9 +23963,54 @@
       }
     },
     {
+      "id": "A.1.11.exercise.5",
+      "title": "Exercise 5",
+      "order": 558,
+      "sectionId": "A.1.11",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.1.11",
+        "printedStart": "944",
+        "pdfPageStart": 984,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "A.1.11.exercise.6",
+      "title": "Exercise 6",
+      "order": 559,
+      "sectionId": "A.1.11",
+      "sourceExerciseNumber": 6,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.1.11",
+        "printedStart": "944",
+        "pdfPageStart": 984,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "A.1.11.exercise.7",
+      "title": "Exercise 7",
+      "order": 560,
+      "sectionId": "A.1.11",
+      "sourceExerciseNumber": 7,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.1.11",
+        "printedStart": "944",
+        "pdfPageStart": 984,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "A.2.9.exercise.1",
       "title": "Exercise 1",
-      "order": 434,
+      "order": 561,
       "sectionId": "A.2.9",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22120,7 +24025,7 @@
     {
       "id": "A.2.9.exercise.2",
       "title": "Exercise 2",
-      "order": 435,
+      "order": 562,
       "sectionId": "A.2.9",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22135,7 +24040,7 @@
     {
       "id": "A.2.9.exercise.3",
       "title": "Exercise 3",
-      "order": 436,
+      "order": 563,
       "sectionId": "A.2.9",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22150,7 +24055,7 @@
     {
       "id": "A.3.4.exercise.1",
       "title": "Exercise 1",
-      "order": 437,
+      "order": 564,
       "sectionId": "A.3.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22165,7 +24070,7 @@
     {
       "id": "A.3.4.exercise.2",
       "title": "Exercise 2",
-      "order": 438,
+      "order": 565,
       "sectionId": "A.3.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22180,7 +24085,7 @@
     {
       "id": "A.3.4.exercise.3",
       "title": "Exercise 3",
-      "order": 439,
+      "order": 566,
       "sectionId": "A.3.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22195,7 +24100,7 @@
     {
       "id": "A.3.4.exercise.4",
       "title": "Exercise 4",
-      "order": 440,
+      "order": 567,
       "sectionId": "A.3.4",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -22210,7 +24115,7 @@
     {
       "id": "A.4.9.exercise.1",
       "title": "Exercise 1",
-      "order": 441,
+      "order": 568,
       "sectionId": "A.4.9",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22225,7 +24130,7 @@
     {
       "id": "A.4.9.exercise.2",
       "title": "Exercise 2",
-      "order": 442,
+      "order": 569,
       "sectionId": "A.4.9",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22240,7 +24145,7 @@
     {
       "id": "A.4.9.exercise.3",
       "title": "Exercise 3",
-      "order": 443,
+      "order": 570,
       "sectionId": "A.4.9",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22255,7 +24160,7 @@
     {
       "id": "A.4.9.exercise.4",
       "title": "Exercise 4",
-      "order": 444,
+      "order": 571,
       "sectionId": "A.4.9",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -22270,7 +24175,7 @@
     {
       "id": "A.4.9.exercise.5",
       "title": "Exercise 5",
-      "order": 445,
+      "order": 572,
       "sectionId": "A.4.9",
       "sourceExerciseNumber": 5,
       "contentStatus": "unconverted",
@@ -22285,7 +24190,7 @@
     {
       "id": "A.5.8.exercise.1",
       "title": "Exercise 1",
-      "order": 446,
+      "order": 573,
       "sectionId": "A.5.8",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22300,7 +24205,7 @@
     {
       "id": "A.5.8.exercise.2",
       "title": "Exercise 2",
-      "order": 447,
+      "order": 574,
       "sectionId": "A.5.8",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22315,7 +24220,7 @@
     {
       "id": "A.5.8.exercise.3",
       "title": "Exercise 3",
-      "order": 448,
+      "order": 575,
       "sectionId": "A.5.8",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22330,7 +24235,7 @@
     {
       "id": "A.5.8.exercise.4",
       "title": "Exercise 4",
-      "order": 449,
+      "order": 576,
       "sectionId": "A.5.8",
       "sourceExerciseNumber": 4,
       "contentStatus": "unconverted",
@@ -22345,7 +24250,7 @@
     {
       "id": "A.6.3.exercise.1",
       "title": "Exercise 1",
-      "order": 450,
+      "order": 577,
       "sectionId": "A.6.3",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22358,9 +24263,54 @@
       }
     },
     {
+      "id": "A.6.3.exercise.2",
+      "title": "Exercise 2",
+      "order": 578,
+      "sectionId": "A.6.3",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.6.3",
+        "printedStart": "1011",
+        "pdfPageStart": 1051,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "A.6.3.exercise.3",
+      "title": "Exercise 3",
+      "order": 579,
+      "sectionId": "A.6.3",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.6.3",
+        "printedStart": "1011",
+        "pdfPageStart": 1051,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "A.6.3.exercise.4",
+      "title": "Exercise 4",
+      "order": 580,
+      "sectionId": "A.6.3",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.6.3",
+        "printedStart": "1011",
+        "pdfPageStart": 1051,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "A.7.5.exercise.1",
       "title": "Exercise 1",
-      "order": 451,
+      "order": 581,
       "sectionId": "A.7.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22375,7 +24325,7 @@
     {
       "id": "A.7.5.exercise.2",
       "title": "Exercise 2",
-      "order": 452,
+      "order": 582,
       "sectionId": "A.7.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22390,7 +24340,7 @@
     {
       "id": "A.8.9.exercise.1",
       "title": "Exercise 1",
-      "order": 453,
+      "order": 583,
       "sectionId": "A.8.9",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22405,7 +24355,7 @@
     {
       "id": "A.8.9.exercise.2",
       "title": "Exercise 2",
-      "order": 454,
+      "order": 584,
       "sectionId": "A.8.9",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22420,7 +24370,7 @@
     {
       "id": "A.8.9.exercise.3",
       "title": "Exercise 3",
-      "order": 455,
+      "order": 585,
       "sectionId": "A.8.9",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22435,7 +24385,7 @@
     {
       "id": "A.9.6.exercise.1",
       "title": "Exercise 1",
-      "order": 456,
+      "order": 586,
       "sectionId": "A.9.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22450,7 +24400,7 @@
     {
       "id": "A.9.6.exercise.2",
       "title": "Exercise 2",
-      "order": 457,
+      "order": 587,
       "sectionId": "A.9.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22465,7 +24415,7 @@
     {
       "id": "A.9.6.exercise.3",
       "title": "Exercise 3",
-      "order": 458,
+      "order": 588,
       "sectionId": "A.9.6",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22480,7 +24430,7 @@
     {
       "id": "A.10.5.exercise.1",
       "title": "Exercise 1",
-      "order": 459,
+      "order": 589,
       "sectionId": "A.10.5",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22495,7 +24445,7 @@
     {
       "id": "A.10.5.exercise.2",
       "title": "Exercise 2",
-      "order": 460,
+      "order": 590,
       "sectionId": "A.10.5",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22510,7 +24460,7 @@
     {
       "id": "A.10.5.exercise.3",
       "title": "Exercise 3",
-      "order": 461,
+      "order": 591,
       "sectionId": "A.10.5",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22525,7 +24475,7 @@
     {
       "id": "A.11.7.exercise.1",
       "title": "Exercise 1",
-      "order": 462,
+      "order": 592,
       "sectionId": "A.11.7",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22540,7 +24490,7 @@
     {
       "id": "A.11.7.exercise.2",
       "title": "Exercise 2",
-      "order": 463,
+      "order": 593,
       "sectionId": "A.11.7",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22555,7 +24505,7 @@
     {
       "id": "A.11.7.exercise.3",
       "title": "Exercise 3",
-      "order": 464,
+      "order": 594,
       "sectionId": "A.11.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22568,9 +24518,39 @@
       }
     },
     {
+      "id": "A.11.7.exercise.4",
+      "title": "Exercise 4",
+      "order": 595,
+      "sectionId": "A.11.7",
+      "sourceExerciseNumber": 4,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.11.7",
+        "printedStart": "1067",
+        "pdfPageStart": 1107,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "A.11.7.exercise.5",
+      "title": "Exercise 5",
+      "order": 596,
+      "sectionId": "A.11.7",
+      "sourceExerciseNumber": 5,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "A.11.7",
+        "printedStart": "1067",
+        "pdfPageStart": 1107,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
       "id": "B.1.4.exercise.1",
       "title": "Exercise 1",
-      "order": 465,
+      "order": 597,
       "sectionId": "B.1.4",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22585,7 +24565,7 @@
     {
       "id": "B.1.4.exercise.2",
       "title": "Exercise 2",
-      "order": 466,
+      "order": 598,
       "sectionId": "B.1.4",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22600,7 +24580,7 @@
     {
       "id": "B.1.4.exercise.3",
       "title": "Exercise 3",
-      "order": 467,
+      "order": 599,
       "sectionId": "B.1.4",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
@@ -22615,7 +24595,7 @@
     {
       "id": "B.2.6.exercise.1",
       "title": "Exercise 1",
-      "order": 468,
+      "order": 600,
       "sectionId": "B.2.6",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22630,7 +24610,7 @@
     {
       "id": "B.2.6.exercise.2",
       "title": "Exercise 2",
-      "order": 469,
+      "order": 601,
       "sectionId": "B.2.6",
       "sourceExerciseNumber": 2,
       "contentStatus": "unconverted",
@@ -22643,16 +24623,46 @@
       }
     },
     {
-      "id": "B.2.6.exercise.3",
+      "id": "B.3.7.exercise.1",
+      "title": "Exercise 1",
+      "order": 602,
+      "sectionId": "B.3.7",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "B.3.7",
+        "printedStart": "1084",
+        "pdfPageStart": 1124,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "B.3.7.exercise.2",
+      "title": "Exercise 2",
+      "order": 603,
+      "sectionId": "B.3.7",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "B.3.7",
+        "printedStart": "1084",
+        "pdfPageStart": 1124,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "B.3.7.exercise.3",
       "title": "Exercise 3",
-      "order": 470,
-      "sectionId": "B.2.6",
+      "order": 604,
+      "sectionId": "B.3.7",
       "sourceExerciseNumber": 3,
       "contentStatus": "unconverted",
       "source": {
-        "sectionId": "B.2.6",
-        "printedStart": "1076",
-        "pdfPageStart": 1116,
+        "sectionId": "B.3.7",
+        "printedStart": "1084",
+        "pdfPageStart": 1124,
         "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
         "companionCreated": false
       }
@@ -22660,7 +24670,7 @@
     {
       "id": "B.4.2.exercise.1",
       "title": "Exercise 1",
-      "order": 471,
+      "order": 605,
       "sectionId": "B.4.2",
       "sourceExerciseNumber": 1,
       "contentStatus": "unconverted",
@@ -22668,6 +24678,66 @@
         "sectionId": "B.4.2",
         "printedStart": "1085",
         "pdfPageStart": 1125,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "B.4.2.exercise.2",
+      "title": "Exercise 2",
+      "order": 606,
+      "sectionId": "B.4.2",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "B.4.2",
+        "printedStart": "1086",
+        "pdfPageStart": 1126,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "B.6.5.exercise.1",
+      "title": "Exercise 1",
+      "order": 607,
+      "sectionId": "B.6.5",
+      "sourceExerciseNumber": 1,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "B.6.5",
+        "printedStart": "1095",
+        "pdfPageStart": 1135,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "B.6.5.exercise.2",
+      "title": "Exercise 2",
+      "order": 608,
+      "sectionId": "B.6.5",
+      "sourceExerciseNumber": 2,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "B.6.5",
+        "printedStart": "1095",
+        "pdfPageStart": 1135,
+        "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
+        "companionCreated": false
+      }
+    },
+    {
+      "id": "B.6.5.exercise.3",
+      "title": "Exercise 3",
+      "order": 609,
+      "sectionId": "B.6.5",
+      "sourceExerciseNumber": 3,
+      "contentStatus": "unconverted",
+      "source": {
+        "sectionId": "B.6.5",
+        "printedStart": "1095",
+        "pdfPageStart": 1135,
         "sourceHash": "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56",
         "companionCreated": false
       }

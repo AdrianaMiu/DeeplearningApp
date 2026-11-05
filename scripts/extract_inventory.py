@@ -13,7 +13,7 @@ from pathlib import Path
 EXPECTED_HASH = "93316e525a034cfa935023c3c31196c86f5edfd0e056f50f09676f6364a0be56"
 PAGE_OFFSET = 40
 HEADING = re.compile(r"^\s*((?:\d{1,2}|[AB])(?:\.\d+){0,2})\s+([A-Z][^\n]{1,140}?)\s*$")
-NUMBERED_ITEM = re.compile(r"^\s*(\d+)\.\s+\S")
+EXERCISE_MARKER = re.compile(r"^(?:\s*\d{3}\s{2,})?(\s*)((?:(\d+)\.|(•)))\s+(\S.*)$")
 
 CHAPTER_TITLES = {
     1: "Introduction", 2: "Preliminaries", 3: "Linear Neural Networks for Regression",
@@ -39,12 +39,66 @@ def source_ref(section_id: str, pdf_page: int) -> dict:
     }
 
 
-def longest_prefix(numbers: list[int]) -> int:
-    values = set(numbers)
-    count = 0
-    while count + 1 in values:
-        count += 1
-    return count
+def extract_exercises(pages: list[str], headings: list[dict], first_pdf_page: int = 41) -> list[dict]:
+    """Extract top-level exercise metadata between each Exercises heading and the next heading."""
+    ordered_headings = sorted(headings, key=lambda item: (item["pageIndex"], item["lineIndex"]))
+    exercises: list[dict] = []
+    exercise_order = 1
+    for heading_index, heading in enumerate(ordered_headings):
+        if heading["title"].strip().lower() != "exercises":
+            continue
+        boundary = ordered_headings[heading_index + 1] if heading_index + 1 < len(ordered_headings) else None
+        candidates_by_page: list[list[tuple[int, int, int | None, bool]]] = []
+        last_page = boundary["pageIndex"] if boundary else len(pages) - 1
+        for page_index in range(heading["pageIndex"], last_page + 1):
+            lines = pages[page_index].splitlines()
+            start = heading["lineIndex"] + 1 if page_index == heading["pageIndex"] else 0
+            stop = boundary["lineIndex"] if boundary and page_index == boundary["pageIndex"] else len(lines)
+            page_candidates: list[tuple[int, int, int | None, bool]] = []
+            for line_index in range(start, stop):
+                match = EXERCISE_MARKER.match(lines[line_index])
+                if not match:
+                    continue
+                prompt_column = match.start(5)
+                number = int(match.group(3)) if match.group(3) else None
+                rest = match.group(5).strip()
+                if line_index <= 2 and number is not None and rest.isupper():
+                    continue
+                page_candidates.append((page_index, prompt_column, number, match.group(4) is not None))
+            if page_candidates:
+                candidates_by_page.append(page_candidates)
+
+        candidates: list[tuple[int, int, int | None, bool]] = []
+        first_candidate = next((page[0] for page in candidates_by_page if page), None)
+        numbered_mode = first_candidate is not None and first_candidate[2] is not None
+        for page_candidates in candidates_by_page:
+            same_kind = [item for item in page_candidates if (item[2] is not None) == numbered_mode]
+            if not same_kind:
+                continue
+            top_prompt_column = min(item[1] for item in same_kind)
+            candidates.extend(item for item in same_kind if item[1] == top_prompt_column)
+
+        numbered = [item for item in candidates if item[2] is not None]
+        bullets = [item for item in candidates if item[3]]
+        selected: list[tuple[int, int]] = []
+        if numbered:
+            expected = 1
+            for page_index, _indent, number, _bullet in numbered:
+                if number == expected:
+                    selected.append((page_index, expected))
+                    expected += 1
+        elif bullets:
+            selected = [(item[0], index) for index, item in enumerate(bullets, start=1)]
+
+        for page_index, number in selected:
+            section_id = heading["id"]
+            exercises.append({
+                "id": f"{section_id}.exercise.{number}", "title": f"Exercise {number}",
+                "order": exercise_order, "sectionId": section_id, "sourceExerciseNumber": number,
+                "contentStatus": "unconverted", "source": source_ref(section_id, first_pdf_page + page_index),
+            })
+            exercise_order += 1
+    return exercises
 
 
 def extract(pdf: Path) -> dict:
@@ -55,10 +109,9 @@ def extract(pdf: Path) -> dict:
     pages = result.stdout.decode("utf-8", errors="replace").split("\f")
     seen: set[str] = set()
     headings: list[dict] = []
-    page_text_by_id: dict[str, str] = {}
     for offset, page in enumerate(pages):
         pdf_page = 41 + offset
-        for line in page.splitlines():
+        for line_index, line in enumerate(page.splitlines()):
             match = HEADING.match(line)
             if not match:
                 continue
@@ -70,8 +123,10 @@ def extract(pdf: Path) -> dict:
             if root.isdigit() and not 1 <= int(root) <= 20:
                 continue
             seen.add(section_id)
-            headings.append({"id": section_id, "title": title, "pdfPage": pdf_page})
-            page_text_by_id[section_id] = page
+            headings.append({
+                "id": section_id, "title": title, "pdfPage": pdf_page,
+                "pageIndex": offset, "lineIndex": line_index,
+            })
 
     chapters = []
     for number, title in CHAPTER_TITLES.items():
@@ -103,23 +158,7 @@ def extract(pdf: Path) -> dict:
             "contentStatus": "unconverted", "source": source_ref(section_id, item["pdfPage"]),
         })
 
-    exercises = []
-    exercise_order = 1
-    for section in sections:
-        if section["title"].lower() != "exercises":
-            continue
-        page = page_text_by_id.get(section["id"], "")
-        marker = re.search(rf"^\s*{re.escape(section['id'])}\s+Exercises\s*$", page, re.MULTILINE)
-        tail = page[marker.end():] if marker else page
-        count = longest_prefix([int(match.group(1)) for match in map(NUMBERED_ITEM.match, tail.splitlines()) if match])
-        for number in range(1, count + 1):
-            exercise_id = f"{section['id']}.exercise.{number}"
-            exercises.append({
-                "id": exercise_id, "title": f"Exercise {number}", "order": exercise_order,
-                "sectionId": section["id"], "sourceExerciseNumber": number,
-                "contentStatus": "unconverted", "source": source_ref(section["id"], section["source"]["pdfPageStart"]),
-            })
-            exercise_order += 1
+    exercises = extract_exercises(pages, headings)
 
     orientation = [
         {"id": "orientation-installation", "title": "Installation", "order": 1, "kind": "orientation",

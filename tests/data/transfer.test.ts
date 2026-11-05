@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
-import type { Attempt, LearnerSettings, ProgressExportV1 } from '../../src/domain/types';
+import type { Attempt, ExerciseProgressRecord, LearnerSettings, ProgressExportV1 } from '../../src/domain/types';
 import { createLearningDatabase, type LearningDatabase } from '../../src/data/db';
 import { LearningRepository } from '../../src/data/repository';
 import {
@@ -54,6 +54,7 @@ function payload(overrides: Partial<ProgressExportV1> = {}): ProgressExportV1 {
     reviews: [],
     sessions: [],
     notes: [],
+    exerciseProgress: [],
     settings: settings('2026-11-03T08:00:00.000Z'),
     ...overrides,
   };
@@ -111,6 +112,25 @@ describe('local learning data transfer', () => {
 
     expect(result).toMatchObject({ mode: 'merge', added: { attempts: 1 } });
     await expect(repository.getAttempts()).resolves.toHaveLength(2);
+  });
+
+  it('merges only newer same-ID exercise workflow records', async () => {
+    const older: ExerciseProgressRecord = { id: '1.9.exercise.1', exerciseId: '1.9.exercise.1', state: 'deferred',
+      linkedAttemptIds: [], updatedAt: '2026-11-03T08:00:00.000Z' };
+    const newer: ExerciseProgressRecord = { ...older, state: 'completed', linkedAttemptIds: ['attempt-1'],
+      completedAt: '2026-11-04T08:00:00.000Z', updatedAt: '2026-11-04T08:00:00.000Z' };
+    await repository.saveExerciseProgress(older);
+    await importProgress(db, JSON.stringify(payload({ exerciseProgress: [newer] })), 'merge');
+    expect(await repository.getExerciseProgress()).toEqual([newer]);
+    await importProgress(db, JSON.stringify(payload({ exerciseProgress: [older] })), 'merge');
+    expect(await repository.getExerciseProgress()).toEqual([newer]);
+  });
+
+  it('imports older version 1 backups without an exercise progress property', async () => {
+    const oldBackup = payload();
+    const { exerciseProgress: _omitted, ...withoutExerciseProgress } = oldBackup;
+    await importProgress(db, JSON.stringify(withoutExerciseProgress), 'replace');
+    expect(await repository.getExerciseProgress()).toEqual([]);
   });
 
   it('keeps the newest settings record during merge', async () => {
@@ -185,6 +205,10 @@ describe('local learning data transfer', () => {
         tags: ['tensor'],
         createdAt: '2026-11-03T08:02:00.000Z',
         updatedAt: '2026-11-03T08:02:00.000Z',
+      }],
+      exerciseProgress: [{
+        id: '1.9.exercise.1', exerciseId: '1.9.exercise.1', state: 'completed', linkedAttemptIds: ['round-trip'],
+        attemptedAt: '2026-11-03T08:00:00.000Z', completedAt: '2026-11-03T08:05:00.000Z', updatedAt: '2026-11-03T08:05:00.000Z',
       }],
       settings: settings('2026-11-03T08:15:00.000Z', 'ro-help'),
     });

@@ -232,6 +232,19 @@ export interface NoteRecord {
   updatedAt: string;
 }
 
+export type ExerciseWorkflowState = 'not_started' | 'attempted' | 'completed' | 'deferred' | 'discussed';
+
+export interface ExerciseProgressRecord {
+  id: string;
+  exerciseId: string;
+  state: ExerciseWorkflowState;
+  linkedAttemptIds: string[];
+  updatedAt: string;
+  attemptedAt?: string;
+  completedAt?: string;
+  note?: string;
+}
+
 export interface LearnerSettings {
   id: 'learner-settings';
   language: 'en' | 'ro-help';
@@ -259,5 +272,6 @@ export interface ProgressExportV1 {
   reviews: ReviewEvent[];
   sessions: SessionRecord[];
   notes: NoteRecord[];
+  exerciseProgress: ExerciseProgressRecord[];
   settings: LearnerSettings;
 }

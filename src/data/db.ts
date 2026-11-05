@@ -2,6 +2,7 @@ import Dexie, { type EntityTable } from 'dexie';
 
 import type {
   Attempt,
+  ExerciseProgressRecord,
   LearnerSettings,
   NoteRecord,
   ReviewEvent,
@@ -14,6 +15,7 @@ export class LearningDatabase extends Dexie {
   sessions!: EntityTable<SessionRecord, 'id'>;
   notes!: EntityTable<NoteRecord, 'id'>;
   settings!: EntityTable<LearnerSettings, 'id'>;
+  exerciseProgress!: EntityTable<ExerciseProgressRecord, 'id'>;
 
   constructor(name = 'deep-learning-companion') {
     super(name);
@@ -23,6 +25,14 @@ export class LearningDatabase extends Dexie {
       sessions: '&id, lessonId, updatedAt',
       notes: '&id, conceptId, updatedAt, *tags',
       settings: '&id, updatedAt',
+    });
+    this.version(2).stores({
+      attempts: '&id, questionId, timestamp, *conceptIds',
+      reviews: '&id, conceptId, attemptId, timestamp, dueAt',
+      sessions: '&id, lessonId, updatedAt',
+      notes: '&id, conceptId, updatedAt, *tags',
+      settings: '&id, updatedAt',
+      exerciseProgress: '&id, exerciseId, state, updatedAt, *linkedAttemptIds',
     });
   }
 }

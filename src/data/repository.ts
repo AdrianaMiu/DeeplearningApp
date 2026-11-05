@@ -1,5 +1,6 @@
 import type {
   Attempt,
+  ExerciseProgressRecord,
   LearnerSettings,
   NoteRecord,
   ReviewEvent,
@@ -13,6 +14,7 @@ export interface LearningSnapshot {
   sessions: SessionRecord[];
   notes: NoteRecord[];
   settings: LearnerSettings;
+  exerciseProgress: ExerciseProgressRecord[];
 }
 
 export const defaultLearnerSettings = (updatedAt = new Date(0).toISOString()): LearnerSettings => ({
@@ -51,6 +53,18 @@ export class LearningRepository {
     return this.db.settings.put(value);
   }
 
+  async saveExerciseProgress(value: ExerciseProgressRecord): Promise<string> {
+    if (value.id !== value.exerciseId) throw new Error('Exercise progress ID and exercise ID must match.');
+    if ((value.state === 'attempted' || value.state === 'completed') && value.linkedAttemptIds.length === 0) {
+      throw new Error(`${value.state} exercise progress requires a linked attempt.`);
+    }
+    const current = await this.db.exerciseProgress.get(value.id);
+    if (current && Date.parse(value.updatedAt) < Date.parse(current.updatedAt)) {
+      throw new Error('Cannot replace exercise progress with an older update.');
+    }
+    return this.db.exerciseProgress.put(value);
+  }
+
   getAttempts(): Promise<Attempt[]> {
     return this.db.attempts.orderBy('timestamp').toArray();
   }
@@ -67,18 +81,23 @@ export class LearningRepository {
     return this.db.notes.orderBy('updatedAt').toArray();
   }
 
+  getExerciseProgress(): Promise<ExerciseProgressRecord[]> {
+    return this.db.exerciseProgress.orderBy('updatedAt').toArray();
+  }
+
   async getSettings(): Promise<LearnerSettings> {
     return (await this.db.settings.get('learner-settings')) ?? defaultLearnerSettings();
   }
 
   async snapshot(): Promise<LearningSnapshot> {
-    const [attempts, reviews, sessions, notes, settings] = await Promise.all([
+    const [attempts, reviews, sessions, notes, exerciseProgress, settings] = await Promise.all([
       this.getAttempts(),
       this.getReviews(),
       this.getSessions(),
       this.getNotes(),
+      this.getExerciseProgress(),
       this.getSettings(),
     ]);
-    return { attempts, reviews, sessions, notes, settings };
+    return { attempts, reviews, sessions, notes, exerciseProgress, settings };
   }
 }

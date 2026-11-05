@@ -55,6 +55,22 @@ const noteSchema = z.object({
   updatedAt: isoDate,
 }).strict();
 
+const exerciseProgressSchema = z.object({
+  id: z.string().min(1),
+  exerciseId: z.string().min(1),
+  state: z.enum(['not_started', 'attempted', 'completed', 'deferred', 'discussed']),
+  linkedAttemptIds: z.array(z.string().min(1)),
+  updatedAt: isoDate,
+  attemptedAt: isoDate.optional(),
+  completedAt: isoDate.optional(),
+  note: z.string().optional(),
+}).strict().superRefine((value, context) => {
+  if (value.id !== value.exerciseId) context.addIssue({ code: 'custom', message: 'Exercise progress IDs must match.' });
+  if ((value.state === 'attempted' || value.state === 'completed') && value.linkedAttemptIds.length === 0) {
+    context.addIssue({ code: 'custom', message: `${value.state} exercise progress requires a linked attempt.` });
+  }
+});
+
 const settingsSchema = z.object({
   id: z.literal('learner-settings'),
   language: z.enum(['en', 'ro-help']),
@@ -76,6 +92,7 @@ export const progressExportV1Schema = z.object({
   reviews: z.array(reviewSchema),
   sessions: z.array(sessionSchema),
   notes: z.array(noteSchema),
+  exerciseProgress: z.array(exerciseProgressSchema).optional().default([]),
   settings: settingsSchema,
 }).strict();
 
@@ -86,13 +103,13 @@ export type ImportPreview =
       valid: true;
       contentVersion: string;
       exportedAt: string;
-      counts: { attempts: number; reviews: number; sessions: number; notes: number };
+      counts: { attempts: number; reviews: number; sessions: number; notes: number; exerciseProgress: number };
     }
   | { valid: false; error: string };
 
 export interface ImportResult {
   mode: ImportMode;
-  added: { attempts: number; reviews: number; sessions: number; notes: number };
+  added: { attempts: number; reviews: number; sessions: number; notes: number; exerciseProgress: number };
 }
 
 function decode(raw: string): ProgressExportV1 {
@@ -121,6 +138,7 @@ export function previewImport(raw: string): ImportPreview {
         reviews: value.reviews.length,
         sessions: value.sessions.length,
         notes: value.notes.length,
+        exerciseProgress: value.exerciseProgress.length,
       },
     };
   } catch (error) {
@@ -146,9 +164,9 @@ export async function importProgress(
   mode: ImportMode,
 ): Promise<ImportResult> {
   const value = decode(raw);
-  const added = { attempts: 0, reviews: 0, sessions: 0, notes: 0 };
+  const added = { attempts: 0, reviews: 0, sessions: 0, notes: 0, exerciseProgress: 0 };
 
-  await db.transaction('rw', db.attempts, db.reviews, db.sessions, db.notes, db.settings, async () => {
+  await db.transaction('rw', [db.attempts, db.reviews, db.sessions, db.notes, db.exerciseProgress, db.settings], async () => {
     if (mode === 'replace') {
       await Promise.all(db.tables.map((table) => table.clear()));
       await Promise.all([
@@ -156,12 +174,14 @@ export async function importProgress(
         db.reviews.bulkAdd(value.reviews),
         db.sessions.bulkAdd(value.sessions),
         db.notes.bulkAdd(value.notes),
+        db.exerciseProgress.bulkAdd(value.exerciseProgress),
         db.settings.add(value.settings),
       ]);
       added.attempts = value.attempts.length;
       added.reviews = value.reviews.length;
       added.sessions = value.sessions.length;
       added.notes = value.notes.length;
+      added.exerciseProgress = value.exerciseProgress.length;
       return;
     }
 
@@ -169,6 +189,11 @@ export async function importProgress(
     const sessions = value.sessions.filter((session) => {
       const local = localSessions.get(session.id);
       return !local || Date.parse(session.updatedAt) > Date.parse(local.updatedAt);
+    });
+    const localExerciseProgress = new Map((await db.exerciseProgress.toArray()).map((record) => [record.id, record]));
+    const exerciseProgress = value.exerciseProgress.filter((record) => {
+      const local = localExerciseProgress.get(record.id);
+      return !local || Date.parse(record.updatedAt) > Date.parse(local.updatedAt);
     });
     const [attempts, reviews, notes, currentSettings] = await Promise.all([
       unseen(value.attempts, (await db.attempts.toCollection().primaryKeys()) as string[]),
@@ -181,6 +206,7 @@ export async function importProgress(
       db.reviews.bulkAdd(reviews),
       db.sessions.bulkPut(sessions),
       db.notes.bulkAdd(notes),
+      db.exerciseProgress.bulkPut(exerciseProgress),
       !currentSettings || value.settings.updatedAt > currentSettings.updatedAt
         ? db.settings.put(value.settings)
         : Promise.resolve('learner-settings'),
@@ -189,6 +215,7 @@ export async function importProgress(
     added.reviews = reviews.length;
     added.sessions = sessions.filter((session) => !localSessions.has(session.id)).length;
     added.notes = notes.length;
+    added.exerciseProgress = exerciseProgress.filter((record) => !localExerciseProgress.has(record.id)).length;
   });
 
   return { mode, added };

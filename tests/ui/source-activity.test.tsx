@@ -35,6 +35,23 @@ describe('source section and exercise routes', () => {
     expect(await repository.getAttempts()).toEqual([]);
   });
 
+  it('preserves an evidence-backed completion when its note is edited', async () => {
+    await repository.appendAttempt({ id: 'exercise-attempt', questionId: '1.9.exercise.1', questionVersion: 1,
+      conceptIds: ['chapter-1'], response: 'Reasoned response', timestamp: '2026-11-05T09:00:00.000Z', score: 1,
+      gradingMethod: 'rubric', confidence: 4, hintsUsed: 0, solutionRevealed: false,
+      tutorSupportLevel: 'none', applicationEvidence: true });
+    await repository.saveExerciseProgress({ id: '1.9.exercise.1', exerciseId: '1.9.exercise.1', state: 'completed',
+      linkedAttemptIds: ['exercise-attempt'], attemptedAt: '2026-11-05T09:00:00.000Z',
+      completedAt: '2026-11-05T09:05:00.000Z', updatedAt: '2026-11-05T09:05:00.000Z' });
+    open('/exercise/1.9.exercise.1');
+    expect(await screen.findByText(/evidence-backed state:/i)).toBeInTheDocument();
+    expect(screen.getByText((_, element) => element?.tagName === 'P' && element.textContent === 'Evidence-backed state: completed')).toBeInTheDocument();
+    await userEvent.type(screen.getByLabelText(/exercise note/i), 'Keep this completion.');
+    await userEvent.click(screen.getByRole('button', { name: /save exercise state/i }));
+    expect((await repository.getExerciseProgress())[0]).toMatchObject({ state: 'completed',
+      linkedAttemptIds: ['exercise-attempt'], note: 'Keep this completion.' });
+  });
+
   it('links every source record from the chapter atlas with accurate remaining counts', async () => {
     open('/curriculum/chapter-1');
     expect(await screen.findByText(/15 of 17 detailed sections authored/i)).toBeInTheDocument();

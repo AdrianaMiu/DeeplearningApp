@@ -2,7 +2,12 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import Dexie from 'dexie';
 import { createLearningDatabase, type LearningDatabase } from '../../src/data/db';
 import { LearningRepository } from '../../src/data/repository';
-import type { ExerciseProgressRecord } from '../../src/domain/types';
+import type { Attempt, ExerciseProgressRecord } from '../../src/domain/types';
+
+const attempt = (id: string): Attempt => ({ id, questionId: '1.9.exercise.1', questionVersion: 1,
+  conceptIds: ['chapter-1'], response: 'My answer', timestamp: '2026-11-05T09:59:00.000Z', score: 1,
+  gradingMethod: 'rubric', confidence: 4, hintsUsed: 0, solutionRevealed: false,
+  tutorSupportLevel: 'none', applicationEvidence: true });
 
 const base = (change: Partial<ExerciseProgressRecord> = {}): ExerciseProgressRecord => ({
   id: '1.9.exercise.1',
@@ -33,6 +38,8 @@ describe('individual exercise progress', () => {
   it('requires evidence before an exercise can be attempted or completed', async () => {
     await expect(repository.saveExerciseProgress(base({ state: 'completed' }))).rejects.toThrow(/linked attempt/i);
     const completed = base({ state: 'completed', linkedAttemptIds: ['attempt-1'], completedAt: '2026-11-05T10:00:00.000Z' });
+    await expect(repository.saveExerciseProgress(completed)).rejects.toThrow(/does not exist/i);
+    await repository.appendAttempt(attempt('attempt-1'));
     await repository.saveExerciseProgress(completed);
     expect(await repository.getExerciseProgress()).toEqual([completed]);
   });

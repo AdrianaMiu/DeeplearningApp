@@ -58,6 +58,16 @@ export class LearningRepository {
     if ((value.state === 'attempted' || value.state === 'completed') && value.linkedAttemptIds.length === 0) {
       throw new Error(`${value.state} exercise progress requires a linked attempt.`);
     }
+    if (value.linkedAttemptIds.length > 0) {
+      const attempts = await this.db.attempts.bulkGet(value.linkedAttemptIds);
+      value.linkedAttemptIds.forEach((attemptId, index) => {
+        const attempt = attempts[index];
+        if (!attempt) throw new Error(`Linked attempt ${attemptId} does not exist.`);
+        if (attempt.questionId !== value.exerciseId) {
+          throw new Error(`Linked attempt ${attemptId} does not belong to exercise ${value.exerciseId}.`);
+        }
+      });
+    }
     const current = await this.db.exerciseProgress.get(value.id);
     if (current && Date.parse(value.updatedAt) < Date.parse(current.updatedAt)) {
       throw new Error('Cannot replace exercise progress with an older update.');

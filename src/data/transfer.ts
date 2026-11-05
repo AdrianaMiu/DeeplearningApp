@@ -166,6 +166,20 @@ export async function importProgress(
   const value = decode(raw);
   const added = { attempts: 0, reviews: 0, sessions: 0, notes: 0, exerciseProgress: 0 };
 
+  const availableAttempts = new Map(value.attempts.map((attempt) => [attempt.id, attempt]));
+  if (mode === 'merge') {
+    for (const attempt of await db.attempts.toArray()) availableAttempts.set(attempt.id, attempt);
+  }
+  for (const record of value.exerciseProgress) {
+    for (const attemptId of record.linkedAttemptIds) {
+      const attempt = availableAttempts.get(attemptId);
+      if (!attempt) throw new Error(`Linked attempt ${attemptId} does not exist.`);
+      if (attempt.questionId !== record.exerciseId) {
+        throw new Error(`Linked attempt ${attemptId} does not belong to exercise ${record.exerciseId}.`);
+      }
+    }
+  }
+
   await db.transaction('rw', [db.attempts, db.reviews, db.sessions, db.notes, db.exerciseProgress, db.settings], async () => {
     if (mode === 'replace') {
       await Promise.all(db.tables.map((table) => table.clear()));

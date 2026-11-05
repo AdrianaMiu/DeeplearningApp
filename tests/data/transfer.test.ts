@@ -12,10 +12,10 @@ import {
 
 const contentVersion = 'd2l-2026.11-v1';
 
-function attempt(id: string, timestamp = '2026-11-03T08:00:00.000Z'): Attempt {
+function attempt(id: string, timestamp = '2026-11-03T08:00:00.000Z', questionId = 'diagnostic-tensor-shape'): Attempt {
   return {
     id,
-    questionId: 'diagnostic-tensor-shape',
+    questionId,
     questionVersion: 1,
     conceptIds: ['tensor-shapes'],
     response: '[6, 4]',
@@ -120,10 +120,21 @@ describe('local learning data transfer', () => {
     const newer: ExerciseProgressRecord = { ...older, state: 'completed', linkedAttemptIds: ['attempt-1'],
       completedAt: '2026-11-04T08:00:00.000Z', updatedAt: '2026-11-04T08:00:00.000Z' };
     await repository.saveExerciseProgress(older);
-    await importProgress(db, JSON.stringify(payload({ exerciseProgress: [newer] })), 'merge');
+    await importProgress(db, JSON.stringify(payload({ attempts: [attempt('attempt-1', undefined, '1.9.exercise.1')], exerciseProgress: [newer] })), 'merge');
     expect(await repository.getExerciseProgress()).toEqual([newer]);
     await importProgress(db, JSON.stringify(payload({ exerciseProgress: [older] })), 'merge');
     expect(await repository.getExerciseProgress()).toEqual([newer]);
+  });
+
+  it('rejects exercise evidence links that resolve to no imported or existing attempt', async () => {
+    const unsupported: ExerciseProgressRecord = { id: '1.9.exercise.1', exerciseId: '1.9.exercise.1',
+      state: 'completed', linkedAttemptIds: ['invented'], completedAt: '2026-11-04T08:00:00.000Z',
+      updatedAt: '2026-11-04T08:00:00.000Z' };
+    await expect(importProgress(db, JSON.stringify(payload({ exerciseProgress: [unsupported] })), 'replace'))
+      .rejects.toThrow(/linked attempt invented does not exist/i);
+    await repository.appendAttempt(attempt('already-local', undefined, '1.9.exercise.1'));
+    await expect(importProgress(db, JSON.stringify(payload({ exerciseProgress: [{ ...unsupported,
+      linkedAttemptIds: ['already-local'] }] })), 'merge')).resolves.toMatchObject({ mode: 'merge' });
   });
 
   it('imports older version 1 backups without an exercise progress property', async () => {
@@ -180,7 +191,7 @@ describe('local learning data transfer', () => {
 
   it('round-trips every local learner collection and can reset them', async () => {
     const original = payload({
-      attempts: [attempt('round-trip')],
+      attempts: [attempt('round-trip', undefined, '1.9.exercise.1')],
       reviews: [{
         id: 'review-1',
         conceptId: 'tensor-shapes',

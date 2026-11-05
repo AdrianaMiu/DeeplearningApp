@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
@@ -16,6 +16,80 @@ function NavigationControls() {
 }
 
 describe('practice modes', () => {
+  it('opens the explicit review question and rejects questions from a different activity', async () => {
+    const db = createLearningDatabase(`question-context-${crypto.randomUUID()}`);
+    const repository = new LearningRepository(db);
+    let view = render(<MemoryRouter initialEntries={['/practice?mode=quick&entry=optimization-studio&question=studio-12-q2']}><AppShell repository={repository} /></MemoryRouter>);
+    expect(await screen.findByRole('heading', { name: /list w after each of three updates/i })).toBeInTheDocument();
+    expect(screen.getByText(/Question 2\/4/)).toBeInTheDocument();
+    view.unmount();
+    view = render(<MemoryRouter initialEntries={['/practice?mode=quick&entry=optimization-studio&question=studio-13-q2']}><AppShell repository={repository} /></MemoryRouter>);
+    expect(await screen.findByRole('heading', { name: /negative gradient tell you/i })).toBeInTheDocument();
+    expect(screen.getByText(/Question 1\/4/)).toBeInTheDocument();
+    view.unmount(); db.close(); await db.delete();
+  });
+  it('takes a due studio concept from Today through review to a rescheduled answer', async () => {
+    const db = createLearningDatabase(`due-studio-${crypto.randomUUID()}`);
+    const repository = new LearningRepository(db);
+    const question = questions.find((item) => item.id === 'studio-12-q1')!;
+    const conceptId = question.conceptIds[0];
+    await repository.appendReview({ id: 'due', conceptId, attemptId: 'old', timestamp: '2026-01-01T00:00:00Z', dueAt: '2026-01-02T00:00:00Z', intervalIndex: 0 });
+    const user = userEvent.setup();
+    const view = render(<MemoryRouter><AppShell repository={repository} /></MemoryRouter>);
+    await user.click((await screen.findAllByRole('link', { name: 'Open review' }))[0]);
+    await user.click(await screen.findByRole('link', { name: /start earliest review/i }));
+    expect(await screen.findByRole('heading', { name: question.prompt })).toBeInTheDocument();
+    await user.click(screen.getByRole('radio', { name: String(question.answer) }));
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await screen.findByRole('button', { name: /next question/i });
+    const reviews = (await repository.getReviews()).filter((item) => item.conceptId === conceptId);
+    expect(reviews).toHaveLength(2);
+    expect(reviews[1].intervalIndex).toBe(1);
+    expect(Date.parse(reviews[1].dueAt)).toBeGreaterThan(Date.now());
+    view.unmount(); db.close(); await db.delete();
+  });
+
+  it('advances from the latest reset rather than a historical maximum interval', async () => {
+    const db = createLearningDatabase(`reset-interval-${crypto.randomUUID()}`);
+    const repository = new LearningRepository(db);
+    const question = questions.find((item) => item.id === 'studio-12-q1')!;
+    const conceptId = question.conceptIds[0];
+    await repository.appendReview({ id: 'reset', conceptId, attemptId: 'reset', timestamp: '2026-02-01T00:00:00Z', dueAt: '2026-02-02T00:00:00Z', intervalIndex: 0 });
+    await repository.appendReview({ id: 'old', conceptId, attemptId: 'old', timestamp: '2026-01-01T00:00:00Z', dueAt: '2026-01-31T00:00:00Z', intervalIndex: 4 });
+    const user = userEvent.setup();
+    const view = render(<MemoryRouter initialEntries={['/practice?mode=quick&entry=optimization-studio']}><AppShell repository={repository} /></MemoryRouter>);
+    await user.click(await screen.findByRole('radio', { name: String(question.answer) }));
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await screen.findByRole('button', { name: /next question/i });
+    expect((await repository.getReviews()).filter((item) => item.conceptId === conceptId).at(-1)?.intervalIndex).toBe(1);
+    view.unmount(); db.close(); await db.delete();
+  });
+
+  it.each(['attempt', 'review'])('keeps a failed final %s save retryable and completes only after atomic persistence', async (failure) => {
+    const db = createLearningDatabase(`retry-${crypto.randomUUID()}`);
+    const repository = new LearningRepository(db);
+    const user = userEvent.setup();
+    const view = render(<MemoryRouter initialEntries={['/practice?mode=chapter&entry=optimization-studio']}><AppShell repository={repository} /></MemoryRouter>);
+    await screen.findByRole('heading', { name: /chapter check/i });
+    for (let i = 0; i < 3; i++) {
+      const radio = screen.queryAllByRole('radio')[0];
+      if (radio) await user.click(radio); else await user.type(screen.getByLabelText(/your answer/i), '1');
+      await user.click(screen.getByRole('button', { name: /check answer/i }));
+      await user.click(await screen.findByRole('button', { name: /next question/i }));
+    }
+    vi.spyOn(repository, failure === 'attempt' ? 'appendAttempt' : 'appendReview').mockRejectedValueOnce(new Error('Disk unavailable'));
+    await user.type(screen.getByLabelText(/your answer/i), 'Gradient 2, updated weight 1.5, new loss 1.125.');
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await screen.findByText(/could not save this attempt/i);
+    expect(screen.queryByText('Chapter check complete.')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /check answer/i })).toBeEnabled();
+    expect(await repository.getAttempts()).toHaveLength(3);
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await screen.findByText('Chapter check complete.');
+    expect(await repository.getAttempts()).toHaveLength(4);
+    view.unmount(); db.close(); await db.delete();
+    vi.restoreAllMocks();
+  });
   it('renders a response control for each question type', () => {
     const base = questions[0];
     const renderType = (type: typeof base.type) => render(<QuestionResponse question={{ ...base, type, options: ['Yes', 'No'], rubric: ['Explain your reasoning'] }} value="" onChange={() => {}} />);

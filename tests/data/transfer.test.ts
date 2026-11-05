@@ -89,6 +89,16 @@ describe('local learning data transfer', () => {
     await expect(repository.getAttempts()).resolves.toEqual([attempt('attempt-1')]);
   });
 
+  it('merges newer same-ID lesson reasoning without rolling it back from older backups', async () => {
+    const older = { id: 'guided', lessonId: 'tensor-shapes', goal: 'Shapes', startedAt: '2026-11-03T08:00:00.000Z', updatedAt: '2026-11-03T08:00:00.000Z', resumeStep: 'predict', prediction: 'Old guess', reflection: '' };
+    const newer = { ...older, updatedAt: '2026-11-04T08:00:00.000Z', resumeStep: 'reflect', prediction: 'Revised guess', reflection: 'New explanation', workedRevealed: true };
+    await repository.saveSession(older);
+    await importProgress(db, JSON.stringify(payload({ sessions: [newer] })), 'merge');
+    expect(await repository.getSessions()).toEqual([newer]);
+    await importProgress(db, JSON.stringify(payload({ sessions: [older] })), 'merge');
+    expect(await repository.getSessions()).toEqual([newer]);
+  });
+
   it('merges distinct attempts while ignoring identical UUIDs', async () => {
     await repository.appendAttempt(attempt('attempt-1'));
     await repository.saveSettings(settings('2026-11-03T07:00:00.000Z'));

@@ -78,6 +78,6 @@ Gemini processes indexed book documents and submitted conversation context. Free
 
 Learning data stays in the browser. Tutor context is sent only after the learner opens the tutor, accepts its disclosure, completes Turnstile, and asks a question. Application code does not log prompts or answers.
 
-Use **Settings → Download progress JSON** before reset or replace. Import presents a preview with merge or replace; merge ignores identical UUIDs and preserves distinct evidence. A service worker update does not reset progress.
+Use **Settings → Download progress JSON** before reset or replace. Import presents a preview with merge or replace. Merge ignores duplicate attempt/review UUIDs and preserves distinct evidence. Saved lesson sessions with the same ID use the newest `updatedAt` record (equal timestamps keep the local record); settings also use the newest record. Notes with existing IDs remain local. A service worker update does not reset progress.
 
 Content states are `unconverted` (indexed source), `drafted` (awaiting review), `reviewed` (checked companion material), and `published` (approved for release). Mastery uses evidence: Demonstrated requires two distinct unassisted successes including an application item; Retained additionally requires a later unseen unassisted check after at least seven days.

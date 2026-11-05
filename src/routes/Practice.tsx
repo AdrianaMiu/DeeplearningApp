@@ -8,12 +8,12 @@ import { useAppData } from '../app/context';
 import { diagnosticQuestions } from '../content/diagnostic';
 import { learningEntries, lessons } from '../content/lessons';
 import { questions } from '../content/questions';
-import { scheduleReview } from '../domain/review';
+import { getLatestReviews, scheduleReview } from '../domain/review';
 import type { Question } from '../domain/types';
 
 export default function Practice() {
   const [params] = useSearchParams();
-  const sessionKey = JSON.stringify([params.get('mode'), params.get('entry')]);
+  const sessionKey = JSON.stringify([params.get('mode'), params.get('entry'), params.get('question')]);
   return <PracticeSession key={sessionKey} />;
 }
 
@@ -33,10 +33,13 @@ function PracticeSession() {
   const [recommendation, setRecommendation] = useState('tensor-shapes');
   const [answer, setAnswer] = useState('');
   const [hints, setHints] = useState(0);
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const entryQuestions = questions.filter((item) => item.lessonId === entry?.id);
+  const [questionIndex, setQuestionIndex] = useState(() => mode === 'quick' ? Math.max(0, entryQuestions.findIndex((item) => item.id === params.get('question'))) : 0);
   const [confidence, setConfidence] = useState<1 | 2 | 3 | 4 | 5>(3);
   const [solutionRevealed, setSolutionRevealed] = useState(false);
   const [feedback, setFeedback] = useState<string>();
+  const [saveError, setSaveError] = useState<string>();
+  const [saving, setSaving] = useState(false);
   useEffect(() => { if (snapshot?.settings.diagnosticSkipped || snapshot?.settings.diagnosticCompleted) setSkipped(true); }, [snapshot]);
 
   async function skipDiagnostic() {
@@ -49,25 +52,25 @@ function PracticeSession() {
     const timestamp = new Date().toISOString();
     const result = gradeQuestion(question, response).score;
     const attemptId = crypto.randomUUID();
-    await repository.appendAttempt({
-      id: attemptId, questionId: question.id, questionVersion: question.version,
-      conceptIds: question.conceptIds, response, timestamp, score: result,
-      gradingMethod: question.rubric ? 'rubric' : 'deterministic', confidence,
-      hintsUsed: usedHints, solutionRevealed: revealed,
-      tutorSupportLevel: usedHints > 0 ? 'hint' : revealed ? 'revealed' : 'none',
-      applicationEvidence: question.applicationEvidence,
-    });
-    const existingReviews = await repository.getReviews();
-    for (const conceptId of question.conceptIds) {
-      const currentInterval = existingReviews
-        .filter((item) => item.conceptId === conceptId)
-        .reduce((latest, item) => Math.max(latest, item.intervalIndex), -1);
-      const scheduled = scheduleReview(timestamp, currentInterval, result === 1 && !revealed && usedHints === 0, confidence);
-      await repository.appendReview({
-        id: crypto.randomUUID(), conceptId, attemptId, timestamp,
-        intervalIndex: scheduled.intervalIndex, dueAt: scheduled.dueAt,
+    await repository.db.transaction('rw', repository.db.attempts, repository.db.reviews, async () => {
+      await repository.appendAttempt({
+        id: attemptId, questionId: question.id, questionVersion: question.version,
+        conceptIds: question.conceptIds, response, timestamp, score: result,
+        gradingMethod: question.rubric ? 'rubric' : 'deterministic', confidence,
+        hintsUsed: usedHints, solutionRevealed: revealed,
+        tutorSupportLevel: usedHints > 0 ? 'hint' : revealed ? 'revealed' : 'none',
+        applicationEvidence: question.applicationEvidence,
       });
-    }
+      const latestReviews = getLatestReviews(await repository.getReviews());
+      for (const conceptId of question.conceptIds) {
+        const currentInterval = latestReviews.get(conceptId)?.intervalIndex ?? -1;
+        const scheduled = scheduleReview(timestamp, currentInterval, result === 1 && !revealed && usedHints === 0, confidence);
+        await repository.appendReview({
+          id: crypto.randomUUID(), conceptId, attemptId, timestamp,
+          intervalIndex: scheduled.intervalIndex, dueAt: scheduled.dueAt,
+        });
+      }
+    });
     refresh();
     return result;
   }
@@ -83,16 +86,20 @@ function PracticeSession() {
   }
 
   async function submitPractice(question: Question) {
+    if (saving || feedback) return;
+    setSaving(true); setSaveError(undefined);
     try {
       const result = await recordEvidence(question, answer, hints, solutionRevealed);
       setFeedback(result ? `Correct. ${question.explanation}` : `Not yet. ${question.explanation}`);
     } catch (reason) {
-      setFeedback(reason instanceof Error ? `Could not save this attempt: ${reason.message}` : 'Could not save this attempt. Try again.');
+      setSaveError(reason instanceof Error ? `Could not save this attempt: ${reason.message}. Try again.` : 'Could not save this attempt. Try again.');
+    } finally {
+      setSaving(false);
     }
   }
 
   function resetQuestion(nextIndex: number) {
-    setQuestionIndex(nextIndex); setAnswer(''); setHints(0); setFeedback(undefined); setSolutionRevealed(false); setConfidence(3);
+    setQuestionIndex(nextIndex); setAnswer(''); setHints(0); setFeedback(undefined); setSaveError(undefined); setSolutionRevealed(false); setConfidence(3);
   }
 
   if ((mode === 'diagnostic' && !diagnosticDismissed) || (!mode && !skipped)) {
@@ -114,7 +121,8 @@ function PracticeSession() {
       {solutionRevealed && <p className="hint">Solution: {Array.isArray(question.answer) ? question.answer.join(', ') : question.answer}. {question.explanation}</p>}
       <QuestionResponse question={question} value={answer} onChange={setAnswer} />
       <label>Confidence<select name="answer-confidence" value={confidence} onChange={(event) => setConfidence(Number(event.target.value) as 1 | 2 | 3 | 4 | 5)}><option value="1">1 · guessing</option><option value="2">2 · uncertain</option><option value="3">3 · fairly sure</option><option value="4">4 · confident</option><option value="5">5 · could teach it</option></select></label>
-      <button className="button button--primary" disabled={!answer.trim() || Boolean(feedback)} onClick={() => submitPractice(question)}>Check answer</button>
+      <button className="button button--primary" disabled={!answer.trim() || Boolean(feedback) || saving} onClick={() => submitPractice(question)}>{saving ? 'Saving answer…' : 'Check answer'}</button>
+      {saveError && <p className="result-bad" role="alert">{saveError}</p>}
       {feedback && <><p className="feedback" role="status">{feedback} {(hints > 0 || solutionRevealed) && 'Recorded as assisted evidence.'}</p>{mode === 'chapter' && questionIndex === selectedQuestions.length - 1 ? <p>Chapter check complete.</p> : <button className="button button--quiet" onClick={() => resetQuestion((questionIndex + 1) % selectedQuestions.length)}>Next question</button>}</>}
     </section></div>;
 }

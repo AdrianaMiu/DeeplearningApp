@@ -45,7 +45,7 @@ describe('secondary route guidance', () => {
     ]);
     open('/review');
     expect(await screen.findByText('1 review due')).toBeInTheDocument();
-    expect(screen.getByText(/residual network/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /practice residual network/i })).toHaveAttribute('href', '/practice?mode=quick&entry=modern-cnn-studio&question=studio-8-q1');
     expect(screen.queryByText(/tensor shape/i)).not.toBeInTheDocument();
   });
 

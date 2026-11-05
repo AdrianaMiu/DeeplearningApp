@@ -165,17 +165,21 @@ export async function importProgress(
       return;
     }
 
-    const [attempts, reviews, sessions, notes, currentSettings] = await Promise.all([
+    const localSessions = new Map((await db.sessions.toArray()).map((session) => [session.id, session]));
+    const sessions = value.sessions.filter((session) => {
+      const local = localSessions.get(session.id);
+      return !local || Date.parse(session.updatedAt) > Date.parse(local.updatedAt);
+    });
+    const [attempts, reviews, notes, currentSettings] = await Promise.all([
       unseen(value.attempts, (await db.attempts.toCollection().primaryKeys()) as string[]),
       unseen(value.reviews, (await db.reviews.toCollection().primaryKeys()) as string[]),
-      unseen(value.sessions, (await db.sessions.toCollection().primaryKeys()) as string[]),
       unseen(value.notes, (await db.notes.toCollection().primaryKeys()) as string[]),
       db.settings.get('learner-settings'),
     ]);
     await Promise.all([
       db.attempts.bulkAdd(attempts),
       db.reviews.bulkAdd(reviews),
-      db.sessions.bulkAdd(sessions),
+      db.sessions.bulkPut(sessions),
       db.notes.bulkAdd(notes),
       !currentSettings || value.settings.updatedAt > currentSettings.updatedAt
         ? db.settings.put(value.settings)
@@ -183,7 +187,7 @@ export async function importProgress(
     ]);
     added.attempts = attempts.length;
     added.reviews = reviews.length;
-    added.sessions = sessions.length;
+    added.sessions = sessions.filter((session) => !localSessions.has(session.id)).length;
     added.notes = notes.length;
   });
 

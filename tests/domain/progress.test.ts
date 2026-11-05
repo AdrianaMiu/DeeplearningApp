@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Attempt } from '../../src/domain/types';
 import { deriveConceptProgress, recommendNextTask } from '../../src/domain/progress';
-import { REVIEW_INTERVAL_DAYS, scheduleReview, getDueReviews } from '../../src/domain/review';
+import { REVIEW_INTERVAL_DAYS, scheduleReview, getDueReviews, getLatestReviews } from '../../src/domain/review';
 
 const attempt = (overrides: Partial<Attempt>): Attempt => ({
   id: crypto.randomUUID(),
@@ -21,6 +21,13 @@ const attempt = (overrides: Partial<Attempt>): Attempt => ({
 });
 
 describe('review scheduling', () => {
+  it('keeps a reset as the scheduling baseline regardless of history order', () => {
+    const older = { id: 'old', conceptId: 'gradient-descent', attemptId: 'old-attempt', timestamp: '2026-01-01T00:00:00Z', dueAt: '2026-01-31T00:00:00Z', intervalIndex: 4 };
+    const reset = { ...older, id: 'reset', timestamp: '2026-02-01T00:00:00Z', dueAt: '2026-02-02T00:00:00Z', intervalIndex: 0 };
+    for (const history of [[older, reset], [reset, older]]) {
+      expect(scheduleReview('2026-02-02T00:00:00Z', getLatestReviews(history).get('gradient-descent')!.intervalIndex, true, 4)).toEqual({ intervalIndex: 1, dueAt: '2026-02-05T00:00:00.000Z' });
+    }
+  });
   it('uses the latest review per concept independent of order and resolves timestamp ties deterministically', () => {
     const base = { conceptId: 'tensor-shape', attemptId: 'a', intervalIndex: 0 };
     const old = { ...base, id: 'old', timestamp: '2026-01-01T00:00:00Z', dueAt: '2026-01-02T00:00:00Z' };

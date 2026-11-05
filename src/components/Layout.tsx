@@ -46,7 +46,11 @@ export function Layout({ children }: { children: ReactNode }) {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     drawerRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
-    const focusFrame = requestAnimationFrame(() => drawerRef.current?.querySelector<HTMLButtonElement>('button')?.focus());
+    const focusFrame = requestAnimationFrame(() => {
+      if (!drawerRef.current?.contains(document.activeElement)) {
+        drawerRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
+      }
+    });
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();

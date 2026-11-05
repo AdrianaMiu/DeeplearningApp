@@ -17,7 +17,7 @@ export function scheduleReview(
 /** Resolve append-only history before determining which concepts are due.
  * Identical event times prefer the later scheduled due date, then the ID,
  * so imported histories produce the same answer regardless of array order. */
-export function getDueReviews(reviews: readonly import('./types').ReviewEvent[], now: string): import('./types').ReviewEvent[] {
+export function getLatestReviews(reviews: readonly import('./types').ReviewEvent[]): Map<string, import('./types').ReviewEvent> {
   const latest = new Map<string, import('./types').ReviewEvent>();
   for (const review of reviews) {
     const previous = latest.get(review.conceptId);
@@ -29,6 +29,10 @@ export function getDueReviews(reviews: readonly import('./types').ReviewEvent[],
       latest.set(review.conceptId, review);
     }
   }
+  return latest;
+}
+
+export function getDueReviews(reviews: readonly import('./types').ReviewEvent[], now: string): import('./types').ReviewEvent[] {
   const cutoff = Date.parse(now);
-  return [...latest.values()].filter((review) => Date.parse(review.dueAt) <= cutoff);
+  return [...getLatestReviews(reviews).values()].filter((review) => Date.parse(review.dueAt) <= cutoff);
 }

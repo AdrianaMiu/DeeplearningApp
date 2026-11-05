@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import unittest
 from pathlib import Path
 
@@ -8,6 +9,13 @@ SPEC = importlib.util.spec_from_file_location("extract_inventory", MODULE_PATH)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader
 SPEC.loader.exec_module(MODULE)
+
+WORKTREE_ROOT = Path(__file__).parents[2]
+PDF_CANDIDATES = [
+    WORKTREE_ROOT / "2106.11342v5.pdf",
+    Path(__file__).parents[4] / "2106.11342v5.pdf",
+]
+VERIFIED_PDF = next((path for path in PDF_CANDIDATES if path.exists()), None)
 
 
 class ExerciseExtractionTests(unittest.TestCase):
@@ -145,6 +153,18 @@ class ExerciseExtractionTests(unittest.TestCase):
         exercises = MODULE.extract_exercises(pages, headings, first_pdf_page=983)
 
         self.assertEqual([item["sourceExerciseNumber"] for item in exercises], [1, 2, 3, 4])
+
+    @unittest.skipUnless(VERIFIED_PDF, "verified source PDF is not available locally")
+    def test_verified_pdf_reproduces_the_checked_in_inventory_and_all_heading_audits(self):
+        audit = []
+
+        inventory = MODULE.extract(VERIFIED_PDF, exercise_audit=audit)
+        checked_in = json.loads((WORKTREE_ROOT / "src/content/generated-inventory.json").read_text())
+
+        self.assertEqual(inventory, checked_in)
+        self.assertEqual(len(audit), 148)
+        self.assertEqual(sum(len(item["selectedNumbers"]) for item in audit), 609)
+        self.assertTrue(all(not item["anomalies"] for item in audit))
 
 
 if __name__ == "__main__":

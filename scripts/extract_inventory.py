@@ -79,12 +79,32 @@ def extract_exercises(
         candidates: list[tuple[int, int, int | None, bool]] = []
         first_candidate = next((page[0] for page in candidates_by_page if page), None)
         numbered_mode = first_candidate is not None and first_candidate[2] is not None
+        expected_top_level = 1
         for page_candidates in candidates_by_page:
             same_kind = [item for item in page_candidates if (item[2] is not None) == numbered_mode]
             if not same_kind:
                 continue
-            top_prompt_column = min(item[1] for item in same_kind)
-            candidates.extend(item for item in same_kind if item[1] == top_prompt_column)
+            columns = sorted({item[1] for item in same_kind})
+            if numbered_mode:
+                # A continuation page may begin with only subquestions from the
+                # preceding top-level item. Choose a column only when it contains
+                # the next expected top-level number; the leftmost such column
+                # wins when both a parent and nested list restart at 1.
+                viable_columns = [
+                    column for column in columns
+                    if expected_top_level in [item[2] for item in same_kind if item[1] == column]
+                ]
+                if not viable_columns:
+                    continue
+                top_prompt_column = min(viable_columns)
+                top_level_page = [item for item in same_kind if item[1] == top_prompt_column]
+                candidates.extend(top_level_page)
+                for _page_index, _indent, number, _bullet in top_level_page:
+                    if number == expected_top_level:
+                        expected_top_level += 1
+            else:
+                top_prompt_column = min(columns)
+                candidates.extend(item for item in same_kind if item[1] == top_prompt_column)
 
         numbered = [item for item in candidates if item[2] is not None]
         bullets = [item for item in candidates if item[3]]

@@ -23,7 +23,8 @@ export function Layout({ children }: { children: ReactNode }) {
   const menuRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
   const { pathname, key: locationKey } = useLocation();
-  const route: SectionRoute = matchPath('/lesson/:lessonId', pathname) ? '/curriculum'
+  const route: SectionRoute = matchPath('/lesson/:lessonId', pathname) || matchPath('/section/:sectionId', pathname)
+    || matchPath('/exercise/:exerciseId', pathname) ? '/curriculum'
     : navigation.find(([to]) => matchPath(to, pathname))?.[0] ?? '/';
   const modalOpen = mobile && open;
 

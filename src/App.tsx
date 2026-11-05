@@ -14,6 +14,8 @@ const Lab = lazy(() => import('./routes/Lab'));
 const Progress = lazy(() => import('./routes/Progress'));
 const Notes = lazy(() => import('./routes/Notes'));
 const Settings = lazy(() => import('./routes/Settings'));
+const SectionActivity = lazy(() => import('./routes/SectionActivity'));
+const ExerciseActivity = lazy(() => import('./routes/ExerciseActivity'));
 
 export function AppShell({ repository }: { repository?: LearningRepository }) {
   return (
@@ -24,6 +26,8 @@ export function AppShell({ repository }: { repository?: LearningRepository }) {
             <Route path="/" element={<Today />} />
             <Route path="/curriculum/:chapterId?" element={<Curriculum />} />
             <Route path="/lesson/:lessonId" element={<Lesson />} />
+            <Route path="/section/:sectionId" element={<SectionActivity />} />
+            <Route path="/exercise/:exerciseId" element={<ExerciseActivity />} />
             <Route path="/practice" element={<Practice />} />
             <Route path="/review" element={<Review />} />
             <Route path="/lab" element={<Lab />} />

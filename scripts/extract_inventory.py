@@ -39,11 +39,19 @@ def source_ref(section_id: str, pdf_page: int) -> dict:
     }
 
 
-def extract_exercises(pages: list[str], headings: list[dict], first_pdf_page: int = 41) -> list[dict]:
-    """Extract top-level exercise metadata between each Exercises heading and the next heading."""
+def extract_exercises(
+    pages: list[str], headings: list[dict], first_pdf_page: int = 41,
+    audit: list[dict] | None = None,
+) -> list[dict]:
+    """Extract exercise metadata and reject structurally ambiguous heading ranges.
+
+    When supplied, ``audit`` receives one reconciliation record for every
+    recognized Exercises heading, including headings with no selected items.
+    """
     ordered_headings = sorted(headings, key=lambda item: (item["pageIndex"], item["lineIndex"]))
     exercises: list[dict] = []
     exercise_order = 1
+    reconciliation: list[dict] = []
     for heading_index, heading in enumerate(ordered_headings):
         if heading["title"].strip().lower() != "exercises":
             continue
@@ -90,6 +98,33 @@ def extract_exercises(pages: list[str], headings: list[dict], first_pdf_page: in
         elif bullets:
             selected = [(item[0], index) for index, item in enumerate(bullets, start=1)]
 
+        selected_numbers = [number for _page_index, number in selected]
+        candidate_numbers = [item[2] for item in numbered if item[2] is not None]
+        anomalies: list[str] = []
+        if numbered:
+            highest = max(candidate_numbers)
+            expected_numbers = list(range(1, highest + 1))
+            if candidate_numbers != expected_numbers:
+                missing = sorted(set(expected_numbers) - set(candidate_numbers))
+                duplicates = sorted({number for number in candidate_numbers if candidate_numbers.count(number) > 1})
+                details = []
+                if missing:
+                    details.append(f"missing numbers {missing}")
+                if duplicates:
+                    details.append(f"duplicate numbers {duplicates}")
+                if not details:
+                    details.append("out-of-order numbering")
+                anomalies.append("numbered candidate sequence is not contiguous: " + ", ".join(details))
+        if not selected:
+            anomalies.append("zero exercise items selected")
+        reconciliation.append({
+            "sectionId": heading["id"],
+            "candidateNumbers": candidate_numbers,
+            "selectedNumbers": selected_numbers,
+            "mode": "numbered" if numbered else "bulleted" if bullets else "none",
+            "anomalies": anomalies,
+        })
+
         for page_index, number in selected:
             section_id = heading["id"]
             exercises.append({
@@ -98,10 +133,18 @@ def extract_exercises(pages: list[str], headings: list[dict], first_pdf_page: in
                 "contentStatus": "unconverted", "source": source_ref(section_id, first_pdf_page + page_index),
             })
             exercise_order += 1
+    if audit is not None:
+        audit.extend(reconciliation)
+    failures = [entry for entry in reconciliation if entry["anomalies"]]
+    if failures:
+        message = "; ".join(
+            f"{entry['sectionId']}: {', '.join(entry['anomalies'])}" for entry in failures
+        )
+        raise ValueError(f"Exercise extraction reconciliation failed: {message}")
     return exercises
 
 
-def extract(pdf: Path) -> dict:
+def extract(pdf: Path, exercise_audit: list[dict] | None = None) -> dict:
     digest = hashlib.sha256(pdf.read_bytes()).hexdigest()
     if digest != EXPECTED_HASH:
         raise SystemExit(f"Unexpected PDF hash: {digest}")
@@ -158,7 +201,7 @@ def extract(pdf: Path) -> dict:
             "contentStatus": "unconverted", "source": source_ref(section_id, item["pdfPage"]),
         })
 
-    exercises = extract_exercises(pages, headings)
+    exercises = extract_exercises(pages, headings, audit=exercise_audit)
 
     orientation = [
         {"id": "orientation-installation", "title": "Installation", "order": 1, "kind": "orientation",
@@ -178,10 +221,20 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("pdf", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument(
+        "--audit-output", type=Path,
+        help="Write the per-Exercises-heading structural reconciliation report as JSON.",
+    )
     args = parser.parse_args()
-    inventory = extract(args.pdf)
+    exercise_audit: list[dict] = []
+    inventory = extract(args.pdf, exercise_audit=exercise_audit)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(inventory, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if args.audit_output:
+        args.audit_output.parent.mkdir(parents=True, exist_ok=True)
+        args.audit_output.write_text(
+            json.dumps(exercise_audit, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
     print(f"Wrote {len(inventory['sections'])} sections and {len(inventory['exercises'])} exercise references")
 
 

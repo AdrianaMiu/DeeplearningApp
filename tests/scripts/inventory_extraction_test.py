@@ -11,6 +11,49 @@ SPEC.loader.exec_module(MODULE)
 
 
 class ExerciseExtractionTests(unittest.TestCase):
+    def test_reports_a_numbering_gap_instead_of_silently_truncating_the_list(self):
+        pages = ["2.1.8 Exercises\n      1. First\n      3. Third\n"]
+        headings = [{"id": "2.1.8", "title": "Exercises", "pageIndex": 0, "lineIndex": 0}]
+        audit = []
+
+        with self.assertRaisesRegex(ValueError, r"2\.1\.8.*missing.*2"):
+            MODULE.extract_exercises(pages, headings, first_pdf_page=50, audit=audit)
+
+        self.assertEqual(audit[0]["sectionId"], "2.1.8")
+        self.assertEqual(audit[0]["candidateNumbers"], [1, 3])
+        self.assertEqual(audit[0]["selectedNumbers"], [1])
+        self.assertTrue(audit[0]["anomalies"])
+
+    def test_reports_every_exercise_heading_including_zero_item_sections(self):
+        pages = ["2.1.8 Exercises\nNo recognizable items\n2.2 Next\n"]
+        headings = [
+            {"id": "2.1.8", "title": "Exercises", "pageIndex": 0, "lineIndex": 0},
+            {"id": "2.2", "title": "Next", "pageIndex": 0, "lineIndex": 2},
+        ]
+        audit = []
+
+        with self.assertRaisesRegex(ValueError, r"2\.1\.8.*zero exercise items"):
+            MODULE.extract_exercises(pages, headings, audit=audit)
+
+        self.assertEqual(len(audit), 1)
+        self.assertEqual(audit[0]["selectedNumbers"], [])
+
+    def test_reconciles_each_heading_when_all_sequences_are_contiguous(self):
+        pages = [
+            "2.1.8 Exercises\n  1. First\n  2. Second\n2.2.5 Exercises\n  1. Only\n"
+        ]
+        headings = [
+            {"id": "2.1.8", "title": "Exercises", "pageIndex": 0, "lineIndex": 0},
+            {"id": "2.2.5", "title": "Exercises", "pageIndex": 0, "lineIndex": 3},
+        ]
+        audit = []
+
+        exercises = MODULE.extract_exercises(pages, headings, audit=audit)
+
+        self.assertEqual(len(exercises), 3)
+        self.assertEqual([item["sectionId"] for item in audit], ["2.1.8", "2.2.5"])
+        self.assertTrue(all(not item["anomalies"] for item in audit))
+
     def test_continues_numbered_exercises_across_pages_and_records_item_pages(self):
         pages = [
             "2.3.13 Exercises\n     1. First task\n        1. Nested choice\n        2. Nested choice\n",

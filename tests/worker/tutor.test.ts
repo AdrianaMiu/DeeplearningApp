@@ -67,6 +67,8 @@ describe('guarded tutor Worker', () => {
     expect((await handleTutorRequest(request({ ...validBody, mode: 'solve' }), env(), fetcher)).status).toBe(400);
     expect((await handleTutorRequest(request({ ...validBody, lessonId: 'secret-chapter' }), env(), fetcher)).status).toBe(400);
     expect((await handleTutorRequest(request({ ...validBody, learnerAttempt: 'x'.repeat(4_001) }), env(), fetcher)).status).toBe(413);
+    expect((await handleTutorRequest(request({ ...validBody, learnerAttempt: 'x'.repeat(1_201) }), env(), fetcher)).status).toBe(413);
+    expect((await handleTutorRequest(request({ ...validBody, question: 'x'.repeat(1_001) }), env(), fetcher)).status).toBe(400);
     expect(fetcher).not.toHaveBeenCalled();
   });
 

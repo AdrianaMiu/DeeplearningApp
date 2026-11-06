@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { CONTENT_VERSION, tutorContexts } from './context';
 import { generateGroundedTutorReply, TutorProviderError } from './gemini';
 import { DeadlineError, fetchJson, readText, withDeadline } from '../../src/tutor/deadline';
+import { TUTOR_INPUT_LIMITS } from '../../src/tutor/context-budget';
 
 interface RateLimiter { limit(input: { key: string }): Promise<{ success: boolean }> }
 interface KvNamespace {
@@ -21,17 +22,21 @@ export interface TutorEnv {
   DAILY_LIMITS: KvNamespace;
 }
 
-const conversationSchema = z.object({ role: z.enum(['user', 'assistant']), content: z.string().max(800) });
+const conversationSchema = z.object({ role: z.enum(['user', 'assistant']), content: z.string().max(TUTOR_INPUT_LIMITS.message) });
 const requestSchema = z.object({
   lessonId: z.string(),
   conceptIds: z.array(z.string()).max(8),
   mode: z.enum(['hint', 'explain', 'feedback', 'reveal']),
-  learnerAttempt: z.string(),
-  question: z.string().max(4_000),
+  learnerAttempt: z.string().max(TUTOR_INPUT_LIMITS.learnerAttempt),
+  question: z.string().max(TUTOR_INPUT_LIMITS.question),
   locale: z.enum(['en', 'ro-help']),
-  recentConversation: z.array(conversationSchema).max(6),
+  recentConversation: z.array(conversationSchema).max(TUTOR_INPUT_LIMITS.messages),
   turnstileToken: z.string().min(1),
   anonymousClientId: z.string().min(8).max(128),
+}).superRefine((value, context) => {
+  const total = value.learnerAttempt.length + value.question.length
+    + value.recentConversation.reduce((sum, turn) => sum + turn.content.length, 0);
+  if (total > TUTOR_INPUT_LIMITS.total) context.addIssue({ code: 'custom', message: 'Tutor context budget exceeded.' });
 });
 
 type Fetcher = typeof fetch;
@@ -108,8 +113,8 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
   try { unknownBody = JSON.parse(raw); } catch { return safeError('INVALID_PAYLOAD', 'Request must be valid JSON.', 400, origin); }
   if (typeof unknownBody === 'object' && unknownBody !== null && 'learnerAttempt' in unknownBody
     && typeof (unknownBody as { learnerAttempt?: unknown }).learnerAttempt === 'string'
-    && (unknownBody as { learnerAttempt: string }).learnerAttempt.length > 4_000) {
-    return safeError('PAYLOAD_TOO_LARGE', 'Learner attempt is limited to 4,000 characters.', 413, origin);
+    && (unknownBody as { learnerAttempt: string }).learnerAttempt.length > TUTOR_INPUT_LIMITS.learnerAttempt) {
+    return safeError('PAYLOAD_TOO_LARGE', `Learner attempt is limited to ${TUTOR_INPUT_LIMITS.learnerAttempt} characters.`, 413, origin);
   }
   const parsed = requestSchema.safeParse(unknownBody);
   if (!parsed.success) return safeError('INVALID_PAYLOAD', 'Tutor request is malformed or uses an unsupported mode.', 400, origin);
@@ -143,7 +148,7 @@ export async function handleTutorRequest(request: Request, env: TutorEnv, fetche
       `Allowed source section IDs: ${context.sourceRefs.map((sourceRef) => sourceRef.sectionId).join(', ')}`,
       `Question: ${body.question}`,
       `Learner attempt: ${body.learnerAttempt}`,
-      `Recent conversation: ${JSON.stringify(body.recentConversation.slice(-6))}`,
+      `Recent conversation: ${JSON.stringify(body.recentConversation)}`,
       'Return only allowed source section IDs. If context is insufficient, set insufficientEvidence true. Never invent a page, equation, or citation.',
     ].join('\n');
 

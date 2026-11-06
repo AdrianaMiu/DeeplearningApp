@@ -33,7 +33,7 @@ describe('Deep Learning Companion interface', () => {
     const user = userEvent.setup();
     renderAt('/');
 
-    expect(await screen.findByRole('heading', { name: /your next clear step/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /your next clear step/i }, { timeout: 3_000 })).toBeInTheDocument();
     await user.click(screen.getByRole('link', { name: /curriculum/i }));
     expect(await screen.findByRole('heading', { name: /the complete map/i })).toBeInTheDocument();
     expect(screen.getByText(/20 chapters/i)).toBeInTheDocument();

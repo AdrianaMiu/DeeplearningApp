@@ -53,7 +53,12 @@ describe('TutorPanel', () => {
     act(() => (callbacks[1].callback as (token: string) => void)('second-token'));
     await user.click(ask);
     expect(await screen.findByText('Second reply')).toBeInTheDocument();
-    expect(JSON.parse(fetchTutor.mock.calls[1][1].body)).toMatchObject({ turnstileToken: 'second-token', learnerAttempt: 'My shape is 3' });
+    const secondBody = JSON.parse(fetchTutor.mock.calls[1][1].body);
+    expect(secondBody).toMatchObject({ turnstileToken: 'second-token', learnerAttempt: 'My shape is 3' });
+    expect(secondBody.recentConversation).toEqual(success ? [
+      { role: 'user', content: 'What axis remains?' },
+      { role: 'assistant', content: 'First reply' },
+    ] : []);
   });
 
   it('renews verification after synchronous client-id failure while preserving the question and reply', async () => {

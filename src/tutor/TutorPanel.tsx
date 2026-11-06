@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 
 import { anonymousClientId, requestTutor as defaultRequestTutor, type TutorMode, type TutorRequest, type TutorResponse } from './client';
+import { compactTutorInput, type TutorConversationTurn } from './context-budget';
 import { TurnstileWidget } from './TurnstileWidget';
 
 export function TutorPanel({ lessonId, conceptIds, learnerAttempt, locale = 'en', requestTutor = defaultRequestTutor }: {
@@ -18,6 +19,7 @@ export function TutorPanel({ lessonId, conceptIds, learnerAttempt, locale = 'en'
   const [reply, setReply] = useState<TutorResponse>();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [conversation, setConversation] = useState<TutorConversationTurn[]>([]);
   const [verificationGeneration, setVerificationGeneration] = useState(0);
   const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY ?? '';
   const injected = requestTutor !== defaultRequestTutor;
@@ -37,11 +39,15 @@ export function TutorPanel({ lessonId, conceptIds, learnerAttempt, locale = 'en'
     setToken('');
     setLoading(true); setError('');
     try {
+      const compact = compactTutorInput({ learnerAttempt, question, recentConversation: conversation });
       const result = await requestTutor({
-        lessonId, conceptIds, mode, learnerAttempt, question, locale, recentConversation: [],
+        lessonId, conceptIds, mode, learnerAttempt: compact.learnerAttempt, question: compact.question,
+        locale, recentConversation: compact.recentConversation,
         turnstileToken: requestToken, anonymousClientId: anonymousClientId(),
       });
       setReply(result);
+      setConversation((current) => [...current,
+        { role: 'user', content: question }, { role: 'assistant', content: result.reply }]);
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Tutor is temporarily unavailable.');
     } finally {

@@ -42,4 +42,3 @@ First add the compact validation and tutor-budget foundations, then finish Chapt
 - Activating book RAG without the separate privacy/provisioning decision.
 - Using AI-generated answers as independent mastery evidence.
 - Claiming that the extracted count is an independent count of the book.
-

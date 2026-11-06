@@ -102,4 +102,3 @@
 - [ ] Run source/security, unit, Python, build, Playwright, accessibility, offline and transfer checks.
 - [ ] Independently review the branch; fix Critical/Important findings with TDD.
 - [ ] Merge and deploy only after explicit completion evidence, then close issue #7.
-

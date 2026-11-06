@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 const text = z.string().trim().min(1);
-const texts = z.array(text).min(1);
+const instructionalText = (minimum: number) => z.string().trim().min(minimum);
+const objectives = z.array(instructionalText(15)).min(1);
 const sourceRef = z.object({
   sectionId: text,
   printedStart: text,
@@ -20,19 +21,19 @@ const base = {
 
 export const sectionActivitySchema = z.object({
   ...base,
-  objectives: texts,
-  explanation: text,
-  workedExample: text,
-  independentTask: text,
+  objectives,
+  explanation: instructionalText(100),
+  workedExample: instructionalText(50),
+  independentTask: instructionalText(50),
 });
 
 export const exerciseActivitySchema = z.object({
   ...base,
-  prompt: text,
-  hints: z.array(text).min(2),
+  prompt: instructionalText(60),
+  hints: z.array(instructionalText(15)).min(2),
   evaluation: z.discriminatedUnion('kind', [
-    z.object({ kind: z.literal('answer'), answer: text, explanation: text }),
-    z.object({ kind: z.literal('rubric'), criteria: z.array(text).min(1) }),
+    z.object({ kind: z.literal('answer'), answer: text, explanation: instructionalText(30) }),
+    z.object({ kind: z.literal('rubric'), criteria: z.array(instructionalText(15)).min(1) }),
   ]),
 });
 

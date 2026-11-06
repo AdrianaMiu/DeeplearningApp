@@ -16,6 +16,10 @@ function rawId(value: unknown): string | undefined {
     ? value.sourceId : undefined;
 }
 
+function normalizeProse(value: string): string {
+  return value.toLocaleLowerCase('en').replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
 export function createCoverageCatalog(input: CoverageCatalogInput) {
   const sections = new Map(input.inventory.sections.map((item) => [item.id, item]));
   const exercises = new Map(input.inventory.exercises.map((item) => [item.id, item]));
@@ -75,6 +79,24 @@ export function createCoverageCatalog(input: CoverageCatalogInput) {
   }
   input.sectionActivities.forEach((value) => validateActivity(value, 'section'));
   input.exerciseActivities.forEach((value) => validateActivity(value, 'exercise'));
+
+  const proseOwners = new Map<string, string>();
+  const proseFields = (activity: SectionActivity | ExerciseActivity): string[] => 'explanation' in activity
+    ? [activity.explanation, activity.workedExample, activity.independentTask]
+    : [activity.prompt];
+  for (const activity of [...sectionActivities.values(), ...exerciseActivities.values()]) {
+    if (invalid.has(activity.sourceId)) continue;
+    for (const prose of proseFields(activity)) {
+      const normalized = normalizeProse(prose);
+      const owner = proseOwners.get(normalized);
+      if (owner && owner !== activity.sourceId) {
+        add({ code: 'DUPLICATE_CONTENT', sourceId: activity.sourceId,
+          message: `Activity ${activity.sourceId} repeats reviewed teaching prose from ${owner}.` });
+        break;
+      }
+      proseOwners.set(normalized, activity.sourceId);
+    }
+  }
 
   const classifications = new Map<string, CoverageClassification>();
   for (const value of input.classifications) {

@@ -9,9 +9,9 @@ const source = {
 const sectionActivity = {
   sourceId: '1.1', chapterId: 'chapter-1', contentStatus: 'reviewed' as const,
   objectives: ['Distinguish programs from learned models.'],
-  explanation: 'A model acquires adjustable behavior from evidence and an objective.',
-  workedExample: 'Compare a fixed threshold with a fitted linear boundary.',
-  independentTask: 'Name which parts are learned in a small classifier.',
+  explanation: 'A model acquires adjustable behavior from evidence and an objective, while fixed program logic specifies how observations and parameters are combined during learning and prediction.',
+  workedExample: 'Compare a manually fixed threshold with a linear boundary whose weights are fitted from labeled observations.',
+  independentTask: 'Analyze a small classifier and identify which components are fixed, which are learned, and what evidence changes them.',
   sourceRefs: [source],
 };
 const exerciseActivity = {

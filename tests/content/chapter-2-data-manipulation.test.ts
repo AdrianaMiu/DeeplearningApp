@@ -20,22 +20,22 @@ describe('Chapter 2 data-manipulation coverage batch', () => {
     expect(catalog.validateCoverage()).toEqual([]);
     expect(catalog.getChapterCoverageSummary('chapter-2')).toEqual({
       chapterId: 'chapter-2', sourceSectionCount: 55, exerciseCount: 45,
-      authoredSectionCount: 7, authoredExerciseCount: 2,
-      classifiedNonSubstantiveCount: 2, unclassifiedSectionCount: 46, remainingExerciseCount: 43,
+      authoredSectionCount: 12, authoredExerciseCount: 7,
+      classifiedNonSubstantiveCount: 3, unclassifiedSectionCount: 40, remainingExerciseCount: 38,
     });
   });
 
   it('provides distinct reviewed learning activities and exercise workflows', () => {
-    expect(new Set(chapter2DataManipulationSections.map((item) => item.explanation)).size).toBe(7);
+    expect(new Set(chapter2DataManipulationSections.map((item) => item.explanation)).size).toBe(12);
     expect(chapter2DataManipulationSections.every((item) => item.explanation.length >= 120)).toBe(true);
-    expect(chapter2DataManipulationExercises).toHaveLength(2);
+    expect(chapter2DataManipulationExercises).toHaveLength(7);
     expect(chapter2DataManipulationExercises.every((item) => item.hints.length >= 2)).toBe(true);
   });
 
   it('is included as an honest partial batch in the production catalog', () => {
     expect(coverageCatalog.getChapterCoverageSummary('chapter-2')).toMatchObject({
-      authoredSectionCount: 7, authoredExerciseCount: 2,
-      unclassifiedSectionCount: 46, remainingExerciseCount: 43,
+      authoredSectionCount: 12, authoredExerciseCount: 7,
+      unclassifiedSectionCount: 40, remainingExerciseCount: 38,
     });
   });
 });

@@ -35,10 +35,36 @@ export const chapter2DataManipulationSections: SectionActivity[] = [
     'Tensor libraries interoperate with array libraries and native scalars, but conversion is not semantically free. Depending on device, dtype, and API, memory may be shared or copied; extracting a scalar also discards its tensor shape and usually removes it from automatic-differentiation tracking.',
     'A CPU tensor and an array may share storage under a zero-copy conversion, so mutating one can affect the other. A tensor on an accelerator must first move data to host memory before ordinary array code can use it.',
     'Write a conversion checklist covering device, dtype, ownership, gradient tracking, and scalar extraction. Apply it to a tensor that must be passed to a plotting library.'),
+  section('2.2', ['Trace raw tabular data into a model-ready tensor.', 'Identify decisions hidden inside preprocessing.'],
+    'Data preprocessing turns external records into a numerical representation with explicit rows, columns, types, and missing-value rules. The transformation is part of the learning system: a model cannot recover distinctions that parsing discarded, and inconsistent training and inference transformations create silent distribution shift.',
+    'A house table containing area, neighborhood, and price needs numeric parsing, a representation for neighborhood, a policy for absent area values, and a separate target column before tensor conversion.',
+    'Design a preprocessing contract for a five-column dataset. State each output column, its type, its missing-value policy, and one invariant checked before training.'),
+  section('2.2.1', ['Read a delimited dataset without losing its schema.', 'Inspect records before numerical conversion.'],
+    'Reading a dataset is more than opening a file: delimiters, headers, encodings, quoting, and inferred types determine the table that downstream code sees. Early inspection should confirm row count, column names, representative values, and missing markers before any irreversible conversion is applied.',
+    'If an identifier contains leading zeros, automatic integer inference changes its meaning; loading it as text preserves the identifier while genuinely numeric measurement columns can remain numeric.',
+    'Specify four checks immediately after loading a delivery dataset, including one check for schema drift and one for a value that could be parsed into the wrong type.'),
+  section('2.2.2', ['Separate numeric and categorical preparation.', 'Choose a defensible missing-data strategy.'],
+    'Numeric columns can often be imputed from a statistic computed on training data, while categorical columns require an explicit vocabulary or indicator representation. The fitted preprocessing parameters must come only from the training split; computing them on all data leaks information from evaluation examples.',
+    'Replace missing training-set temperatures with the training mean, and expand a weather category into indicator columns with a defined unknown category for values not seen during fitting.',
+    'Prepare a mixed table with two numeric and two categorical columns. Explain how every missing value is handled and where each fitted preprocessing parameter is stored.'),
+  section('2.2.3', ['Convert a prepared table to a tensor with controlled dtype.', 'Verify row and feature alignment.'],
+    'Tensor conversion requires a homogeneous numerical representation, so dataframe labels and mixed host-language objects cannot simply be assumed to survive. Choose the dtype deliberately, preserve the row order used for targets, and assert the expected two-dimensional feature shape before training.',
+    'After encoding, 100 examples with seven feature columns should produce a feature tensor shaped (100, 7) and a target tensor whose leading dimension is also 100.',
+    'Write conversion assertions for features and targets, including dtype, finite values, matching example counts, and the exact feature width expected by the model.'),
+  section('2.2.4', ['Explain why preprocessing is a learned pipeline component.', 'Recognize leakage and deployment mismatch.'],
+    'Preprocessing choices encode assumptions about scale, categories, missingness, and future inputs. Treating them as a fitted, versioned pipeline makes the assumptions testable and repeatable; ad hoc notebook transformations are difficult to reproduce and can behave differently when deployed.',
+    'A category vocabulary fitted on the complete dataset leaks evaluation information, while a vocabulary fitted on training data with an unknown bucket can process future categories consistently.',
+    'Audit a proposed preprocessing notebook for leakage, irreproducible state, and training-serving mismatch. Give one concrete test for each failure class.'),
 ];
 
 const exercise = (number: number, prompt: string, hints: string[], criteria: string[]): ExerciseActivity => {
   const sourceId = `2.1.8.exercise.${number}`;
+  return { sourceId, chapterId: 'chapter-2', contentStatus: 'reviewed', prompt, hints,
+    evaluation: { kind: 'rubric', criteria }, sourceRefs: [exerciseSourceRef(sourceId)] };
+};
+
+const preprocessingExercise = (number: number, prompt: string, hints: string[], criteria: string[]): ExerciseActivity => {
+  const sourceId = `2.2.5.exercise.${number}`;
   return { sourceId, chapterId: 'chapter-2', contentStatus: 'reviewed', prompt, hints,
     evaluation: { kind: 'rubric', criteria }, sourceRefs: [exerciseSourceRef(sourceId)] };
 };
@@ -50,9 +76,25 @@ export const chapter2DataManipulationExercises: ExerciseActivity[] = [
   exercise(2, 'Investigate broadcasting and memory behavior with two compatible operands and one incompatible pair, then compare rebinding with an in-place update using object identity or storage evidence.',
     ['Compare dimensions from the trailing side.', 'Keep an alias before the update so the memory behavior is observable.'],
     ['Derives compatible result shapes axis by axis.', 'Explains the incompatible pair precisely.', 'Uses evidence to distinguish allocation from mutation.', 'Notes one risk of mutation.']),
+  preprocessingExercise(1, 'Create a schema audit for a small CSV-like dataset before cleaning it, covering headers, inferred types, missing markers, identifiers, and one malformed row.',
+    ['Inspect raw values before choosing conversions.', 'Treat identifiers separately from measured quantities.'],
+    ['Reports each column and inferred type.', 'Finds a realistic parsing risk.', 'Defines a check that fails on schema drift.']),
+  preprocessingExercise(2, 'Design a leakage-safe preprocessing pipeline for mixed numeric and categorical features, and state exactly which values are learned from the training split.',
+    ['Separate fitting the transformation from applying it.', 'Include a policy for previously unseen categories.'],
+    ['Identifies every fitted statistic or vocabulary.', 'Uses training data only for fitting.', 'Handles unknown categories and missing numeric values.']),
+  preprocessingExercise(3, 'Given 240 table rows, six prepared feature columns, and one target column, specify the feature and target tensor shapes and a set of assertions that must pass before training.',
+    ['The example axis must agree between features and targets.', 'Check dtype and finite values as well as shape.'],
+    ['States compatible feature and target shapes.', 'Checks example alignment.', 'Checks numerical dtype and invalid values.']),
+  preprocessingExercise(4, 'Compare mean imputation with adding a missingness indicator for a sensor value, then explain a situation where the fact that a value is missing carries predictive information.',
+    ['Ask why the measurement might be absent.', 'Distinguish replacing a value from preserving the missingness signal.'],
+    ['Explains both transformations.', 'Provides a plausible informative-missingness mechanism.', 'Notes a deployment risk if missingness patterns change.']),
+  preprocessingExercise(5, 'Write a training-versus-serving consistency checklist for a preprocessing pipeline and propose a regression test using one representative record.',
+    ['Version the transformation state together with the model.', 'Compare the exact output vector, not only whether conversion succeeds.'],
+    ['Covers column order, dtype, fitted state, and unknown values.', 'Defines a reproducible expected vector.', 'Explains how the test detects pipeline drift.']),
 ];
 
 export const chapter2DataManipulationClassifications: CoverageClassification[] = [
   { sourceId: '2.1.7', kind: 'summary' },
   { sourceId: '2.1.8', kind: 'exercise-heading' },
+  { sourceId: '2.2.5', kind: 'exercise-heading' },
 ];

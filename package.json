@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b --pretty false",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "audit:release": "python3 -B scripts/verify_release.py --dist dist"
   },
   "dependencies": {
     "dexie": "latest",

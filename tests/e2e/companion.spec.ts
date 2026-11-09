@@ -97,6 +97,47 @@ test.describe('Deep Learning Companion release', () => {
     await expect(page.getByText('Individual exercise references', { exact: false })).toBeVisible();
   });
 
+  test('Chapter 20 essential path preserves non-AI evidence and honest depth status', async ({ page }) => {
+    await page.getByRole('link', { name: 'Curriculum Explore the book', exact: true }).click();
+    const chapter = page.getByTestId('chapter-row').filter({ has: page.getByRole('heading', { name: /^Chapter 20:/ }) });
+    await chapter.getByRole('link', { name: /inspect sections/i }).click();
+    await expect(page).toHaveURL(/#\/curriculum\/chapter-20$/);
+    const detail = page.locator('.chapter-detail');
+    const path = detail.locator(':scope > ul').getByRole('link');
+    await expect(path).toHaveText([
+      'Separate two adversarial updates',
+      'Trace a complete GAN training step',
+      'Build and diagnose a DCGAN image path',
+    ]);
+    await expect(detail.getByText('Essential path complete', { exact: true })).toBeVisible();
+    await expect(detail.getByText('0 of 14 detailed sections authored · 0 of 3 exercise activities authored.')).toBeVisible();
+    await expect(detail.locator('.curriculum-chapter li .status')).toHaveText(Array(14).fill('Depth expansion planned'));
+    await detail.getByText('Individual exercise references (3)', { exact: true }).click();
+    await expect(detail.locator('.exercise-index li .status')).toHaveText(Array(3).fill('Depth expansion planned'));
+
+    await path.nth(2).click();
+    await expect(page.getByRole('heading', { name: 'Build and diagnose a DCGAN image path', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Open tutor', exact: true })).toHaveAttribute('aria-expanded', 'false');
+    await page.goBack();
+    await path.nth(1).click();
+    await expect(page.getByRole('heading', { name: 'Trace a complete GAN training step', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'predict', exact: true }).click();
+    await page.getByLabel('Your prediction').fill('Detach generated images during the discriminator update; preserve the input gradient during the generator update.');
+    await page.getByRole('button', { name: 'Reveal worked example' }).click();
+    await page.getByRole('button', { name: 'check', exact: true }).click();
+    await page.getByRole('link', { name: 'Open quick practice' }).click();
+    await expect(page).toHaveURL(/mode=quick&entry=gan-training-step$/);
+    await page.getByRole('radio', { name: 'D receives gradients, while this fake branch sends no gradients into G', exact: true }).check();
+    await page.getByRole('button', { name: 'Check answer', exact: true }).click();
+    await expect(page.getByRole('status')).toContainText('Correct.');
+    await page.getByRole('link', { name: 'Progress Inspect your evidence', exact: true }).click();
+    const evidence = page.locator('.progress-list article').filter({ has: page.getByRole('heading', { name: 'gradient boundary', exact: true }) });
+    await expect(evidence).toContainText('1 independent evidence item');
+    await page.reload();
+    await expect(evidence).toContainText('1 independent evidence item');
+    await expect(evidence).toContainText('practiced');
+  });
+
 
   test('guides a studio through prediction, interaction, check and resume', async ({ page }) => {
     await page.goto('./#/lesson/modern-cnn-studio');

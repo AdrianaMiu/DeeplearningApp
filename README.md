@@ -1,16 +1,17 @@
 # Deep Learning Companion
 
-An offline-capable personal learning application for the full *Dive into Deep Learning* curriculum. It publishes 32 reviewed learning entries: twelve detailed lessons and twenty chapter/appendix studios, with 120 reviewed assessment items (112 lesson/studio questions and eight diagnostic items).
+An offline-capable personal learning application covering the *Dive into Deep Learning* curriculum. The release contains 38 reviewed learning entries: eighteen deep lessons and twenty chapter/appendix studios, with 138 reviewed assessment items (130 lesson/studio questions and eight diagnostic items). Full detailed book conversion remains in progress.
 
 Live target: `https://adrianamiu.github.io/DeeplearningApp/`
 
 ## What is included
 
-- Core learning paths for all 20 chapters and both appendices (22 paths). Chapters 2–3 have detailed lessons; the other chapters and appendices have studios. Each studio has four mixed chapter checks and a mathematical or decision interaction.
+- Core learning paths for all 20 chapters and both appendices (22 paths). Chapters 2–3 have deep lessons; Chapters 18–20 each have an existing studio followed by two new deep lessons. The other chapters and appendices have studios. Each studio has four mixed chapter checks and a mathematical or decision interaction.
+- Chapters 18–20 are essential-path complete: Gaussian-process posterior inference and regression practice; hyperparameter experiment design and asynchronous/multi-fidelity search; GAN training and DCGAN practice. These six new lessons add 18 questions. Their detailed section and exercise activities remain depth expansion planned. See [content status](docs/content-status.md).
 - Appendix A covers §A.1–A.11; Appendix B covers §B.1–B.8. The full source inventory remains metadata: companion coverage does not mark every source section converted or visually reviewed.
 - A learning cockpit, guided stages, practice modes, diagnostic, spaced review, evidence-based progress, local notes, and a downloadable PyTorch regression notebook.
 - Local-first attempts, sessions, notes, review events, settings, and versioned JSON backup/restore in IndexedDB; published content and lazy studios work offline after the app is cached.
-- Optional Gemini tutoring through a separate Cloudflare Worker. Reviewed companion explanations work without a retrieval store; book-grounded responses require private provisioning and verified citations. The learning app works without a tutor service.
+- Optional Gemini tutoring through a separate Cloudflare Worker. Reviewed companion explanations work without a retrieval store; book-grounded responses require private provisioning and verified citations. Tutor latency remains an open, nonblocking issue; the essential paths and deterministic checks work without a tutor service.
 - GitHub Pages under `/DeeplearningApp/`, hash routes, and a scoped service worker with an explicit update notice.
 
 The PDF, extracted book prose, verbatim exercise prompts, keys, local databases, private retrieval manifests, and `config/` are excluded from publication.
@@ -33,11 +34,12 @@ python3 -B -m unittest discover -s tests/rag -p '*_test.py'
 python3 -B -m unittest discover -s tests/scripts -p '*_test.py'
 npm run build
 npm run test:e2e
+npm run audit:release
 WRANGLER_LOG_PATH=/tmp/d2l-wrangler.log npx wrangler deploy --dry-run --config worker/wrangler.jsonc --outdir /tmp/d2l-worker-dry-run
 python3 -B scripts/verify_release.py --dist dist --worker-out /tmp/d2l-worker-dry-run
 ```
 
-The production preview uses `/DeeplearningApp/`. Unit tests enforce the 32 entries, 120 assessment items, and 22 core paths. The release audit checks tracked-file/private-file exclusions, recognizable secret signatures, selected build outputs, Pages asset URLs/manifest scope, and optional Worker RAG configuration. It reports filenames only; it is a guard, not proof that arbitrary prose or every possible secret format is absent. Review publication inputs as well. CI never ingests the book or contacts Gemini.
+The production preview uses `/DeeplearningApp/`. Unit tests enforce the 38 entries, 138 assessment items, and 22 core paths. The Chapter 20 browser acceptance test follows the curriculum path, opens both new lessons, and verifies an unassisted practice evidence item survives reload. `npm run audit:release` audits the existing production build and tracked inputs; the additional Python command also includes the Worker dry-run bundle. The release audit checks tracked-file/private-file exclusions, recognizable secret signatures, selected build outputs, Pages asset URLs/manifest scope, and optional Worker RAG configuration. It reports filenames only; it is a guard, not proof that arbitrary prose or every possible secret format is absent. Review publication inputs as well. CI never ingests the book or contacts Gemini.
 
 ## Source inventory and review records
 

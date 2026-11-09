@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { ChapterLearningPath, CurriculumInventory, LearningEntry, Milestone, SourceRef } from '../domain/types';
+import type { ChapterLearningPath, CurriculumInventory, EssentialPathStatus, LearningEntry, Milestone, SourceRef } from '../domain/types';
 import { chapterLearningMap as defaultPaths, milestones as defaultMilestones } from './course-map';
 import { curriculumInventory } from './inventory';
 import { learningEntries } from './lessons';
@@ -24,6 +24,8 @@ export interface ChapterLearningSummary {
   capability?: string;
   coreEntryIds: string[];
   availableEntryIds: string[];
+  essentialPathStatus: EssentialPathStatus;
+  essentialEntryCount: number;
   studioCount: number;
   deepLessonCount: number;
   questionCount: number;
@@ -191,12 +193,16 @@ export function createLearningCatalog(input: CatalogInput) {
     const path = paths.get(chapter.id);
     const coreEntryIds = path?.coreEntryIds ?? [];
     const entries = coreEntryIds.flatMap((id) => availableById.get(id) ? [availableById.get(id)!] : []);
+    const essentialCoreIds = [...new Set(coreEntryIds)];
+    const essentialEntryCount = essentialCoreIds.filter((id) => availableById.has(id)).length;
     const studios = entries.filter((entry) => entry.kind === 'chapter-studio');
     const detailed = coverage.getChapterCoverageSummary(chapter.id);
     summariesById.set(chapter.id, {
       chapterId: chapter.id, milestoneId: path?.milestoneId, title: chapter.title,
       purpose: studios[0]?.purpose, capability: studios[0]?.capability,
       coreEntryIds: [...coreEntryIds], availableEntryIds: entries.map((entry) => entry.id),
+      essentialPathStatus: essentialCoreIds.length >= 3 && essentialEntryCount === essentialCoreIds.length ? 'complete' : 'planned',
+      essentialEntryCount,
       studioCount: studios.length, deepLessonCount: entries.length - studios.length,
       questionCount: studios.reduce((total, studio) => total + studio.chapterCheckQuestionIds.length, 0),
       sourceSectionCount: sectionCounts.get(chapter.id) ?? 0, exerciseCount: exerciseCounts.get(chapter.id) ?? 0,
@@ -214,6 +220,7 @@ export function createLearningCatalog(input: CatalogInput) {
       const summary = summariesById.get(chapterId);
       return summary ? { ...summary, coreEntryIds: [...summary.coreEntryIds], availableEntryIds: [...summary.availableEntryIds], issues: summary.issues.map((issue) => ({ ...issue })) }
         : { chapterId, milestoneId: undefined, title: chapterId, coreEntryIds: [], availableEntryIds: [], studioCount: 0,
+          essentialPathStatus: 'planned', essentialEntryCount: 0,
           deepLessonCount: 0, questionCount: 0, sourceSectionCount: 0, exerciseCount: 0, availability: 'indexed',
           authoredSectionCount: 0, authoredExerciseCount: 0, classifiedNonSubstantiveCount: 0,
           unclassifiedSectionCount: 0, remainingExerciseCount: 0,

@@ -1,4 +1,5 @@
 export type ContentStatus = 'unconverted' | 'drafted' | 'reviewed' | 'published';
+export type EssentialPathStatus = 'planned' | 'complete';
 export type ConceptState = 'not_started' | 'learning' | 'practiced' | 'demonstrated' | 'retained';
 export type QuestionType = 'multiple_choice' | 'numeric' | 'shape' | 'code_trace' | 'debugging' | 'explanation' | 'transfer';
 export type GradingMethod = 'deterministic' | 'rubric' | 'ai_provisional';

@@ -4,12 +4,51 @@ import { chapterLearningMap } from '../../src/content/course-map';
 import { curriculumInventory } from '../../src/content/inventory';
 import { learningEntries } from '../../src/content/lessons';
 import sourceManifest from '../../src/content/studio-source-manifest.json';
+import { coverageCatalog } from '../../src/content/coverage';
 
 const introduction = learningEntries.find((entry) => entry.id === 'introduction-studio')!;
 const tensor = learningEntries.find((entry) => entry.id === 'tensor-shapes')!;
 const replaceIntroduction = (replacement: unknown) => learningEntries.map((entry) => entry === introduction ? replacement : entry);
 
 describe('learning catalog', () => {
+  it.each([
+    ['chapter-18', 19, 18], ['chapter-19', 28, 7], ['chapter-20', 14, 3],
+  ])('distinguishes the complete essential path from detailed coverage for %s', (chapterId, sections, exercises) => {
+    expect(getChapterLearningSummary(chapterId)).toMatchObject({
+      essentialPathStatus: 'complete', essentialEntryCount: 3,
+      sourceSectionCount: sections, exerciseCount: exercises,
+      authoredSectionCount: 0, authoredExerciseCount: 0,
+      unclassifiedSectionCount: sections, remainingExerciseCount: exercises,
+    });
+  });
+
+  it.each(['missing', 'invalid', 'duplicate'])('keeps an essential path planned when a core entry is %s', (failure) => {
+    const coreId = 'gp-posterior-inference';
+    const entries = failure === 'missing' ? learningEntries.filter((entry) => entry.id !== coreId)
+      : failure === 'invalid' ? learningEntries.map((entry) => entry.id === coreId ? { ...entry, title: '' } : entry)
+      : [...learningEntries, learningEntries.find((entry) => entry.id === coreId)!];
+    const catalog = createLearningCatalog({ entries, coverageCatalog });
+    expect(catalog.getChapterLearningSummary('chapter-18')).toMatchObject({
+      essentialPathStatus: 'planned', essentialEntryCount: 2,
+      authoredSectionCount: 0, authoredExerciseCount: 0,
+    });
+    expect(catalog.getChapterLearningSummary('chapter-1')).toMatchObject({
+      essentialPathStatus: 'planned', essentialEntryCount: 1,
+      authoredSectionCount: 15, authoredExerciseCount: 4,
+    });
+  });
+
+  it('requires at least three distinct available core entries, excluding other available lessons', () => {
+    const path = chapterLearningMap.get('chapter-18')!;
+    const chapterPaths = new Map(chapterLearningMap);
+    chapterPaths.set('chapter-18', { ...path, coreEntryIds: [path.coreEntryIds[0], path.coreEntryIds[1], path.coreEntryIds[1]] });
+    const catalog = createLearningCatalog({ entries: learningEntries, chapterLearningMap: chapterPaths });
+    expect(catalog.getChapterLearningSummary('chapter-18')).toMatchObject({ essentialPathStatus: 'planned', essentialEntryCount: 2 });
+    expect(catalog.getChapterLearningSummary('unknown')).toMatchObject({ essentialPathStatus: 'planned', essentialEntryCount: 0 });
+    expect(createLearningCatalog({ entries: [] }).getChapterLearningSummary('chapter-20'))
+      .toMatchObject({ essentialPathStatus: 'planned', essentialEntryCount: 0 });
+  });
+
   it('reports duplicate and missing catalog identities', () => {
     const entries = learningEntries.filter((entry) => entry.id !== 'tensor-shapes');
     const catalog = createLearningCatalog({ entries: [...entries, { ...introduction }] });
@@ -82,6 +121,7 @@ describe('learning catalog', () => {
     const partial = catalog.getChapterLearningSummary('chapter-2');
     expect(partial).toMatchObject({ chapterId: 'chapter-2', milestoneId: 'foundations', title: 'Preliminaries',
       availability: 'partial', deepLessonCount: 9, studioCount: 0, questionCount: 0,
+      essentialPathStatus: 'planned', essentialEntryCount: 9,
       coreEntryIds: chapterLearningMap.get('chapter-2')!.coreEntryIds,
     });
     expect(partial.availableEntryIds).not.toContain('tensor-shapes');

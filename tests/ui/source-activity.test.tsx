@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { AppShell } from '../../src/App';
@@ -54,8 +54,9 @@ describe('source section and exercise routes', () => {
 
   it('links every source record from the chapter atlas with accurate remaining counts', async () => {
     open('/curriculum/chapter-1');
-    expect(await screen.findByText(/15 of 17 detailed sections authored/i)).toBeInTheDocument();
-    expect(screen.getByText(/4 of 4 exercise activities authored/i)).toBeInTheDocument();
+    const details = await screen.findByRole('region', { name: 'Introduction' });
+    expect(within(details).getByText(/15 of 17 detailed sections authored/i)).toBeInTheDocument();
+    expect(within(details).getByText(/4 of 4 exercise activities authored/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /section 1\.1 a motivating example/i })).toHaveAttribute('href', '/section/1.1');
     expect(screen.getByRole('link', { name: /exercise 1\.9\.exercise\.1/i })).toHaveAttribute('href', '/exercise/1.9.exercise.1');
     expect(screen.queryByText(/referenced in activity/i)).not.toBeInTheDocument();

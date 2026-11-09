@@ -44,8 +44,8 @@ describe('learning catalog', () => {
       expect.objectContaining({ code: 'INVALID_ENTRY' }),
     ]);
     expect(catalog.getAvailableLearningEntries().map((entry) => entry.id)).not.toContain('malformed-fixture');
-    expect(catalog.getAvailableLearningEntries()).toHaveLength(34);
-    expect(learningEntries).toHaveLength(34);
+    expect(catalog.getAvailableLearningEntries()).toHaveLength(36);
+    expect(learningEntries).toHaveLength(36);
   });
 
   it.each([
@@ -70,10 +70,10 @@ describe('learning catalog', () => {
 
   it('requires a studio manifest record with the correct source identity', () => {
     const missing = createLearningCatalog({ entries: learningEntries, sourceManifest: { ...sourceManifest, studios: [] } });
-    expect(missing.getAvailableLearningEntries()).toHaveLength(14);
+    expect(missing.getAvailableLearningEntries()).toHaveLength(16);
     expect(missing.validateLearningCatalog()[0]).toMatchObject({ code: 'MANIFEST_REFERENCE_MISSING', entryId: 'introduction-studio' });
     const wrongHash = createLearningCatalog({ entries: learningEntries, sourceManifest: { ...sourceManifest, sourceHash: 'wrong' } });
-    expect(wrongHash.getAvailableLearningEntries()).toHaveLength(14);
+    expect(wrongHash.getAvailableLearningEntries()).toHaveLength(16);
     expect(wrongHash.validateLearningCatalog()).toContainEqual(expect.objectContaining({ code: 'SOURCE_HASH_MISMATCH' }));
   });
 
@@ -131,7 +131,7 @@ describe('learning catalog', () => {
 
   it('keeps all production paths available and returns stable, isolated result arrays', () => {
     expect(validateLearningCatalog()).toEqual([]);
-    expect(getAvailableLearningEntries()).toHaveLength(34);
+    expect(getAvailableLearningEntries()).toHaveLength(36);
     for (const chapterId of chapterLearningMap.keys()) expect(getChapterLearningSummary(chapterId).availability).toBe('available');
     const catalog = createLearningCatalog({ entries: [...learningEntries, { ...tensor }] });
     const issues = catalog.validateLearningCatalog();
@@ -140,7 +140,7 @@ describe('learning catalog', () => {
     catalog.getAvailableLearningEntries().pop();
     catalog.getChapterLearningSummary('chapter-1').availableEntryIds.pop();
     expect(catalog.validateLearningCatalog()).toHaveLength(1);
-    expect(catalog.getAvailableLearningEntries()).toHaveLength(33);
+    expect(catalog.getAvailableLearningEntries()).toHaveLength(35);
     expect(catalog.getChapterLearningSummary('chapter-1').availableEntryIds).toEqual(['introduction-studio']);
   });
 });

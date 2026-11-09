@@ -53,7 +53,7 @@ const coreEntryIdsByChapter = new Map<string, string[]>([
   ['chapter-16', ['nlp-applications-studio']],
   ['chapter-17', ['reinforcement-learning-studio']],
   ['chapter-18', ['gaussian-processes-studio']],
-  ['chapter-19', ['hyperparameter-optimization-studio']],
+  ['chapter-19', ['hyperparameter-optimization-studio', 'hpo-experiment-design', 'asynchronous-multifidelity-hpo']],
   ['chapter-20', ['gan-studio', 'gan-training-step', 'dcgan-practice']],
   ['appendix-a', ['math-appendix-studio']],
   ['appendix-b', ['tools-appendix-studio']],

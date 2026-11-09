@@ -1,0 +1,47 @@
+import type { DeepLesson } from '../../domain/types';
+import { companionSource } from '../source';
+
+export const chapter19EssentialLessons: DeepLesson[] = [
+  {
+    kind: 'deep-lesson', id: 'hpo-experiment-design', chapterId: 'chapter-19', milestoneId: 'broader',
+    title: 'Design a trustworthy hyperparameter experiment',
+    question: 'What makes a winning configuration evidence of improvement rather than a lucky or leaked comparison?',
+    objectives: ['Separate training, validation selection, and final test evaluation.', 'Compare configurations across seeds within a declared search space and compute budget.'],
+    prerequisites: ['Spend a search budget deliberately', 'Turn raw columns into usable tensors'],
+    conceptIds: ['hyperparameter-search', 'validation-isolation', 'random-seeds', 'experiment-budget'],
+    sourceRefs: [companionSource('19.1.1', 860), companionSource('19.1.2', 863), companionSource('19.2.4', 869), companionSource('19.2.6', 872)],
+    views: {
+      intuition: 'An HPO trial trains model parameters under a chosen configuration and measures validation performance. Choosing the best configuration is itself a learning process: repeated validation comparisons can overfit that split. Reserve an untouched test set to evaluate the final selected procedure, and fit preprocessing only on training data.',
+      math: 'For configuration λ and training seed s, let v(λ,s) be the validation loss after a fixed resource allocation. A repeated-seed estimate is mean_v(λ)=(1/S)Σ_s v(λ,s); lower is better here. Variation across seeds indicates training randomness, while variation across data splits is a separate uncertainty. The minimum observed validation loss is a selection result, not an unbiased estimate of test performance. For positive scale parameters, sampling log λ uniformly gives equal probability to equal multiplicative intervals.',
+      code: 'Before searching, declare the split, metric and direction, configuration distributions, resource cap, and seed policy. For example, sample learning rate log-uniformly from 1e−4 to 1e−1 rather than uniformly over those raw values. Record configuration, training seed, split identity, resource, validation loss, and elapsed compute in a trial ledger. Use a separate search seed for sampling configurations; repeat finalists with the same predeclared set of training seeds. Never feed test scores back into the search.',
+      workConnection: 'For a new dataset, establish random search and a simple default as baselines under the same budget. Include unsuccessful and stopped trials in cost accounting. Report the seed results and their mean, rather than selecting the best seed per configuration. If validation is reused heavily, consider fresh validation data or nested evaluation; repeated seeds alone cannot repair validation overfitting or a leaked split.',
+    },
+    predictionPrompt: 'Configuration A has the best single validation run, but B has a better mean across the same three training seeds. Predict what evidence you should compare and whether opening the test scores would help select between them safely.',
+    workedExample: 'Using a fixed split and equal training resource per run, A has validation losses [0.20,0.32,0.26], averaging 0.26. B has [0.24,0.23,0.25], averaging 0.24. A owns the best single run, but B wins this predeclared mean-loss comparison. Six runs at four epochs each cost 24 trial-epochs. Keep all six records, select using validation, then evaluate the frozen choice on the untouched test set. These three seeds do not establish statistical significance or remove split uncertainty.',
+    independentTask: 'Design a twelve-run learning-rate search: name the sampling distribution, validation metric, split policy, and separate search and training seeds. Reserve part of the budget for repeated finalist runs, specify how their scores will be aggregated, and describe when the test set can be opened. Explain one reason equal epochs may not mean equal compute.',
+    misconceptions: ['The best training seed is not a fair estimate of a configuration’s typical performance.', 'An untouched test set cannot remain untouched if its score is used to choose another configuration.', 'Reproducible seeds help audit an experiment but do not guarantee generalization or eliminate validation overfitting.'],
+    teachBackPrompt: 'Explain how you would make an HPO result reproducible and credible, from choosing the search distribution to recording failed trials, repeating seeds, and evaluating the final choice.',
+    contentStatus: 'reviewed', durationMinutes: 35,
+  },
+  {
+    kind: 'deep-lesson', id: 'asynchronous-multifidelity-hpo', chapterId: 'chapter-19', milestoneId: 'broader',
+    title: 'Allocate asynchronous and multi-fidelity trials',
+    question: 'How can idle workers and cheap partial results guide a search without confusing speed with model quality?',
+    objectives: ['Distinguish configuration search from scheduling and asynchronous execution from early stopping.', 'Trace successive-halving resource costs and diagnose uncertain early rankings.'],
+    prerequisites: ['Design a trustworthy hyperparameter experiment'],
+    conceptIds: ['searcher-scheduler', 'asynchronous-search', 'multi-fidelity', 'successive-halving', 'compute-accounting'],
+    sourceRefs: [companionSource('19.2.1', 867), companionSource('19.2.2', 868), companionSource('19.3.2', 876), companionSource('19.4.1', 886), companionSource('19.5.2', 901)],
+    views: {
+      intuition: 'The searcher proposes configurations; the scheduler decides when trials run and whether to continue or stop them. Asynchronous execution starts work when a worker becomes free, avoiding a wait for the slowest trial in a batch. It does not inherently stop trials early: asynchronous random search can give every trial the full budget. Multi-fidelity methods additionally use partial-resource scores to allocate more training to selected trials.',
+      math: 'In a simple successive-halving bracket with reduction factor 3, nine trials reach cumulative epoch 1, three survivors reach epoch 3, and one reaches epoch 9. If training resumes from checkpoints, cost is 9×1+3×(3−1)+1×(9−3)=21 trial-epochs. If every rung restarts from scratch, cost is 9×1+3×3+1×9=27. These epoch totals are fair compute proxies only when epoch costs are comparable; also record accelerator time and hardware.',
+      code: 'Keep propose_configuration() separate from schedule_or_stop(trial, report). Report trial ID, configuration, seed, cumulative resource, validation metric, and timestamp. A synchronous halving rung waits for its cohort; an asynchronous halving scheduler can decide using comparable reports already available at that rung, so arrival order can change decisions. State the exact policy and grace period, handle failures explicitly, and count all consumed work, including pruned trials and checkpoint overhead. Use checkpoints when claiming resume-based savings.',
+      workConnection: 'Early leaders can be fast learners that plateau; slow starters may become better at full fidelity. Check how partial rankings agree with later results on pilot runs and adjust the minimum resource or promotion policy if they disagree. Compare search methods on best eligible validation score versus elapsed wall time and total accelerator time under matched hardware and budgets. A partial score at one epoch should not be declared better than another configuration’s nine-epoch final score without a common evaluation resource.',
+    },
+    predictionPrompt: 'One worker finishes a trial while another is still busy. Can asynchronous random search start another full-budget trial immediately? Separately, could pruning at epoch one discard the eventual best nine-epoch configuration?',
+    workedExample: 'At epoch one, A has loss 0.30 and B has 0.45. At epoch nine, a pilot run shows A at 0.28 and B at 0.20: the ranking reverses, so pruning B early would lose the better final model. A grace period can reduce this risk but spends more compute. In the nine→three→one resumed bracket with cumulative budgets 1→3→9, the first rung costs 9 epochs, promotions add 6 and then 6, totaling 21. Running all nine trials to nine epochs would cost 81 comparable trial-epochs; the 60-epoch saving buys less evidence about pruned trials.',
+    independentTask: 'Trace a resumed halving bracket with four trials at two epochs, two at six, and one at eighteen. Calculate total incremental trial-epochs, then the cost if each rung restarts. Describe how an asynchronous version avoids waiting, what reports are compared at a rung, and a pilot check for slow-starting configurations. State how you would compare methods when trial architectures have different epoch runtimes.',
+    misconceptions: ['Asynchronous execution changes worker coordination; it does not by itself imply multi-fidelity pruning.', 'An early validation ranking is uncertain evidence about the final-resource ranking.', 'Cumulative checkpoint budgets must be converted to incremental costs when resumed work is counted.', 'More completed trials in less wall time does not establish better compute efficiency without total resource accounting.'],
+    teachBackPrompt: 'Explain the separate jobs of the searcher and scheduler, trace a halving budget, and defend a fair asynchronous comparison that accounts for early-ranking uncertainty and all consumed compute.',
+    contentStatus: 'reviewed', durationMinutes: 40,
+  },
+];

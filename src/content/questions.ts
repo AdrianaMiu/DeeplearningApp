@@ -2,6 +2,7 @@ import { studioQuestions } from './studio-questions';
 import type { Question } from '../domain/types';
 import { makeQuestion, type QuestionSeed } from './question-helpers';
 import { chapter20EssentialQuestionSeeds } from './essential-questions/chapter-20';
+import { chapter19EssentialQuestionSeeds } from './essential-questions/chapter-19';
 
 const seeds: QuestionSeed[] = [
   { id: 'q01', lessonId: 'tensor-shapes', type: 'shape', prompt: 'X has shape (3,4). What is the shape of X[:,1]?', answer: ['3'], explanation: 'Selecting one column removes the second axis.' },
@@ -38,4 +39,4 @@ const seeds: QuestionSeed[] = [
   { id: 'q32', lessonId: 'regression-training', type: 'explanation', prompt: 'What does decreasing training loss prove and not prove?', answer: 'optimization is occurring; generalization is not proven', explanation: 'Validation or unseen data is needed for evidence of generalization.' },
 ];
 
-export const questions: Question[] = [...seeds.map(makeQuestion), ...chapter20EssentialQuestionSeeds.map(makeQuestion), ...studioQuestions];
+export const questions: Question[] = [...seeds.map(makeQuestion), ...chapter20EssentialQuestionSeeds.map(makeQuestion), ...chapter19EssentialQuestionSeeds.map(makeQuestion), ...studioQuestions];

@@ -3,6 +3,7 @@ import { chapterLearningMap } from './course-map';
 import { companionSource } from './source';
 import { chapterStudios } from './studios';
 import { chapter20EssentialLessons } from './essential-lessons/chapter-20';
+import { chapter19EssentialLessons } from './essential-lessons/chapter-19';
 
 interface LessonSeed {
   id: string; title: string; question: string; sections: [string, number, number?][];
@@ -44,7 +45,7 @@ export const lessons: DeepLesson[] = [...seeds.map((seed, index): DeepLesson => 
   teachBackPrompt: `Explain ${seed.title.toLowerCase()} in your own words, then name one situation where it matters.`,
   contentStatus: 'reviewed',
   durationMinutes: 35,
-})), ...chapter20EssentialLessons];
+})), ...chapter20EssentialLessons, ...chapter19EssentialLessons];
 
 export const learningEntries: LearningEntry[] = [...lessons, ...chapterStudios];
 export const learningEntryById = new Map(learningEntries.map((entry) => [entry.id, entry]));

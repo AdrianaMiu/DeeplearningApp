@@ -1,7 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
 
+import { chapter18EssentialLessons } from '../../src/content/essential-lessons/chapter-18';
+import { chapter19EssentialLessons } from '../../src/content/essential-lessons/chapter-19';
+import { chapter20EssentialLessons } from '../../src/content/essential-lessons/chapter-20';
 import { handleTutorRequest, type TutorEnv } from '../../worker/src/index';
 
+const essentialLessons = [...chapter18EssentialLessons, ...chapter19EssentialLessons, ...chapter20EssentialLessons];
 const origin = 'https://adrianamiu.github.io';
 const validBody = {
   lessonId: 'tensor-shapes',
@@ -38,13 +42,13 @@ function request(body: unknown = validBody, requestOrigin = origin) {
   });
 }
 
-function successfulFetch() {
+function successfulFetch(sourceSectionIds = ['2.1.2']) {
   return vi.fn(async (input: RequestInfo | URL, _init?: RequestInit) => {
     const url = String(input);
     if (url.includes('turnstile')) return Response.json({ success: true });
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify({
       reply: 'Indexing one axis removes it; the first axis remains.',
-      sourceSectionIds: ['2.1.2'],
+      sourceSectionIds,
       supportLevel: 'hint',
       insufficientEvidence: false,
       suggestedNextAttempt: 'Name the axis that remains.',
@@ -53,6 +57,43 @@ function successfulFetch() {
 }
 
 describe('guarded tutor Worker', () => {
+  it.each(essentialLessons)('maps allowed citations to verified pages for $id', async (lesson) => {
+    const sectionIds = lesson.sourceRefs.map((source) => source.sectionId);
+    const fetcher = successfulFetch(sectionIds);
+    const response = await handleTutorRequest(request({
+      ...validBody, lessonId: lesson.id, conceptIds: lesson.conceptIds,
+      question: lesson.question, learnerAttempt: 'I have a partial explanation and want to check my reasoning.',
+    }), env(), fetcher);
+
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({
+      sourceRefs: lesson.sourceRefs.map(({ sectionId, printedStart, pdfPageStart }) => ({
+        sectionId, printedStart, pdfPageStart,
+      })),
+      grounding: 'companion',
+    });
+    const geminiCall = fetcher.mock.calls.find(([input]) => String(input).includes('generativelanguage'));
+    const geminiBody = JSON.parse(String(geminiCall?.[1]?.body));
+    expect(geminiBody.generationConfig.responseJsonSchema.properties.sourceSectionIds.items.enum).toEqual(sectionIds);
+  });
+
+  it.each([
+    ['gp-posterior-inference', '18.3.4'],
+    ['gp-regression-practice', '18.2.1'],
+    ['hpo-experiment-design', '19.3.2'],
+    ['asynchronous-multifidelity-hpo', '19.1.1'],
+    ['gan-training-step', '20.2.1'],
+    ['dcgan-practice', '20.1.2'],
+  ])('rejects an out-of-allowlist citation for %s', async (lessonId, foreignSectionId) => {
+    const lesson = essentialLessons.find((entry) => entry.id === lessonId)!;
+    const response = await handleTutorRequest(request({
+      ...validBody, lessonId, conceptIds: lesson.conceptIds,
+    }), env(), successfulFetch([foreignSectionId]));
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toMatchObject({ code: 'MALFORMED_TUTOR_RESPONSE' });
+  });
+
   it('answers health checks without exposing configuration and rejects foreign CORS origins', async () => {
     const health = await handleTutorRequest(new Request('https://tutor.example/health'), env(), successfulFetch());
     expect(await health.json()).toEqual({ ok: true, service: 'deep-learning-companion-tutor' });

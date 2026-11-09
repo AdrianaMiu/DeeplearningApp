@@ -39,7 +39,7 @@ describe('complete book course map', () => {
       ['chapter-17', ['reinforcement-learning-studio']],
       ['chapter-18', ['gaussian-processes-studio']],
       ['chapter-19', ['hyperparameter-optimization-studio']],
-      ['chapter-20', ['gan-studio']],
+      ['chapter-20', ['gan-studio', 'gan-training-step', 'dcgan-practice']],
       ['appendix-a', ['math-appendix-studio']],
       ['appendix-b', ['tools-appendix-studio']],
     ]);
@@ -49,6 +49,6 @@ describe('complete book course map', () => {
       }
     }
     const coreEntryIds = [...chapterLearningMap.values()].flatMap((path) => path.coreEntryIds);
-    expect(new Set(coreEntryIds).size).toBe(32);
+    expect(new Set(coreEntryIds).size).toBe(34);
   });
 });

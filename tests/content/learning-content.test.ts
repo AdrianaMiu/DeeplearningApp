@@ -4,27 +4,28 @@ import { learningEntries, learningEntryById, lessons } from '../../src/content/l
 import { questions } from '../../src/content/questions';
 
 describe('published learning content', () => {
-  it('preserves the twelve deep lesson IDs', () => {
+  it('preserves the original deep lesson IDs alongside the Chapter 20 essentials', () => {
     expect(lessons.map((lesson) => lesson.id).sort()).toEqual([
       'autodiff', 'broadcasting', 'chain-rule', 'data-preprocessing',
-      'derivatives-gradients', 'linear-algebra-objects', 'linear-regression',
+      'dcgan-practice', 'derivatives-gradients', 'gan-training-step', 'linear-algebra-objects', 'linear-regression',
       'probability-expectation', 'products-and-norms', 'reductions',
       'regression-training', 'tensor-shapes',
     ]);
-    expect(learningEntries).toHaveLength(32);
-    expect(learningEntryById.size).toBe(32);
+    expect(learningEntries).toHaveLength(34);
+    expect(learningEntryById.size).toBe(34);
     expect(learningEntryById.get('missing-entry')).toBeUndefined();
     for (const lesson of lessons) {
       expect(lesson.kind).toBe('deep-lesson');
-      expect(lesson.chapterId).toBe(lesson.id === 'linear-regression' || lesson.id === 'regression-training' ? 'chapter-3' : 'chapter-2');
-      expect(lesson.milestoneId).toBe(lesson.chapterId === 'chapter-2' ? 'foundations' : 'models');
+      const isChapter20 = ['gan-training-step', 'dcgan-practice'].includes(lesson.id);
+      expect(lesson.chapterId).toBe(isChapter20 ? 'chapter-20' : lesson.id === 'linear-regression' || lesson.id === 'regression-training' ? 'chapter-3' : 'chapter-2');
+      expect(lesson.milestoneId).toBe(isChapter20 ? 'broader' : lesson.chapterId === 'chapter-2' ? 'foundations' : 'models');
       expect(learningEntryById.get(lesson.id)).toBe(lesson);
     }
   });
 
-  it('contains the twelve approved reviewed lessons with complete learning anatomy', () => {
-    expect(lessons).toHaveLength(12);
-    expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(12);
+  it('contains fourteen approved reviewed lessons with complete learning anatomy', () => {
+    expect(lessons).toHaveLength(14);
+    expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(14);
     for (const lesson of lessons) {
       expect(lesson.contentStatus).toBe('reviewed');
       expect(lesson.objectives.length).toBeGreaterThan(0);
@@ -42,11 +43,11 @@ describe('published learning content', () => {
     }
   });
 
-  it('contains 120 unique reviewed assessment items', () => {
+  it('contains 126 unique reviewed assessment items', () => {
     expect(diagnosticQuestions).toHaveLength(8);
-    expect(questions).toHaveLength(112);
+    expect(questions).toHaveLength(118);
     const all = [...diagnosticQuestions, ...questions];
-    expect(new Set(all.map((question) => question.id)).size).toBe(120);
+    expect(new Set(all.map((question) => question.id)).size).toBe(126);
     const types = new Set(all.map((question) => question.type));
     expect([...types].sort()).toEqual(
       ['multiple_choice', 'shape', 'numeric', 'code_trace', 'debugging', 'explanation', 'transfer'].sort(),

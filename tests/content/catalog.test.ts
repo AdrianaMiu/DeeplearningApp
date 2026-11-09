@@ -12,6 +12,57 @@ const replaceIntroduction = (replacement: unknown) => learningEntries.map((entry
 
 describe('learning catalog', () => {
   it.each([
+    ['gp-posterior-inference', '19.1.2', 863],
+    ['hpo-experiment-design', '20.1.2', 915],
+    ['gan-training-step', '18.2.1', 839],
+  ])('rejects %s using valid pages for the foreign chapter section %s', (id, sectionId, page) => {
+    const lesson = learningEntries.find((entry) => entry.id === id)!;
+    const ref = { ...lesson.sourceRefs[0], sectionId, printedStart: String(page), printedEnd: String(page),
+      pdfPageStart: page + 40, pdfPageEnd: page + 40 };
+    const catalog = createLearningCatalog({ entries: learningEntries.map((entry) => entry === lesson ? { ...lesson, sourceRefs: [ref] } : entry) });
+    expect(catalog.validateLearningCatalog()).toContainEqual(expect.objectContaining({ code: 'INVALID_ENTRY', entryId: id, sectionId }));
+    expect(catalog.getAvailableLearningEntries().some((entry) => entry.id === id)).toBe(false);
+  });
+
+  it.each([
+    ['gp-posterior-inference', '18.2.1', 915, 915],
+    ['hpo-experiment-design', '19.1.2', 915, 915],
+    ['gan-training-step', '20.1.2', 839, 839],
+    ['gp-posterior-inference', '18.2.1', 842, 842],
+    ['hpo-experiment-design', '19.1.2', 867, 867],
+    ['gan-training-step', '20.1.2', 918, 918],
+    ['gp-posterior-inference', '18.2.1', 839, 842],
+    ['hpo-experiment-design', '19.1.2', 863, 867],
+    ['gan-training-step', '20.1.2', 915, 918],
+    ['gp-posterior-inference', '18.3.7', 860, 860],
+    ['asynchronous-multifidelity-hpo', '19.5.4', 913, 913],
+    ['dcgan-practice', '20.2.6', 928, 928],
+  ])('rejects %s citing %s at out-of-section print pages %i–%i', (id, sectionId, start, end) => {
+    const lesson = learningEntries.find((entry) => entry.id === id)!;
+    const ref = { ...lesson.sourceRefs[0], sectionId, printedStart: String(start), printedEnd: String(end),
+      pdfPageStart: start + 40, pdfPageEnd: end + 40 };
+    const catalog = createLearningCatalog({ entries: learningEntries.map((entry) => entry === lesson ? { ...lesson, sourceRefs: [ref] } : entry) });
+    expect(catalog.validateLearningCatalog()).toContainEqual(expect.objectContaining({ code: 'INVALID_PAGE_SPAN', entryId: id, sectionId }));
+    expect(catalog.getAvailableLearningEntries().some((entry) => entry.id === id)).toBe(false);
+    expect(catalog.getChapterLearningSummary(lesson.chapterId)).toMatchObject({ essentialPathStatus: 'planned', essentialEntryCount: 2 });
+  });
+
+  it.each([
+    ['gp-posterior-inference', '18.2', 839, 846],
+    ['gp-regression-practice', '18.3.4', 850, 853],
+    ['asynchronous-multifidelity-hpo', '19.3.2', 877, 882],
+    ['gan-training-step', '20.1.2', 915, 915],
+    ['dcgan-practice', '20.2.4', 923, 924],
+  ])('accepts %s citing %s within indexed boundaries at print pages %i–%i', (id, sectionId, start, end) => {
+    const lesson = learningEntries.find((entry) => entry.id === id)!;
+    const ref = { ...lesson.sourceRefs[0], sectionId, printedStart: String(start), printedEnd: String(end),
+      pdfPageStart: start + 40, pdfPageEnd: end + 40 };
+    const catalog = createLearningCatalog({ entries: learningEntries.map((entry) => entry === lesson ? { ...lesson, sourceRefs: [ref] } : entry) });
+    expect(catalog.validateLearningCatalog()).toEqual([]);
+    expect(catalog.getAvailableLearningEntries()).toHaveLength(38);
+  });
+
+  it.each([
     ['chapter-18', 19, 18], ['chapter-19', 28, 7], ['chapter-20', 14, 3],
   ])('distinguishes the complete essential path from detailed coverage for %s', (chapterId, sections, exercises) => {
     expect(getChapterLearningSummary(chapterId)).toMatchObject({

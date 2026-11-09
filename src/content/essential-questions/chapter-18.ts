@@ -17,11 +17,16 @@ export const chapter18EssentialQuestionSeeds: QuestionSeed[] = [
     explanation: 'The noisy training variance is C=1+0.25=1.25. Conditioning gives latent variance 1−0.5²/1.25=1−0.2=0.8. A future noisy observation instead has variance 0.8+0.25=1.05; the question asks for the latent variance.',
   },
   {
-    id: 'q47', lessonId: 'gp-posterior-inference', type: 'debugging', application: true,
-    prompt: 'A sensor GP adds independent measurement-noise variance to every entry of the training covariance and the train/test cross-covariance. It then labels the latent posterior band as a band for the next noisy reading. Diagnose both errors and repair the calculation.',
-    answer: 'Independent observation noise contributes σ_n²I to the training covariance, so only its diagonal changes. Keep latent train/test kernel cross-covariances unchanged. Condition using that noisy training covariance to obtain the latent posterior, then add σ_n²I to the latent test covariance for a future independent noisy reading and label the band accordingly.',
+    id: 'q47', version: 2, lessonId: 'gp-posterior-inference', type: 'multiple_choice', application: true,
+    prompt: 'A sensor GP adds independent measurement-noise variance to every entry of the training covariance and the train/test cross-covariance. It then labels the latent posterior band as a band for the next noisy reading. Which calculation repairs both errors?',
+    options: [
+      'Add noise to every training entry but leave cross-covariances unchanged; condition on that matrix; add fresh measurement-noise variance for the next reading.',
+      'Add noise only to the training diagonal and leave cross-covariances unchanged; condition for the latent posterior; add fresh noise variance for the next reading and label the bands separately.',
+      'Add noise only to the training diagonal and cross-covariance diagonal; condition for the latent posterior; use the same band for latent values and the next reading.',
+      'Add noise only to the training diagonal and leave cross-covariances unchanged; condition for the latent posterior; label that band as a future-reading band because training already included noise.',
+    ],
+    answer: 'Add noise only to the training diagonal and leave cross-covariances unchanged; condition for the latent posterior; add fresh noise variance for the next reading and label the bands separately.',
     hints: ['Independent noise at different measurements has zero cross-covariance; a future reading introduces fresh noise.'],
-    rubric: ['Adds independent observation noise only to the training diagonal and leaves latent cross-covariances unchanged', 'Conditions with the corrected covariance to obtain latent predictions', 'Adds future noise to latent predictive covariance and distinguishes the resulting bands'],
     explanation: 'Adding the same noise variance everywhere imposes spurious correlations between independent measurement errors. The training diagonal captures noisy evidence without changing latent kernel cross-covariances. A new reading has its own independent error, so its variance exceeds the latent variance by the measurement-noise variance.',
   },
   {
@@ -40,11 +45,16 @@ export const chapter18EssentialQuestionSeeds: QuestionSeed[] = [
     explanation: 'C[0,0]=2+0.1=2.1; the off-diagonal stays 0.6 because the observation noise is independent. The value 0.1 is a variance, not a standard deviation. Numerical jitter would be a separately recorded diagonal perturbation, and Cholesky would factor C rather than K.',
   },
   {
-    id: 'q50', lessonId: 'gp-regression-practice', type: 'debugging', application: true,
-    prompt: 'An RBF GP with a very long length scale produces narrow bands while smoothing away a real sensor regime jump. Nearly duplicate inputs also make its near-zero-noise covariance hard to factor. A teammate proposes increasing jitter until both problems disappear. Diagnose the separate issues and propose a verification plan.',
-    answer: 'Near-duplicate inputs with very small noise can create numerical ill-conditioning; use Cholesky solves, check construction and precision, and record a small jitter with sensitivity checks. Jitter is not a measurement-noise estimate or a cure for the smooth-kernel mismatch. Inspect deployment-matched held-out residuals and noisy predictive intervals near the jump, compare shorter scales, a less smooth kernel or a regime-aware model, and estimate observation noise separately where data permit.',
+    id: 'q50', version: 2, lessonId: 'gp-regression-practice', type: 'multiple_choice', application: true,
+    prompt: 'An RBF GP with a very long length scale produces narrow bands while smoothing away a real sensor regime jump. Nearly duplicate inputs also make its near-zero-noise covariance hard to factor. A teammate proposes increasing jitter until both problems disappear. Which plan separates the issues correctly?',
+    options: [
+      'Increase jitter until factorization succeeds; treat it as measured sensor noise; use the resulting narrow bands to verify that the regime jump is modeled.',
+      'Use stable Cholesky solves and record small jitter with sensitivity checks; keep the long-scale kernel; accept successful factorization as evidence that the uncertainty bands are calibrated.',
+      'Use stable solves, check precision and small recorded jitter sensitivity; estimate noise separately; compare kernel or regime alternatives with deployment-matched held-out residuals and predictive intervals.',
+      'Replace the kernel to represent the jump; explicitly invert the near-singular covariance without numerical checks; select the model solely by its training fit.',
+    ],
+    answer: 'Use stable solves, check precision and small recorded jitter sensitivity; estimate noise separately; compare kernel or regime alternatives with deployment-matched held-out residuals and predictive intervals.',
     hints: ['Separate the reliability of the matrix computation from the assumptions about the function and measurement noise.'],
-    rubric: ['Diagnoses numerical conditioning and uses stable solves plus small recorded jitter and sensitivity checks', 'Distinguishes jitter from observation noise and identifies excessive smoothness as a model issue', 'Uses held-out residuals and predictive intervals to compare plausible kernel or regime alternatives'],
     explanation: 'Jitter can stabilize a nearly singular covariance by perturbing its diagonal. It does not establish the measurement-noise level or make a long-scale RBF prior appropriate for a jump. Stable computation and credible uncertainty require separate checks: numerical sensitivity, model alternatives, and evaluation on data withheld under a deployment-relevant split.',
   },
 ];

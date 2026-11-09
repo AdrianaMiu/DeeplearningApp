@@ -47,14 +47,14 @@ describe('Chapter 18 essential path', () => {
       const lesson = learningEntryById.get(lessonId)!;
       const checks = items.filter((question) => question.lessonId === lessonId);
       expect(checks).toHaveLength(3);
-      expect(checks.map((question) => question.type)).toEqual(['multiple_choice', 'numeric', 'debugging']);
+      expect(checks.map((question) => question.type)).toEqual(['multiple_choice', 'numeric', 'multiple_choice']);
       expect(checks.filter((question) => question.applicationEvidence)).toHaveLength(1);
       for (const check of checks) {
         expect(check.sourceRefs).toEqual(lesson.sourceRefs);
         expect(check.conceptIds).toEqual(lesson.conceptIds);
         expect(check.hints.every((hint) => hint.trim().length > 15)).toBe(true);
         expect(check.explanation.length).toBeGreaterThan(35);
-        if (check.type === 'debugging') expect(check.rubric?.length).toBeGreaterThanOrEqual(2);
+        if (check.applicationEvidence) expect(check.rubric).toBeUndefined();
       }
     }
     expect(items.find((question) => question.id === 'q46')).toMatchObject({ answer: 0.8, tolerance: 0.001 });

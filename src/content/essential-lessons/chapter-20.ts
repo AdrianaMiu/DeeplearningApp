@@ -21,7 +21,7 @@ export const chapter20EssentialLessons: DeepLesson[] = [
     independentTask: 'Write the two-phase pseudocode with distinct optimizers, gradient clearing, targets, loss reductions, and the detach boundary. Calculate the discriminator loss for probabilities 0.9 and 0.4. Name a parameter-change check for each phase and explain why the G phase needs a fresh D forward.',
     misconceptions: ['Freezing discriminator parameters does not mean disabling derivatives through its input.', 'Real and fake labels for the discriminator differ; the non-saturating generator uses real targets.', 'A summed loss and an equally weighted mean over real and fake batches differ by a factor of two.'],
     teachBackPrompt: 'Explain one complete GAN step to a colleague, naming every target, optimizer, gradient boundary, and loss reduction. Explain why a small loss alone does not establish a useful generator.',
-    contentStatus: 'reviewed', durationMinutes: 35,
+    contentStatus: 'reviewed', durationMinutes: 15,
   },
   {
     kind: 'deep-lesson', id: 'dcgan-practice', chapterId: 'chapter-20', milestoneId: 'broader',
@@ -42,6 +42,6 @@ export const chapter20EssentialLessons: DeepLesson[] = [
     independentTask: 'Design a 32×32 grayscale variant: list every spatial size and choose the final channel count. State the real-image normalization and discriminator output shape. Then diagnose a run where many distinct latent inputs yield nearly identical images, proposing a diversity check alongside both loss curves.',
     misconceptions: ['Transposed convolution is a learned mapping, not the mathematical inverse of an arbitrary convolution.', 'A tanh generator output requires a matching real-data scale, not just matching tensor shapes.', 'Realistic individual images do not prove coverage of different modes of the data.'],
     teachBackPrompt: 'Trace one latent vector to an RGB image and back to a discriminator logit. Explain how you would check spatial sizes, pixel ranges, and diversity before interpreting the losses.',
-    contentStatus: 'reviewed', durationMinutes: 35,
+    contentStatus: 'reviewed', durationMinutes: 15,
   },
 ];

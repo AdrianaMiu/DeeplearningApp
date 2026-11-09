@@ -92,6 +92,17 @@ export function createLearningCatalog(input: CatalogInput) {
   });
   const chaptersById = new Map(inventory.chapters.map((chapter) => [chapter.id, chapter]));
   const sectionsById = new Map(inventory.sections.map((section) => [section.id, section]));
+  // The index records heading starts, not end pages. A section includes its
+  // descendants up to the next peer/ancestor heading. Keep that boundary page
+  // inclusive because two headings can share a printed page.
+  const orderedSections = [...inventory.sections].sort((a, b) => a.order - b.order);
+  const sectionPageBounds = new Map(orderedSections.map((section, index) => {
+    const next = orderedSections.slice(index + 1).find((candidate) => candidate.level <= section.level);
+    return [section.id, {
+      start: section.source.pdfPageStart,
+      end: section.source.pdfPageEnd ?? next?.source.pdfPageStart ?? inventory.sourcePageCount,
+    }];
+  }));
   const sectionChapterById = new Map<string, string>();
   function sectionChapter(sectionId: string, seen = new Set<string>()): string | undefined {
     if (sectionChapterById.has(sectionId)) return sectionChapterById.get(sectionId);
@@ -155,6 +166,11 @@ export function createLearningCatalog(input: CatalogInput) {
         || ref.pdfPageStart < 1 || pdfEnd < ref.pdfPageStart || pdfEnd > inventory.sourcePageCount
         || ref.pdfPageStart !== printedStart + 40 || pdfEnd !== printedEnd + 40) {
         add({ ...refContext, code: 'INVALID_PAGE_SPAN', message: 'Source pages must be ordered, within the book, and use the verified printed/PDF offset.' });
+      }
+      const sectionBounds = sectionPageBounds.get(ref.sectionId);
+      if (entry.kind === 'deep-lesson' && sectionBounds
+        && (ref.pdfPageStart < sectionBounds.start || pdfEnd > sectionBounds.end)) {
+        add({ ...refContext, code: 'INVALID_PAGE_SPAN', message: 'Lesson source pages must stay within the indexed bounds of the cited section.' });
       }
       if (entry.kind === 'chapter-studio' && !manifestById.get(entry.id)?.references.some((verified) =>
         verified.sectionId === ref.sectionId && verified.printedStart === ref.printedStart

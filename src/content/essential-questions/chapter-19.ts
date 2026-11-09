@@ -17,11 +17,16 @@ export const chapter19EssentialQuestionSeeds: QuestionSeed[] = [
     explanation: 'The mean is (0.24+0.21+0.27)/3=0.72/3=0.24. The best seed score, 0.21, is not the mean performance. Repeating training seeds on one split does not measure uncertainty across different data splits.',
   },
   {
-    id: 'q41', lessonId: 'hpo-experiment-design', type: 'debugging', application: true,
-    prompt: 'A team claims an HPO improvement after selecting each configuration’s best seed and checking test accuracy after every trial. Design a replacement comparison and identify what the trial ledger must retain.',
-    answer: 'Select configurations using a fixed validation split and a predeclared aggregate over the same training seeds and resource budget. Reserve fresh untouched test data for the frozen choice because the old test has guided selection. Retain configurations, seeds, split identity, resources, validation scores, and failed or stopped trial costs.',
+    id: 'q41', version: 2, lessonId: 'hpo-experiment-design', type: 'multiple_choice', application: true,
+    prompt: 'A team claims an HPO improvement after selecting each configuration’s best seed and checking test accuracy after every trial. Which replacement comparison and trial ledger would make the claim credible?',
+    options: [
+      'Select by validation means over predeclared shared seeds and resources; freeze the choice before fresh untouched test evaluation; log configurations, seeds, splits, scores, resources, and failed or stopped costs.',
+      'Select each configuration’s best validation seed at equal resources; freeze the choice before fresh untouched test evaluation; log configurations, seeds, splits, scores, and every trial’s resource cost.',
+      'Select by validation means over predeclared shared seeds and resources; use the already consulted test as untouched final evidence; log configurations, seeds, splits, scores, and every trial’s resource cost.',
+      'Select by validation means over predeclared shared seeds and resources; freeze the choice before fresh untouched test evaluation; log only successful finalists so failed trials cannot distort the compute comparison.',
+    ],
+    answer: 'Select by validation means over predeclared shared seeds and resources; freeze the choice before fresh untouched test evaluation; log configurations, seeds, splits, scores, resources, and failed or stopped costs.',
     hints: ['Seed selection and reuse of test feedback create separate sources of optimistic results.'],
-    rubric: ['Replaces best-seed selection with a predeclared aggregate over comparable repeated runs', 'Removes test feedback from selection and uses untouched data for final evaluation', 'Records configurations, seeds, split, scores, and compute including unsuccessful trials'],
     explanation: 'Keeping only a lucky seed and choosing with test feedback both bias the comparison. Comparable repetitions make training variation visible, validation supports selection, and untouched data assesses the final procedure. A complete ledger makes the claimed gain auditable against its compute cost.',
   },
   {
@@ -40,11 +45,16 @@ export const chapter19EssentialQuestionSeeds: QuestionSeed[] = [
     explanation: 'Initial training costs 9×1=9, the first promotions add 3×(3−1)=6, and the final promotion adds 1×(9−3)=6, totaling 21. Adding the cumulative rung budgets would give 27 and double-count resumed work; 27 would instead describe restarting each rung from scratch.',
   },
   {
-    id: 'q44', lessonId: 'asynchronous-multifidelity-hpo', type: 'debugging', application: true,
-    prompt: 'A search report declares a fast architecture superior because it completes more trials and leads at epoch one. A slower architecture is pruned before its loss drops at epoch nine. Diagnose the claim and propose an evidence-based scheduling and compute comparison.',
-    answer: 'Early rankings can reverse and asynchronous arrival favors available reports. Use pilot full-resource curves to assess pruning reliability and consider a longer grace period. Compare candidates at a common final resource and methods under matched hardware and budgets, recording all trial costs, total accelerator time, and wall time rather than completed-trial count alone.',
+    id: 'q44', version: 2, lessonId: 'asynchronous-multifidelity-hpo', type: 'multiple_choice', application: true,
+    prompt: 'A search report declares a fast architecture superior because it completes more trials and leads at epoch one. A slower architecture is pruned before its loss drops at epoch nine. Which diagnosis and comparison plan is justified?',
+    options: [
+      'Treat epoch-one leadership as the final ranking; retain the current pruning policy; compare completed-trial counts and wall time on matched hardware.',
+      'Check pilot curves for ranking reversals and lengthen the grace period if needed; compare epoch-one scores with epoch-nine scores and count only promoted work.',
+      'Give every architecture nine epochs and declare equal compute; compare final scores and completed-trial counts without recording different epoch runtimes.',
+      'Check full-resource pilot curves for ranking reversals and justify the grace period; compare at common final resource under matched hardware and budgets, recording all accelerator costs and wall time.',
+    ],
+    answer: 'Check full-resource pilot curves for ranking reversals and justify the grace period; compare at common final resource under matched hardware and budgets, recording all accelerator costs and wall time.',
     hints: ['Distinguish early learning speed, final validation quality, and the actual cost of each epoch.'],
-    rubric: ['Identifies ranking reversal and the risk of pruning slow starters from early or incomplete evidence', 'Proposes pilot learning-curve checks and a justified minimum resource or grace period', 'Compares quality at a common resource and accounts for all compute plus hardware and wall time'],
     explanation: 'Fast completion and early quality do not establish final quality. Pilot curves can expose unreliable partial rankings before aggressive pruning. Different architectures have different epoch costs, so fair claims require an explicit budget and ledger of all work, including discarded trials, alongside elapsed time.',
   },
 ];

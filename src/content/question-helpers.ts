@@ -2,7 +2,7 @@ import type { Question, QuestionType } from '../domain/types';
 import { learningEntryById } from './lessons';
 
 export interface QuestionSeed {
-  id: string; lessonId: string; type: QuestionType; prompt: string;
+  id: string; lessonId: string; type: QuestionType; prompt: string; version?: number;
   answer: string | number | string[]; explanation: string; application?: boolean;
   options?: string[]; tolerance?: number; hints?: string[]; rubric?: string[];
 }
@@ -12,7 +12,7 @@ export function makeQuestion(seed: QuestionSeed, index: number): Question {
   if (!lesson) throw new Error(`Unknown lesson ${seed.lessonId}`);
   return {
     id: seed.id,
-    version: 1,
+    version: seed.version ?? 1,
     lessonId: seed.lessonId,
     conceptIds: lesson.conceptIds,
     sourceRefs: lesson.sourceRefs,

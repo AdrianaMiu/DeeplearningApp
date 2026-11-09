@@ -21,7 +21,7 @@ export const chapter19EssentialLessons: DeepLesson[] = [
     independentTask: 'Design a twelve-run learning-rate search: name the sampling distribution, validation metric, split policy, and separate search and training seeds. Reserve part of the budget for repeated finalist runs, specify how their scores will be aggregated, and describe when the test set can be opened. Explain one reason equal epochs may not mean equal compute.',
     misconceptions: ['The best training seed is not a fair estimate of a configuration’s typical performance.', 'An untouched test set cannot remain untouched if its score is used to choose another configuration.', 'Reproducible seeds help audit an experiment but do not guarantee generalization or eliminate validation overfitting.'],
     teachBackPrompt: 'Explain how you would make an HPO result reproducible and credible, from choosing the search distribution to recording failed trials, repeating seeds, and evaluating the final choice.',
-    contentStatus: 'reviewed', durationMinutes: 35,
+    contentStatus: 'reviewed', durationMinutes: 15,
   },
   {
     kind: 'deep-lesson', id: 'asynchronous-multifidelity-hpo', chapterId: 'chapter-19', milestoneId: 'broader',
@@ -42,6 +42,6 @@ export const chapter19EssentialLessons: DeepLesson[] = [
     independentTask: 'Trace a resumed halving bracket with four trials at two epochs, two at six, and one at eighteen. Calculate total incremental trial-epochs, then the cost if each rung restarts. Describe how an asynchronous version avoids waiting, what reports are compared at a rung, and a pilot check for slow-starting configurations. State how you would compare methods when trial architectures have different epoch runtimes.',
     misconceptions: ['Asynchronous execution changes worker coordination; it does not by itself imply multi-fidelity pruning.', 'An early validation ranking is uncertain evidence about the final-resource ranking.', 'Cumulative checkpoint budgets must be converted to incremental costs when resumed work is counted.', 'More completed trials in less wall time does not establish better compute efficiency without total resource accounting.'],
     teachBackPrompt: 'Explain the separate jobs of the searcher and scheduler, trace a halving budget, and defend a fair asynchronous comparison that accounts for early-ranking uncertainty and all consumed compute.',
-    contentStatus: 'reviewed', durationMinutes: 40,
+    contentStatus: 'reviewed', durationMinutes: 15,
   },
 ];

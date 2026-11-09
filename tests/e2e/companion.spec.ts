@@ -130,12 +130,20 @@ test.describe('Deep Learning Companion release', () => {
     await page.getByRole('radio', { name: 'D receives gradients, while this fake branch sends no gradients into G', exact: true }).check();
     await page.getByRole('button', { name: 'Check answer', exact: true }).click();
     await expect(page.getByRole('status')).toContainText('Correct.');
+    await page.getByRole('button', { name: 'Next question', exact: true }).click();
+    await page.getByLabel('Your answer', { exact: true }).fill('0.308');
+    await page.getByRole('button', { name: 'Check answer', exact: true }).click();
+    await expect(page.getByRole('status')).toContainText('Correct.');
+    await page.getByRole('button', { name: 'Next question', exact: true }).click();
+    await page.getByRole('radio', { name: 'Use disjoint optimizers; detach fake images only for D; preserve the G-to-D gradient for G; compare both networks’ parameters around each phase.', exact: true }).check();
+    await page.getByRole('button', { name: 'Check answer', exact: true }).click();
+    await expect(page.getByRole('status')).toContainText('Correct.');
     await page.getByRole('link', { name: 'Progress Inspect your evidence', exact: true }).click();
     const evidence = page.locator('.progress-list article').filter({ has: page.getByRole('heading', { name: 'gradient boundary', exact: true }) });
-    await expect(evidence).toContainText('1 independent evidence item');
+    await expect(evidence).toContainText('3 independent evidence items');
     await page.reload();
-    await expect(evidence).toContainText('1 independent evidence item');
-    await expect(evidence).toContainText('practiced');
+    await expect(evidence).toContainText('3 independent evidence items');
+    await expect(evidence).toContainText('demonstrated');
   });
 
 

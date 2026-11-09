@@ -16,6 +16,24 @@ function NavigationControls() {
 }
 
 describe('practice modes', () => {
+  it.each([
+    ['Use disjoint optimizers; detach fake images only for D; preserve the G-to-D gradient for G; compare both networks’ parameters around each phase.', 1],
+    ['Use disjoint optimizers; detach fake images in both phases; compare both networks’ parameters around each phase to confirm separate updates.', 0],
+  ])('records diagnosis application evidence and its actual deterministic score', async (answer, score) => {
+    const db = createLearningDatabase(`application-diagnosis-${crypto.randomUUID()}`);
+    const repository = new LearningRepository(db);
+    const user = userEvent.setup();
+    const view = render(<MemoryRouter initialEntries={['/practice?mode=quick&entry=gan-training-step&question=q35']}><AppShell repository={repository} /></MemoryRouter>);
+    await user.click(await screen.findByRole('radio', { name: answer }));
+    await user.click(screen.getByRole('button', { name: /check answer/i }));
+    await screen.findByRole('button', { name: /next question/i });
+    expect(await repository.getAttempts()).toEqual([expect.objectContaining({
+      questionId: 'q35', questionVersion: 2, score, gradingMethod: 'deterministic',
+      applicationEvidence: true, hintsUsed: 0, solutionRevealed: false, tutorSupportLevel: 'none',
+    })]);
+    view.unmount(); db.close(); await db.delete();
+  });
+
   it('opens the explicit review question and rejects questions from a different activity', async () => {
     const db = createLearningDatabase(`question-context-${crypto.randomUUID()}`);
     const repository = new LearningRepository(db);

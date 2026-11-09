@@ -21,7 +21,7 @@ export const chapter18EssentialLessons: DeepLesson[] = [
     independentTask: 'Repeat the one-training-point example for noise variance 1 instead of 0.25. Compute the test mean, latent variance, and future-observation variance. Explain why the observation has less influence. Then set the train/test cross-covariance to zero and state what remains of the posterior at that test input.',
     misconceptions: ['Observation-noise variance is added to the training diagonal, not every covariance entry.', 'A posterior over the latent function and a predictive distribution over noisy observations generally have different variances.', 'A positive observation-noise variance means a GP need not interpolate its training targets.', 'Posterior confidence is conditional on the kernel, noise model, and fixed hyperparameters; it is not a guarantee against misspecification.'],
     teachBackPrompt: 'Draw the training/test covariance blocks, explain how conditioning uses them, and justify why a future measurement has more variance than the latent function at the same input.',
-    contentStatus: 'reviewed', durationMinutes: 40,
+    contentStatus: 'reviewed', durationMinutes: 15,
   },
   {
     kind: 'deep-lesson', id: 'gp-regression-practice', chapterId: 'chapter-18', milestoneId: 'broader',
@@ -42,6 +42,6 @@ export const chapter18EssentialLessons: DeepLesson[] = [
     independentTask: 'Outline a small GP experiment for sensor values that jump at a known regime change. Specify a deployment-matched split, training-only transforms, RBF kernel and noise parameters, Cholesky solves, marginal-likelihood optimization, and separate latent/noisy prediction bands. Describe a residual pattern that would challenge the smooth-kernel assumption and one alternative to evaluate. State how you would distinguish numerical jitter from estimated measurement noise.',
     misconceptions: ['An explicit matrix inverse is unnecessary for GP prediction and is a poor default numerical implementation.', 'Numerical jitter and observation-noise variance have separate purposes even though both can alter a diagonal.', 'Maximizing marginal likelihood selects parameters within a model family; it does not establish that the family is appropriate.', 'A narrow band around a smoothed-away discontinuity can indicate model misspecification rather than reliable certainty.'],
     teachBackPrompt: 'Explain a small GP fit from training-only scaling through kernel construction, stable solves, and marginal likelihood, then diagnose a confidently wrong prediction using residuals and kernel assumptions.',
-    contentStatus: 'reviewed', durationMinutes: 45,
+    contentStatus: 'reviewed', durationMinutes: 15,
   },
 ];

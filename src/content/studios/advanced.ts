@@ -22,7 +22,7 @@ export const advancedStudios: ChapterStudio[] = [
     ] },
   }),
   makeStudio({
-    id: 'gaussian-processes-studio', chapter: 18, title: 'Encode similarity with a GP kernel',
+    id: 'gaussian-processes-studio', chapter: 18, title: 'Encode similarity with a GP kernel', durationMinutes: 15,
     question: 'How can a model describe uncertainty over entire functions?',
     purpose: 'Connect a Gaussian process prior to kernel similarity and noisy observations.',
     capability: 'Compute a small RBF covariance and explain the role of length scale in a GP prior.',
@@ -38,7 +38,7 @@ export const advancedStudios: ChapterStudio[] = [
     interaction: { kind: 'parameter-lab', title: 'Change a kernel length scale', instruction: 'Compare the unit-amplitude RBF covariance between x=0 and x=1 as length scale changes.', model: 'rbf-kernel', controls: [{ id: 'length-scale', label: 'Length scale', min: 0.25, max: 3, step: 0.25, initial: 1 }] },
   }),
   makeStudio({
-    id: 'hyperparameter-optimization-studio', chapter: 19, title: 'Spend a search budget deliberately',
+    id: 'hyperparameter-optimization-studio', chapter: 19, title: 'Spend a search budget deliberately', durationMinutes: 15,
     question: 'Which model should receive more training when the search budget is limited?',
     purpose: 'Separate parameter training from validation-based hyperparameter selection and resource allocation.',
     capability: 'Allocate a small trial budget and explain the uncertainty of early stopping decisions.',
@@ -54,7 +54,7 @@ export const advancedStudios: ChapterStudio[] = [
     interaction: { kind: 'parameter-lab', title: 'Allocate trial epochs', instruction: 'Reserve six epochs for three initial trials, then allocate the remaining budget. Count additional epochs rather than charging the initial work twice.', model: 'search-budget', controls: [{ id: 'budget', label: 'Total trial epochs', min: 6, max: 18, step: 1, initial: 10 }] },
   }),
   makeStudio({
-    id: 'gan-studio', chapter: 20, title: 'Separate two adversarial updates',
+    id: 'gan-studio', chapter: 20, title: 'Separate two adversarial updates', durationMinutes: 15,
     question: 'What should each network learn from the same generated sample?',
     purpose: 'Distinguish generator and discriminator objectives before considering convolutional GAN architectures.',
     capability: 'Compute a discriminator loss and explain which parameters change in each alternating update.',

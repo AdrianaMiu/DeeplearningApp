@@ -17,11 +17,16 @@ export const chapter20EssentialQuestionSeeds: QuestionSeed[] = [
     explanation: 'The two terms are −ln 0.9≈0.105361 and −ln 0.6≈0.510826. Their equally weighted average is 0.308093, rounding to 0.308. The sum 0.616 would use a different reduction.',
   },
   {
-    id: 'q35', lessonId: 'gan-training-step', type: 'debugging', application: true,
-    prompt: 'In an image-generation run, G parameters change during the D phase. Its optimizer contains both networks, and the fake-image branch is not detached. Specify two corrections and a direct check that only the intended network changes in each phase.',
-    answer: 'Give D and G disjoint optimizers; detach fake images in the D phase while retaining the differentiable G-to-D path in the G phase. Compare saved parameter values before and after each phase: D alone changes in the D phase, G alone in the G phase.',
+    id: 'q35', version: 2, lessonId: 'gan-training-step', type: 'multiple_choice', application: true,
+    prompt: 'In an image-generation run, G parameters change during the D phase. Its optimizer contains both networks, and the fake-image branch is not detached. Which repair and verification plan correctly isolates both updates?',
+    options: [
+      'Keep the shared optimizer; clear both gradient buffers after backward; compare only the combined loss before and after each phase.',
+      'Use disjoint optimizers; detach fake images only for D; preserve the G-to-D gradient for G; compare both networks’ parameters around each phase.',
+      'Use disjoint optimizers; detach fake images in both phases; compare both networks’ parameters around each phase to confirm separate updates.',
+      'Keep the shared optimizer; detach fake images only for D; step both networks in the G phase; compare generated samples instead of parameters.',
+    ],
+    answer: 'Use disjoint optimizers; detach fake images only for D; preserve the G-to-D gradient for G; compare both networks’ parameters around each phase.',
     hints: ['A gradient boundary and an optimizer parameter list control different parts of the update.'],
-    rubric: ['Separates optimizer parameter lists and detaches generated images only for the D phase', 'Preserves gradients through D to G without stepping D in the G phase', 'Checks actual parameter changes separately around both phases'],
     explanation: 'Connected fake samples allow D’s loss to differentiate into G, and an optimizer containing G can apply that unintended gradient. Separate parameter lists and the D-phase detach boundary prevent this. Per-phase parameter comparisons test the update behavior directly.',
   },
   {
@@ -40,11 +45,16 @@ export const chapter20EssentialQuestionSeeds: QuestionSeed[] = [
     explanation: 'The output height is (12−1)×2−2×1+4=24. Width also becomes 24 for the same settings; the number of output channels is a separate layer choice.',
   },
   {
-    id: 'q38', lessonId: 'dcgan-practice', type: 'debugging', application: true,
-    prompt: 'A DCGAN discriminator quickly separates every batch. Real RGB pixels are still in [0,255], while G ends in tanh. Fix the range mismatch and specify checks before claiming that matching ranges solved image quality or diversity.',
-    answer: 'Normalize real pixels with x/127.5−1 to [−1,1]. Check matching image shapes and observed ranges, then inspect a fixed latent grid over checkpoints and fresh latent draws for quality and diversity alongside both losses.',
+    id: 'q38', version: 2, lessonId: 'dcgan-practice', type: 'multiple_choice', application: true,
+    prompt: 'A DCGAN discriminator quickly separates every batch. Real RGB pixels are still in [0,255], while G ends in tanh. Which repair and follow-up checks address the mismatch without overstating the result?',
+    options: [
+      'Map real pixels with x/255 to [0,1]; check matching shapes; treat a discriminator mean of 0.5 as proof of realistic and diverse images.',
+      'Map real pixels with x/127.5−1 to [−1,1]; check shapes and ranges; declare diversity solved as soon as both losses stop changing.',
+      'Map real pixels with x/127.5−1 to [−1,1]; check shapes and ranges; inspect fixed and fresh latent samples for quality and diversity alongside both losses.',
+      'Keep real pixels in [0,255]; normalize only generated images for display; check fresh latent samples once the discriminator loss is small.',
+    ],
+    answer: 'Map real pixels with x/127.5−1 to [−1,1]; check shapes and ranges; inspect fixed and fresh latent samples for quality and diversity alongside both losses.',
     hints: ['A classifier can exploit pixel scale without learning image structure.'],
-    rubric: ['Maps real pixels to [−1,1] with the stated normalization', 'Checks real/fake shapes and value ranges', 'Evaluates generated quality and diversity beyond the losses'],
     explanation: 'A scale mismatch supplies D with an easy cue unrelated to image realism. Matching ranges removes that cue but does not guarantee stable training or prevent mode collapse; generated samples and their variation still need inspection.',
   },
 ];

@@ -22,8 +22,8 @@ describe('complete chapter studios', () => {
     expect(studios).toHaveLength(20);
     expect(studios.filter((studio) => remainingIds.includes(studio.id)).map((studio) => studio.id).sort())
       .toEqual([...remainingIds].sort());
-    expect(learningEntries).toHaveLength(36);
-    expect(learningEntryById.size).toBe(36);
+    expect(learningEntries).toHaveLength(38);
+    expect(learningEntryById.size).toBe(38);
     expect(chapterLearningMap.size).toBe(22);
     for (const path of chapterLearningMap.values()) for (const id of path.coreEntryIds) {
       expect(learningEntryById.get(id)).toMatchObject({ chapterId: path.chapterId, milestoneId: path.milestoneId });

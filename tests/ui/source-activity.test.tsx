@@ -14,15 +14,15 @@ describe('source section and exercise routes', () => {
   const open = (path: string) => render(<MemoryRouter initialEntries={[path]}><AppShell repository={repository} /></MemoryRouter>);
 
   it('shows an honest unavailable state for an unconverted section', async () => {
-    open('/section/4.1');
-    expect(await screen.findByRole('heading', { name: /softmax regression/i })).toBeInTheDocument();
+    open('/section/5.1');
+    expect(await screen.findByRole('heading', { name: /multilayer perceptrons/i })).toBeInTheDocument();
     expect(screen.getByText(/section activity is not authored yet/i)).toBeInTheDocument();
     expect(screen.getByText(/unconverted/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /back to chapter 4/i })).toHaveAttribute('href', '/curriculum/chapter-4');
+    expect(screen.getByRole('link', { name: /back to chapter 5/i })).toHaveAttribute('href', '/curriculum/chapter-5');
   });
 
   it('tracks deferred and discussed exercise workflow without granting mastery', async () => {
-    open('/exercise/4.1.5.exercise.1');
+    open('/exercise/5.1.4.exercise.1');
     expect(await screen.findByRole('heading', { name: /exercise 1/i })).toBeInTheDocument();
     expect(screen.getByText(/activity is not authored yet/i)).toBeInTheDocument();
     await userEvent.selectOptions(screen.getByLabelText(/exercise workflow state/i), 'discussed');
@@ -30,9 +30,18 @@ describe('source section and exercise routes', () => {
     await userEvent.click(screen.getByRole('button', { name: /save exercise state/i }));
     expect(await screen.findByText(/saved as discussed/i)).toBeInTheDocument();
     expect(await repository.getExerciseProgress()).toEqual([expect.objectContaining({
-      id: '4.1.5.exercise.1', state: 'discussed', linkedAttemptIds: [],
+      id: '5.1.4.exercise.1', state: 'discussed', linkedAttemptIds: [],
     })]);
     expect(await repository.getAttempts()).toEqual([]);
+  });
+
+  it('opens a Chapter 4 activity from the curriculum', async () => {
+    open('/curriculum/chapter-4');
+    const details = await screen.findByRole('region', { name: /linear neural networks for classification/i });
+    expect(within(details).getByText(/30 of 30 exercise activities authored/i)).toBeInTheDocument();
+    await userEvent.click(within(details).getByRole('link', { name: /section 4\.1 softmax regression/i }));
+    expect(await screen.findByRole('heading', { name: /softmax regression/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /worked example/i })).toBeInTheDocument();
   });
 
   it('preserves an evidence-backed completion when its note is edited', async () => {

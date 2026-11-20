@@ -44,7 +44,7 @@ export default function ExerciseActivity({ catalog = coverageCatalog }: { catalo
     refresh();
   }
   if (!source) return <div className="page"><header className="page-heading"><h1>Exercise not found</h1></header><Link to="/curriculum">Return to curriculum</Link></div>;
-  return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Individual source exercise · §{source.sectionId}</p><h1>{source.title}</h1><p>Printed page {source.source.printedStart} · PDF page {source.source.pdfPageStart}</p></header>
+  return <div className="page narrow-page"><header className="page-heading"><p className="eyebrow">Individual source exercise · {source.sectionId}</p><h1>{source.title}</h1><p>Printed page {source.source.printedStart} · PDF page {source.source.pdfPageStart}</p></header>
     {!activity ? <section className="paper-card"><p className="status">Unconverted</p><h2>Exercise activity is not authored yet</h2><p>The source exercise is indexed individually. A reviewed companion prompt, hints and check are still required.</p></section>
       : <><section className="paper-card"><p className="status status--reviewed">{activity.contentStatus}</p><h2>Companion activity</h2><p>{activity.prompt}</p><details><summary>Progressive hints</summary><ol>{activity.hints.map((hint) => <li key={hint}>{hint}</li>)}</ol></details>{activity.evaluation.kind === 'rubric' ? <><h2>Evaluation rubric</h2><ul>{activity.evaluation.criteria.map((item) => <li key={item}>{item}</li>)}</ul></> : <p>Submit an attempt before revealing the reviewed check.</p>}</section>
       <section className="paper-card"><h2>Record an attempt</h2><p>Your response stays in this browser. A self-check records workflow evidence but cannot grant concept mastery.</p>

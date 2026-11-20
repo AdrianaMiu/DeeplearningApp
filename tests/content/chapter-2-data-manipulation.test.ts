@@ -16,7 +16,7 @@ describe('Chapter 2 data-manipulation coverage batch', () => {
     classifications: chapter2DataManipulationClassifications,
   });
 
-  it('covers section 2.1 without overstating the rest of Chapter 2', () => {
+  it('covers sections 2.1 and 2.2 without overstating the rest of Chapter 2', () => {
     expect(catalog.validateCoverage()).toEqual([]);
     expect(catalog.getChapterCoverageSummary('chapter-2')).toEqual({
       chapterId: 'chapter-2', sourceSectionCount: 55, exerciseCount: 45,
@@ -32,10 +32,11 @@ describe('Chapter 2 data-manipulation coverage batch', () => {
     expect(chapter2DataManipulationExercises.every((item) => item.hints.length >= 2)).toBe(true);
   });
 
-  it('is included as an honest partial batch in the production catalog', () => {
+  it('is included in the complete Chapter 2 production catalog', () => {
+    expect(coverageCatalog.validateCoverage()).toEqual([]);
     expect(coverageCatalog.getChapterCoverageSummary('chapter-2')).toMatchObject({
-      authoredSectionCount: 12, authoredExerciseCount: 7,
-      unclassifiedSectionCount: 40, remainingExerciseCount: 38,
+      authoredSectionCount: 44, authoredExerciseCount: 45,
+      unclassifiedSectionCount: 0, remainingExerciseCount: 0,
     });
   });
 });

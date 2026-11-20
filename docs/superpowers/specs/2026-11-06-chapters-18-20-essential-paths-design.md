@@ -32,20 +32,20 @@ Each chapter receives three entries rather than one long lesson. The existing co
 ### Chapter 18 — Gaussian Processes
 
 1. **Encode similarity with a GP kernel** (existing studio): function uncertainty, RBF similarity, and length scale.
-2. **Condition a prior into a posterior**: observations, noise, posterior mean, posterior uncertainty, and the distinction between epistemic and observation uncertainty. Sources: §18.2 and §18.3.1–§18.3.3.
-3. **Build and diagnose a small GP regression model**: covariance matrix, diagonal noise, stable linear solves, marginal likelihood intuition, and when kernel assumptions fail. Sources: §18.3.2–§18.3.5.
+2. **Condition a prior into a posterior**: observations, noise, posterior mean, posterior uncertainty, and the distinction between epistemic and observation uncertainty. Sources: 18.2 and 18.3.1–18.3.3.
+3. **Build and diagnose a small GP regression model**: covariance matrix, diagonal noise, stable linear solves, marginal likelihood intuition, and when kernel assumptions fail. Sources: 18.3.2–18.3.5.
 
 ### Chapter 19 — Hyperparameter Optimization
 
 1. **Spend a search budget deliberately** (existing studio): validation-based search and multi-fidelity allocation.
-2. **Design a trustworthy HPO experiment**: search spaces, random search, validation isolation, seeds, trial ledgers, and fair comparisons. Sources: §19.1 and §19.2.
-3. **Allocate resources asynchronously**: scheduler/searcher separation, asynchronous random search, successive halving, stragglers, and early-ranking uncertainty. Sources: §19.3–§19.5.
+2. **Design a trustworthy HPO experiment**: search spaces, random search, validation isolation, seeds, trial ledgers, and fair comparisons. Sources: 19.1 and 19.2.
+3. **Allocate resources asynchronously**: scheduler/searcher separation, asynchronous random search, successive halving, stragglers, and early-ranking uncertainty. Sources: 19.3–19.5.
 
 ### Chapter 20 — Generative Adversarial Networks
 
 1. **Separate two adversarial updates** (existing studio): generator/discriminator roles and alternating gradients.
-2. **Trace a complete GAN training step**: latent samples, detach boundaries, discriminator and generator objectives, update order, and diagnostic signals. Sources: §20.1.
-3. **Move from a toy GAN to a DCGAN**: convolutional generator/discriminator structure, normalization and activations, sample-quality/diversity checks, instability, and mode collapse. Sources: §20.2.
+2. **Trace a complete GAN training step**: latent samples, detach boundaries, discriminator and generator objectives, update order, and diagnostic signals. Sources: 20.1.
+3. **Move from a toy GAN to a DCGAN**: convolutional generator/discriminator structure, normalization and activations, sample-quality/diversity checks, instability, and mode collapse. Sources: 20.2.
 
 ## Assessment and interaction
 

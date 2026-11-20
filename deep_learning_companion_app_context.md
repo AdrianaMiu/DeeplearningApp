@@ -154,7 +154,7 @@ Tutor responses must distinguish book content, companion explanations, and exter
 
 Title: Why can two differently shaped tensors be added?
 
-Source: Chapter 2, §2.1.4 Broadcasting, printed pages 35–36; its heading was verified on PDF page 75. The following question is an original companion example.
+Source: Chapter 2, 2.1.4 Broadcasting, printed pages 35–36; its heading was verified on PDF page 75. The following question is an original companion example.
 
 Objective: Align dimensions from the right, decide whether each pair is equal or includes a dimension of size 1, and predict the output shape and values. Explain broadcasting as conceptual expansion; do not imply an implementation must physically copy every element.
 

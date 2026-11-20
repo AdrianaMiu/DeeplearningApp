@@ -176,7 +176,7 @@ The learner can move backward freely. Worked examples remain gated by a predicti
 ```text
 Orient ━ Predict ━ Understand ─ Try ─ Check ─ Reflect
 
-Why this matters                    Source §7.1–§7.3
+Why this matters                    Source 7.1–7.3
 ┌──────────────────────────────┬───────────────────────────────────┐
 │ Interaction / prediction     │ Intuition · Math · Code · My work│
 │ with numeric text output     │ active explanation               │

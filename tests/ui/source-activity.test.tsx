@@ -14,15 +14,15 @@ describe('source section and exercise routes', () => {
   const open = (path: string) => render(<MemoryRouter initialEntries={[path]}><AppShell repository={repository} /></MemoryRouter>);
 
   it('shows an honest unavailable state for an unconverted section', async () => {
-    open('/section/5.1');
-    expect(await screen.findByRole('heading', { name: /multilayer perceptrons/i })).toBeInTheDocument();
+    open('/section/6.1');
+    expect(await screen.findByRole('heading', { name: /layers and modules/i })).toBeInTheDocument();
     expect(screen.getByText(/section activity is not authored yet/i)).toBeInTheDocument();
     expect(screen.getByText(/unconverted/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /back to chapter 5/i })).toHaveAttribute('href', '/curriculum/chapter-5');
+    expect(screen.getByRole('link', { name: /back to chapter 6/i })).toHaveAttribute('href', '/curriculum/chapter-6');
   });
 
   it('tracks deferred and discussed exercise workflow without granting mastery', async () => {
-    open('/exercise/5.1.4.exercise.1');
+    open('/exercise/6.1.5.exercise.1');
     expect(await screen.findByRole('heading', { name: /exercise 1/i })).toBeInTheDocument();
     expect(screen.getByText(/activity is not authored yet/i)).toBeInTheDocument();
     await userEvent.selectOptions(screen.getByLabelText(/exercise workflow state/i), 'discussed');
@@ -30,7 +30,7 @@ describe('source section and exercise routes', () => {
     await userEvent.click(screen.getByRole('button', { name: /save exercise state/i }));
     expect(await screen.findByText(/saved as discussed/i)).toBeInTheDocument();
     expect(await repository.getExerciseProgress()).toEqual([expect.objectContaining({
-      id: '5.1.4.exercise.1', state: 'discussed', linkedAttemptIds: [],
+      id: '6.1.5.exercise.1', state: 'discussed', linkedAttemptIds: [],
     })]);
     expect(await repository.getAttempts()).toEqual([]);
   });

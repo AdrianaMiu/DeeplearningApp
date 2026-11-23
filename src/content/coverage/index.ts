@@ -1,5 +1,9 @@
 import { curriculumInventory } from '../inventory';
 import { createCoverageCatalog } from './registry';
+import { mlpBasicsSections, mlpBasicsExercises, mlpBasicsClassifications } from './chapter-5-basics';
+import { mlpTrainingSections, mlpTrainingExercises, mlpTrainingClassifications } from './chapter-5-training';
+import { mlpGeneralizationSections, mlpGeneralizationExercises, mlpGeneralizationClassifications } from './chapter-5-generalization';
+import { housePriceSections, housePriceExercises, housePriceClassifications } from './chapter-5-house-prices';
 import { classificationFoundationSections, classificationFoundationExercises, classificationFoundationClassifications } from './chapter-4-foundations';
 import { classificationTrainingSections, classificationTrainingExercises, classificationTrainingClassifications } from './chapter-4-training';
 import { classificationGeneralizationSections, classificationGeneralizationExercises, classificationGeneralizationClassifications } from './chapter-4-generalization';
@@ -27,12 +31,14 @@ export const sectionActivities = [
   ...calculusSections, ...autodiffSections, ...probabilitySections, ...documentationSections,
   ...regressionSections, ...trainingSections, ...conciseSections, ...generalizationSections, ...weightDecaySections,
   ...classificationFoundationSections, ...classificationTrainingSections, ...classificationGeneralizationSections,
+  ...mlpBasicsSections, ...mlpTrainingSections, ...mlpGeneralizationSections, ...housePriceSections,
 ];
 export const exerciseActivities = [
   ...chapter1ExerciseActivities, ...chapter2DataManipulationExercises, ...linearAlgebraExercises,
   ...remainingAlgebraExercises, ...calculusExercises, ...autodiffExercises, ...probabilityExercises,
   ...regressionExercises, ...trainingExercises, ...conciseExercises, ...generalizationExercises, ...weightDecayExercises,
   ...classificationFoundationExercises, ...classificationTrainingExercises, ...classificationGeneralizationExercises,
+  ...mlpBasicsExercises, ...mlpTrainingExercises, ...mlpGeneralizationExercises, ...housePriceExercises,
 ];
 export const coverageClassifications = [
   ...chapter1Classifications, ...chapter2DataManipulationClassifications, ...linearAlgebraClassifications,
@@ -40,6 +46,7 @@ export const coverageClassifications = [
   ...documentationClassifications, ...regressionClassifications, ...trainingClassifications,
   ...conciseClassifications, ...generalizationClassifications, ...weightDecayClassifications,
   ...classificationFoundationClassifications, ...classificationTrainingClassifications, ...classificationGeneralizationClassifications,
+  ...mlpBasicsClassifications, ...mlpTrainingClassifications, ...mlpGeneralizationClassifications, ...housePriceClassifications,
 ];
 
 export const coverageCatalog = createCoverageCatalog({

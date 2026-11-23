@@ -1,0 +1,121 @@
+import { defineExerciseActivity, defineSectionActivity } from './authoring';
+import type { CoverageClassification } from './types';
+
+const chapter = 'chapter-5';
+
+export const mlpBasicsSections = [
+  defineSectionActivity(chapter, '5.1', {
+    objectives: ['Explain the role of hidden layers in a multilayer perceptron.'],
+    explanation: 'An MLP transforms examples through one or more hidden representations before producing the final prediction. Learned affine maps mix input coordinates and nonlinear activations allow the network to represent relationships that one affine map cannot.',
+    workedExample: 'A positive and a negative ReLU unit combine to represent the absolute value function, which bends at zero.',
+    independentTask: 'Explain why a model with only an affine output cannot fit three points from the absolute value graph that span its bend.',
+  }),
+  defineSectionActivity(chapter, '5.1.1', {
+    objectives: ['Trace the shapes and parameter counts through hidden layers.'],
+    explanation: 'A dense layer maps every example from one feature width to another using a shared weight matrix and bias vector. The batch dimension stays fixed, and hidden layer outputs become the inputs of the next layer.',
+    workedExample: 'A 5-to-3 dense layer maps a batch of shape (8, 5) to (8, 3) and has 15 weights and 3 biases.',
+    independentTask: 'Find both output shapes and total parameter count for a batch of 12 examples and a 4-to-6-to-2 network.',
+  }),
+  defineSectionActivity(chapter, '5.1.2', {
+    objectives: ['Predict the behavior of activation functions on different inputs.'],
+    explanation: 'ReLU keeps positive inputs and clamps negative inputs at zero. Sigmoid and tanh are smooth and saturate for sufficiently large magnitudes, yielding small derivatives. A learned negative slope can preserve some signal below zero.',
+    workedExample: 'At input -3, ReLU returns zero, while PReLU with a negative-side slope of 0.2 returns -0.6.',
+    independentTask: 'Sketch ReLU, sigmoid and tanh near zero and at large positive inputs. Mark where their slopes become small.',
+  }),
+  defineSectionActivity(chapter, '5.2', {
+    objectives: ['Connect an MLP specification to its classification training loop.'],
+    explanation: 'Training an MLP uses batched predictions and a loss just like linear classification. The main architectural difference is the intermediate affine and nonlinear computation through which the same backward pass sends gradients.',
+    workedExample: 'An image classifier flattens each image, maps it through a hidden activation and then emits one logit per class.',
+    independentTask: 'Write the steps from a batch of grayscale images and class indices to the first update of a two-layer classifier.',
+  }),
+  defineSectionActivity(chapter, '5.2.1', {
+    objectives: ['Implement a one-hidden-layer forward pass with explicit tensors.'],
+    explanation: 'A from-scratch implementation stores a weight matrix and bias for each layer as trainable parameters. Flatten each example separately, apply the first affine transform and activation, then produce class logits with the second affine transform.',
+    workedExample: 'Input shape (10, 1, 8, 8) flattens to (10, 64) and maps through widths 16 and 3 to logits of shape (10, 3).',
+    independentTask: 'List the four parameter shapes for that network and explain which bias axis broadcasts for each affine transform.',
+  }),
+  defineSectionActivity(chapter, '5.2.2', {
+    objectives: ['Match a framework module stack to an explicit MLP computation.'],
+    explanation: 'A framework can compose flattening, dense layers and an elementwise activation into a reusable module. The stack should leave the batch dimension alone and emit raw logits when the cross-entropy loss expects them.',
+    workedExample: 'Flatten, Linear(64,16), ReLU and Linear(16,3) express a one-hidden-layer classifier for 8-by-8 grayscale images.',
+    independentTask: 'Replace the hidden layer with two layers of widths 16 and 8. Write the module order and predict the logits shape for 10 images.',
+  }),
+];
+
+export const mlpBasicsClassifications: CoverageClassification[] = [
+  { sourceId: '5.1.3', kind: 'summary' },
+  { sourceId: '5.1.4', kind: 'exercise-heading' },
+  { sourceId: '5.2.3', kind: 'summary' },
+  { sourceId: '5.2.4', kind: 'exercise-heading' },
+];
+
+function exercise(sourceId: string, prompt: string, hints: [string, string], criteria: string[]) {
+  return defineExerciseActivity(chapter, sourceId, { prompt, hints, evaluation: { kind: 'rubric', criteria } });
+}
+
+export const mlpBasicsExercises = [
+  exercise('5.1.4.exercise.1',
+    'A two-dimensional input goes through scalar and then two-dimensional affine layers. Explain why the stack cannot learn the identity map, even with arbitrary biases.',
+    ['Compose the two affine maps into one.', 'Bound the rank using the scalar intermediate width.'],
+    ['Shows that the effective linear part has rank at most one.', 'Contrasts the identity map, whose linear part has rank two.']),
+  exercise('5.1.4.exercise.2',
+    'For PReLU with learned slope 0.2, compute the input slopes at -3 and 2 and explain why the derivative at zero needs special handling.',
+    ['Read the slope of each affine branch.', 'Compare the left and right derivatives at zero.'],
+    ['Obtains slopes 0.2 and 1 respectively.', 'Explains the one-sided slopes differ at zero.']),
+  exercise('5.1.4.exercise.3',
+    'Let g(x) = x times sigmoid(2x). Differentiate it and evaluate the resulting slope at x = 0.',
+    ['Use the product rule before differentiating sigmoid.', 'The derivative of sigmoid(u) with respect to u is sigmoid(u)(1 - sigmoid(u)).'],
+    ['Derives sigmoid(2x) + 2x sigmoid(2x)(1 - sigmoid(2x)).', 'Evaluates the slope at zero as one half.']),
+  exercise('5.1.4.exercise.4',
+    'For h(x) = ReLU(x + 2) - 2 ReLU(x - 1), derive all affine branches and check continuity at the two switching points.',
+    ['Split the real line where hidden preactivations vanish.', 'Evaluate both adjacent expressions at each boundary.'],
+    ['Obtains 0, x + 2, and 4 - x on successive intervals.', 'Shows matching values at x = -2 and x = 1.']),
+  exercise('5.1.4.exercise.5',
+    'Convert the scalar hidden neuron y = 3 tanh(wx + b) + 4 into a sigmoid neuron that computes exactly the same function.',
+    ['Express tanh(u) using sigmoid(2u).', 'Absorb the constant offset into the output bias.'],
+    ['Produces y = 6 sigmoid(2wx + 2b) + 1.', 'Explains which affine parameters handle scaling and offset.']),
+  exercise('5.1.4.exercise.6',
+    'A training-time layer subtracts the current batch mean from each example. Show how a fixed example can receive different values in two batches and identify an inference risk.',
+    ['Compare the value 4 in batches [4, 2] and [4, 8].', 'Consider comparing online predictions computed in different batches.'],
+    ['Computes centered outputs 1 and -2 for the same example.', 'Explains a prediction dependency on other batch members.']),
+  exercise('5.1.4.exercise.7',
+    'Compare the sigmoid derivative at input 0 and at input 10. Explain how the difference affects the gradient of an earlier parameter.',
+    ['Use the product of sigmoid and one minus sigmoid.', 'The local slope multiplies the upstream gradient.'],
+    ['Obtains 0.25 at zero and about 0.000045 at ten.', 'Connects a saturated activation to weak backward signals.']),
+  exercise('5.2.4.exercise.1',
+    'Design a width sweep for an MLP with one hidden layer. Specify the settings you would hold fixed and the measurements you would graph.',
+    ['Try at least three widths with a common data split.', 'Decide how to account for random initialization.'],
+    ['Identifies a controlled width sweep and validation comparison.', 'Reports variability or repeats before selecting a width.']),
+  exercise('5.2.4.exercise.2',
+    'Compare a one-hidden-layer image classifier with a two-hidden-layer variant. Use measurements that help separate accuracy gains from the extra computation.',
+    ['Keep preprocessing and data splits the same.', 'Record parameter counts and elapsed training time.'],
+    ['Defines a fair evaluation with validation accuracy and a resource measure.', 'Avoids claiming that additional layers necessarily improve accuracy.']),
+  exercise('5.2.4.exercise.3',
+    'A classifier compresses every input into one scalar before the remaining dense stack. Explain what happens when two different examples yield the same scalar.',
+    ['Treat the scalar as the only input to downstream layers.', 'Ask whether the original features can still be distinguished.'],
+    ['Shows downstream deterministic predictions coincide for the two examples.', 'Explains the risk of discarding useful class information.']),
+  exercise('5.2.4.exercise.4',
+    'Plan an experiment to compare three learning rates over a fixed training horizon, then explain how extending the horizon might change the ranking.',
+    ['Plot validation outcomes against epoch.', 'Distinguish instability from merely slow convergence.'],
+    ['Controls the architecture, data split and initial conditions.', 'Explains that smaller rates may require more epochs to catch up.']),
+  exercise('5.2.4.exercise.5',
+    'Budget 15 runs for comparing MLP width, depth, learning rate and training duration. Explain how you would choose candidates and evaluate a winning configuration.',
+    ['A full Cartesian grid grows as choices multiply.', 'Reserve the test set for the final configuration.'],
+    ['Proposes a bounded strategy such as random search with validation selection.', 'Accounts for interactions and reserves a final evaluation.']),
+  exercise('5.2.4.exercise.6',
+    'Design a benchmark comparing explicit tensor operations and a module-based MLP for two hidden-layer widths. Include controls that isolate implementation differences.',
+    ['Align architecture, batch size, dtype and device.', 'Warm up and synchronize if timing accelerator work.'],
+    ['Compares equal workloads and repeats timing measurements.', 'Reports how the timing gap changes with width.']),
+  exercise('5.2.4.exercise.7',
+    'Compare matrix multiplication latency near dimension 512 on a CPU and, if available, a GPU. Explain how you would investigate a sudden jump at 513.',
+    ['Use matching dtypes and repeat after warm-up.', 'Consult device specifications and check whether kernel selection changes.'],
+    ['Times neighboring sizes with device-appropriate synchronization.', 'Treats alignment and kernel dispatch as hypotheses rather than inferring memory bus width from timing alone.']),
+  exercise('5.2.4.exercise.8',
+    'Compare ReLU and tanh on the same image classifier. Plan what to inspect besides final accuracy if one variant learns more slowly.',
+    ['Track training and validation curves with shared splits.', 'Inspect hidden activation ranges and gradient scale.'],
+    ['Defines a controlled activation comparison.', 'Uses learning curves or gradient evidence to interpret the result.']),
+  exercise('5.2.4.exercise.9',
+    'Compare very small random weights with width-scaled initialization in a deeper ReLU MLP. Predict what you would measure before any training update.',
+    ['Trace activation variance across hidden layers.', 'Use the same batches and architecture across initialization conditions.'],
+    ['Measures activation or gradient scale by layer before training.', 'Checks whether the observed early scales relate to later learning behavior.']),
+];
